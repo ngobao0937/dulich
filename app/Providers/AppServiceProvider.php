@@ -54,9 +54,9 @@ class AppServiceProvider extends ServiceProvider
             'pages' => $pages,
             'pageTc' => $pageTc,
             'pageGt' => $pageGt,
-            'meta_title' => '',
-            'meta_description' => '',
-            'meta_keywords' => '',
+            'meta_title' => 'Asimat - Thiết bị vật tư chính hãng',
+            'meta_description' => 'Chuyên cung cấp thiết bị vật tư chính hãng với giá tốt nhất.',
+            'meta_keywords' => 'asimat, thiet bi, thiết bị, vat tu, vật tư, thiet bi vat tu, thiết bị vật tư',
             'meta_og_image' => asset('images/default.jpg'),
             'meta_og_url' => '',
             'meta_og_type' => 'website'

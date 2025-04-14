@@ -7,8 +7,8 @@
 <meta http-equiv="Content-Language" content="en-us" />
 <meta http-equiv="imagetoolbar" content="no" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
-<meta name="copyright" content="Copyright © 2010 Hose and Fittings" />
-<meta name="author" content="Zappy Pally">
+<meta name="copyright" content="Copyright © 2025 Asimat" />
+<meta name="author" content="Asimat">
 <meta name="description" content="{{ $meta_description }}">
 <meta name="keywords" content="{{ e($meta_keywords) }}">
 <meta name="geo.region" content="VN-Hồ Chí Minh">
@@ -17,9 +17,9 @@
 <meta property="og:description" content="{{ $meta_description }}">
 <meta property="og:image" content="{{ $meta_og_image }}">
 <meta property="og:url" content="{{ $meta_og_url }}">
-<meta property="og:site_name" content="zappyandpally.com">
-<meta property="og:image:width" content="560">
-<meta property="og:image:height" content="292">
+<meta property="og:site_name" content="">
+<meta property="og:image:width" content="400">
+<meta property="og:image:height" content="400">
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="RATING" content="GENERAL" />
 <meta property="al:web:should_fallback" content="true">
