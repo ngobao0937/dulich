@@ -1,0 +1,11 @@
+@extends('frontend.layout.app')
+@section('title', 'Hose and Fittings - Quality')
+@section('content')
+
+@endsection
+@section('styles')
+
+@endsection
+@section('script')
+
+@endsection
