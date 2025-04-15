@@ -35,33 +35,28 @@
                                 <img src="{{ asset('assets/frontend/images/dathongbao_120x46.png') }}">
                             </a>
                         </div>
-                        
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="footer-warp">
-                                <h3 class="name">Sitemap</h3>
-                                <ul class="sublist">
-                                    <li><a href="/">Trang chủ</a></li>
-                                    <li><a href="{{ route('frontend.home.page', ['slug'=>$pageGt->slug]) }}">Giới thiệu</a></li>
-                                    <li><a href="{{ route('frontend.home.products') }}">Sản phẩm</a></li>
-                                    <li><a href="/lien-he">Liên hệ</a></li>
-                                </ul>
-                            </div>
+                    <div class="row d-flex justify-content-between">
+                        <div class="footer-warp">
+                            <h3 class="name">Sitemap</h3>
+                            <ul class="sublist">
+                                <li><a href="/">Trang chủ</a></li>
+                                <li><a href="{{ route('frontend.home.page', ['slug'=>$pageGt->slug]) }}">Giới thiệu</a></li>
+                                <li><a href="{{ route('frontend.home.products') }}">Sản phẩm</a></li>
+                                <li><a href="/lien-he">Liên hệ</a></li>
+                            </ul>
                         </div>
-                        <div class="col-6">
-                            <div class="footer-warp">
-                                <h3 class="name">Thông tin chung</h3>
-                                <ul class="sublist">
-                                    @foreach ($pages as $page)
-                                    <li>
-                                        <a href="{{ route('frontend.home.page', ['slug'=>$page->slug]) }}">{{ $page->name }}</a>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                        <div class="footer-warp">
+                            <h3 class="name">Thông tin chung</h3>
+                            <ul class="sublist">
+                                @foreach ($pages as $page)
+                                <li>
+                                    <a href="{{ route('frontend.home.page', ['slug'=>$page->slug]) }}">{{ $page->name }}</a>
+                                </li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                 </div>

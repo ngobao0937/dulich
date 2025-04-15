@@ -2,7 +2,7 @@
 <div class="leftMenu"style="width: 270px;">
     <div class="menu-left">
         <div class="leftTitle">
-            <h2>MINH LAP CO., LTD.</h2>
+            <h2>ASIMAT CO., LTD.</h2>
         </div>
         <div class="topMenu pt-3 pb-3 " style="position:unset; background: #e5e5ff;">
             <ul>

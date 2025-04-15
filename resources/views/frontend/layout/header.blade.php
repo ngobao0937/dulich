@@ -4,7 +4,9 @@
 
     </div> --}}
     <div style="position: absolute; left: 20px; top: 15px; z-index: 2;">
-        <img src="{{ asset('assets/frontend/images/logo.png') }}" alt="Logo" width="110">
+        <a href="{{ route('frontend.home.index') }}">
+            <img src="{{ asset('assets/frontend/images/logo.png') }}" alt="Logo" width="110">
+        </a>
     </div>
     <div class="headerCompany" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 45px; text-align: left; background-color: #54546d; z-index: 1; padding: 15px 0 0 120px">ASIMAT CO., LTD.</div>
     <div class="headerSearch" style="margin: 15px; z-index: 2; position: relative;">

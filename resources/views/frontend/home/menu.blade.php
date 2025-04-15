@@ -6,20 +6,23 @@
         <h2>Sản phẩm / {{ $menu->name }}</h2>
     </div>
     <div class="mainProduct">
-        <div class="contentProduct">
-            <table width="100%" cellpadding="0" cellspacing="0" border="1" style="border-collapse: collapse;">
-                <tbody>
+        <div class="contentProduct table-responsive">
+            <table class="table table-hover" width="100%" cellpadding="0" cellspacing="0" border="1" style="border-collapse: collapse;">
+                <thead>
                     <tr>
-                        <th width="120" class="center red uppercase">
-                            <img src="{{ asset('assets/frontend/images/icon_image.png') }}" align="absmiddle" /> Hình ảnh
+                        <th width="120" class="uppercase red text-center" style="min-width: 120px;">
+                            <img src="{{ asset('assets/frontend/images/icon_image.png') }}" /> Hình ảnh
                         </th>
-                        <th class="center red uppercase">
-                            <img src="{{ asset('assets/frontend/images/icon_pro.png') }}" align="absmiddle" /> Tên sản phẩm
+                        <th class="uppercase red text-center" style="min-width: 250px;">
+                            <img src="{{ asset('assets/frontend/images/icon_pro.png') }}" /> Tên sản phẩm
                         </th>
-                        <th width="135" class="center red uppercase">
-                            <img src="{{ asset('assets/frontend/images/icon_find.png') }}" align="absmiddle" /> Tài liệu kỹ thuật
+                        <th width="120" class="uppercase red text-center" style="min-width: 120px;">
+                            <img src="{{ asset('assets/frontend/images/icon_find.png') }}" /> Tài liệu
                         </th>
                     </tr>
+                </thead>
+                <tbody>
+                    
                     @forelse ($products as $product)
                     <tr style="font-size: 14px;">
                         <td>
@@ -35,8 +38,8 @@
                                 {{ $product->short_description }}
                             </p>
                         </td>
-                        <td class="center">
-                            <div>
+                        <td class="text-center">
+                            <div class="text-center">
                                 @foreach ($product->documents as $document)
                                 <a href="{{ asset('uploads/documents/'.$document->name) }}" target="_blank" title="{{ $document->name }}">
                                     <img src="{{ asset('assets/frontend/images/icon_pdf.png') }}" alt="{{ $document->name }}" />

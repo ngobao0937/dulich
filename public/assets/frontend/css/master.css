@@ -88,9 +88,9 @@ h1,h2,h3,h4,h5,h6 {display:inline;}
 /*-----------------------*/
 
 /*----- MAIN column -----*/
-.widthMain {width:100%; padding: 0 20px 0 10px; text-align: left;}
+.widthMain {width:100%; padding: 0 10px; text-align: left;}
 .mainTitle {
-	height:40px; padding:15px 15px 5px; color:#00f;display: flex;align-items: center;
+	padding:10px 0; color:#00f;display: flex;align-items: center;
 }
 .mainTitle h2 {font-size:1.8em; font-weight:normal;}
 .mainTitle h2 a {text-decoration:none; color:#00f;}

@@ -176,7 +176,6 @@
     }
 
     .main-content{
-        padding-left: 10px;
         width: 100%;
         border-left:1px solid #d0d0d0;
 	    border-right:1px solid #d0d0d0;
