@@ -48,10 +48,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table table-bordered table-sm">
+                <table class="table table-bordered table-sm table-hover">
                     <tbody>
                         <tr>
-                            <th>Họ tên</th>
+                            <th width="100">Họ tên</th>
                             <td id="contact-name"></td>
                         </tr>
                         <tr>

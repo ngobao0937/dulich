@@ -13,13 +13,27 @@ class ContactController extends Controller
         if ($request->has('search') && $request->search) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
-                $q->where('name', 'like', '%' . $search . '%');
+                $q->where('name', 'like', '%' . $search . '%')
+                ->orWhere('title', 'like', '%' . $search . '%')
+                ->orWhere('address', 'like', '%' . $search . '%')
+                ->orWhere('phone', 'like', '%' . $search . '%')
+                ->orWhere('email', 'like', '%' . $search . '%')
+                ->orWhere('company', 'like', '%' . $search . '%')
+                ->orWhere('title', 'like', '%' . $search . '%')
+                ->orWhere('fax', 'like', '%' . $search . '%');
             });
+        }
+
+        $active = $request->has('active') ? $request->active : '0';
+
+
+        if($active != 'all'){
+            $query->where('active', $active);
         }
 
         $contacts = $query->orderby('id', 'desc')->paginate(20);
 
-        return view('backend.contact.index', compact('contacts'));
+        return view('backend.contact.index', compact('contacts', 'active'));
     }
 
     public function edit(Request $request) {

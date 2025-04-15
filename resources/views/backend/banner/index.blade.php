@@ -28,6 +28,7 @@
                             <th style="width: 60px;">#</th>
                             <th style="width: 90px;">Hình ảnh</th>
                             <th>Tên Banner</th>
+                            <th>Link</th>
                             <th style="width: 100px;">Thứ tự</th>
                             <th style="width: 100px;">Trạng thái</th>
                             <th style="width: 100px;">Hành động</th>
@@ -47,6 +48,7 @@
                             <td>
                                 {{ $banner->name }}
                             </td>
+                            <td>{{ $banner->link ? $banner->link : '#' }}</td>
                             <td>{{ $banner->position }}</td>
                             <td class="text-center">
                                 @if ($banner->active != 1)

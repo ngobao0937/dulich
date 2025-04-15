@@ -9,6 +9,13 @@
                         Thêm mới
                     </a>
                     <form method="GET" action="{{ route('backend.product.index') }}" class="form-inline" id="search-form">
+                        <div class="input-group input-group-sm mr-2">
+                            <select name="active" id="active" class="form-control">
+                                <option value="all" {{ request('active') == 'all' ? 'selected' : '' }}>Tất cả</option>
+                                <option value="1" {{ request('active') == '1' ? 'selected' : '' }}>Hoạt động</option>
+                                <option value="0" {{ request('active') == '0' ? 'selected' : '' }}>Tạm dừng</option>
+                            </select>
+                        </div>
                         <div class="input-group input-group-sm">
                             <input type="text" class="form-control" id="search" name="search" value="{{ request('search') }}" placeholder="Tìm kiếm ...">
                             <div class="input-group-append">

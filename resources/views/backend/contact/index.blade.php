@@ -7,6 +7,13 @@
                 <div class="div-header" style="display: flex; justify-content: space-between; flex-wrap: nowrap; gap: 10px;">
                     <span></span>
                     <form method="GET" action="{{ route('backend.contact.index') }}" class="form-inline" id="search-form">
+                        <div class="input-group input-group-sm mr-2">
+                            <select name="active" id="active" class="form-control">
+                                <option value="0" {{ $active == '0' ? 'selected' : '' }}>Chưa đọc</option>
+                                <option value="1" {{ $active == '1' ? 'selected' : '' }}>Đã đọc</option>
+                                <option value="all" {{ $active == 'all' ? 'selected' : '' }}>Tất cả</option>
+                            </select>
+                        </div>
                         <div class="input-group input-group-sm">
                             <input type="text" class="form-control" id="search" name="search" value="{{ request('search') }}" placeholder="Tìm kiếm ...">
                             <div class="input-group-append">

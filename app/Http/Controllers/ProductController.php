@@ -28,6 +28,10 @@ class ProductController extends Controller
             });
         }
 
+        if($request->active != 'all' && ($request->active == '0' || $request->active == '1') && $request->has('active')){
+            $query->where('active', $request->active);
+        }
+
         $products = $query->where('isdelete', 0)->orderby('id', 'desc')->paginate(20);
 
         return view('backend.product.index', compact('products'));
