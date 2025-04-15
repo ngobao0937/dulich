@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Str;
 
 class CKEditorController extends Controller
 {
@@ -13,11 +13,12 @@ class CKEditorController extends Controller
     {
         if ($request->hasFile('upload')) {
             $file = $request->file('upload');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = 'uploads/';
-            $file->move(public_path($filePath), $fileName);
+            $image = compressImage($file);
+            $fileName = Str::uuid() . '_' . time() . '.jpg';
+            $filePath = public_path('uploads/' . $fileName);
+            $image->save($filePath);
 
-            $url = asset($filePath . $fileName);
+            $url = asset('uploads/' . $fileName);
             return response()->json([
                 'uploaded' => 1,
                 'fileName' => $fileName,
