@@ -12,7 +12,7 @@ class DashboardController extends Controller
     	if (!Auth::check()){
             return redirect(route('backend.login'));
         }
-        return view('backend.dashboard.index');
-
+        // return view('backend.dashboard.index');
+        return redirect()->route('backend.product.index');
     }
 }

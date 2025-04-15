@@ -8,19 +8,19 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="/admin" class="brand-link">
       <img src="{{ asset('assets/backend/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">ADMIN LTE 3</span>
+      <span class="brand-text font-weight-light">ADMIN ASIMAT</span>
     </a>
 
     <div class="sidebar">
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-header">SIDEBAR</li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="{{ route('backend.dashboard.index') }}" class="nav-link {{ request()->routeIs('backend.dashboard.*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>Dashboard</p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a href="{{ route('backend.product.index') }}" class="nav-link {{ request()->routeIs('backend.product.*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-store"></i>
@@ -87,7 +87,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="javascript:void(0)" data-toggle="modal" data-target="#modal-logout" class="nav-link">
+            <a href="javascript:void(0)" data-toggle="modal" data-target="#modal-logout" class="nav-link"  style="color: rgb(250, 97, 97);">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>Sign out</p>
             </a>
