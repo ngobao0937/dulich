@@ -43,7 +43,4 @@
     }
 </style>
 @endsection
-@section('script')
-
-@endsection
 

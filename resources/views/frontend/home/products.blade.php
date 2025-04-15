@@ -20,11 +20,4 @@
         {{ $products->links('pagination::bootstrap-4') }}
     </div>
 </div>
-
-@endsection
-@section('styles')
-
-@endsection
-@section('script')
-
 @endsection

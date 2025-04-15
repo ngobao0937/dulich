@@ -67,9 +67,3 @@
 </div>
 <div class="clear"></div>
 @endsection
-@section('styles')
-
-@endsection
-@section('script')
-
-@endsection

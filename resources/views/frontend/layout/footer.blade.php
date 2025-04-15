@@ -32,7 +32,7 @@
                             {{-- Mã số thuế: 0304116221  - Ngày cấp: 02/12/2005<br /> --}}
                             Copyright © 2025 - Asimat Co., Ltd.<br />
                             <a href="#" target="_blank">
-                                <img src="{{ asset('assets/frontend/images/dathongbao_120x46.png') }}">
+                                <img src="{{ asset('assets/frontend/images/dathongbao_120x46.png') }}" alt="Đã thông báo">
                             </a>
                         </div>
                     </div>

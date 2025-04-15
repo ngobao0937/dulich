@@ -14,7 +14,7 @@
             <div class="searchLable">Tìm kiếm</div>
             <input name="keyword" id="keyword" type="text" placeholder="Nhập từ khóa" class="searchForm"/>
             <a href="javascript:void(0);" class="searchBtn">
-                <span><img src="{{ asset('assets/frontend/images/blank.gif') }}" width="20" /></span>
+                <span><img src="{{ asset('assets/frontend/images/blank.gif') }}" width="20" alt="Search" /></span>
             </a>
         </form>
     </div>

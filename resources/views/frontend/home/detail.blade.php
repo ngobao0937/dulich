@@ -58,11 +58,4 @@
         <div class="clear"></div>
     </div>
 </div>
-
-@endsection
-@section('styles')
-
-@endsection
-@section('script')
-
 @endsection
