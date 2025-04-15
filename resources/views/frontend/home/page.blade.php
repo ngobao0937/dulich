@@ -4,7 +4,7 @@
 <div class="widthMain">
     <!-- About us -->
     <div class="mainTitle"><h2>{{ $page->name }}</h2></div>
-    <div class="aboutUs" style="font-size: 14px;">
+    <div class="aboutUs" style="font-size: 14px; margin-top: -5px; line-height: 1.6;" >
         {!! $page->content !!}
     </div>
 </div>

@@ -24,7 +24,9 @@
         </div>
         @include('frontend.layout.footer')
     </div>
-    
+    <button id="scrollToTop" style="display: none; position: fixed; bottom: 30px; right: 30px; z-index: 100; height: 40px; width: 40px; border-radius: 50%; background: #54546d;" type="button" class="btn btn-lg">
+        <i class="fas fa-chevron-up" style="font-size: 17px; color: white;"></i>
+    </button>
     @yield('script')
 </body>
 </html>

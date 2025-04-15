@@ -3,7 +3,7 @@
 @section('content')
 <div class="widthMain">
     <div class="mainTitle"><h2>Thông tin chi tiết</h2></div>
-    <div class="row">
+    <div class="row" style="margin-top: -20px;">
         <div class="col-md-4 d-flex justify-content-center">
             <div class="productDetailTxtImg">
                 <div class="detailProImg w-100 h-100">
@@ -35,7 +35,7 @@
     </div>
     <div class="mainProduct">
         <div class="proDes">
-            <div class="titleDes"><h2>Mô tả sản phẩm</h2></div>
+            <div class="titleDes" style="background: none; padding: 0;"><h2 style="color: blue;">Mô tả sản phẩm</h2></div>
             <div class="mt-2" style="font-size: 14px; line-height: 1.5;">
                 {!! $product->long_description !!}
             </div>

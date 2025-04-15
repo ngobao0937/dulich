@@ -5,11 +5,11 @@
     </div> --}}
     <div style="position: absolute; left: 20px; top: 15px; z-index: 2;">
         <a href="{{ route('frontend.home.index') }}">
-            <img src="{{ asset('assets/frontend/images/logo.png') }}" alt="Logo" width="110">
+            <img src="{{ asset('assets/frontend/images/logo.png') }}" alt="Logo" width="90">
         </a>
     </div>
-    <div class="headerCompany" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 45px; text-align: left; background-color: #54546d; z-index: 1; padding: 15px 0 0 120px">ASIMAT CO., LTD.</div>
-    <div class="headerSearch" style="margin: 15px; z-index: 2; position: relative;">
+    <div class="headerCompany" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 45px; text-align: left; background-color: #54546d; z-index: 1; padding: 18px 0 0 100px">ASIMAT CO., LTD.</div>
+    <div class="headerSearch" style="margin: 10px; z-index: 2; position: relative;">
         <form name="frmsearch" method="get" action="{{ route('frontend.home.products') }}">
             <div class="searchLable">Tìm kiếm</div>
             <input name="keyword" id="keyword" type="text" placeholder="Nhập từ khóa" class="searchForm"/>

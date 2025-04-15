@@ -27,9 +27,11 @@
     </div>
 </div>
 <!-- Visitor Counter -->
-<div class="visitorCounter">Số lượt truy cập <b>1060998</b><br />Số người đang xem <b>03</b></div>
+<div class="visitorCounter">
+    {{-- Số lượt truy cập <b>1060998</b><br />Số người đang xem <b>03</b> --}}
+</div>
 <!-- Web links -->
-<div class="webLink">
+{{-- <div class="webLink">
     <span style="font-size: 14px;">Liên kết website</span>
     <select class="webLinkForm mt-2 form-control form-control-sm w-100" onchange="goToURL(this)" style="font-size: 14px;">
         <option>Liên kết website</option>
@@ -37,7 +39,7 @@
         <option value="{{ $website->link ? $website->link : '#' }}" >{{ $website->name }}</option>
         @endforeach
     </select>
-</div>
+</div> --}}
 <!-- Banner -->
 <div class="bannerLeft">
     <div class="mainTitle">

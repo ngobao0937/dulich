@@ -1,8 +1,8 @@
 <!-- FOOTER -->
 <footer>
-    <div class="footerBg">
+    <div class="footerBg" style="padding: 0;">
         <div class="footerLogo" style="height: 115px;">
-            <h3>Khách hàng</h3>
+            <h4>Khách hàng</h4>
             <div class="footerLogoList">
                 <div class="swiper customerSwiper">
                     <div class="swiper-wrapper">
@@ -19,13 +19,13 @@
             </div>
         </div>
         
-        <div class="footerCopyright">
-            <div class="row">
-                <div class="col-md-6">
+        <div class="footerCopyright" style="padding: 10px 10px 0 10px;">
+            <div class="row" style="padding: 0;">
+                <div class="col-md-6" style="padding: 0;">
                     <div class="footer-warp">
                         <h3 class="name">CÔNG TY TNHH VẬT TƯ THIẾT BỊ Á CHÂU</h3><br>
                         <div class="mt-2" style="line-height: 1.5;">
-                            Địa chỉ: 71 Bà Huyện Thanh Quan, Phường 4, Tp Vũng Tàu<br />
+                            Địa chỉ: 71 Bà Huyện Thanh Quan, P.4, Tp Vũng Tàu<br />
                             Điện thoại: 0908 863 678<br />
                             Email: info@asimat.vn <br />
                             Website: www.asimat.vn <br />
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" style="padding: 0;">
                     <div class="row d-flex justify-content-between">
                         <div class="footer-warp">
                             <h3 class="name">Sitemap</h3>
@@ -102,10 +102,22 @@
         overlay.addEventListener('click', function () {
             closeSidebar();
         });
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 300) {
+            $('#scrollToTop').fadeIn();
+            } else {
+            $('#scrollToTop').fadeOut();
+            }
+        });
+
+        // Khi click thì scroll lên đầu trang
+        $('#scrollToTop').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 500); // 500ms để mượt
+            return false;
+        });
     });
 </script>
-
-
 
 <script language="javascript">
     hs.graphicsDir = 'assets/frontend/images/';

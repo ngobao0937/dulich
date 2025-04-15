@@ -3,7 +3,7 @@
 @section('content')
 <div class="widthMain text-left">
     <div class="mainTitle"><h2>Liên hệ</h2></div>
-    <div class="mt-3" style="font-size: 14px;">
+    <div style="font-size: 14px; margin-top: -5px;">
         <div style="line-height: 150%;">
             <p>
                 <em>

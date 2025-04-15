@@ -5,7 +5,7 @@
     <div class="mainTitle">
         <h2>Sản phẩm / {{ $menu->name }}</h2>
     </div>
-    <div class="mainProduct">
+    <div class="mainProduct" style="margin-top: -5px;">
         <div class="contentProduct table-responsive">
             <table class="table table-hover" width="100%" cellpadding="0" cellspacing="0" border="1" style="border-collapse: collapse;">
                 <thead>

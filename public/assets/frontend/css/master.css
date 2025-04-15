@@ -12,7 +12,7 @@ h1,h2,h3,h4,h5,h6 {display:inline;}
 
 /*========== HEADER ==========*/
 .Header {
-	height:130px; 
+	height:110px; 
 	/* background:url(../images/header_bg.png) no-repeat; 
 	background-size: auto 100%;  */
 	background: #dedede;
@@ -30,7 +30,7 @@ h1,h2,h3,h4,h5,h6 {display:inline;}
 	line-height:100%;  */
 	text-transform:uppercase;
 }
-.headerSearch {float:right; width:227px; height:18px; padding:1px 0px; margin:10px; color:#ccc; font-weight:bold; background:url(../images/search_bg.png) right no-repeat;}
+.headerSearch {float:right; width:227px; height:18px; color:#ccc; font-weight:bold; background:url(../images/search_bg.png) right no-repeat;}
 .searchLable {display:inline-block; float:left; padding:3px 0;}
 .searchForm {width:140px; margin-left:5px; border:none; font:normal 13px Arial, Helvetica, sans-serif; color:#777; background:none; padding:2px; float:left;}
 .searchBtn {margin-left:5px; cursor:pointer; border:none; float:left;}
@@ -38,7 +38,11 @@ h1,h2,h3,h4,h5,h6 {display:inline;}
 
 .topMenu {position: absolute; bottom: 5px; right: 5px; font:bold 14px Tahoma, Geneva, sans-serif;}
 .topMenu ul {float:right; padding:0; margin:0; list-style:none;}
-.topMenu ul li {float:left; padding:5px 0 5px 17px; margin:0 10px; background: url(../images/topMenu_bullet.gif) left no-repeat;}
+.topMenu ul li {
+	float:left; 
+	margin:5px 10px 5px 15px; 
+	/* background: url(../images/topMenu_bullet.gif) left no-repeat; */
+}
 .topMenu ul li a {color:#000; text-decoration:none;}
 .topMenu ul li a:hover {color:#55556e;}
 .topMenu ul li.current a {color:#55556e;}
@@ -67,7 +71,7 @@ h1,h2,h3,h4,h5,h6 {display:inline;}
 	align-items: center;
 }
 .leftTitle h2 {
-	font-size:1.8em; 
+	font-size:1.5em; 
 	font-weight:normal;
 }
 /*
@@ -92,14 +96,14 @@ h1,h2,h3,h4,h5,h6 {display:inline;}
 .mainTitle {
 	padding:10px 0; color:#00f;display: flex;align-items: center;
 }
-.mainTitle h2 {font-size:1.8em; font-weight:normal;}
+.mainTitle h2 {font-size:1.5em; font-weight:normal;}
 .mainTitle h2 a {text-decoration:none; color:#00f;}
 .mainContent {}
 
 /*--- Homepage ---*/
 /*-- About us --*/
 .homeLeft {float:left; width:360px;}
-.homeAbout {padding:10px 0; line-height:140%; text-align:justify;}
+.homeAbout {line-height:140%; text-align:justify;}
 .homeAbout p {padding:5px 0;}
 .homeAbout img {max-width:360px; width:expression(this.width > 360 ? 360 : true); margin:5px 0;}
 /*-- Products --*/
@@ -114,8 +118,8 @@ h1,h2,h3,h4,h5,h6 {display:inline;}
 /*----------------*/
 
 /*----- About us page -----*/
-.aboutUs {padding:10px 0; line-height:1.4;}
-.aboutUs p {padding:5px 0;}
+/* .aboutUs {line-height:1.4;}
+.aboutUs p {padding:5px 0;} */
 .aboutUs img {max-width:100%; margin:5px;}
 /*-------------------------*/
 
@@ -130,7 +134,7 @@ h1,h2,h3,h4,h5,h6 {display:inline;}
 /*-----------------------*/
 
 /*----- Products -----*/
-.mainProduct {padding:10px 0;}
+
 .productSpace {float:left; width:0; padding:20px 10px;}
 .contentProduct {}
 .contentProduct table {border:1px solid #CCC; border-collapse:collapse;}

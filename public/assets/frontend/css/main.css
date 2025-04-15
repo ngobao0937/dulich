@@ -164,7 +164,7 @@ footer{
     color: inherit !important;
 }
 .headerSearch{
-    margin-top: 15px !important;
+    margin-top: 14px !important;
 }
 @media (max-width: 600px) {
     .searchLable{
@@ -183,6 +183,10 @@ footer{
     }
     .searchLable{
         color: #000;
+    }
+    #scrollToTop{
+        right: 10px !important;
+        bottom: 50px !important;
     }
 }
 @media (min-width: 768px) {
@@ -231,8 +235,8 @@ footer{
 
     .sidebar-toggle {
         position: fixed;
-        top: 15px;
-        left: 15px;
+        top: 6px;
+        left: 10px;
         z-index: 1100;
         transition: left 0.3s ease;
         display: block; /* Ẩn mặc định */

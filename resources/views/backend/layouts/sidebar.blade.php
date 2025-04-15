@@ -39,12 +39,12 @@
               <p>Danh mục</p>
             </a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="{{ route('backend.website.index') }}" class="nav-link {{ request()->routeIs('backend.website.*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-link"></i>
               <p>Link Website</p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item {{ request()->routeIs('backend.banner.*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ request()->routeIs('backend.banner.*') ? 'active' : '' }}">
               <i class="nav-icon far fa-image"></i>
