@@ -29,19 +29,19 @@
                     <div class="row">
                         <div class="col-md-7">
                             <div class="form-group">
-                                <label for="name">Tên sản phẩm</label>
+                                <label for="name">Tên sản phẩm <span class="text-danger">*</span></label>
                                 <input type="text" name="name" id="name" class="form-control" value="{{ $name }}" maxlength="250" required>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="model">Mã sản phẩm</label>
-                                <input type="text" name="model" id="model" class="form-control" value="{{ $model }}" maxlength="50" required>
+                                <input type="text" name="model" id="model" class="form-control" value="{{ $model }}" maxlength="50">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="menu_fk">Danh mục</label>
+                                <label for="menu_fk">Danh mục <span class="text-danger">*</span></label>
                                 <select name="menu_fk" id="menu_fk" class="form-control" required>
                                     <option value="">-- Chọn danh mục --</option>
                                     @foreach ($menus as $menu)
@@ -77,7 +77,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="document">Tài liệu</label>
+                        <label for="document">Tài liệu (*.pdf)</label>
                         <input type="file" id="document" name="document[]" accept=".pdf" multiple>
                     </div>
 
@@ -100,12 +100,12 @@
                     @endif
     
                     <div class="form-group">
-                        <label>Meta Keywords</label>
+                        <label>Meta Keywords</label><i class="fas fa-question-circle ml-1" data-toggle="tooltip" title="Các từ khóa hỗ trợ trang web xuất hiện ưu tiên khi người dùng tìm kiếm, mỗi từ cách nhau bằng dấu phẩy (VD: 'key 1, key 2')"></i>
                         <input type="text" name="meta_keywords" class="form-control" value="{{ $meta_keywords }}">
                     </div>
 
                     <div class="form-group">
-                        <label>Meta Description</label>
+                        <label>Meta Description</label><i class="fas fa-question-circle ml-1" data-toggle="tooltip" title="Hiển thị nội dung mô tả khi chia sẻ liên kết sản phẩm qua Messenger, Zalo, ..."></i>
                         <textarea type="text" name="meta_description" class="form-control" rows="2" style="resize: vertical;" maxlength="150">{{ $meta_description }}</textarea>
                     </div>
 

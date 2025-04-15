@@ -39,6 +39,7 @@ class BannerController extends Controller
 		
 		$validator = Validator::make($request->all(), [
             'name' => 'required',
+			'position' => 'required'
         ]);
 
 		if ($validator->fails()) {

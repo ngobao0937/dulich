@@ -21,7 +21,7 @@
                 <div class="proNum" style="font-size: 14px;"><b>Model: </b>{{ $product->model }}</div>
                 <p></p>
                 <div style="line-height: 1.5;">
-                    <b style="font-size: 14px;">Tài liệu kỹ thuật</b>: 
+                    <b style="font-size: 14px;">Tài liệu kỹ thuật: </b> 
                     @foreach ($product->documents as $document)
                     <a href="{{ asset('uploads/documents/'.$document->name) }}" target="_blank">
                         <img src="{{ asset('assets/frontend/images/page_pdf.png') }}" alt="{{ $document->name }}" /> 

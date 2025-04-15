@@ -29,13 +29,13 @@
                     <div class="row">
                         <div class="col-md-9">
                             <div class="form-group">
-                                <label>Tên Banner</label>
+                                <label>Tên Banner <span class="text-danger">*</span></label>
                                 <input name="name" id="name" type="text" class="form-control" placeholder="Nhập tên ..." required />
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Thứ tự</label>
+                                <label>Thứ tự <span class="text-danger">*</span></label>
                                 <input name="position" id="position" type="number" class="form-control" placeholder="Thứ tự ..." required />
                             </div>
                         </div>

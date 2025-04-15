@@ -28,7 +28,7 @@
                     @csrf
                     <input type="text" id="id" name="id" value="" hidden>
                     <div class="form-group">
-                        <label>Tên danh mục</label>
+                        <label>Tên danh mục <span class="text-danger">*</span></label>
                         <input name="name" id="name" type="text" class="form-control" placeholder="Tên danh mục ..." required>
                     </div>
                     <div class="form-group" style="margin-bottom: -5px;">

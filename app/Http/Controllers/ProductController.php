@@ -24,7 +24,9 @@ class ProductController extends Controller
         if ($request->has('search') && $request->search) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
-                $q->where('name', 'like', '%' . $search . '%');
+                $q->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('model', 'like', '%' . $search . '%')
+                    ->orWhere('short_description', 'like', '%' . $search . '%');
             });
         }
 
@@ -52,7 +54,7 @@ class ProductController extends Controller
 		$validator = Validator::make($request->all(), [
             'name' => 'required',
 			'menu_fk' => 'required',
-            'model' => 'required',
+            // 'model' => 'required',
             'document.*' => 'file|mimes:pdf|max:2048',
         ]);
 

@@ -42,7 +42,7 @@
 </div> --}}
 <!-- Banner -->
 <div class="bannerLeft">
-    <div class="mainTitle">
+    <div class="mainTitle" style="padding: 0">
         <h2>Đối tác</h2>
     </div>
     <div class="lkw_s">
