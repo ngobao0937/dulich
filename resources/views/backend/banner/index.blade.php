@@ -41,10 +41,31 @@
                         @forelse($banners as $banner)
                         <tr>
                             <td><?php echo $i++; ?></td>
-                            <td>
+                            {{-- <td>
                                 <div style="background: #ededed  url('{{$banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
-                                {{-- <div style="background: #ededed  url('{{$banner->image ? 'https://s3-hcm-r1.longvan.net/kaholding/'.$banner->image->ten : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div> --}}
+                                <div style="background: #ededed  url('{{$banner->image ? 'https://s3-hcm-r1.longvan.net/kaholding/'.$banner->image->ten : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
+                            </td> --}}
+                            <td>
+                                @php
+                                    $isVideo = false;
+                                    if ($banner->image) {
+                                        $extension = pathinfo($banner->image->ten, PATHINFO_EXTENSION);
+                                        $isVideo = in_array(strtolower($extension), ['mp4', 'mov', 'avi', 'wmv', 'webm']);
+                                    }
+                                @endphp
+                            
+                                @if ($isVideo)
+                                    <video src="{{ asset('uploads/' . $banner->image->ten) }}" 
+                                        muted 
+                                        preload="metadata" 
+                                        style="background: #ededed; object-fit: contain; width: 100%;height: 30px;">
+                                    </video>
+                                @else
+                                    <div style="background: #ededed url('{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}') no-repeat center center; background-size: contain; width: 100%;height: 30px;">
+                                    </div>
+                                @endif
                             </td>
+                            
                             <td>
                                 {{ $banner->name }}
                             </td>

@@ -34,7 +34,7 @@
                         <tr class="table-bg">
                             <th style="width: 60px;">#</th>
                             <th style="width: 90px;">Hình ảnh</th>
-                            <th>Tên sản phẩm</th>
+                            <th>Tên khách sạn</th>
                             <th style="width: 250px;">Danh mục</th>
                             <th style="width: 100px;">Trạng thái</th>
                             <th style="width: 100px;">Hành động</th>
@@ -50,7 +50,11 @@
                                 {{-- <div style="background: #ededed  url('{{$product->image ? 'https://s3-hcm-r1.longvan.net/kaholding/'.$product->image->ten : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div> --}}
                             </td>
                             <td class="text-wrap">{{ $product->name }}</td>
-                            <td>{{ $product->menu->name }}</td>
+                            <td>
+                                @foreach ($product->menus as $key => $menu)
+                                    {{ $menu->name }}{{ $key < $product->menus->count() - 1 ? ', ' : '' }}
+                                @endforeach
+                            </td>
                             <td class="text-center">
                                 @if ($product->active != 1)
                                 <span class="badge badge-warning">Tạm dừng</span>
@@ -91,7 +95,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>Bạn có thật sự muốn xóa sản phẩm này?</p>
+                    <p>Bạn có thật sự muốn xóa khách sạn này?</p>
                     <input type="text" id="deleteId" name="id" hidden />
                 </div>
                 <div class="modal-footer justify-content-between">

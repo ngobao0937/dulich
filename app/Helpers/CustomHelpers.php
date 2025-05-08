@@ -12,33 +12,89 @@ use Illuminate\Http\Request;
 use App\Models\Image;
 use Carbon\Carbon;
 
-function compressImage($file) {
-    return ImageIntervention::make($file)
-        ->resize(1200, null, function ($constraint) {
+function compressImage($file, $quality = 60, $resizeWidth = 1200) {
+    $image = ImageIntervention::make($file);
+
+    // Nếu resizeWidth không phải null, thực hiện resize ảnh
+    if ($resizeWidth !== null) {
+        // Resize theo chiều rộng và giữ tỷ lệ chiều cao
+        return $image->resize($resizeWidth, null, function ($constraint) {
             $constraint->aspectRatio();
-            $constraint->upsize();
+            $constraint->upsize();  // Đảm bảo không thay đổi kích thước nếu ảnh nhỏ hơn
         })
-        ->encode('jpg', 60); 
+        ->encode('jpg', $quality);
+    }
+
+    // Nếu không resize, chỉ giảm chất lượng ảnh
+    return $image->encode('jpg', $quality);
 }
 
+// function SaveImage(Request $request, $id, $type, $inputType = 'picture'){
+//     $file = $request->file($inputType);
 
-function SaveImage(Request $request, $id, $type, $inputType = 'picture'){
+//     $image = compressImage($file);
+
+//     $file_name = Str::uuid() . '_' . time() . '.jpg';
+
+//     Image::updateOrCreate(
+//         [
+//             'id_fk' => $id,
+//             'type' => $type
+//         ],
+//         [
+//             'ten' => $file_name
+//         ]
+//     );
+
+//     $path = public_path('uploads/' . $file_name);
+//     $image->save($path); 
+// }
+
+function SaveImage(Request $request, $id, $type, $inputType = 'picture', $quality = 60, $resizeWidth = 1200) {
     $file = $request->file($inputType);
 
-    $image = compressImage($file);
+    if (!$file) {
+        return; // Không làm gì nếu không có file
+    }
 
-    $file_name = Str::uuid() . '_' . time() . '.jpg';
+    $mimeType = $file->getMimeType();
 
-    Image::updateOrCreate(
-        [
-            'id_fk' => $id,
-            'type' => $type
-        ],
-        [
-            'ten' => $file_name
-        ]
-    );
+    // Nếu là hình ảnh
+    if (str_starts_with($mimeType, 'image/')) {
+        $image = compressImage($file, $quality, $resizeWidth);
 
-    $path = public_path('uploads/' . $file_name);
-    $image->save($path); 
+        $file_name = Str::uuid() . '_' . time() . '.jpg';
+
+        Image::updateOrCreate(
+            [
+                'id_fk' => $id,
+                'type' => $type
+            ],
+            [
+                'ten' => $file_name
+            ]
+        );
+
+        $path = public_path('uploads/' . $file_name);
+        $image->save($path);
+
+    } 
+    // Nếu là video
+    elseif (str_starts_with($mimeType, 'video/')) {
+        $extension = $file->getClientOriginalExtension(); // lấy đuôi file gốc (mp4, mov, etc.)
+        $file_name = Str::uuid() . '_' . time() . '.' . $extension;
+
+        Image::updateOrCreate(
+            [
+                'id_fk' => $id,
+                'type' => $type
+            ],
+            [
+                'ten' => $file_name
+            ]
+        );
+
+        $path = public_path('uploads/' . $file_name);
+        $file->move(public_path('uploads/'), $file_name); 
+    }
 }

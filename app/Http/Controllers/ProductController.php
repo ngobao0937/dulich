@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Menu;
+use App\Models\ProductMenu;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Image;
 use App\Models\Banner;
-use App\Models\Document;
+use App\Models\Extension;
 use Carbon\Carbon;
 
 class ProductController extends Controller
@@ -25,8 +26,13 @@ class ProductController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', '%' . $search . '%')
-                    ->orWhere('model', 'like', '%' . $search . '%')
-                    ->orWhere('short_description', 'like', '%' . $search . '%');
+                    ->orWhere('address', 'like', '%' . $search . '%')
+                    ->orWhere('email', 'like', '%' . $search . '%')
+                    ->orWhere('phone', 'like', '%' . $search . '%')
+                    ->orWhere('content', 'like', '%' . $search . '%')
+                    ->orWhereHas('menu', function ($q) use ($search) {
+                        $q->where('name', 'like', '%' . $search . '%');
+                    });
             });
         }
 
@@ -53,9 +59,6 @@ class ProductController extends Controller
 		
 		$validator = Validator::make($request->all(), [
             'name' => 'required',
-			'menu_fk' => 'required',
-            // 'model' => 'required',
-            'document.*' => 'file|mimes:pdf|max:2048',
         ]);
 
 		if ($validator->fails()) {
@@ -67,10 +70,14 @@ class ProductController extends Controller
 		$data = [
 			'name' => $request->input('name'),
 			'slug' => Str::slug($request->input('name')),
-			'short_description' => $request->short_description,
-            'long_description' => $request->long_description,
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+            'email' => $request->input('email'),
+            'link' => $request->input('link'),
+            'content' => $request->input('content'),
+            // 'extension_fk' => $request->input('extension_fk'),
+            // 'menu_fk' => is_array($request->menus_fk) ? implode(',', $request->menus_fk) : null,
 			'active' => $request->active ? 1 : 0,
-			'menu_fk' => $request->menu_fk,
 			'model' => $request->model,
             'meta_keywords' => $request->meta_keywords,
             'meta_description' => $request->meta_description
@@ -81,27 +88,39 @@ class ProductController extends Controller
 			$data
 		);
 
+        ProductMenu::where('product_fk', $obj->id)->delete();
+
+        $menus_fk = $request->input('menus_fk', []); 
+
+        foreach ($menus_fk as $menuId) {
+            ProductMenu::create([
+                'product_fk' => $obj->id,
+                'menu_fk' => $menuId
+            ]);
+        }
 
 		if($request->hasfile('picture')){
 			SaveImage($request, $obj->id, 'product_hinh_dai_dien');
 		}
 
-        if ($request->hasFile('document')) {
-            foreach ($request->file('document') as $file) {
-                $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-        
-                $file->move(public_path('uploads/documents'), $filename);
-        
-                Document::updateOrCreate(
+        if($request->hasfile('picture360')){
+			SaveImage($request, $obj->id, 'product_vr360', 'picture360', 100, null);
+		}
+
+        if ($request->filled('uploaded_pictures')) {
+            $pictures = json_decode($request->input('uploaded_pictures'), true);
+            foreach ($pictures as $fileName) {
+                Image::updateOrCreate(
+                    ['id' => null],
                     [
-                        'product_fk' => $obj->id,
-                        'name' => $filename,
+                        'ten' => $fileName,
+                        'id_fk' => $obj->id,
+                        'type' => 'product_hinh_khac'
                     ]
                 );
             }
         }
         
-
 		return redirect(route('backend.product.index', $request->query()));
     }
 
@@ -113,16 +132,16 @@ class ProductController extends Controller
        return redirect(route('backend.product.index', $request->query()));
     }
 
-    public function deletePDF(Request $request)
+    public function deleteImg(Request $request)
     {
-        $pdf = Document::find($request->input('id'));
+        $img = Image::find($request->input('id'));
         
-        if (!empty($pdf)) {
-            $pdf->isdelete = 1;
-            $pdf->save();
-            return response()->json(['success' => true, 'documentId' => $pdf->id]);
+        if (!empty($img)) {
+            $img->isdelete = 1;
+            $img->save();
+            return response()->json(['success' => true, 'imageId' => $img->id]);
         }else{
-            return response()->json(['success' => false, 'message' => 'File không tồn tại.'], 404);
+            return response()->json(['success' => false, 'message' => 'Hình ảnh không tồn tại.'], 404);
         }
     }
 

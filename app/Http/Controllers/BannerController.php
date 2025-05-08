@@ -23,7 +23,7 @@ class BannerController extends Controller
             });
         }
 
-        $banners = $query->where('type', $request->type)->orderby('position', 'asc')->paginate(20);
+        $banners = $query->orderby('position', 'asc')->paginate(20);
 
         return view('backend.banner.index', compact('banners'));
     }
@@ -53,13 +53,13 @@ class BannerController extends Controller
 				'active' => $request->active ? 1 : 0,
 				'position' => $request->position,
 				'link' => $request->link,
-				'type' => $request->type
+				// 'type' => $request->type
 			]
 		);
 
 
 		if($request->hasfile('picture')){
-			SaveImage($request, $obj->id, 'banner');
+			SaveImage($request, $obj->id, 'banner', 'picture', 100);
 		}
 
 		return redirect(route('backend.banner.index', $request->query()));
@@ -70,6 +70,7 @@ class BannerController extends Controller
 		$id = $request->input('id');
 		$banner = Banner::find($id);
 		$banner->delete();
-       return redirect(route('backend.banner.index', $request->query()));
+		$banner->image()->delete();
+        return redirect(route('backend.banner.index', $request->query()));
     }
 }

@@ -1,5 +1,5 @@
 @extends('frontend.layout.app')
-@section('title', 'Hose and Fittings - Quality')
+@section('title', 'Du lịch')
 @section('content')
 
 @endsection

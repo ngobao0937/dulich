@@ -54,14 +54,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        {{-- <div class="col">
                             <div class="form-group">
                                 <div class="icheck-success d-inline">
                                     <input type="checkbox" name="public" id="public" />
                                     <label for="public">Hiển thị trang chủ</label>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     
                 </div>

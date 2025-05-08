@@ -8,7 +8,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="/admin" class="brand-link">
       <img src="{{ asset('assets/backend/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">ADMIN ASIMAT</span>
+      <span class="brand-text font-weight-light">ADMIN WEBSITE</span>
     </a>
 
     <div class="sidebar">
@@ -23,14 +23,26 @@
           </li> --}}
           <li class="nav-item">
             <a href="{{ route('backend.product.index') }}" class="nav-link {{ request()->routeIs('backend.product.*') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-store"></i>
-              <p>Sản phẩm</p>
+              <i class="nav-icon fas fa-hotel"></i>
+              <p>Khách sạn</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('backend.contact.index') }}" class="nav-link {{ request()->routeIs('backend.contact.*') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-envelope"></i>
-              <p>Liên hệ</p>
+            <a href="{{ route('backend.room.index') }}" class="nav-link {{ request()->routeIs('backend.room.*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-bed"></i>
+              <p>Phòng</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('backend.voucher.index') }}" class="nav-link {{ request()->routeIs('backend.voucher.*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-ticket-alt"></i>
+              <p>Mã giảm giá</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('backend.event.index') }}" class="nav-link {{ request()->routeIs('backend.event.*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-calendar-week"></i>
+              <p>Sự kiện</p>
             </a>
           </li>
           <li class="nav-item">
@@ -39,40 +51,17 @@
               <p>Danh mục</p>
             </a>
           </li>
-          {{-- <li class="nav-item">
-            <a href="{{ route('backend.website.index') }}" class="nav-link {{ request()->routeIs('backend.website.*') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-link"></i>
-              <p>Link Website</p>
+          <li class="nav-item">
+            <a href="{{ route('backend.extension.index') }}" class="nav-link {{ request()->routeIs('backend.extension.*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-puzzle-piece"></i>
+              <p>Tiện ích</p>
             </a>
-          </li> --}}
-          <li class="nav-item {{ request()->routeIs('backend.banner.*') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ request()->routeIs('backend.banner.*') ? 'active' : '' }}">
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('backend.banner.index') }}" class="nav-link {{ request()->routeIs('backend.banner.*') ? 'active' : '' }}">
               <i class="nav-icon far fa-image"></i>
-              <p>
-                Banner
-                <i class="fas fa-angle-left right"></i>
-              </p>
+              <p>Banner</p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('backend.banner.index', ['type'=>'main']) }}" class="nav-link {{ request()->routeIs('backend.banner.*') && request('type') == 'main' ? 'active' : '' }}">
-                  <i class="far {{ request()->routeIs('backend.banner.*') && request('type') == 'main' ? 'fa-dot-circle' : 'fa-circle' }} nav-icon"></i>
-                  <p>Chính</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('backend.banner.index', ['type'=>'partner']) }}" class="nav-link {{ request()->routeIs('backend.banner.*') && request('type') == 'partner' ? 'active' : '' }}">
-                  <i class="far {{ request()->routeIs('backend.banner.*') && request('type') == 'partner' ? 'fa-dot-circle' : 'fa-circle' }} nav-icon"></i>
-                  <p>Đối tác</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('backend.banner.index', ['type'=>'customer']) }}" class="nav-link {{ request()->routeIs('backend.banner.*') && request('type') == 'customer' ? 'active' : '' }}">
-                  <i class="far {{ request()->routeIs('backend.banner.*') && request('type') == 'customer' ? 'fa-dot-circle' : 'fa-circle' }} nav-icon"></i>
-                  <p>Khách hàng</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
             <a href="{{ route('backend.page.index') }}" class="nav-link {{ request()->routeIs('backend.page.*') ? 'active' : '' }}">
@@ -89,7 +78,7 @@
           <li class="nav-item">
             <a href="javascript:void(0)" data-toggle="modal" data-target="#modal-logout" class="nav-link"  style="color: rgb(250, 97, 97);">
               <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p>Sign out</p>
+              <p>Đăng xuất</p>
             </a>
           </li>
         </ul>

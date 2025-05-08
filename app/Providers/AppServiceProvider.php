@@ -4,10 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Banner;
-use App\Models\Partner;
 use App\Models\Menu;
 use App\Models\Page;
-use App\Models\Website;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,24 +34,14 @@ class AppServiceProvider extends ServiceProvider
         //     ]);
         // });
 
-        $banners = Banner::where('active', 1)->where('type', 'main')->orderby('position', 'asc')->get();
-        $partners = Banner::where('active', 1)->where('type', 'partner')->orderby('position', 'asc')->get();
-        $customers = Banner::where('active', 1)->where('type', 'customer')->orderby('position', 'asc')->get();
-        $pages = Page::whereIn('id', [10002,10003,10004,10005])->get();
-        $pageTc = Page::find(10000);
-        $pageGt = Page::find(10001);
+        $banners = Banner::where('active', 1)->orderby('position', 'asc')->get();
+        $pages = Page::all();
         $menus = Menu::where('active', 1)->get();
-        $websites = Website::where('active', 1)->get();
 
         view()->share([
             'banners'=> $banners,
-            'partners' => $partners,
-            'customers' => $customers,
             'menus'=> $menus,
-            'websites' => $websites,
             'pages' => $pages,
-            'pageTc' => $pageTc,
-            'pageGt' => $pageGt,
             'meta_title' => 'Asimat - Thiết bị vật tư chính hãng',
             'meta_description' => 'Chuyên cung cấp thiết bị vật tư chính hãng với giá tốt nhất.',
             'meta_keywords' => 'asimat, thiet bi, thiết bị, vat tu, vật tư, thiet bi vat tu, thiết bị vật tư',

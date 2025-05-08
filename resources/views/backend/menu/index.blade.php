@@ -28,7 +28,7 @@
                             <th style="width: 60px;">#</th>
                             <th style="width: 90px;">Hình ảnh</th>
                             <th>Tên danh mục</th>
-                            <th style="width: 100px;">Trang chủ</th>
+                            {{-- <th style="width: 100px;">Trang chủ</th> --}}
                             <th style="width: 100px;">Trạng thái</th>
                             <th style="width: 100px;">Hành động</th>
                         </tr>
@@ -43,13 +43,13 @@
                                     {{-- <div style="background: #ededed  url('{{$menu->image ? 'https://s3-hcm-r1.longvan.net/kaholding/'.$menu->image->ten : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div> --}}
                                 </td>
                                 <td>{{ $menu->name }}</td>
-                                <td class="text-center">
+                                {{-- <td class="text-center">
                                     @if ($menu->public != 1)
                                     <span class="badge badge-warning">Ẩn</span>
                                     @else
                                     <span class="badge badge-success">Hiển thị</span>
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td class="text-center">
                                     @if ($menu->active != 1)
                                     <span class="badge badge-warning">Tạm dừng</span>
@@ -98,7 +98,7 @@
     $('#menuModal').on('hidden.bs.modal', function() {
         $('#id').val('');
         $('#name').val('');
-        $('#public').prop('checked', false);
+        // $('#public').prop('checked', false);
         $('#active').prop('checked', false);
         $('#picture').val('');
         $('#imagePreview').attr('src', defaultImage);
@@ -114,9 +114,9 @@
                 if(data.menu.active == 1){
                     $('#active').prop('checked', true);
                 }
-                if(data.menu.public == 1){
-                    $('#public').prop('checked', true);
-                }
+                // if(data.menu.public == 1){
+                //     $('#public').prop('checked', true);
+                // }
                 if(data.menu.image){
                     // $('#imagePreview').attr('src', 'https://s3-hcm-r1.longvan.net/kaholding/' + data.menu.image.ten);
                     // originalImage = 'https://s3-hcm-r1.longvan.net/kaholding/' + data.menu.image.ten;

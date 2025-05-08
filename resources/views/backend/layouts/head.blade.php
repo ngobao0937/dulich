@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>ADMIN</title>
-<link rel="icon" type="image/vnd.microsoft.icon" href="{{ asset('assets/frontend/images/logo.png') }}">
+<link rel="icon" type="image/vnd.microsoft.icon" href="{{ asset('images/favicon.ico') }}">
 <link rel="stylesheet" href="{{ asset('assets/backend/dist/css/adminlte.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/backend/plugins/fontawesome-free/css/all.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">

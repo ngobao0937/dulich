@@ -58,15 +58,15 @@
                         <div class="remove-icon" id="removeIcon" style="display: none;">
                             <i class="fa fa-times"></i>
                         </div>
-                        <input type="file" id="picture" name="picture" accept="image/*" hidden />
+                        <input type="file" id="picture" name="picture" accept="image/*,video/*" hidden />
                     </div>
+                    
                     <div class="form-group">
                         <div class="icheck-success d-inline">
                             <input type="checkbox" name="active" id="active" />
                             <label for="active">Hoạt động</label>
                         </div>
                     </div>
-                    <input type="hidden" name="type" value="{{ request('type') }}">
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>

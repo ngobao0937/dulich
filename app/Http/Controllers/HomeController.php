@@ -18,10 +18,12 @@ class HomeController extends Controller
         $products = Product::where('active', 1)->where('isdelete', 0)->orderby('id', 'desc')->take(8)->get();
         $menus_public = Menu::where('active', 1)->where('public', 1)->get();
         $trang_chu = Page::find(10000);
+        $banner_trangchu = Banner::find(10000);
         return view('frontend.home.index', [
             'products' => $products,
             'menus_public' => $menus_public,
-            'trang_chu' => $trang_chu
+            'trang_chu' => $trang_chu,
+            'banner_trangchu' => $banner_trangchu
         ]);
     }
 

@@ -21,7 +21,7 @@ class MenuController extends Controller
             $query->where('name', 'like', '%' . $search .'%');
         }
     
-        $menus = $query->paginate(20);
+        $menus = $query->orderby('id','desc')->paginate(20);
     
         return view('backend.menu.index', compact('menus'));
     }
@@ -44,7 +44,7 @@ class MenuController extends Controller
                 'name' => $request->input('name'),
                 'slug' =>Str::slug($request->input('name')),
                 'active' => $request->active ? 1 : 0,
-                'public' => $request->public ? 1 : 0,
+                // 'public' => $request->public ? 1 : 0,
             ]
         );
 
@@ -66,25 +66,17 @@ class MenuController extends Controller
     public function delete(Request $request)
     {
         $id = $request->input('id');
-        // $disable = [1,2,3,4,5,6,7,8,9,10,11,16];
+        $disable = [10000, 10001, 10002];
     
-        // if (in_array($id, $disable)) {
-        //     return redirect()->back()->withErrors('Không thể xóa menu này!')->withInput();
-        // }
+        if (in_array($id, $disable)) {
+            return redirect()->back()->withErrors('Không thể xóa menu này!')->withInput();
+        }
     
         $menu = Menu::find($id);
         if (!$menu) {
             return redirect()->route('backend.menu.index')
                 ->with('error', 'Menu không tồn tại!');
         }
-    
-        // if ($menu->menu_fk == 0) {
-        //     $level2Menus = Menu::where('menu_fk', $menu->id)->pluck('id');
-        //     Menu::whereIn('menu_fk', $level2Menus)->delete();
-        //     Menu::whereIn('id', $level2Menus)->delete();
-        // } elseif (Menu::where('menu_fk', $menu->id)->exists()) {
-        //     Menu::where('menu_fk', $menu->id)->delete();
-        // }
     
         $menu->delete();
     

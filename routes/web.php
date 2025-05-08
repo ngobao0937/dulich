@@ -6,16 +6,34 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\ExtensionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\CKEditorController;
-use App\Http\Controllers\WebsiteController;
-use Mews\Captcha\Captcha;
 
 Route::get('/', [HomeController::class, 'index'])->name('frontend.home.index');
+
+Route::get('/chitiet', function(){
+    return view('frontend.home.chitiet');
+});
+
+Route::get('/uudai', function(){
+    return view('frontend.home.uudai');
+});
+
+Route::get('/event', function(){
+    return view('frontend.home.event');
+});
+
+Route::get('/event_con', function(){
+    return view('frontend.home.event_con');
+});
 
 Route::get('/tr-{slug}', [HomeController::class, 'page'])->name('frontend.home.page');
 
@@ -24,10 +42,6 @@ Route::get('/san-pham', [HomeController::class, 'products'])->name('frontend.hom
 Route::get('/sp{id}-{slug}', [HomeController::class, 'detail'])->name('frontend.home.detail');
 
 Route::get('/lien-he', [HomeController::class, 'contact'])->name('frontend.home.contact');
-
-Route::get('/captcha', [HomeController::class, 'captcha'])->name('frontend.home.captcha');
-
-Route::post('/check-captcha', [HomeController::class, 'check_captcha'])->name('frontend.home.check_captcha');
 
 Route::post('/gui-lien-he', [HomeController::class, 'post_contact'])->name('frontend.home.post_contact');
 
@@ -60,6 +74,11 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/menu/edit', [MenuController::class, 'edit'])->name('backend.menu.edit');
     Route::delete('/menu/delete', [MenuController::class, 'delete'])->name('backend.menu.delete');
 
+    Route::get('/extension', [ExtensionController::class, 'index'])->name('backend.extension.index');
+    Route::post('/extension/store', [ExtensionController::class, 'store'])->name('backend.extension.store');
+    Route::get('/extension/edit', [ExtensionController::class, 'edit'])->name('backend.extension.edit');
+    Route::delete('/extension/delete', [ExtensionController::class, 'delete'])->name('backend.extension.delete');
+
     Route::get('/page', [PageController::class, 'index'])->name('backend.page.index');
     Route::post('/page/store', [PageController::class, 'store'])->name('backend.page.store');
     Route::get('/page/edit', [PageController::class, 'edit'])->name('backend.page.edit');
@@ -69,15 +88,31 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/product/create', [ProductController::class,'create'])->name('backend.product.create');
     Route::get('/product/edit', [ProductController::class,'edit'])->name('backend.product.edit');
     Route::delete('/product/delete', [ProductController::class,'delete'])->name('backend.product.delete');
-    Route::delete('/product/deletePDF', [ProductController::class,'deletePDF'])->name('backend.product.deletePDF');
+    Route::delete('/product/delete-img', [ProductController::class,'deleteImg'])->name('backend.product.delete.img');
+
+    Route::get('/room', [RoomController::class,'index'])->name('backend.room.index');
+    Route::post('/room/store', [RoomController::class,'store'])->name('backend.room.store');
+    Route::get('/room/create', [RoomController::class,'create'])->name('backend.room.create');
+    Route::get('/room/edit', [RoomController::class,'edit'])->name('backend.room.edit');
+    Route::delete('/room/delete', [RoomController::class,'delete'])->name('backend.room.delete');
+    Route::delete('/room/delete-img', [RoomController::class,'deleteImg'])->name('backend.room.delete.img');
+
+    Route::get('/voucher', [VoucherController::class,'index'])->name('backend.voucher.index');
+    Route::post('/voucher/store', [VoucherController::class,'store'])->name('backend.voucher.store');
+    Route::get('/voucher/create', [VoucherController::class,'create'])->name('backend.voucher.create');
+    Route::get('/voucher/edit', [VoucherController::class,'edit'])->name('backend.voucher.edit');
+    Route::delete('/voucher/delete', [VoucherController::class,'delete'])->name('backend.voucher.delete');
+
+    Route::get('/event', [EventController::class,'index'])->name('backend.event.index');
+    Route::post('/event/store', [EventController::class,'store'])->name('backend.event.store');
+    Route::get('/event/create', [EventController::class,'create'])->name('backend.event.create');
+    Route::get('/event/edit', [EventController::class,'edit'])->name('backend.event.edit');
+    Route::delete('/event/delete', [EventController::class,'delete'])->name('backend.event.delete');
+    Route::delete('/event/delete-img', [EventController::class,'deleteImg'])->name('backend.event.delete.img');
+
 
     Route::get('/contact', [ContactController::class, 'index'])->name('backend.contact.index');
     Route::post('/contact/store', [ContactController::class, 'store'])->name('backend.contact.store');
     Route::delete('/contact/delete', [ContactController::class, 'delete'])->name('backend.contact.delete');
     Route::get('/contact/edit', [ContactController::class, 'edit'])->name('backend.contact.edit');
-
-    Route::get('/website', [WebsiteController::class, 'index'])->name('backend.website.index');
-    Route::post('/website/store', [WebsiteController::class, 'store'])->name('backend.website.store');
-    Route::delete('/website/delete', [WebsiteController::class, 'delete'])->name('backend.website.delete');
-    Route::get('/website/edit', [WebsiteController::class, 'edit'])->name('backend.website.edit');
 });

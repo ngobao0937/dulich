@@ -1,58 +1,47 @@
-<!-- HEADER -->	
-<div class="Header">
-    {{-- <div style="position: absolute; width: 100%; height: 50px; background: #54546d; z-index: 1;">
-
-    </div> --}}
-    <div style="position: absolute; left: 20px; top: 15px; z-index: 2;">
-        <a href="{{ route('frontend.home.index') }}">
-            <img src="{{ asset('assets/frontend/images/logo.png') }}" alt="Logo" width="90">
-        </a>
-    </div>
-    <div class="headerCompany" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 45px; text-align: left; background-color: #54546d; z-index: 1; padding: 18px 0 0 100px">ASIMAT CO., LTD.</div>
-    <div class="headerSearch" style="margin: 10px; z-index: 2; position: relative;">
-        <form name="frmsearch" method="get" action="{{ route('frontend.home.products') }}">
-            <div class="searchLable">Tìm kiếm</div>
-            <input name="keyword" id="keyword" type="text" placeholder="Nhập từ khóa" class="searchForm"/>
-            <a href="javascript:void(0);" class="searchBtn">
-                <span><img src="{{ asset('assets/frontend/images/blank.gif') }}" width="20" alt="Search" /></span>
-            </a>
-        </form>
-    </div>
-    
-    <div class="clear"></div>
-    <div class="topMenu menu-top">
-        <ul>
-            <li class=""><a href="/">Trang chủ</a></li>
-            <li class=""><a href="{{ route('frontend.home.page', ['slug'=>$pageGt->slug]) }}">Giới thiệu</a></li>
-            <li class=""><a href="{{ route('frontend.home.products') }}">Sản phẩm</a></li>
-            <li class=""><a href="/lien-he">Liên hệ</a></li>
-            {{-- <li class="lang">
-                <div class="headerLang">
-                    <a href=""><img src="{{ asset('assets/frontend/images/lang_1290412622.png') }}" alt="" /></a>
-                    <a href=""><img src="{{ asset('assets/frontend/images/lang_1290412632.png') }}" alt="" /></a>
-                </div>
-            </li> --}}
-        </ul>
-        <div class="clear"></div>
-    </div>
-    <div class="clear"></div>
-</div>
-<!-- end of HEADER -->
-
-<!-- Banner -->
-<div class="mainBanner">
-    <div class="swiper bannerSwiper">
-        <div class="swiper-wrapper">
-            @foreach ($banners as $banner)
-            <div class="swiper-slide">
-                <a href="{{ $banner->link ? $banner->link : '#' }}"><img src="{{ $banner->image ? asset('uploads/'.$banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->ten }}"></a>
+<header>
+    <section id="SECTION31">
+        <div class="sp_container">
+            <div id="SHAPE78" open-popup="POPUP3" class="hide_item_desktop">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 18 18">
+                    <foreignObject x="0" y="0" width="18" height="18">
+                        <i class=" far  fa-ellipsis-h" style="font-size: 18px; color: rgb(28, 77, 114); cursor: pointer;"></i>
+                    </foreignObject>
+                </svg>
             </div>
-            @endforeach
+            <div id="GROUP772">
+                <div>
+                    <a id="TITLE643" href="/" class="over hide_item_mobile">
+                        
+                        <h3>TRANG CHỦ</h3>
+                    </a>
+                    <a id="TITLE644" href="#" class="hide_item_mobile">
+                        <h3>SỰ KIỆN</h3>
+                    </a>
+                    <a id="TITLE645" href="#" class="hide_item_mobile">
+                        <h3>NGHỈ DƯỠNG</h3>
+                    </a>
+                    <a id="TITLE646" href="#" class="hide_item_mobile">
+                        <h3>VUI CHƠI</h3>
+                    </a>
+                    <a id="TITLE647" href="#" class="hide_item_mobile">
+                        <h3>ẨM THỰC</h3>
+                    </a>
+                    <div id="TITLE648" class="hide_item_mobile">
+                        <h3>VỀ CHÚNG TÔI</h3>
+                    </div>
+                    <div id="TITLE649" class="hide_item_mobile">
+                        <h3>LIÊN HỆ</h3>
+                    </div>
+                    <div id="BUTTON122">
+                        <button type="button" data-funnel="yes"> 
+                            <span> ĐĂNG KÝ</span> 
+                        </button>
+                    </div>
+                    <div id="TITLE650">
+                        <h3>Du lịch Bà Rịa - Vũng Tàu</h3>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Pagination dạng số -->
-        <div class="swiper-pagination"></div>
-    </div>
-</div>
-
-<!-- end of BANNER -->
+    </section>
+</header>
