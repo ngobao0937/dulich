@@ -1,5 +1,5 @@
 @extends('frontend.layout.app')
-@section('title', 'Du lịch')
+@section('title', 'Sở du lịch - Trang chủ')
 @section('content')
 
 <div>
@@ -7,7 +7,7 @@
         <div class="swiper-wrapper">
             @foreach ($banners as $banner)
                 <div class="swiper-slide">
-                    <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 16/9;" src="{{ asset('uploads/' . $banner->image->ten) }}" alt="">
+                    <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 21/9;" src="{{ asset('uploads/' . $banner->image->ten) }}" alt="">
                 </div>
             @endforeach
         </div>
@@ -311,7 +311,7 @@
                     <div class="resort-card">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover" src="{{ $product->promotionThuongMainimage ? asset('uploads/'.$product->promotionThuongMainimage->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
                             </a>
                         </div>
                         <div class="resort-details">
@@ -372,7 +372,7 @@
                     <div class="resort-card">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover" src="{{ $product->promotionThuongMainimage ? asset('uploads/'.$product->promotionThuongMainimage->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
                             </a>
                         </div>
                         <div class="resort-details">
@@ -433,7 +433,7 @@
                     <div class="resort-card">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover" src="{{ $product->promotionThuongMainimage ? asset('uploads/'.$product->promotionThuongMainimage->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
                             </a>
                         </div>
                         <div class="resort-details">
@@ -600,10 +600,11 @@
             <p>Hãy để chúng tôi mang đến cho bạn những thông tin du lịch mới nhất, các chương trình khuyến mãi hấp dẫn từ Sở Du lịch và các đối tác. Chỉ một bước đơn giản, bạn sẽ không bỏ lỡ bất kỳ cơ hội tiết kiệm nào cho chuyến đi đến Bà Rịa - Vũng Tàu!</p>
         </div>
         <div id="FORM5" data-type="lead">
-            <form>
-                <div id="INPUT21"><input data-require="true" name="full_name" value="" type="text" data-type="text" placeholder="Họ tên"></div>
-                <div id="INPUT22"><input data-require="true" name="email" value="" type="email" data-type="email" placeholder="Email"></div>
-                <div id="INPUT23"><input data-require="true" name="phone" value="" type="text" data-type="phone" placeholder="Số điện thoại"></div>
+            <form action="{{ route('frontend.customer.store') }}" method="post">
+                @csrf
+                <div id="INPUT21"><input name="name" type="text" placeholder="Họ tên" required></div>
+                <div id="INPUT22"><input name="email" type="email" placeholder="Email" required></div>
+                <div id="INPUT23"><input name="phone" type="tel" placeholder="Số điện thoại" required></div>
                 <div id="BUTTON123"><button type="submit" data-funnel="yes"> <span> Gửi thông tin</span> </button></div>
             </form>
             <div class="data_thankyou" type="popup" style="display: none;">Cảm ơn bạn đã quan tâm!</div>
@@ -613,7 +614,7 @@
         </div>
     </div>
 </section>
-<div id="POPUP1">
+{{-- <div id="POPUP1">
     <div data-width="414" data-height="328">
         <div id="SHAPE53">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 11.250000953674316 17.9976863861084">
@@ -758,7 +759,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
 @section('styles')
 <link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}">

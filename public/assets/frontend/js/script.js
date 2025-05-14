@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+        }
+    });
+
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
         $('#scrollToTop').fadeIn();

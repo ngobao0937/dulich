@@ -181,7 +181,7 @@ class ProductController extends Controller
         return view('frontend.product.detail', [
             'product' => $product,
             'meta_title' => $product->name,
-            'meta_description' => $product->meta_description ?? 'Chuyên cung cấp đồ dùng mẹ và bé, tã, sữa, quần áo trẻ em chính hãng với giá tốt nhất.',
+            'meta_description' => $product->meta_description ?? 'Trang thông tin du lịch Bà Rịa Vũng Tàu Tourism.',
             'meta_keywords' => $meta_keywords,
             'meta_og_image' => $product->image ? asset('uploads/'.$product->image->ten) : asset('images/default.jpg'),
             'meta_og_url' => route('frontend.product.detail',['id'=>$request->id, 'slug'=>$request->slug]),
@@ -308,5 +308,42 @@ class ProductController extends Controller
             'activeSort' => $request->sort_by ?? 'default',
         ]);
     }
+
+    public function promotions(Request $request)
+    {
+        $banners = Banner::where('type', 'main')
+            ->orderBy('position', 'asc')
+            ->where('active', 1)
+            ->get();
+
+        $menuIds = $request->input('filters', []);
+        $keyword = $request->input('keyword');
+
+        $products = Product::where('active', 1)
+            ->where('isdelete', 0)
+            ->when(!empty($menuIds), function ($query) use ($menuIds) {
+                $query->whereHas('menus', function ($q) use ($menuIds) {
+                    $q->whereIn('menus.id', $menuIds);
+                });
+            })
+            ->when(!empty($keyword), function ($query) use ($keyword) {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('products.name', 'like', "%$keyword%")
+                    ->orWhereHas('promotionThuongMain', function ($sub) use ($keyword) {
+                        $sub->where('name', 'like', "%$keyword%");
+                    });
+                });
+            })
+            ->whereHas('promotionThuongMain')
+            ->orderBy('id', 'desc')
+            ->paginate(20);
+
+        return view('frontend.product.promotions', [
+            'banners' => $banners,
+            'products' => $products,
+        ]);
+    }
+
+
 
 }

@@ -45,8 +45,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a class="navbar-brand mx-auto font-weight-bold text-primary text-center" href="/" style="z-index: 1; color: white !important; font-size: 22px;">
-            Du lịch Bà Rịa - Vũng Tàu
+        <a class="navbar-brand mx-auto font-weight-bold text-primary text-center title-web" href="/">
+            <img class="mr-2 logo-web" src="{{ asset('images/logo-1.png') }}" alt="Logo">
+            <span style="color: white;">Du lịch Bà Rịa - Vũng Tàu</span>
         </a>
 
         <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
@@ -58,7 +59,7 @@
                     <a class="nav-link text-white" href="#">SỰ KIỆN DU LỊCH</a>
                 </li>
                 <li class="nav-item" >
-                    <a class="nav-link text-white" href="#">KHUYẾN MÃI & ƯU ĐÃI</a>
+                    <a class="nav-link text-white" href="{{ route('frontend.product.promotions') }}">KHUYẾN MÃI & ƯU ĐÃI</a>
                 </li>
                 <li class="nav-item ml-lg-3">
                     <button class="btn pl-3 pr-3" style="background: white; border-radius: 20px;" type="button" data-funnel="yes"><b style="color: rgb(28, 77, 114);">ĐĂNG KÝ</b></button>

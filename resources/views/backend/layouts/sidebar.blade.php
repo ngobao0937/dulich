@@ -27,22 +27,28 @@
               <p>Khách sạn</p>
             </a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="{{ route('backend.room.index') }}" class="nav-link {{ request()->routeIs('backend.room.*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-bed"></i>
               <p>Phòng</p>
             </a>
-          </li>
-          <li class="nav-item">
+          </li> --}}
+          {{-- <li class="nav-item">
             <a href="{{ route('backend.voucher.index') }}" class="nav-link {{ request()->routeIs('backend.voucher.*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-ticket-alt"></i>
               <p>Mã giảm giá</p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a href="{{ route('backend.event.index') }}" class="nav-link {{ request()->routeIs('backend.event.*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-calendar-week"></i>
               <p>Sự kiện</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('backend.customer.index') }}" class="nav-link {{ request()->routeIs('backend.customer.*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-user-tag"></i>
+              <p>Người đăng ký</p>
             </a>
           </li>
           <li class="nav-item">

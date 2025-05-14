@@ -42,11 +42,11 @@ class AppServiceProvider extends ServiceProvider
             'banners'=> $banners,
             'menus'=> $menus,
             'pages' => $pages,
-            'meta_title' => 'Asimat - Thiết bị vật tư chính hãng',
-            'meta_description' => 'Chuyên cung cấp thiết bị vật tư chính hãng với giá tốt nhất.',
-            'meta_keywords' => 'asimat, thiet bi, thiết bị, vat tu, vật tư, thiet bi vat tu, thiết bị vật tư',
+            'meta_title' => 'Bariavungtau tourism - Sở du lịch Bà Rịa Vũng Tàu',
+            'meta_description' => 'Trang thông tin du lịch Bà Rịa Vũng Tàu Tourism.',
+            'meta_keywords' => 'bariavungtau tourism, tourism, du lich, so du lich, so du lich ba ria vung tau',
             'meta_og_image' => asset('images/default.jpg'),
-            'meta_og_url' => '',
+            'meta_og_url' => 'https://dev.dulichbariavungtau.vn/',
             'meta_og_type' => 'website'
         ]);
     }

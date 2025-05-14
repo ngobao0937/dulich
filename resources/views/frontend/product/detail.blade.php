@@ -1,5 +1,5 @@
 @extends('frontend.layout.app')
-@section('title', 'Chi tiết khách sạn')
+@section('title', $product->name)
 @section('content')
 <div>
     <div class="swiper product-banner-swiper w-100">

@@ -1123,3 +1123,26 @@ a{
     font-size: 20px;
 }
 
+.title-web{
+    z-index: 1; 
+    color: white !important; 
+    font-size: 22px; 
+    display: flex; 
+    align-items: center;
+}
+.logo-web{
+    width: 40px; 
+    height: 40px; 
+    aspect-ratio: 1/1
+}
+@media only screen and (max-width: 760px) {
+    .title-web{
+        font-size: 18px;
+    }
+    .logo-web{
+        width: 30px; 
+        height: 30px; 
+    }
+}
+
+

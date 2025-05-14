@@ -9,13 +9,21 @@
             <h3>ĐĂNG KÝ NHẬN ƯU ĐÃI NGAY</h3>
         </div>
         <div id="FORM3" data-type="lead">
-            <form>
-                <div id="INPUT12"><input data-require="" name="full_name" value="" type="text" data-type="text" placeholder="Họ tên" required="true"></div>
-                <div id="INPUT13"><input data-require="" name="email" value="" type="email" data-type="email" placeholder="Email" required="true"></div>
-                <div id="INPUT14"><input data-require="" name="phone" value="" type="text" data-type="phone" placeholder="Số điện thoại" required="true"></div>
-                <div id="BUTTON15"><button type="submit"> <span> đăng ký ngay</span> </button></div>
+            <form id="formRegisterUuDai" action="{{ route('frontend.customer.store') }}" method="post">
+                @csrf
+                <div id="INPUT12">
+                    <input name="name" type="text" placeholder="Họ tên" required class="form-control">
+                </div>
+                <div id="INPUT13">
+                    <input name="email" type="email" placeholder="Email" required class="form-control">
+                </div>
+                <div id="INPUT14">
+                    <input name="phone" type="tel" placeholder="Số điện thoại" required class="form-control">
+                </div>
+
+                <div id="BUTTON15"><button type="submit"> <span>Đăng ký ngay</span> </button></div>
             </form>
-            <div class="data_thankyou" type="popup" style="display: none;">Cảm ơn bạn đã quan tâm!</div>
+            <div class="data_thankyou" style="display: none;">Cảm ơn bạn đã quan tâm!</div>
         </div>
     </div>
 </div>
@@ -29,6 +37,59 @@
 <script src="{{ asset('assets/frontend/lib/bootstrap-4.6.2-dist/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/lib/swiper/swiper-bundle.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/script.js') }}"></script>
+{{-- <script>
+    $('#formRegisterUuDai').on('submit', function (e) {
+        e.preventDefault();
+
+        let form = $(this);
+        form.find('input').removeClass('is-invalid');
+        form.find('.invalid-feedback').text('');
+
+        let name = form.find('input[name="name"]').val().trim();
+        let email = form.find('input[name="email"]').val().trim();
+        let phone = form.find('input[name="phone"]').val().trim();
+
+        $.ajax({
+            type: 'POST',
+            url: '{{ route("frontend.customer.store") }}',
+            data: {
+                name: name,
+                email: email,
+                phone: phone,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function () {
+                form.hide();
+                $('.data_thankyou').show();
+            },
+            error: function (xhr) {
+                if (xhr.status === 422) {
+                    let errors = xhr.responseJSON.errors;
+                    if (errors.name) {
+                        form.find('input[name="name"]').addClass('is-invalid');
+                        form.find('input[name="name"]').siblings('.invalid-feedback').text(errors.name[0]);
+                    }
+                    if (errors.email) {
+                        form.find('input[name="email"]').addClass('is-invalid');
+                        form.find('input[name="email"]').siblings('.invalid-feedback').text(errors.email[0]);
+                    }
+                    if (errors.phone) {
+                        form.find('input[name="phone"]').addClass('is-invalid');
+                        form.find('input[name="phone"]').siblings('.invalid-feedback').text(errors.phone[0]);
+                    }
+                } else {
+                    alert('Có lỗi xảy ra. Vui lòng thử lại sau.');
+                }
+            }
+        });
+    });
+
+
+    function validateEmail(email) {
+        let re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+</script> --}}
 
 {{-- <script type="text/javascript">
     function inIframe() {

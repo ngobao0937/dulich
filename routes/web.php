@@ -17,11 +17,15 @@ use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\PromotionController;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/', [HomeController::class, 'index'])->name('frontend.home.index');
 
+Route::get('/khuyen-mai-uu-dai', [ProductController::class, 'promotions'])->name('frontend.product.promotions');
+
 Route::get('/ks{id}-{slug}', [ProductController::class, 'detail'])->name('frontend.product.detail');
 
+Route::post('/dang-ky-nhan-khuyen-mai', [CustomerController::class, 'store'])->name('frontend.customer.store');
 
 Route::get('/uudai', function(){
     return view('frontend.home.uudai');
@@ -119,4 +123,9 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::post('/promotion/store', [PromotionController::class, 'store'])->name('backend.promotion.store');
     Route::get('/promotion/edit', [PromotionController::class, 'edit'])->name('backend.promotion.edit');
     Route::delete('/promotion/delete', [PromotionController::class, 'delete'])->name('backend.promotion.delete');
+
+    Route::get('/customer', [CustomerController::class, 'index'])->name('backend.customer.index');
+    Route::post('/customer/store', [CustomerController::class, 'store'])->name('backend.customer.store');
+    Route::get('/customer/edit', [CustomerController::class, 'edit'])->name('backend.customer.edit');
+    Route::delete('/customer/delete', [CustomerController::class, 'delete'])->name('backend.customer.delete');
 });
