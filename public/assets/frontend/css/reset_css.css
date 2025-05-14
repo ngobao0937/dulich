@@ -17,10 +17,11 @@
 ::placeholder {
     color: unset;
 }
-*:not(animate,item,path, svg, span, foreignObject, b, i, u, table, tr, td, tbody, rect,polygon, circle , iframe, em,strong ){
+/* *:not(animate,item,path, svg, span, foreignObject, b, i, u, table, tr, td, tbody, rect,polygon, circle , iframe, em,strong ){
     all: unset;
     display: block;
-}
+} */
+
 /*input:not([type="checkbox"]){
     all: unset;
     display: block;

@@ -1,0 +1,301 @@
+<div class="card">
+    <div class="card-header">
+        <a class="collapsed card-link w-100 d-flex" data-toggle="collapse" href="#collapseImage">
+            <span style="color: #333; font-weight: bold">Thư viện ảnh</span>
+        </a>
+    </div>
+    <div id="collapseImage" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+            <div class="form-group">
+                <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#imagesModal">
+                    Thêm mới
+                </a>
+            </div>
+            <div class="table-responsive">
+                <table id="table_" class="table table-hover text-nowrap">
+                    <thead class="thead-light">
+                        <tr class="table-bg">
+                            <th style="width: 60px;">#</th>
+                            <th style="width: 90px;">Hình ảnh</th>
+                            <th>Tiêu đề</th>
+                            <th>Link</th>
+                            <th style="width: 100px;">Thứ tự</th>
+                            <th style="width: 100px;">Trạng thái</th>
+                            <th style="width: 100px;">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody  id="table_tbodyImages">
+                        @forelse($product->images as $image)
+                        <tr data-id="{{ $image->id }}">
+                            <td>{{ $loop->iteration }}</td>
+                            <td>
+                                <div style="background: #ededed  url('{{$image->image ? asset('uploads/' . $image->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
+                            </td>
+                            
+                            <td>
+                                {{ $image->name }}
+                            </td>
+                            <td>{{ $image->link ? $image->link : '#' }}</td>
+                            <td>{{ $image->position }}</td>
+                            <td class="text-center">
+                                @if ($image->active != 1)
+                                <span class="badge badge-warning">Tạm dừng</span>
+                                @else
+                                <span class="badge badge-success">Hoạt động</span>
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#imagesModal" onclick="alertImages({{ $image->id }})">
+                                <i class="fa fa-edit"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm" onclick="alertDeleteImages({{ $image->id }})">
+                                <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="10" class="text-center">Không có dữ liệu</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="imagesModal" class="modal fade" role="dialog" aria-labelledby="imagesModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('backend.banner.store', request()->query()) }}" method="post" enctype="multipart/form-data" id="formImages">
+                <div class="modal-body">
+                    @csrf
+                    <input type="text" id="idImages" name="id" value="" hidden />
+                    <input type="hidden" name="product_fk" value="{{ $id }}">
+                    <input type="hidden" name="type" value="product_images">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <label>Tên <span class="text-danger">*</span></label>
+                                <input name="name" id="nameImages" type="text" class="form-control" placeholder="Nhập tên ..." required />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Thứ tự <span class="text-danger">*</span></label>
+                                <input name="position" id="positionImages" type="number" min="1" step="1" class="form-control" placeholder="Thứ tự ..." required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mô tả</label>
+                        <input name="description" id="descriptionImages" type="text" class="form-control" placeholder="Mô tả ..."/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Link</label>
+                        <input name="link" id="linkImages" type="url" class="form-control" placeholder="Liên kết ..."/>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: -5px;">
+                        <label style="margin-bottom: 0;">Hình ảnh</label>
+                    </div>
+
+                    <div class="image-upload-container">
+                        <img id="imagePreviewImages" src="{{ asset('images/upload.png') }}" class="preview-image" />
+                        <div class="upload-icon" id="uploadIconImages">
+                            <i class="fa fa-camera"></i>
+                        </div>
+                        <div class="remove-icon" id="removeIconImages" style="display: none;">
+                            <i class="fa fa-times"></i>
+                        </div>
+                        <input type="file" id="pictureImages" name="picture" accept="image/*" hidden />
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="icheck-success d-inline">
+                            <input type="checkbox" name="active" id="activeImages" />
+                            <label for="activeImages">Hoạt động</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-success">Lưu thông tin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="deleteImagesModal" class="modal fade" role="dialog" data-id="0">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <form action="{{ route('backend.banner.delete', request()->query()) }}" method="post">
+                @csrf @method('DELETE')
+                <div class="modal-header">
+                    <h4 class="modal-title">Xác nhận xóa</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có thật sự muốn xóa hình ảnh này?</p>
+                    <input type="text" id="deleteImagesId" name="id" hidden />
+                    <input type="hidden" name="type" id="deleteImagesType" value="product">
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
+                    <button type="submit" class="btn btn-danger delete">Xóa</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+$('#formImages').submit(function (e) {
+    e.preventDefault();
+
+    var formData = new FormData(this);
+    var id = $('#idImages').val();
+
+    $.ajax({
+        url: "{{ route('backend.banner.store') }}",
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (res) {
+            if (res.success) {
+                $('#imagesModal').modal('hide');
+
+                if (id) {
+                    $('#table_tbodyImages tr[data-id="' + id + '"]').replaceWith(res.html);
+                    toastr.success('Cập nhật hình ảnh thành công!');
+                } else {
+                    $('#table_tbodyImages tr').each(function () {
+                        if ($(this).find('td[colspan]').length && $(this).text().includes('Không có dữ liệu')) {
+                            $(this).remove();
+                        }
+                    });
+                    $('#table_tbodyImages').append(res.html);
+                    toastr.success('Thêm mới hình ảnh thành công!');
+                }
+
+                updateSttImages();
+            }
+        },
+        error: function (err) {
+            toastr.error('Lỗi khi lưu dữ liệu');
+            console.log(err.responseJSON);
+        }
+    });
+});
+
+function updateSttImages() {
+    $('#table_tbodyImages tr').each(function (index) {
+        $(this).find('td:first').text(index + 1);
+    });
+}
+
+var imagesImage = "";
+
+$('#uploadIconImages').on('click', function() {
+    $('#pictureImages').click();
+});
+
+$('#imagePreviewImages').on('click', function() {
+    $('#pictureImages').click();
+});
+
+$('#pictureImages').on('change', function(event) {
+    var file = event.target.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#imagePreviewImages').attr('src', e.target.result);
+            $('#removeIconImages').show();
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+$('#removeIconImages').on('click', function() {
+    $('#pictureImages').val('');
+    if (imagesImage) {
+        $('#imagePreviewImages').attr('src', imagesImage);
+    } else {
+        $('#imagePreviewImages').attr('src', defaultImage);
+    }
+    $('#removeIconImages').hide(); 
+});
+
+$('#imagesModal').on('hidden.bs.modal', function() {
+    $('#idImages').val('');
+    $('#nameImages').val('');
+    $('#descriptionImages').val('');
+    $('#positionImages').val('');
+    $('#linkImages').val('');
+    $('#activeImages').prop('checked', false);
+    $('#pictureImages').val('');
+    $('#imagePreviewImages').attr('src', defaultImage);
+});
+function alertImages(imagesId){
+    $.ajax({
+        type: 'GET',
+        url: '/admin/banner/edit' + '?id=' + imagesId,
+        success: function(data){
+            $('#idImages').val(data.banner.id);
+            $('#nameImages').val(data.banner.name ?? '');
+            $('#descriptionImages').val(data.banner.description ?? '');
+            $('#positionImages').val(data.banner.position ?? '');
+            $('#linkImages').val(data.banner.link ?? '');
+            if(data.banner.active == 1){
+                $('#activeImages').prop('checked', true);
+            }
+
+            if(data.banner.image){
+                $('#imagePreviewImages').attr('src', '/uploads/' + data.banner.image.ten);
+                imagesImage = '/uploads/' + data.banner.image.ten;
+            }
+
+        },
+        error: function(error){
+            console.log(error);
+        }
+    })
+}
+function alertDeleteImages(id) {
+    $('#deleteImagesModal').data('id', id);
+    $('#deleteImagesModal').modal('toggle');
+}
+
+$('#deleteImagesModal button.delete').on('click', function(e) {
+    e.preventDefault();
+
+    var imagesId = $('#deleteImagesModal').data('id');
+    var type = $('#deleteImagesType').val();
+
+    $.ajax({
+        url: '{{ route('backend.banner.delete') }}',
+        method: 'delete',
+        data: {
+            id: imagesId,
+            type: type
+        },
+        success: function (response) {
+            if (response.success) {
+                $('#deleteImagesModal').modal('toggle');
+                $('tr[data-id="' + imagesId + '"]').remove();
+                
+                toastr.success('Xóa hình ảnh thành công!');
+            } else {
+                toastr.error('Không thể xóa hình ảnh!');
+            }
+        },
+        error: function () {
+            toastr.error('Đã xảy ra lỗi. Vui lòng thử lại!');
+        }
+    });
+});

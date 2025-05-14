@@ -26,6 +26,7 @@
                 <div class="modal-body">
                     @csrf
                     <input type="text" id="id" name="id" value="" hidden />
+                    <input type="hidden" name="type" value="main">
                     <div class="row">
                         <div class="col-md-9">
                             <div class="form-group">
@@ -58,7 +59,7 @@
                         <div class="remove-icon" id="removeIcon" style="display: none;">
                             <i class="fa fa-times"></i>
                         </div>
-                        <input type="file" id="picture" name="picture" accept="image/*,video/*" hidden />
+                        <input type="file" id="picture" name="picture" accept="image/*" hidden />
                     </div>
                     
                     <div class="form-group">

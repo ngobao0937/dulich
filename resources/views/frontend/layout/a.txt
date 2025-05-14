@@ -9,3 +9,15 @@
 @section('script')
 
 @endsection
+
+<div class="card">
+    <div class="card-header">
+        <a class="collapsed card-link w-100 d-flex" data-toggle="collapse" href="#collapseImage">
+            <span style="color: #333; font-weight: bold">Hình ảnh</span>
+        </a>
+    </div>
+    <div id="collapseImage" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+        </div>
+    </div>
+</div>

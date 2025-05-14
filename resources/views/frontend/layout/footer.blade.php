@@ -1,5 +1,5 @@
 <footer>
-    <section id="SECTION35">
+    <section id="SECTION35" class="w-100">
         <div class="sp_container">
             <div id="PARAGRAPH30">
                 <p>FOLLOW US</p>

@@ -41,95 +41,12 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <a class="collapsed card-link w-100 d-flex" data-toggle="collapse" href="#collapseBanner">
-                        <span style="color: #333; font-weight: bold">Banner</span>
-                    </a>
-                </div>
-                <div id="collapseBanner" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#bannerModal">
-                                Thêm mới
-                            </a>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="table_" class="table table-hover text-nowrap">
-                                <thead class="thead-light">
-                                    <tr class="table-bg">
-                                        <th style="width: 60px;">#</th>
-                                        <th style="width: 90px;">Hình ảnh</th>
-                                        <th>Văn bản</th>
-                                        <th>Link</th>
-                                        <th style="width: 100px;">Thứ tự</th>
-                                        <th style="width: 100px;">Trạng thái</th>
-                                        <th style="width: 100px;">Hành động</th>
-                                    </tr>
-                                </thead>
-                                <tbody  id="table_tbodyBanner">
-                                    @forelse($product->banners as $banner)
-                                    <tr data-id="{{ $banner->id }}">
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            <div style="background: #ededed  url('{{$banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
-                                        </td>
-                                        
-                                        <td>
-                                            <b>{{ $banner->name }}</b><br>
-                                            {{ $banner->description }}
-                                        </td>
-                                        <td>{{ $banner->link ? $banner->link : '#' }}</td>
-                                        <td>{{ $banner->position }}</td>
-                                        <td class="text-center">
-                                            @if ($banner->active != 1)
-                                            <span class="badge badge-warning">Tạm dừng</span>
-                                            @else
-                                            <span class="badge badge-success">Hoạt động</span>
-                                            @endif
-                                        </td>
-                                        <td class="text-center">
-                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#bannerModal" onclick="alertBanner({{ $banner->id }})">
-                                            <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-danger btn-sm" onclick="alertDeleteBanner({{ $banner->id }})">
-                                            <i class="fa fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    @empty
-                                    <tr>
-                                        <td colspan="10" class="text-center">Không có dữ liệu</td>
-                                    </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
                     <a class="card-link w-100 d-flex" data-toggle="collapse" href="#collapseInfo" aria-expanded="true">
                         <span style="color: #333; font-weight: bold">Thông tin</span>
                     </a>
                 </div>
                 <div id="collapseInfo" class="collapse show" data-parent="#accordion">
                     <div class="card-body">
-                        <div class="form-group" style="margin-bottom: -5px;">
-                            <label style="margin-bottom: 0;">Hình đại diện</label>
-                        </div>
-        
-                        <div class="image-upload-container mb-2">
-                            <img id="imagePreview" src="{{ $image ? asset('uploads/' . $image) : asset('images/upload.png') }}" class="preview-image" />
-                            <div class="upload-icon" id="uploadIcon">
-                                <i class="fa fa-camera"></i>
-                            </div>
-                            <div class="remove-icon" id="removeIcon" style="display: none;">
-                                <i class="fa fa-times"></i>
-                            </div>
-                            <input type="file" id="picture" name="picture" accept="image/*" hidden />
-                        </div>
-
                         <div class="row">
                             <div class="col-md-7">
                                 <div class="form-group">
@@ -170,25 +87,25 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="hotline">Hotline</label>
-                                    <input type="tel" name="hotline" id="hotline" class="form-control" value="{{ $hotline }}" maxlength="20">
+                                    <input type="tel" name="hotline" id="hotline" class="form-control" value="{{ $hotline }}" maxlength="255">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="phone">Điện thoại</label>
-                                    <input type="tel" name="phone" id="phone" class="form-control" value="{{ $phone }}" maxlength="20">
+                                    <input type="tel" name="phone" id="phone" class="form-control" value="{{ $phone }}" maxlength="255">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" name="email" id="email" class="form-control" value="{{ $email }}" maxlength="250">
+                                    <input type="email" name="email" id="email" class="form-control" value="{{ $email }}" maxlength="300">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="website">Website</label>
-                                    <input type="url" class="form-control" id="website" name="website" placeholder="https://example.com" value="{{ $website }}" maxlength="250">
+                                    <input type="url" class="form-control" id="website" name="website" placeholder="https://example.com" value="{{ $website }}">
                                 </div>
                             </div>
                         </div>
@@ -201,7 +118,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fab fa-facebook-f"></i></span>
                                         </div>
-                                        <input type="url" class="form-control" id="facebook" name="facebook" placeholder="https://facebook.com/yourpage" value="{{ $facebook }}" maxlength="250">
+                                        <input type="url" class="form-control" id="facebook" name="facebook" placeholder="https://facebook.com/yourpage" value="{{ $facebook }}">
                                     </div>
                                 </div>
                             </div>
@@ -212,7 +129,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fab fa-instagram"></i></span>
                                         </div>
-                                        <input type="url" class="form-control" id="instagram" name="instagram" placeholder="https://instagram.com/youraccount" value="{{ $instagram }}" maxlength="250">
+                                        <input type="url" class="form-control" id="instagram" name="instagram" placeholder="https://instagram.com/youraccount" value="{{ $instagram }}">
                                     </div>
                                 </div>
                             </div>
@@ -223,7 +140,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fab fa-twitter"></i></span>
                                         </div>
-                                        <input type="url" class="form-control" id="twitter" name="twitter" placeholder="https://twitter.com/yourhandle" value="{{ $twitter }}" maxlength="250">
+                                        <input type="url" class="form-control" id="twitter" name="twitter" placeholder="https://twitter.com/yourhandle" value="{{ $twitter }}">
                                     </div>
                                 </div>
                             </div>
@@ -234,7 +151,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fab fa-youtube"></i></span>
                                         </div>
-                                        <input type="url" class="form-control" id="youtube" name="youtube" placeholder="https://youtube.com/yourchannel" value="{{ $youtube }}" maxlength="250">
+                                        <input type="url" class="form-control" id="youtube" name="youtube" placeholder="https://youtube.com/yourchannel" value="{{ $youtube }}">
                                     </div>
                                 </div>
                             </div>
@@ -248,26 +165,26 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fab fa-tiktok"></i></span>
                                         </div>
-                                        <input type="url" class="form-control" id="tiktok" name="tiktok" placeholder="https://tiktok.com/@youraccount" value="{{ $tiktok }}" maxlength="250">
+                                        <input type="url" class="form-control" id="tiktok" name="tiktok" placeholder="https://tiktok.com/@youraccount" value="{{ $tiktok }}">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="link360">Link VR 360</label>
-                                    <input type="url" name="link360" id="link360" class="form-control" value="{{ $link360 }}" placeholder="https://example.com/vr360" maxlength="250">
+                                    <input type="url" name="link360" id="link360" class="form-control" value="{{ $link360 }}" placeholder="https://example.com/vr360">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="chatbot">Chatbot</label>
-                                    <input type="url" name="chatbot" id="chatbot" class="form-control" value="{{ $chatbot }}" placeholder="Nhập link script chatbot" maxlength="250">
+                                    <input type="url" name="chatbot" id="chatbot" class="form-control" value="{{ $chatbot }}" placeholder="Nhập link script chatbot">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="map">Bản đồ</label>
-                                    <input type="url" name="map" id="map" class="form-control" value="{{ $map }}" maxlength="250" placeholder="Nhập link iframe bản đồ" maxlength="250">
+                                    <input type="text" name="map" id="map" class="form-control" value="{{ $map }}" maxlength="255" placeholder="Vĩ độ, kinh độ">
                                 </div>
                             </div>
                             
@@ -280,69 +197,90 @@
                     </div>
                 </div>
             </div>
-
             <div class="card">
                 <div class="card-header">
                     <a class="collapsed card-link w-100 d-flex" data-toggle="collapse" href="#collapseImage">
-                        <span style="color: #333; font-weight: bold">Thư viện ảnh</span>
+                    <span style="color: #333; font-weight: bold">Hình ảnh</span>
                     </a>
                 </div>
                 <div id="collapseImage" class="collapse" data-parent="#accordion">
                     <div class="card-body">
-                        <div class="form-group">
-                            <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#imagesModal">
-                                Thêm mới
-                            </a>
+                        <div class="form-group" style="margin-bottom: -5px;">
+                            <label style="margin-bottom: 0;">Hình đại diện</label>
                         </div>
-                        <div class="table-responsive">
-                            <table id="table_" class="table table-hover text-nowrap">
-                                <thead class="thead-light">
-                                    <tr class="table-bg">
-                                        <th style="width: 60px;">#</th>
-                                        <th style="width: 90px;">Hình ảnh</th>
-                                        <th>Tiêu đề</th>
-                                        <th>Link</th>
-                                        <th style="width: 100px;">Thứ tự</th>
-                                        <th style="width: 100px;">Trạng thái</th>
-                                        <th style="width: 100px;">Hành động</th>
-                                    </tr>
-                                </thead>
-                                <tbody  id="table_tbodyImages">
-                                    @forelse($product->images as $image)
-                                    <tr data-id="{{ $image->id }}">
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            <div style="background: #ededed  url('{{$image->image ? asset('uploads/' . $image->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
-                                        </td>
-                                        
-                                        <td>
-                                            <b>{{ $image->name }}</b>
-                                        </td>
-                                        <td>{{ $image->link ? $image->link : '#' }}</td>
-                                        <td>{{ $image->position }}</td>
-                                        <td class="text-center">
-                                            @if ($image->active != 1)
-                                            <span class="badge badge-warning">Tạm dừng</span>
-                                            @else
-                                            <span class="badge badge-success">Hoạt động</span>
-                                            @endif
-                                        </td>
-                                        <td class="text-center">
-                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#imagesModal" onclick="alertImages({{ $image->id }})">
-                                            <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-danger btn-sm" onclick="alertDeleteImages({{ $image->id }})">
-                                            <i class="fa fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    @empty
-                                    <tr>
-                                        <td colspan="10" class="text-center">Không có dữ liệu</td>
-                                    </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
+        
+                        <div class="image-upload-container mb-2">
+                            <img id="imagePreview" src="{{ $image ? asset('uploads/' . $image) : asset('images/upload.png') }}" class="preview-image" />
+                            <div class="upload-icon" id="uploadIcon">
+                                <i class="fa fa-camera"></i>
+                            </div>
+                            <div class="remove-icon" id="removeIcon" style="display: none;">
+                                <i class="fa fa-times"></i>
+                            </div>
+                            <input type="file" id="picture" name="picture" accept="image/*" hidden />
+                        </div>
+
+                        @if($banners && count($banners) > 0)
+                            <div class="form-group" style="margin-bottom: 0;" id="labelBanners">
+                                <label>Banner</label><i class="fas fa-question-circle" style="margin-left: 5px;" data-toggle="tooltip" data-placement="right" title="Kéo thả và nhấn lưu để thay đổi thứ tự ảnh"></i>
+                            </div>
+                            <div class="row image-container" id="sortable-banner-images" style="padding-left: 15px; margin-bottom: 15px;">
+                                @foreach($banners as $item)
+                                <div class="image-item" data-id="{{ $item->id }}" style="cursor: grab;">
+                                    <div class="wrap-btn-delete" style="position: absolute; margin-top: -3px;">
+                                        <a href="javascript:void(0);" class="btn-delete-image" onclick="alertDelete({{ $item->id }})">
+                                            <b>×</b>
+                                        </a>
+                                    </div>
+                                    <img style="width: 100px; height: 80px; background-size: contain; display: block; border: 1px solid gray; object-fit: cover;" src="{{ asset('uploads/'.$item->ten) }}">
+                                </div>
+                                @endforeach
+                            </div>
+                        @endif
+
+                        @if($images && count($images)>0)
+                        <div class="form-group" style="margin-bottom: 0;" id="labelPictures">
+                            <label>Thư viện ảnh</label><i class="fas fa-question-circle" style="margin-left: 5px;" data-toggle="tooltip" data-placement="right" title="Kéo thả và nhấn lưu để thay đổi thứ tự ảnh"></i>
+                        </div>
+                        <div class="row image-container" style="padding-left: 15px; margin-bottom: 15px;" id="pictures">
+                            @foreach($images as $item)
+                            <div class="image-item" data-id="{{ $item->id }}" style="cursor: grab;">
+                                <div class="wrap-btn-delete" style="position: absolute; margin-top: -3px;">
+                                    <a href="javascript:void(0);" class="btn-delete-image" onclick="alertDelete({{ $item->id }})">
+                                        <b>×</b>
+                                    </a>
+                                </div>
+                                <img style="width: 100px; height: 80px; background-size: contain; display: block; border: 1px solid gray; object-fit: cover;" src="{{ asset('uploads/'.$item->ten) }}">
+                            </div>
+                            @endforeach
+                        </div>
+                        @endif
+
+                        @if(isset($product) && (is_countable($images) && count($images) > 0 || is_countable($banners) && count($banners) > 0))
+                            <button id="save-order" class="btn btn-primary btn-sm" style="margin-bottom: 15px;">Lưu thứ tự</button>
+                        @endif
+
+                        <div class="form-group">
+                            <label>Tải banner</label>
+                            <div id="dropzone-pictures-banner" class="dropzone custom-dropzone">
+                                <div class="dz-message">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Kéo & thả ảnh vào đây hoặc <span>nhấn để chọn ảnh</span></p>
+                                </div>
+                            </div>
+                            <input type="hidden" name="uploaded_pictures_banner" id="uploaded_pictures_banner">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Tải thư viện ảnh</label>
+                            <div id="dropzone-pictures" class="dropzone custom-dropzone">
+                                <div class="dz-message">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Kéo & thả ảnh vào đây hoặc <span>nhấn để chọn ảnh</span></p>
+                                </div>
+                            </div>
+                            <input type="hidden" name="uploaded_pictures" id="uploaded_pictures">
                         </div>
                     </div>
                 </div>
@@ -435,7 +373,6 @@
                                         <th style="width: 60px;">#</th>
                                         <th style="width: 90px;">Hình ảnh</th>
                                         <th>Tên chương trình</th>
-                                        <th style="width: 100px;">Giá phòng</th>
                                         <th style="width: 100px;">Độ ưu tiên</th>
                                         <th style="width: 100px;">Ngày bắt đầu</th>
                                         <th style="width: 100px;">Kết thúc sau</th>
@@ -451,7 +388,6 @@
                                                 <div style="background: #ededed  url('{{$item->image ? asset('uploads/' . $item->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
                                             </td>
                                             <td>{{ $item->name}}</td>
-                                            <td class="text-center">{{ number_format($item->price, 0, ',', '.') }}</td>
                                             <td class="text-center">{{ $item->position }}</td>
                                             <td class="text-center">{{ \Carbon\Carbon::parse($item->start_date)->format('d-m-Y') }}</td>
 
@@ -544,7 +480,7 @@
     </div>
 </div>
 
-<div id="uuDaiThuongModal" class="modal fade" role="dialog">
+<div id="uuDaiThuongModal" class="modal fade" role="dialog" aria-labelledby="uuDaiThuongModalLabel">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form action="{{ route('backend.promotion.store', ) }}" method="post" enctype="multipart/form-data" id="formUuDaiThuong">
@@ -559,7 +495,7 @@
                     <input type="hidden" name="type" id="typeUuDaiThuong" value="1">
                     <div class="form-group">
                         <label>Tên chương trình <span class="text-danger">*</span></label>
-                        <input name="name" id="nameUuDaiThuong" type="text" class="form-control" placeholder="Tên chương trình ..." maxlength="250" required>
+                        <input name="name" id="nameUuDaiThuong" type="text" class="form-control" placeholder="Tên chương trình ..." required>
                     </div>
 
                     <div class="form-group">
@@ -585,20 +521,20 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="form-label">Thời gian bắt đầu</label>
+                                <label class="form-label">Thời gian bắt đầu:</label>
                                 <input type="date" class="form-control" id="start_dateUuDaiThuong" name="start_date">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="form-label">Kết thúc sau số ngày</label>
-                                <input type="number" class="form-control" id="end_inUuDaiThuong" name="end_in" min="1" maxlength="10">
+                                <label class="form-label">Kết thúc sau số ngày:</label>
+                                <input type="number" class="form-control" id="end_inUuDaiThuong" name="end_in" min="1">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="form-label">Độ ưu tiên (1-10)</label>
-                                <input type="number" class="form-control" id="positionUuDaiThuong" name="position" min="1" max="10" value="1" maxlength="10">
+                                <label class="form-label">Độ ưu tiên hiển thị (1-10):</label>
+                                <input type="number" class="form-control" id="positionUuDaiThuong" name="position" min="1" max="10" value="1">
                             </div>
                         </div>
                     </div>
@@ -606,8 +542,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label">Email nhận đăng ký</label>
-                                <input type="email" class="form-control" id="emailUuDaiThuong" name="email" maxlength="250">
+                                <label class="form-label">Email nhận đăng ký:</label>
+                                <input type="email" class="form-control" id="emailUuDaiThuong" name="email">
                             </div>
                         </div>
                     </div>
@@ -629,7 +565,7 @@
     </div>
 </div>
 
-<div id="uuDaiPhongModal" class="modal fade" role="dialog">
+<div id="uuDaiPhongModal" class="modal fade" role="dialog" aria-labelledby="uuDaiPhongModalLabel">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form action="{{ route('backend.promotion.store', ) }}" method="post" enctype="multipart/form-data" id="formUuDaiPhong">
@@ -644,7 +580,7 @@
                     <input type="hidden" name="type" id="typeUuDaiPhong" value="2">
                     <div class="form-group">
                         <label>Tên chương trình <span class="text-danger">*</span></label>
-                        <input name="name" id="nameUuDaiPhong" type="text" class="form-control" placeholder="Tên chương trình ..." maxlength="250" required>
+                        <input name="name" id="nameUuDaiPhong" type="text" class="form-control" placeholder="Tên chương trình ..." required>
                     </div>
 
                     <div class="form-group">
@@ -670,51 +606,29 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="form-label">Thời gian bắt đầu</label>
+                                <label class="form-label">Thời gian bắt đầu:</label>
                                 <input type="date" class="form-control" id="start_dateUuDaiPhong" name="start_date">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="form-label">Kết thúc sau số ngày</label>
+                                <label class="form-label">Kết thúc sau số ngày:</label>
                                 <input type="number" class="form-control" id="end_inUuDaiPhong" name="end_in" min="1">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="form-label">Độ ưu tiên (1-10)</label>
+                                <label class="form-label">Độ ưu tiên hiển thị (1-10):</label>
                                 <input type="number" class="form-control" id="positionUuDaiPhong" name="position" min="1" max="10" value="1">
                             </div>
                         </div>
-                         
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label">Email nhận đăng ký</label>
-                                <input type="email" class="form-control" id="emailUuDaiPhong" name="email" maxlength="250">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label">Giá phòng:</label>
-                                <input type="number" class="form-control" id="priceUuDaiPhong" name="price" maxlength="250">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label">Link VR 360</label> <i class="fas fa-question-circle ml-1" data-toggle="tooltip" title="Mặc định ưu tiên hiển thị VR 360 hơn hình ảnh nếu có"></i>
-                                <input type="url" class="form-control" id="link360UuDaiPhong" name="link360" maxlength="250">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label">Ghi chú</label>
-                                <input type="text" class="form-control" id="taglineUuDaiPhong" name="tagline" maxlength="250">
+                                <label class="form-label">Email nhận đăng ký:</label>
+                                <input type="email" class="form-control" id="emailUuDaiPhong" name="email">
                             </div>
                         </div>
                     </div>
@@ -735,179 +649,10 @@
         </div>
     </div>
 </div>
-
-<div id="bannerModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form action="{{ route('backend.banner.store', request()->query()) }}" method="post" enctype="multipart/form-data" id="formBanner">
-                <div class="modal-body">
-                    @csrf
-                    <input type="text" id="idBanner" name="id" value="" hidden />
-                    <input type="hidden" name="product_fk" value="{{ $id }}">
-                    <input type="hidden" name="type" value="product">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <label>Tên <span class="text-danger">*</span></label>
-                                <input name="name" id="nameBanner" type="text" class="form-control" placeholder="Nhập tên ..." maxlength="250" required />
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Thứ tự <span class="text-danger">*</span></label>
-                                <input name="position" id="positionBanner" type="number" min="1" step="1" class="form-control" placeholder="Thứ tự ..." required />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Mô tả</label>
-                        <input name="description" id="descriptionBanner" type="text" class="form-control" maxlength="250"  placeholder="Mô tả ..."/>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Link</label>
-                        <input name="link" id="linkBanner" type="url" class="form-control" placeholder="Liên kết ..." maxlength="250"/>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom: -5px;">
-                        <label style="margin-bottom: 0;">Hình ảnh</label>
-                    </div>
-
-                    <div class="image-upload-container">
-                        <img id="imagePreviewBanner" src="{{ asset('images/upload.png') }}" class="preview-image" />
-                        <div class="upload-icon" id="uploadIconBanner">
-                            <i class="fa fa-camera"></i>
-                        </div>
-                        <div class="remove-icon" id="removeIconBanner" style="display: none;">
-                            <i class="fa fa-times"></i>
-                        </div>
-                        <input type="file" id="pictureBanner" name="picture" accept="image/*" hidden />
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="icheck-success d-inline">
-                            <input type="checkbox" name="active" id="activeBanner" />
-                            <label for="activeBanner">Hoạt động</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-success">Lưu thông tin</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div id="deleteBannerModal" class="modal fade" role="dialog" data-id="0">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <form action="{{ route('backend.banner.delete', request()->query()) }}" method="post">
-                @csrf @method('DELETE')
-                <div class="modal-header">
-                    <h4 class="modal-title">Xác nhận xóa</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Bạn có thật sự muốn xóa banner này?</p>
-                    <input type="text" id="deleteBannerId" name="id" hidden />
-                    <input type="hidden" name="type" id="deleteBannerType" value="product">
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
-                    <button type="submit" class="btn btn-danger delete">Xóa</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div id="imagesModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form action="{{ route('backend.banner.store', request()->query()) }}" method="post" enctype="multipart/form-data" id="formImages">
-                <div class="modal-body">
-                    @csrf
-                    <input type="text" id="idImages" name="id" value="" hidden />
-                    <input type="hidden" name="product_fk" value="{{ $id }}">
-                    <input type="hidden" name="type" value="product_images">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <label>Tên <span class="text-danger">*</span></label>
-                                <input name="name" id="nameImages" type="text" class="form-control" placeholder="Nhập tên ..." maxlength="250" required />
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Thứ tự <span class="text-danger">*</span></label>
-                                <input name="position" id="positionImages" type="number" min="1" step="1" class="form-control" placeholder="Thứ tự ..." required />
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Link</label>
-                        <input name="link" id="linkImages" type="url" class="form-control" placeholder="Liên kết ..."/>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom: -5px;">
-                        <label style="margin-bottom: 0;">Hình ảnh</label>
-                    </div>
-
-                    <div class="image-upload-container">
-                        <img id="imagePreviewImages" src="{{ asset('images/upload.png') }}" class="preview-image" />
-                        <div class="upload-icon" id="uploadIconImages">
-                            <i class="fa fa-camera"></i>
-                        </div>
-                        <div class="remove-icon" id="removeIconImages" style="display: none;">
-                            <i class="fa fa-times"></i>
-                        </div>
-                        <input type="file" id="pictureImages" name="picture" accept="image/*" hidden />
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="icheck-success d-inline">
-                            <input type="checkbox" name="active" id="activeImages" />
-                            <label for="activeImages">Hoạt động</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-success">Lưu thông tin</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div id="deleteImagesModal" class="modal fade" role="dialog" data-id="0">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <form action="{{ route('backend.banner.delete', request()->query()) }}" method="post">
-                @csrf @method('DELETE')
-                <div class="modal-header">
-                    <h4 class="modal-title">Xác nhận xóa</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Bạn có thật sự muốn xóa hình ảnh này?</p>
-                    <input type="text" id="deleteImagesId" name="id" hidden />
-                    <input type="hidden" name="type" id="deleteImagesType" value="product">
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
-                    <button type="submit" class="btn btn-danger delete">Xóa</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 @endsection
 @section('styles')
+<script src="{{ asset('assets/backend/plugins/dropzone6/dropzone-min.js') }}"></script>
+<link href="{{ asset('assets/backend/plugins/dropzone6/dropzone.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .fixed-save {
         position: fixed;
@@ -925,6 +670,45 @@
         border: none;                 
         background-color: transparent;
         cursor: pointer;
+    }
+    .custom-dropzone {
+        border: 2px dashed #007bff;
+        background: rgba(0, 123, 255, 0.05);
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+    
+    .custom-dropzone .dz-message {
+        font-size: 16px;
+        color: #007bff;
+        font-weight: bold;
+    }
+    
+    .custom-dropzone .dz-message i {
+        font-size: 50px;
+        color: #007bff;
+        margin-bottom: 10px;
+    }
+    
+    .custom-dropzone .dz-message span {
+        color: #ff5722;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+    
+    .custom-dropzone:hover {
+        background: rgba(0, 123, 255, 0.1);
+        border-color: #0056b3;
+    }
+    .dropzone .dz-preview.dz-image-preview{
+        background: none !important;
+    }
+    .dropzone .dz-preview .dz-image{
+        background: white !important;
+    }
+    .dropzone .dz-preview .dz-remove{
+        color: red;
+        margin-top: 5px;
     }
     .image-container {
         display: grid;
@@ -953,7 +737,57 @@
 </style>
 @endsection
 @section('scripts')
+<script src="{{ asset('assets/backend/plugins/sortable/Sortable.min.js') }}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var bannerImages = document.getElementById("sortable-banner-images");
+        var pictures = document.getElementById("pictures");
+        var saveOrderBtn = document.getElementById("save-order");
 
+        if (bannerImages) {
+            new Sortable(bannerImages, {
+                animation: 150,
+                ghostClass: "sortable-ghost"
+            });
+        }
+
+        if (pictures) {
+            new Sortable(pictures, {
+                animation: 150,
+                ghostClass: "sortable-ghost"
+            });
+        }
+
+        if (saveOrderBtn) {
+            saveOrderBtn.addEventListener("click", function(event) {
+                event.preventDefault();
+
+                var bannerIDs = bannerImages 
+                    ? [...bannerImages.querySelectorAll(".image-item")].map(item => item.dataset.id) 
+                    : [];
+
+                var pictureIDs = pictures 
+                    ? [...pictures.querySelectorAll(".image-item")].map(item => item.dataset.id) 
+                    : [];
+
+                fetch("{{ route('backend.update.image.order') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({ 
+                        banner: bannerIDs, 
+                        order: pictureIDs 
+                    })
+                })
+                .then(response => response.json())
+                .then(data => toastr.success(data.message))
+                .catch(error => console.error("Error:", error));
+            });
+        }
+    });
+</script>
 <script>
 $(document).ready(function () {
     $('#formUuDaiThuong').submit(function (e) {
@@ -1000,96 +834,6 @@ $(document).ready(function () {
             $(this).find('td:first').text(index + 1);
         });
     }
-
-    $('#formBanner').submit(function (e) {
-        e.preventDefault();
-
-        var formData = new FormData(this);
-        var id = $('#idBanner').val();
-
-        $.ajax({
-            url: "{{ route('backend.banner.store') }}",
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (res) {
-                if (res.success) {
-                    $('#bannerModal').modal('hide');
-
-                    if (id) {
-                        $('#table_tbodyBanner tr[data-id="' + id + '"]').replaceWith(res.html);
-                        toastr.success('Cập nhật banner thành công!');
-                    } else {
-                        $('#table_tbodyBanner tr').each(function () {
-                            if ($(this).find('td[colspan]').length && $(this).text().includes('Không có dữ liệu')) {
-                                $(this).remove();
-                            }
-                        });
-                        $('#table_tbodyBanner').append(res.html);
-                        toastr.success('Thêm mới banner thành công!');
-                    }
-
-                    updateSttBanner();
-                }
-            },
-            error: function (err) {
-                toastr.error('Lỗi khi lưu dữ liệu');
-                console.log(err.responseJSON);
-            }
-        });
-    });
-
-    function updateSttBanner() {
-        $('#table_tbodyBanner tr').each(function (index) {
-            $(this).find('td:first').text(index + 1);
-        });
-    }
-
-    $('#formImages').submit(function (e) {
-        e.preventDefault();
-
-        var formData = new FormData(this);
-        var id = $('#idImages').val();
-
-        $.ajax({
-            url: "{{ route('backend.banner.store') }}",
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (res) {
-                if (res.success) {
-                    $('#imagesModal').modal('hide');
-
-                    if (id) {
-                        $('#table_tbodyImages tr[data-id="' + id + '"]').replaceWith(res.html);
-                        toastr.success('Cập nhật hình ảnh thành công!');
-                    } else {
-                        $('#table_tbodyImages tr').each(function () {
-                            if ($(this).find('td[colspan]').length && $(this).text().includes('Không có dữ liệu')) {
-                                $(this).remove();
-                            }
-                        });
-                        $('#table_tbodyImages').append(res.html);
-                        toastr.success('Thêm mới hình ảnh thành công!');
-                    }
-
-                    updateSttImages();
-                }
-            },
-            error: function (err) {
-                toastr.error('Lỗi khi lưu dữ liệu');
-                console.log(err.responseJSON);
-            }
-        });
-    });
-
-    function updateSttImages() {
-        $('#table_tbodyImages tr').each(function (index) {
-            $(this).find('td:first').text(index + 1);
-        });
-    }
 });
 </script>
 
@@ -1109,7 +853,7 @@ $(document).ready(function () {
             processData: false,
             success: function (res) {
                 if (res.success) {
-                    $('#uuDaiPhongModal').modal('toggle');
+                    $('#uuDaiPhongModal').modal('hide');
 
                     if (id) {
                         $('#table_tbodyUuDaiPhong tr[data-id="' + id + '"]').replaceWith(res.html);
@@ -1308,9 +1052,6 @@ $(document).ready(function () {
         $('#descriptionUuDaiPhong').val('');
         $('#start_dateUuDaiPhong').val('');
         $('#end_inUuDaiPhong').val('');
-        $('#taglineUuDaiPhong').val('');
-        $('#priceUuDaiPhong').val('');
-        $('#link360UuDaiPhong').val('');
         $('#activeUuDaiPhong').prop('checked', false);
         $('#pictureUuDaiPhong').val('');
         $('#imagePreviewUuDaiPhong').attr('src', defaultImage);
@@ -1333,9 +1074,6 @@ $(document).ready(function () {
                 $('#start_dateUuDaiPhong').val(data.promotion.start_date ?? '');
                 $('#end_inUuDaiPhong').val(data.promotion.end_in ?? '');
                 $('#emailUuDaiPhong').val(data.promotion.email ?? '');
-                $('#priceUuDaiPhong').val(data.promotion.price ?? '');
-                $('#taglineUuDaiPhong').val(data.promotion.tagline ?? '');
-                $('#link360UuDaiPhong').val(data.promotion.link360 ?? '');
 
                 if(data.promotion.active == 1){
                     $('#activeUuDaiPhong').prop('checked', true);
@@ -1396,206 +1134,101 @@ $(document).ready(function () {
             }
         });
     });
-
-    var bannerImage = "";
-
-    $('#uploadIconBanner').on('click', function() {
-        $('#pictureBanner').click();
-    });
-
-    $('#imagePreviewBanner').on('click', function() {
-        $('#pictureBanner').click();
-    });
-
-    $('#pictureBanner').on('change', function(event) {
-        var file = event.target.files[0];
-        if (file) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#imagePreviewBanner').attr('src', e.target.result);
-                $('#removeIconBanner').show();
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-    $('#removeIconBanner').on('click', function() {
-        $('#pictureBanner').val('');
-        if (bannerImage) {
-            $('#imagePreviewBanner').attr('src', bannerImage);
-        } else {
-            $('#imagePreviewBanner').attr('src', defaultImage);
-        }
-        $('#removeIconBanner').hide(); 
-    });
-
-    $('#bannerModal').on('hidden.bs.modal', function() {
-        $('#idBanner').val('');
-        $('#nameBanner').val('');
-        $('#descriptionBanner').val('');
-        $('#positionBanner').val('');
-        $('#linkBanner').val('');
-        $('#activeBanner').prop('checked', false);
-        $('#pictureBanner').val('');
-        $('#imagePreviewBanner').attr('src', defaultImage);
-    });
-    function alertBanner(bannerId){
-        $.ajax({
-            type: 'GET',
-            url: '/admin/banner/edit' + '?id=' + bannerId,
-            success: function(data){
-                $('#idBanner').val(data.banner.id);
-                $('#nameBanner').val(data.banner.name ?? '');
-                $('#descriptionBanner').val(data.banner.description ?? '');
-                $('#positionBanner').val(data.banner.position ?? '');
-                $('#linkBanner').val(data.banner.link ?? '');
-                if(data.banner.active == 1){
-                    $('#activeBanner').prop('checked', true);
-                }
-
-                if(data.banner.image){
-                    $('#imagePreviewBanner').attr('src', '/uploads/' + data.banner.image.ten);
-                    bannerImage = '/uploads/' + data.banner.image.ten;
-                }
-
-            },
-            error: function(error){
-                console.log(error);
-            }
-        })
-    }
-    function alertDeleteBanner(id) {
-        $('#deleteBannerModal').data('id', id);
-        $('#deleteBannerModal').modal('toggle');
-    }
-
-    $('#deleteBannerModal button.delete').on('click', function(e) {
-       e.preventDefault();
-
-       var bannerId = $('#deleteBannerModal').data('id');
-       var type = $('#deleteBannerType').val();
-
-       $.ajax({
-            url: '{{ route('backend.banner.delete') }}',
-            method: 'delete',
-            data: {
-                id: bannerId,
-                type: type
-            },
-            success: function (response) {
-                if (response.success) {
-                    $('#deleteBannerModal').modal('toggle');
-                    $('tr[data-id="' + bannerId + '"]').remove();
-                    
-                    toastr.success('Xóa banner thành công!');
-                } else {
-                    toastr.error('Không thể xóa banner!');
-                }
-            },
-            error: function () {
-                toastr.error('Đã xảy ra lỗi. Vui lòng thử lại!');
-            }
-        });
-    });
-
-    var imagesImage = "";
-
-    $('#uploadIconImages').on('click', function() {
-        $('#pictureImages').click();
-    });
-
-    $('#imagePreviewImages').on('click', function() {
-        $('#pictureImages').click();
-    });
-
-    $('#pictureImages').on('change', function(event) {
-        var file = event.target.files[0];
-        if (file) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#imagePreviewImages').attr('src', e.target.result);
-                $('#removeIconImages').show();
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-    $('#removeIconImages').on('click', function() {
-        $('#pictureImages').val('');
-        if (imagesImage) {
-            $('#imagePreviewImages').attr('src', imagesImage);
-        } else {
-            $('#imagePreviewImages').attr('src', defaultImage);
-        }
-        $('#removeIconImages').hide(); 
-    });
-
-    $('#imagesModal').on('hidden.bs.modal', function() {
-        $('#idImages').val('');
-        $('#nameImages').val('');
-        $('#positionImages').val('');
-        $('#linkImages').val('');
-        $('#activeImages').prop('checked', false);
-        $('#pictureImages').val('');
-        $('#imagePreviewImages').attr('src', defaultImage);
-    });
-    function alertImages(imagesId){
-        $.ajax({
-            type: 'GET',
-            url: '/admin/banner/edit' + '?id=' + imagesId,
-            success: function(data){
-                $('#idImages').val(data.banner.id);
-                $('#nameImages').val(data.banner.name ?? '');
-                $('#positionImages').val(data.banner.position ?? '');
-                $('#linkImages').val(data.banner.link ?? '');
-                if(data.banner.active == 1){
-                    $('#activeImages').prop('checked', true);
-                }
-
-                if(data.banner.image){
-                    $('#imagePreviewImages').attr('src', '/uploads/' + data.banner.image.ten);
-                    imagesImage = '/uploads/' + data.banner.image.ten;
-                }
-
-            },
-            error: function(error){
-                console.log(error);
-            }
-        })
-    }
-    function alertDeleteImages(id) {
-        $('#deleteImagesModal').data('id', id);
-        $('#deleteImagesModal').modal('toggle');
-    }
-
-    $('#deleteImagesModal button.delete').on('click', function(e) {
-        e.preventDefault();
-
-        var imagesId = $('#deleteImagesModal').data('id');
-        var type = $('#deleteImagesType').val();
-
-        $.ajax({
-            url: '{{ route('backend.banner.delete') }}',
-            method: 'delete',
-            data: {
-                id: imagesId,
-                type: type
-            },
-            success: function (response) {
-                if (response.success) {
-                    $('#deleteImagesModal').modal('toggle');
-                    $('tr[data-id="' + imagesId + '"]').remove();
-                    
-                    toastr.success('Xóa hình ảnh thành công!');
-                } else {
-                    toastr.error('Không thể xóa hình ảnh!');
-                }
-            },
-            error: function () {
-                toastr.error('Đã xảy ra lỗi. Vui lòng thử lại!');
-            }
-        });
-    });
 </script>
+<script>
+    Dropzone.autoDiscover = false;
 
+    $(document).ready(function() {
+        function initDropzone(dropzoneId, hiddenInputId, maxFiles = null) {
+            if (!document.getElementById(dropzoneId)) {
+                console.error(`Element với ID '${dropzoneId}' không tồn tại`);
+                return;
+            }
+
+            return new Dropzone(`#${dropzoneId}`, {
+                url: '/admin/upload-image',
+                paramName: 'file',
+                maxFiles: maxFiles, 
+                acceptedFiles: 'image/*',
+                addRemoveLinks: true,
+                dictDefaultMessage: "Kéo & thả ảnh vào đây hoặc nhấn để tải lên",
+                dictRemoveFile: "Xóa ảnh",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                transformFile: function(file, done) {
+                    const maxSize = 300 * 1024;
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(event) {
+                        const img = new Image();
+                        img.src = event.target.result;
+
+                        img.onload = function() {
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+
+                            let width = img.width;
+                            let height = img.height;
+
+                            const MAX_WIDTH = 1024;
+                            if (width > MAX_WIDTH) {
+                                height *= MAX_WIDTH / width;
+                                width = MAX_WIDTH;
+                            }
+
+                            canvas.width = width;
+                            canvas.height = height;
+                            ctx.drawImage(img, 0, 0, width, height);
+
+                            let quality = 0.7; 
+                            let compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+
+                            while (compressedDataUrl.length > maxSize && quality > 0.3) {
+                                quality -= 0.1;
+                                compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+                            }
+
+                            fetch(compressedDataUrl)
+                                .then(res => res.blob())
+                                .then(blob => {
+                                    const compressedFile = new File([blob], file.name, { type: 'image/jpeg' });
+                                    done(compressedFile);
+                                });
+                        };
+                    };
+
+                    reader.readAsDataURL(file);
+                },
+                init: function() {
+                    this.on('success', function(file, response) {
+                        file.uploadedFileName = response.file_name; 
+                        if (maxFiles === 1) {
+                            $(`#${hiddenInputId}`).val(response.file_name);
+                        } else {
+                            let currentFiles = JSON.parse($(`#${hiddenInputId}`).val() || '[]');
+                            currentFiles.push(response.file_name);
+                            $(`#${hiddenInputId}`).val(JSON.stringify(currentFiles));
+                        }
+                    });
+
+                    this.on('removedfile', function(file) {
+                        let currentFiles = JSON.parse($(`#${hiddenInputId}`).val() || '[]');
+                        currentFiles = currentFiles.filter(name => name !== file.uploadedFileName);
+                        $(`#${hiddenInputId}`).val(currentFiles.length ? JSON.stringify(currentFiles) : '');
+                    });
+
+                    this.on('error', function(file, errorMessage) {
+                        alert('Tải ảnh thất bại: ' + errorMessage);
+                        this.removeFile(file);
+                    });
+                }
+            });
+        }
+
+        initDropzone('dropzone-pictures-banner', 'uploaded_pictures_banner'); 
+        initDropzone('dropzone-pictures', 'uploaded_pictures'); 
+    });
+
+</script>
 @endsection

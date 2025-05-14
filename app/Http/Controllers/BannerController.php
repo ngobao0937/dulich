@@ -23,7 +23,7 @@ class BannerController extends Controller
             });
         }
 
-        $banners = $query->orderby('position', 'asc')->paginate(20);
+        $banners = $query->where('type', 'main')->orderby('position', 'asc')->paginate(20);
 
         return view('backend.banner.index', compact('banners'));
     }
@@ -42,18 +42,29 @@ class BannerController extends Controller
 			'position' => 'required'
         ]);
 
-		if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+		if($request->type == 'product'){
+			if ($validator->fails()) {
+				return response()->json([
+					'success' => false,
+					'errors' => $validator->errors()
+				], 422);
+			}
+		}else{
+			if ($validator->fails()) {
+				return redirect()->back()->withErrors($validator)->withInput();
+			}
+		}
 
 		$obj = Banner::updateOrCreate(
 			['id' => $request->id],
 			[
 				'name' => $request->name,
+				'description' => $request->description,
 				'active' => $request->active ? 1 : 0,
 				'position' => $request->position,
 				'link' => $request->link,
-				// 'type' => $request->type
+				'product_fk' => $request->product_fk,
+				'type' => $request->type
 			]
 		);
 
@@ -62,7 +73,18 @@ class BannerController extends Controller
 			SaveImage($request, $obj->id, 'banner', 'picture', 100);
 		}
 
-		return redirect(route('backend.banner.index', $request->query()));
+		if($request->type != 'main'){
+			$html = view('backend.product.banner_row', ['banner' => $obj])->render();
+
+			return response()->json([
+				'success' => true,
+				'html' => $html
+			]);
+		}else{
+			return redirect(route('backend.banner.index', $request->query()));
+		}
+
+		
  
     }
 
@@ -71,6 +93,11 @@ class BannerController extends Controller
 		$banner = Banner::find($id);
 		$banner->delete();
 		$banner->image()->delete();
-        return redirect(route('backend.banner.index', $request->query()));
+		if($request->type != 'main'){
+			return response()->json(['success' => true]);
+		}else{
+			return redirect(route('backend.banner.index', $request->query()));
+		}
+        
     }
 }

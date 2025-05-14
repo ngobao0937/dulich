@@ -16,12 +16,12 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\CKEditorController;
+use App\Http\Controllers\PromotionController;
 
 Route::get('/', [HomeController::class, 'index'])->name('frontend.home.index');
 
-Route::get('/chitiet', function(){
-    return view('frontend.home.chitiet');
-});
+Route::get('/ks{id}-{slug}', [ProductController::class, 'detail'])->name('frontend.product.detail');
+
 
 Route::get('/uudai', function(){
     return view('frontend.home.uudai');
@@ -39,7 +39,6 @@ Route::get('/tr-{slug}', [HomeController::class, 'page'])->name('frontend.home.p
 
 Route::get('/san-pham', [HomeController::class, 'products'])->name('frontend.home.products');
 
-Route::get('/sp{id}-{slug}', [HomeController::class, 'detail'])->name('frontend.home.detail');
 
 Route::get('/lien-he', [HomeController::class, 'contact'])->name('frontend.home.contact');
 
@@ -115,4 +114,9 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::post('/contact/store', [ContactController::class, 'store'])->name('backend.contact.store');
     Route::delete('/contact/delete', [ContactController::class, 'delete'])->name('backend.contact.delete');
     Route::get('/contact/edit', [ContactController::class, 'edit'])->name('backend.contact.edit');
+
+    Route::get('/promotion', [PromotionController::class, 'index'])->name('backend.promotion.index');
+    Route::post('/promotion/store', [PromotionController::class, 'store'])->name('backend.promotion.store');
+    Route::get('/promotion/edit', [PromotionController::class, 'edit'])->name('backend.promotion.edit');
+    Route::delete('/promotion/delete', [PromotionController::class, 'delete'])->name('backend.promotion.delete');
 });

@@ -13,7 +13,8 @@ class Image extends Model
         'id_fk',
         'type',
         'isdelete',
-        'position'
+        'position',
+        'tile'
     ];
 	public $timestamps = false;
 }

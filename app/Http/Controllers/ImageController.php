@@ -45,8 +45,13 @@ class ImageController extends Controller
     
     public function updateOrder(Request $request)
     {
+        $banners = $request->input('banner');
         $order = $request->input('order');
     
+        foreach ($banners as $index => $id) {
+            Image::where('id', $id)->update(['position' => $index]);
+        }
+
         foreach ($order as $index => $id) {
             Image::where('id', $id)->update(['position' => $index]);
         }

@@ -15,15 +15,49 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     public function index(){
-        $products = Product::where('active', 1)->where('isdelete', 0)->orderby('id', 'desc')->take(8)->get();
+        $products_KS = Product::where('active', 1)
+            ->where('isdelete', 0)
+            ->whereHas('menus', function ($query) {
+                $query->where('menus.id', 10000);
+            })
+            ->whereHas('promotionThuongMain')
+            ->orderBy('id', 'desc')
+            ->take(5)
+            ->get();
+
+        $products_NH = Product::where('active', 1)
+            ->where('isdelete', 0)
+            ->whereHas('menus', function ($query) {
+                $query->where('menus.id', 10001);
+            })
+            ->whereHas('promotionThuongMain')
+            ->orderBy('id', 'desc')
+            ->take(5)
+            ->get();
+
+        $products_KVC = Product::where('active', 1)
+            ->where('isdelete', 0)
+            ->whereHas('menus', function ($query) {
+                $query->where('menus.id', 10002);
+            })
+            ->whereHas('promotionThuongMain')
+            ->orderBy('id', 'desc')
+            ->take(5)
+            ->get();
+
         $menus_public = Menu::where('active', 1)->where('public', 1)->get();
         $trang_chu = Page::find(10000);
         $banner_trangchu = Banner::find(10000);
+        $banners = Banner::where('type', 'main')->orderby('position', 'asc')->where('active', 1)->get();
         return view('frontend.home.index', [
-            'products' => $products,
+            // 'products' => $products,
             'menus_public' => $menus_public,
             'trang_chu' => $trang_chu,
-            'banner_trangchu' => $banner_trangchu
+            'banner_trangchu' => $banner_trangchu,
+            'banners' => $banners,
+            'products_KS' => $products_KS,
+            'products_NH' => $products_NH,
+            'products_KVC' => $products_KVC
         ]);
     }
 

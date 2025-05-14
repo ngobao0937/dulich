@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Image;
 use App\Models\Banner;
 use App\Models\Extension;
+use App\Models\Promotion;
 use Carbon\Carbon;
 
 class ProductController extends Controller
@@ -45,12 +46,18 @@ class ProductController extends Controller
         return view('backend.product.index', compact('products'));
     }
 	public function create(Request $request) {
-		return view('backend.product.model');
+        if($request->product_fk){
+            $product = Product::find($request->product_fk);
+        }else{
+            $product = Product::create(['isdelete' => 1]);
+        }
+		return view('backend.product.model', ['product' => $product]);
     }
 
 	public function edit(Request $request) {
 		$id = $request->input('id');
 		$product = Product::with(['image'])->find($id);
+        // Promotion::where('product_fk', $product->id)->where('issave', 0)->delete();
 		return view('backend.product.model', [
 			'product' => $product,
 		]);
@@ -68,20 +75,29 @@ class ProductController extends Controller
 		$id = $request->input('id', null);  
 
 		$data = [
-			'name' => $request->input('name'),
-			'slug' => Str::slug($request->input('name')),
+            'name' => $request->input('name'),
+            'slug' => Str::slug($request->input('name')),
             'address' => $request->input('address'),
             'phone' => $request->input('phone'),
             'email' => $request->input('email'),
-            'link' => $request->input('link'),
+            'website' => $request->input('website'),
+            'hotline' => $request->input('hotline'),
+            'facebook' => $request->input('facebook'),
+            'instagram' => $request->input('instagram'),
+            'twitter' => $request->input('twitter'),
+            'youtube' => $request->input('youtube'),
+            'tiktok' => $request->input('tiktok'),
+            'link360' => $request->input('link360'),
+            'chatbot' => $request->input('chatbot'),
+            'map' => $request->input('map'),
+            'location' => $request->input('location'),
             'content' => $request->input('content'),
-            // 'extension_fk' => $request->input('extension_fk'),
-            // 'menu_fk' => is_array($request->menus_fk) ? implode(',', $request->menus_fk) : null,
-			'active' => $request->active ? 1 : 0,
-			'model' => $request->model,
+            'active' => $request->active ? 1 : 0,
             'meta_keywords' => $request->meta_keywords,
-            'meta_description' => $request->meta_description
-		];
+            'meta_description' => $request->meta_description,
+            'isdelete' => 0
+        ];
+
 
 		$obj = Product::updateOrCreate(
 			['id' => $id],
@@ -103,9 +119,19 @@ class ProductController extends Controller
 			SaveImage($request, $obj->id, 'product_hinh_dai_dien');
 		}
 
-        if($request->hasfile('picture360')){
-			SaveImage($request, $obj->id, 'product_vr360', 'picture360', 100, null);
-		}
+        if ($request->filled('uploaded_pictures_banner')) {
+            $pictures = json_decode($request->input('uploaded_pictures_banner'), true);
+            foreach ($pictures as $fileName) {
+                Image::updateOrCreate(
+                    ['id' => null],
+                    [
+                        'ten' => $fileName,
+                        'id_fk' => $obj->id,
+                        'type' => 'product_banner'
+                    ]
+                );
+            }
+        }
 
         if ($request->filled('uploaded_pictures')) {
             $pictures = json_decode($request->input('uploaded_pictures'), true);
@@ -120,6 +146,10 @@ class ProductController extends Controller
                 );
             }
         }
+
+        // Promotion::where('product_fk', $id)
+        //         ->where('issave', 0)
+        //         ->update(['issave' => 1]);
         
 		return redirect(route('backend.product.index', $request->query()));
     }
@@ -146,23 +176,10 @@ class ProductController extends Controller
     }
 
     public function detail(Request $request){
-        $product = Product::where('isdelete', 0)->where('id',$request->id)->first();
-        $description = $product->description;
-        // $products = Product::where('menu_fk', $product->menu_fk)->where('id', '!=', $product->id)->get();
-        $products = Product::all();
-        $blogs = Blog::where('active', 1)->orderBy('id','desc')->take(3)->get();
-        $comments = Comment::where('product_fk', $request->id)->where('comment_fk', 0)->orderBy('id','desc')->get();
-
-        $vouchers = getVouchers();
-
+        $product = Product::where('isdelete', 0)->where('active', 1)->where('id',$request->id)->first();
         $meta_keywords = $product->meta_keywords ? $product->name . ', ' .$product->meta_keywords : $product->name;
         return view('frontend.product.detail', [
             'product' => $product,
-            'products' => $products,
-            'blogs' => $blogs,
-            'comments' => $comments,
-            'vouchers' => $vouchers,
-            'description' => $description,
             'meta_title' => $product->name,
             'meta_description' => $product->meta_description ?? 'Chuyên cung cấp đồ dùng mẹ và bé, tã, sữa, quần áo trẻ em chính hãng với giá tốt nhất.',
             'meta_keywords' => $meta_keywords,
@@ -170,6 +187,8 @@ class ProductController extends Controller
             'meta_og_url' => route('frontend.product.detail',['id'=>$request->id, 'slug'=>$request->slug]),
             'meta_og_type' => 'product'
         ]);
+
+        // return view('frontend.home.chitiet', ['product' => $product]);
     }
 
     public function search(Request $request){

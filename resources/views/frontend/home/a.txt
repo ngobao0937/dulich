@@ -294,12 +294,12 @@
 #SECTION12 {
 	height: 932px;
 	position: relative;
-	/* background-position: center top;
+	background-position: center top;
 	background-repeat: no-repeat;
 	background-image: url('https://media.salekit.com/uploads/salekit_153833482ab9678e6a84fa33a750502b/z6592494699045-ccf192b88e35258e426921ff38e51a65.jpg');
 	background-size: auto 100%;
 	background-attachment: scroll;
-	background-origin: content-box; */
+	background-origin: content-box;
 }
 
 #SECTION14 {
@@ -9089,12 +9089,12 @@
 	#SECTION12 {
 		height: 264px;
 		position: relative;
-		/* background-position: center top;
+		background-position: center top;
 		background-repeat: no-repeat;
 		background-image: url('https://media.salekit.com/uploads/salekit_153833482ab9678e6a84fa33a750502b/z6592494699045-ccf192b88e35258e426921ff38e51a65.jpg');
 		background-size: auto 100%;
 		background-attachment: scroll;
-		background-origin: content-box; */
+		background-origin: content-box;
 	}
 
 	#SECTION14 {
@@ -13491,8 +13491,6 @@
 		left: 317.792px;
 		z-index: 1;
 	}
-
-
 
 	#BUTTON122>*:first-child {
 		background-position: initial;

@@ -34,7 +34,12 @@
     background-attachment: initial;
     background-origin: initial;
     background-clip: initial;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(28, 77, 114);
+    
+}
+
+#SECTION31 *{
+    color: white !important;
 }
 
 #SHAPE78 {
@@ -67,8 +72,8 @@
 #TITLE643 {
     position: absolute;
     z-index: 1;
-    top: 9px;
-    left: 653.25px;
+    top: 18px;
+    left: 760px;
 }
 
 #TITLE643>*:first-child {
@@ -226,7 +231,7 @@
     background-attachment: initial;
     background-origin: initial;
     background-clip: initial;
-    background-color: rgb(28, 77, 114);
+    background-color: rgb(255, 255, 255);
     text-align: center;
     box-sizing: border-box;
     color: rgb(255, 255, 255);
@@ -244,7 +249,7 @@
     width: 100%;
     height: auto;
     font-weight: bold;
-    color: rgb(255, 255, 255);
+    color: rgb(28, 77, 114) !important;
 }
 
 #TITLE650 {
@@ -472,6 +477,18 @@
 
 #OVERLAY11>*:first-child {}
 
+#SECTION20 {
+    height: 1012px;
+    position: relative;
+    background-position: initial;
+    background-repeat: initial;
+    background-image: none;
+    background-size: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+}
+
 @media only screen and (max-width: 760px) {
     #SECTION31 {
         height: 57.49767277221679px;
@@ -482,7 +499,7 @@
         background-attachment: initial;
         background-origin: initial;
         background-clip: initial;
-        background-color: rgb(255, 255, 255);
+        background-color: rgb(28, 77, 114);
     }
     #SHAPE78 {
         position: absolute;
@@ -667,24 +684,24 @@
     }
 
     #BUTTON122>*:first-child {
-        background-position: initial;
-        background-size: initial;
-        background-repeat: initial;
-        background-attachment: initial;
-        background-origin: initial;
-        background-clip: initial;
-        background-color: rgb(28, 77, 114);
-        text-align: center;
-        box-sizing: border-box;
-        color: rgb(255, 255, 255);
-        width: 91px;
-        height: 29px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        border-radius: 25px;
-    }
+		background-position: initial;
+		background-size: initial;
+		background-repeat: initial;
+		background-attachment: initial;
+		background-origin: initial;
+		background-clip: initial;
+		background-color: rgb(255, 255, 255) !important;
+		text-align: center;
+		box-sizing: border-box;
+		color: rgb(255, 255, 255) !important;
+		width: 91px;
+		height: 29px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		border-radius: 25px;
+	}
 
     #BUTTON122>*:first-child span {
         font-size: 12px;
@@ -923,7 +940,7 @@ header{
     top: 0 !important;
     z-index: 100;
     width: 100%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.322);
 }
 
 a{
@@ -936,11 +953,173 @@ a{
     bottom: 30px;
     right: 30px;
     z-index: 100;
-    height: 30px;
-    width: 15px;
+    height: 45px;
+    width: 35px;
     border-radius: 50%;
-    background: rgb(84, 84, 109);
+    background: rgb(247, 247, 247);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.promotion_section{
+
+}
+
+.section-title {
+    color: #084c7e;
+    font-weight: bold;
+    text-align: center;
+    margin: 30px 0;
+    font-size: 33px;
+    font-family: 'Roboto';
+}
+
+
+
+.special-offer-card {
+    border-radius: 8px;
+    overflow: hidden;
+    height: 360px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.special-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+
+.special-offer-overlay {
+    padding: 30px;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    z-index: 2;
+
+}
+
+.special-offer-title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.special-offer-description {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.btn-view-offer {
+    background-color: white;
+    color: #084c7e;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.resort-card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    background-color: white;
+}
+
+.resort-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.resort-details {
+    padding: 15px;
+    line-height: 1.3;
+}
+
+.resort-name {
+    color: #084c7e;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-family: 'Montserrat';
+}
+
+.discount-info {
+    color: rgb(28, 77, 114);
+    font-size: 14px;
+    display: flex;
+    /* align-items: center; */
+    margin-bottom: 10px;
+    
+}
+
+.discount-icon {
+    color: #084c7e;
+    margin-right: 5px;
+    margin-top: 3px;
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: rgb(28, 77, 114);
+}
+
+.countdown-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.countdown-value {
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-weight: bold;
+    color: #084c7e;
+    font-size: 18px;
+}
+
+.countdown-label {
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.btn-get-offer {
+    background-color: #084c7e;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 15px;
+    width: 100%;
+    font-weight: bold;
+}
+
+.btn-view-more {
+    background-color: white;
+    color: #084c7e;
+    border: 2px solid #084c7e;
+    border-radius: 25px;
+    padding: 6px 50px;
+    font-weight: bold;
+    margin: 0px auto 30px auto;
+    display: block;
+    width: fit-content;
+    font-size: 20px;
+}
+

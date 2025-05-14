@@ -6,7 +6,7 @@
 </head>
 <body style="font-family: Roboto;">
     @include('frontend.layout.header')
-    <div style="margin-top: 60px;">
+    <div style="margin-top: 55px;">
         @yield('content')
     </div>
     @include('frontend.layout.footer')

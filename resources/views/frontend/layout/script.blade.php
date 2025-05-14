@@ -1,30 +1,34 @@
+<div id="POPUP1">
+    <div data-width="414" data-height="328">
+        <div id="SHAPE53" class="event_scoll_action" style="cursor: pointer;">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 11.250000953674316 17.9976863861084">
+                <foreignObject x="0" y="0" width="11.250000953674316" height="17.9976863861084"><i class=" far  fa-times" style="font-size: 18px; color: rgb(255, 255, 255); cursor: pointer;"></i></foreignObject>
+            </svg>
+        </div>
+        <div id="TITLE132">
+            <h3>ĐĂNG KÝ NHẬN ƯU ĐÃI NGAY</h3>
+        </div>
+        <div id="FORM3" data-type="lead">
+            <form>
+                <div id="INPUT12"><input data-require="" name="full_name" value="" type="text" data-type="text" placeholder="Họ tên" required="true"></div>
+                <div id="INPUT13"><input data-require="" name="email" value="" type="email" data-type="email" placeholder="Email" required="true"></div>
+                <div id="INPUT14"><input data-require="" name="phone" value="" type="text" data-type="phone" placeholder="Số điện thoại" required="true"></div>
+                <div id="BUTTON15"><button type="submit"> <span> đăng ký ngay</span> </button></div>
+            </form>
+            <div class="data_thankyou" type="popup" style="display: none;">Cảm ơn bạn đã quan tâm!</div>
+        </div>
+    </div>
+</div>
+
 <button id="scrollToTop" type="button" class="btn btn-lg">
-    <i class="fas fa-chevron-up" style="font-size: 17px; color: white;"></i>
+    <i class="fas fa-chevron-up" style="font-size: 17px; color: #084c7e;"></i>
 </button>
 <script src="{{ asset('assets/backend/plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/backend/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/lib/bootstrap-4.6.2-dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/lib/bootstrap-4.6.2-dist/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/lib/swiper/swiper-bundle.min.js') }}"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 300) {
-            $('#scrollToTop').fadeIn();
-            } else {
-            $('#scrollToTop').fadeOut();
-            }
-        });
-
-        // Khi click thì scroll lên đầu trang
-        $('#scrollToTop').click(function () {
-            $('html, body').animate({ scrollTop: 0 }, 500); // 500ms để mượt
-            return false;
-        });
-    });
-    
-</script>
+<script src="{{ asset('assets/frontend/js/script.js') }}"></script>
 
 {{-- <script type="text/javascript">
     function inIframe() {
