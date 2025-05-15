@@ -22,19 +22,19 @@
     <meta name="robots" content="INDEX, FOLLOW" />
     <meta name="RATING" content="GENERAL" />
 
-    <link rel="stylesheet" href="{{ asset('assets/frontend/lib/bootstrap-4.6.2-dist/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/frontend/lib/swiper/swiper-bundle.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/backend/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ auto_version('assets/frontend/lib/bootstrap-4.6.2-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ auto_version('assets/frontend/lib/swiper/swiper-bundle.min.css') }}">
+    <link rel="stylesheet" href="{{ auto_version('assets/backend/plugins/fontawesome-free/css/all.min.css') }}">
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/light.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/solid.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/brands.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/regular.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/duotone.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/fontawesome.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/reset_css.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/animate.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/animate_text.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/light.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/solid.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/brands.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/regular.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/duotone.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/fontawesome.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/reset_css.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/animate.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/animate_text.css') }}">
     {{-- <script type="text/javascript" src="https://builder.salekit.io/assets/lib/jquery.2.1.1.min.js"></script>
     <script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/9a0939d3/www-widgetapi.vflset/www-widgetapi.js" ></script>
     <script src="https://player.vimeo.com/api/player.js"></script> --}}
@@ -45,5 +45,5 @@
         
     </style>
     @yield('styles')
-    <link rel="stylesheet" href="{{ asset('assets/frontend/css/css.css') }}">
+    <link rel="stylesheet" href="{{ auto_version('assets/frontend/css/css.css') }}">
 </head>

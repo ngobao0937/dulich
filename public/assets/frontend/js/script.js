@@ -47,14 +47,14 @@ document.addEventListener('DOMContentLoaded', function () {
         setInterval(updateCountdown, 1000);
     });
 
-    function openPopup() {
+    window.openPopup = function () {
         const popup = document.getElementById("POPUP1");
         if (popup) {
             popup.style.display = "block";
         }
     }
 
-    function closePopup() {
+    window.closePopup = function () {
         const popup = document.getElementById("POPUP1");
         if (popup) {
             popup.style.display = "none";
@@ -66,6 +66,23 @@ document.addEventListener('DOMContentLoaded', function () {
         closeButton.addEventListener("click", closePopup);
     }
 
-    window.openPopup = openPopup;
-    window.closePopup = closePopup;
+    const sidebar = document.getElementById('mobileSidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const toggleBtn = document.getElementById('sidebarToggle');
+    const closeBtn = document.getElementById('sidebarClose');
+
+    toggleBtn.addEventListener('click', function () {
+        sidebar.classList.add('show');
+        overlay.classList.add('show');
+        document.body.style.overflow = 'hidden'; // chặn cuộn trang
+    });
+
+    function closeSidebar() {
+        sidebar.classList.remove('show');
+        overlay.classList.remove('show');
+        document.body.style.overflow = ''; // khôi phục cuộn
+    }
+
+    closeBtn.addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar);
 });

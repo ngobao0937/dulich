@@ -31,12 +31,12 @@
 <button id="scrollToTop" type="button" class="btn btn-lg">
     <i class="fas fa-chevron-up" style="font-size: 17px; color: #084c7e;"></i>
 </button>
-<script src="{{ asset('assets/backend/plugins/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/backend/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('assets/frontend/lib/bootstrap-4.6.2-dist/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/frontend/lib/bootstrap-4.6.2-dist/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/frontend/lib/swiper/swiper-bundle.min.js') }}"></script>
-<script src="{{ asset('assets/frontend/js/script.js') }}"></script>
+<script src="{{ auto_version('assets/backend/plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ auto_version('assets/backend/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+<script src="{{ auto_version('assets/frontend/lib/bootstrap-4.6.2-dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ auto_version('assets/frontend/lib/bootstrap-4.6.2-dist/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ auto_version('assets/frontend/lib/swiper/swiper-bundle.min.js') }}"></script>
+<script src="{{ auto_version('assets/frontend/js/script.js') }}"></script>
 {{-- <script>
     $('#formRegisterUuDai').on('submit', function (e) {
         e.preventDefault();

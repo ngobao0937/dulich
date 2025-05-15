@@ -27,28 +27,28 @@ Route::get('/ks{id}-{slug}', [ProductController::class, 'detail'])->name('fronte
 
 Route::post('/dang-ky-nhan-khuyen-mai', [CustomerController::class, 'store'])->name('frontend.customer.store');
 
-Route::get('/uudai', function(){
-    return view('frontend.home.uudai');
-});
+// Route::get('/uudai', function(){
+//     return view('frontend.home.uudai');
+// });
 
-Route::get('/event', function(){
-    return view('frontend.home.event');
-});
+// Route::get('/event', function(){
+//     return view('frontend.home.event');
+// });
 
-Route::get('/event_con', function(){
-    return view('frontend.home.event_con');
-});
+// Route::get('/event_con', function(){
+//     return view('frontend.home.event_con');
+// });
 
-Route::get('/tr-{slug}', [HomeController::class, 'page'])->name('frontend.home.page');
+// Route::get('/tr-{slug}', [HomeController::class, 'page'])->name('frontend.home.page');
 
-Route::get('/san-pham', [HomeController::class, 'products'])->name('frontend.home.products');
+// Route::get('/san-pham', [HomeController::class, 'products'])->name('frontend.home.products');
 
 
-Route::get('/lien-he', [HomeController::class, 'contact'])->name('frontend.home.contact');
+// Route::get('/lien-he', [HomeController::class, 'contact'])->name('frontend.home.contact');
 
-Route::post('/gui-lien-he', [HomeController::class, 'post_contact'])->name('frontend.home.post_contact');
+// Route::post('/gui-lien-he', [HomeController::class, 'post_contact'])->name('frontend.home.post_contact');
 
-Route::get('/dm-{slug}', [HomeController::class, 'menu'])->name('frontend.home.menu');
+// Route::get('/dm-{slug}', [HomeController::class, 'menu'])->name('frontend.home.menu');
 
 
 Route::get('/admin', [LoginController::class, 'login'])->name('backend.login');

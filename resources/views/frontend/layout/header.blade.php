@@ -37,34 +37,45 @@
     </section>
 </header> --}}
 
-<header class="w-100" >
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(28, 77, 114); color: white;">
-        <!-- Biểu tượng menu trên mobile -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar"
-            aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+<header class="w-100">
+    <nav class="navbar navbar-expand-lg navbar-dark d-flex justify-content-between align-items-center" style="background-color: rgb(28, 77, 114); color: white;">
+        <button class="navbar-toggler" type="button" id="sidebarToggle" style="z-index: 10">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a class="navbar-brand mx-auto font-weight-bold text-primary text-center title-web" href="/">
-            <img class="mr-2 logo-web" src="{{ asset('images/logo-1.png') }}" alt="Logo">
-            <span style="color: white;">Du lịch Bà Rịa - Vũng Tàu</span>
+        <a class="navbar-brands font-weight-bold text-primary title-web a-icon" href="/" style="z-index: 1">
+            <img class="logo-web" src="{{ asset('images/logo-1.png') }}" alt="Logo">
+            <span class="title-sodl ml-2" style="color: white;">Du lịch Bà Rịa - Vũng Tàu</span>
         </a>
 
-        <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
-            <ul class="navbar-nav align-items-center">
-                <li class="nav-item" >
-                    <a class="nav-link text-white" href="/">TRANG CHỦ</a>
-                </li>
-                <li class="nav-item" >
-                    <a class="nav-link text-white" href="#">SỰ KIỆN DU LỊCH</a>
-                </li>
-                <li class="nav-item" >
-                    <a class="nav-link text-white" href="{{ route('frontend.product.promotions') }}">KHUYẾN MÃI & ƯU ĐÃI</a>
-                </li>
-                <li class="nav-item ml-lg-3">
-                    <button class="btn pl-3 pr-3" style="background: white; border-radius: 20px;" type="button" data-funnel="yes"><b style="color: rgb(28, 77, 114);">ĐĂNG KÝ</b></button>
-                </li>
+        <ul class="navbar-nav align-items-center d-none d-lg-flex">
+            <li class="nav-item">
+                <a class="nav-link text-white" href="/" style="font-weight: bold;">TRANG CHỦ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#" style="font-weight: bold;">SỰ KIỆN DU LỊCH</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ route('frontend.product.promotions') }}" style="font-weight: bold;">KHUYẾN MÃI & ƯU ĐÃI</a>
+            </li>
+            <li class="nav-item ml-lg-3">
+                <a href="#" class="btn pl-3 pr-3" style="background: white; border-radius: 20px;"><b style="color: rgb(28, 77, 114);">ĐĂNG KÝ</b></a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="mobileSidebar" class="mobile-sidebar">
+        <div class="sidebar-content">
+            <button id="sidebarClose" class="close-btn">&times;</button>
+            <ul class="list-unstyled mt-4">
+                <li><a class="text-white d-block py-2" href="/" style="font-weight: bold;">TRANG CHỦ</a></li>
+                <li><a class="text-white d-block py-2" href="#" style="font-weight: bold;">SỰ KIỆN DU LỊCH</a></li>
+                <li><a class="text-white d-block py-2" href="{{ route('frontend.product.promotions') }}" style="font-weight: bold;">KHUYẾN MÃI & ƯU ĐÃI</a></li>
+                <li><a class="btn pl-3 pr-3 mt-3" href="#" style="background: white; border-radius: 20px;"><b style="color: rgb(28, 77, 114);">ĐĂNG KÝ</b></a></li>
             </ul>
         </div>
-    </nav>
+    </div>
+
+    <div class="overlay-sidebar" id="sidebarOverlay"></div>
 </header>
+

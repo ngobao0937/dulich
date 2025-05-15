@@ -8,9 +8,8 @@
                 <div class="swiper-slide position-relative">
                     <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 21/5;" src="{{ asset('uploads/' . $banner->image->ten) }}" alt="">
 
-                    <!-- Overlay -->
                     <div class="overlay position-absolute w-100 h-100 top-0 start-0" style="position: absolute; top: 0; left: 0;;background-color: rgba(0, 0, 0, 0.281); display: flex; justify-content: center; align-items: center; z-index: 1;">
-                        <h1 style="color: white; font-weight: bold; font-size: 40px;">ƯU ĐÃI CHO HÔM NAY!</h1>
+                        <h1 style="color: white; font-weight: bold; font-size: clamp(20px, 4vw, 40px);;">ƯU ĐÃI CHO HÔM NAY!</h1>
                     </div>
                 </div>
             @endforeach
@@ -98,7 +97,7 @@
                                 <input type="text" class="form-control" name="keyword" placeholder="Tìm kiếm / Nhập mã voucher"
                                     value="{{ request('keyword') }}">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">Tìm</button>
+                                    <button class="btn btn-primary" type="submit" style="font-weight: bold;">Tìm</button>
                                 </div>
                             </div>
                         </form>
@@ -145,7 +144,7 @@
                                         </div>
                                     </div>
                                     <div class="text-center mt-3">
-                                        <button onclick="openPopup()" class="btn action-button btn-block">Nhận ưu đãi ngay</button>
+                                        <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="btn action-button btn-block" style="font-weight: bold; border-radius: 10px;">Nhận ưu đãi ngay</a>
                                     </div>
                                 </div>
                             </div>
@@ -157,165 +156,6 @@
                             {{ $products->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
-
-                    {{-- <div class="col-md-6 col-lg-4">
-                        <div class="item-card">
-                            <div class="item-image">
-                                <img src="{{ asset('assets/frontend/images/header1.jpg') }}" alt="Pullman Hotel">
-                            </div>
-                            <div class="item-details">
-                                <div class="promotion-badge">Giảm đến 10% tiền khách sạn</div>
-                                <h5 class="item-title">Pullman</h5>
-                                <p class="item-desc">Hết hạn trong 3 ngày | Mã khuyến mãi: DULICHBRVT</p>
-                                <div class="timer">
-                                    <div class="row text-center">
-                                        <div class="col-3">
-                                            <span class="time-value">00</span>
-                                            <div>Ngày</div>
-                                        </div>
-                                        <div class="col-3">
-                                            <span class="time-value">11</span>
-                                            <div>Giờ</div>
-                                        </div>
-                                        <div class="col-3">
-                                            <span class="time-value">57</span>
-                                            <div>Phút</div>
-                                        </div>
-                                        <div class="col-3">
-                                            <span class="time-value">54</span>
-                                            <div>Giây</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-center mt-3">
-                                    <button onclick="openPopup()" class="btn action-button btn-block">Nhận ưu đãi ngay</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 col-lg-4">
-                        <div class="item-card">
-                            <div class="item-image">
-                                <img src="{{ asset('assets/frontend/images/header1.jpg') }}" alt="Premier Pearl">
-                            </div>
-                            <div class="item-details">
-                                <div class="promotion-badge">Miễn phí dịch vụ Spa khi đặt phòng</div>
-                                <h5 class="item-title">Premier Pearl</h5>
-                                <p class="item-desc">Khi đặt phòng [Hạng Phòng] từ khoảng thời gian [khoảng thời gian] sẽ được miễn phí...</p>
-                                <p class="mt-2 mb-0 text-secondary">Không thời hạn</p>
-                                <div class="text-center mt-3">
-                                    <button onclick="openPopup()" class="btn action-button btn-block">Nhận ưu đãi ngay</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 col-lg-4">
-                        <div class="item-card">
-                            <div class="item-image">
-                                <img src="{{ asset('assets/frontend/images/header1.jpg') }}" alt="Premier Pearl">
-                            </div>
-                            <div class="item-details">
-                                <div class="promotion-badge">Miễn phí dịch vụ Spa khi đặt phòng</div>
-                                <h5 class="item-title">Premier Pearl</h5>
-                                <p class="item-desc">Khi đặt phòng [Hạng Phòng] từ khoảng thời gian [khoảng thời gian] sẽ được miễn phí...</p>
-                                <p class="mt-2 mb-0 text-secondary">Không thời hạn</p>
-                                <div class="text-center mt-3">
-                                    <button onclick="openPopup()" class="btn action-button btn-block">Nhận ưu đãi ngay</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 col-lg-4">
-                        <div class="item-card">
-                            <div class="item-image">
-                                <img src="{{ asset('assets/frontend/images/header1.jpg') }}" alt="Grand Hotel">
-                            </div>
-                            <div class="item-details">
-                                <div class="promotion-badge">Giảm 15% cho đặt phòng trực tuyến</div>
-                                <h5 class="item-title">Grand Hotel</h5>
-                                <p class="item-desc">Mã giảm giá: GRANDHOTEL15 | Áp dụng cho tất cả các loại phòng</p>
-                                <div class="timer">
-                                    <div class="row text-center">
-                                        <div class="col-3">
-                                            <span class="time-value">02</span>
-                                            <div>Ngày</div>
-                                        </div>
-                                        <div class="col-3">
-                                            <span class="time-value">08</span>
-                                            <div>Giờ</div>
-                                        </div>
-                                        <div class="col-3">
-                                            <span class="time-value">32</span>
-                                            <div>Phút</div>
-                                        </div>
-                                        <div class="col-3">
-                                            <span class="time-value">15</span>
-                                            <div>Giây</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-center mt-3">
-                                    <button onclick="openPopup()" class="btn action-button btn-block">Nhận ưu đãi ngay</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 col-lg-4">
-                        <div class="item-card">
-                            <div class="item-image">
-                                <img src="{{ asset('assets/frontend/images/header1.jpg') }}" alt="Luxury Resort">
-                            </div>
-                            <div class="item-details">
-                                <div class="promotion-badge">Bữa sáng miễn phí</div>
-                                <h5 class="item-title">Luxury Resort</h5>
-                                <p class="item-desc">Đặt phòng 3 đêm liên tiếp để nhận ưu đãi bữa sáng miễn phí cho 2 người</p>
-                                <p class="mt-2 mb-0 text-secondary">Không thời hạn</p>
-                                <div class="text-center mt-3">
-                                    <button onclick="openPopup()" class="btn action-button btn-block">Nhận ưu đãi ngay</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 col-lg-4">
-                        <div class="item-card">
-                            <div class="item-image">
-                                <img src="{{ asset('assets/frontend/images/header1.jpg') }}" alt="Beach Resort">
-                            </div>
-                            <div class="item-details">
-                                <div class="promotion-badge">Giảm 20% cho đặt phòng cuối tuần</div>
-                                <h5 class="item-title">Beach Resort</h5>
-                                <p class="item-desc">Chỉ áp dụng cho ngày thứ 6, 7 và Chủ nhật | Mã: WEEKEND20</p>
-                                <div class="timer">
-                                    <div class="row text-center">
-                                        <div class="col-3">
-                                            <span class="time-value">05</span>
-                                            <div>Ngày</div>
-                                        </div>
-                                        <div class="col-3">
-                                            <span class="time-value">14</span>
-                                            <div>Giờ</div>
-                                        </div>
-                                        <div class="col-3">
-                                            <span class="time-value">41</span>
-                                            <div>Phút</div>
-                                        </div>
-                                        <div class="col-3">
-                                            <span class="time-value">22</span>
-                                            <div>Giây</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-center mt-3">
-                                    <button onclick="openPopup()" class="btn action-button btn-block">Nhận ưu đãi ngay</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </div>
@@ -324,8 +164,8 @@
 
 @endsection
 @section('styles')
-<link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/frontend/css/uudai.css') }}">
+<link rel="stylesheet" href="{{ auto_version('assets/frontend/css/style.css') }}">
+<link rel="stylesheet" href="{{ auto_version('assets/frontend/css/uudai.css') }}">
 
 @endsection
 @section('script')

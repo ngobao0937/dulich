@@ -952,7 +952,7 @@ a{
     position: fixed;
     bottom: 30px;
     right: 30px;
-    z-index: 100;
+    z-index: 50;
     height: 45px;
     width: 35px;
     border-radius: 50%;
@@ -1102,12 +1102,13 @@ a{
 
 .btn-get-offer {
     background-color: #084c7e;
-    color: white;
+    color: white !important;
     border: none;
     border-radius: 10px;
     padding: 8px 15px;
     width: 100%;
     font-weight: bold;
+    text-align: center;
 }
 
 .btn-view-more {
@@ -1135,14 +1136,288 @@ a{
     height: 40px; 
     aspect-ratio: 1/1
 }
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 767px) {
     .title-web{
         font-size: 18px;
     }
     .logo-web{
-        width: 30px; 
-        height: 30px; 
+        width: 35px; 
+        height: 35px; 
     }
 }
+
+.title1{
+    font-weight: bold;
+    -webkit-text-fill-color: unset;
+    color: rgb(8, 34, 62);
+    /* font-size: 35px; */
+	font-size: clamp(25px, 4vw, 35px);
+}
+.title2{
+	margin: 0px;
+    font-weight: bold;
+    -webkit-text-fill-color: unset;
+    color: rgb(28, 77, 114);
+    /* font-size: 51px; */
+	font-size: clamp(35px, 4vw, 51px);
+}
+.title3{
+    font-size: 19px;
+    font-weight: bold;
+    -webkit-text-fill-color: unset;
+}
+
+.btn-1{
+	background-position: initial;
+    background-size: initial;
+    background-repeat: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: rgb(28, 77, 114);
+    text-align: center;
+    color: rgb(255, 255, 255);
+    width: 406px;
+    height: 59px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+}
+
+.btn-1>span{
+	font-size: clamp(16px, 4vw, 20px);
+    width: 100% !important;
+    height: auto;
+    font-weight: bold;
+}
+
+.title-white{
+	font-size: clamp(20px, 4vw, 35px);
+    font-weight: bold;
+    -webkit-text-fill-color: unset;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.div-hr{
+	border-bottom: 2px solid white;
+	width: 30%;
+}
+
+.title-image{
+	font-size: clamp(18px, 4vw, 26px);
+	color: white;
+	font-weight: bold;
+}
+
+.des-image{
+	font-size: clamp(16px, 4vw, 20px);
+	color: white;
+}
+
+.title-blue{
+	font-size: clamp(20px, 4vw, 35px);
+	font-weight: bold;
+	color: rgb(28, 77, 114);
+	/* font-family: Montserrat-Bold; */
+	text-align: center;
+}
+
+.des-event{
+	font-size: clamp(15px, 4vw, 18px);
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.btn-more-event{
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    color: rgb(255, 255, 255);
+    width: fit-content;
+    height: 38px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.btn-more-event>span{
+	font-size: clamp(14px, 4vw, 17px);
+    height: auto;
+    color: rgb(28, 77, 114);
+    font-weight: bold;
+    width: 100% !important;
+}
+
+.text-normal{
+	font-size: clamp(16px, 4vw, 18px);
+}
+
+.btn-learn-more{
+	background-position: initial;
+    background-size: initial;
+    background-repeat: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: rgba(255, 255, 255, 0);
+    text-align: center;
+    color: rgb(255, 255, 255);
+    width: fit-content;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(28, 77, 114);
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.btn-learn-more>span{
+	font-size: clamp(17px, 4vw, 19px);
+    width: 100% !important;
+    height: auto;
+    color: rgb(28, 77, 114);
+    font-weight: bold;
+}
+
+.title-black{
+	font-size: clamp(17px, 4vw, 19px);
+	color: black;
+	font-weight: bold;
+}
+
+.input-register{
+    border-radius: 8px;
+    padding: 7px 15px;
+    border: var(--color-gray) solid 1px;
+    display: flex;
+    align-items: center;
+    background: rgb(255, 255, 255);
+}
+
+.btn-register-submit{
+	background-position: initial;
+    background-size: initial;
+    background-repeat: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: rgb(28, 77, 114);
+    text-align: center;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.btn-register-submit>span{
+	font-size: 17px;
+    width: 100% !important;
+    height: auto;
+    font-weight: bold;
+	padding: 5px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.title-logo-white{
+	font-size: clamp(20px, 4vw, 25px);
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+.des-logo-footer{
+    font-size: clamp(16px, 4vw, 17px);
+    color: rgb(255, 255, 255);
+}
+.title-follow-white{
+	font-size: clamp(18px, 4vw, 18px);
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+@media screen and (max-width: 767px) {
+	.logo-footer-c{
+		display: none;
+	}
+}
+
+.mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 260px;
+    height: 100%;
+    background-color: rgb(28, 77, 114);
+    color: white;
+    transition: left 0.3s ease;
+    z-index: 9999;
+    padding: 1rem;
+}
+
+.mobile-sidebar.show {
+    left: 0;
+}
+
+.mobile-sidebar .close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.overlay-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 998;
+    display: none;
+}
+.overlay-sidebar.show {
+    display: block;
+}
+
+
+@media screen and (max-width: 991.20px) {
+	.title-sodl{
+		display: none;
+	}
+	.a-icon{
+		position: absolute;
+		width: 100%;
+		justify-content: center;
+		padding-right: 1em;
+	}
+}
+
 
 

@@ -15018,7 +15018,7 @@
 	left: 10px;
 	width: 100%;
 	color: #fff;
-	font-size: 35px;
+	font-size: clamp(25px, 4vw, 35px);
 	font-weight: 600;
 	z-index: 2;
 }

@@ -98,3 +98,11 @@ function SaveImage(Request $request, $id, $type, $inputType = 'picture', $qualit
         $file->move(public_path('uploads/'), $file_name); 
     }
 }
+
+function auto_version($path) {
+    $fullPath = public_path($path);
+    if (file_exists($fullPath)) {
+        return asset($path) . '?v=' . filemtime($fullPath);
+    }
+    return asset($path);
+}

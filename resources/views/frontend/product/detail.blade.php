@@ -9,14 +9,19 @@
                     <div class="position-relative">
                         <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 21/9;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="">
                         
-                        <div id="TITLE360" style="z-index: 2">
+                        {{-- <div id="TITLE360" style="z-index: 2">
                             <h3>{{ $banner->name }}</h3>
                         </div>
                         <div id="PARAGRAPH26" style="z-index: 2">
                             <p>{{ $banner->description }}</p>
+                        </div> --}}
+                    </div>
+                    <div class="overlay d-flex align-items-center" style="border-radius: 0;">
+                        <div class="text-white container">
+                            <div style="font-size: clamp(20px, 4vw, 30px); font-weight: bold;">{{ $banner->name }}</div>
+                            <div style="font-size: clamp(14px, 4vw, 20px);">{{ $banner->description }}</div>
                         </div>
                     </div>
-                    <div id="OVERLAY1" style="z-index: 1"></div>
                 </div>
             @endforeach
         </div>
@@ -108,8 +113,8 @@
 </section>
 
 <section class="promotion_section">
-    <div class="container">
-        <h1 class="section-title" style="font-size: 26px;">CÁC ƯU ĐÃI KHÁC</h1>
+    <div class="container pt-5">
+        <div class="title-blue mb-3">CÁC ƯU ĐÃI KHÁC</div>
         
         <div class="row">
             @foreach ($product->promotionsThuong->where('active', 1)->take(6) as $promotion)
@@ -147,13 +152,13 @@
             
         </div>
         
-        <button class="btn-view-more">Xem thêm về các ưu đãi</button>
+        <a class="btn-view-more" href="{{ route('frontend.product.promotions') }}">Xem thêm về các ưu đãi</a>
     </div>
 </section>
 
 <section class="promotion_section mt-5">
     <div class="container">
-        <h1 class="section-title" style="font-size: 26px;">ƯU ĐÃI HẠNG PHÒNG</h1>
+        <div class="title-blue mb-3">ƯU ĐÃI HẠNG PHÒNG</div>
         
         <div class="row">
             @foreach ($product->promotionsPhong->where('active', 1)->take(6) as $promotion)
@@ -201,7 +206,7 @@
             @endforeach
         </div>
         
-        <button class="btn-view-more">Xem thêm về các ưu đãi</button>
+        <a class="btn-view-more" href="{{ route('frontend.product.promotions') }}">Xem thêm về các ưu đãi</a>
     </div>
 </section>
 
@@ -245,12 +250,13 @@
 
 @endsection
 @section('styles')
-<link rel="stylesheet" href="{{ asset('assets/frontend/css/chitiet.css') }}">
+<link rel="stylesheet" href="{{ auto_version('assets/frontend/css/chitiet.css') }}">
 <style>
     
 </style>
 @endsection
 @section('script')
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var swiper;
