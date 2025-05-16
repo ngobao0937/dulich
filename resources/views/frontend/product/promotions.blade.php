@@ -6,7 +6,7 @@
         <div class="swiper-wrapper">
             @foreach ($banners as $banner)
                 <div class="swiper-slide position-relative">
-                    <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 21/5;" src="{{ asset('uploads/' . $banner->image->ten) }}" alt="">
+                    <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 21/5;" src="{{ asset('uploads/' . $banner->image->ten) }}" alt="{{ $banner->ten }}">
 
                     <div class="overlay position-absolute w-100 h-100 top-0 start-0" style="position: absolute; top: 0; left: 0;;background-color: rgba(0, 0, 0, 0.281); display: flex; justify-content: center; align-items: center; z-index: 1;">
                         <h1 style="color: white; font-weight: bold; font-size: clamp(20px, 4vw, 40px);;">ƯU ĐÃI CHO HÔM NAY!</h1>

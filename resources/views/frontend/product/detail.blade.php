@@ -7,7 +7,7 @@
             @foreach ($product->banners as $banner)
                 <div class="swiper-slide">
                     <div class="position-relative">
-                        <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 21/9;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="">
+                        <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 21/9;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->name }}">
                         
                         {{-- <div id="TITLE360" style="z-index: 2">
                             <h3>{{ $banner->name }}</h3>
@@ -177,7 +177,7 @@
                             @if ($promotion->link360)
                                 <iframe id="embed_iframe_box" src="{{ $promotion->link360 }}" scrolling="no" frameborder="0" allowvr="yes" allow="vr; xr; accelerometer; magnetometer; gyroscope; autoplay;" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" style="width: 100%; height: 100%;"></iframe>
                             @else
-                                <img class="w-100 h-100" style="object-fit: cover" src="{{ $promotion->image ? asset('uploads/'.$promotion->image->ten) : asset('images/default.jpg') }}" alt="">
+                                <img class="w-100 h-100" style="object-fit: cover" src="{{ $promotion->image ? asset('uploads/'.$promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion->ten }}">
                             @endif
                         </div>
                         <div class="resort-details">

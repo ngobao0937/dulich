@@ -31,19 +31,13 @@
     <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/brands.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/regular.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/duotone.min.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/animate.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/animate_text.css') }}"> --}}
+
     <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/fontawesome.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/reset_css.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/animate.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/animate_text.css') }}">
-    {{-- <script type="text/javascript" src="https://builder.salekit.io/assets/lib/jquery.2.1.1.min.js"></script>
-    <script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/9a0939d3/www-widgetapi.vflset/www-widgetapi.js" ></script>
-    <script src="https://player.vimeo.com/api/player.js"></script> --}}
-    <link rel="stylesheet" type="text/css" href="
-        https://fonts.googleapis.com/css?family=Roboto:300,700|Montserrat:300,700|Montserrat:300,700|Montserrat:300,700|Roboto Slab:300,700|Montserrat:300,700|Montserrat:300,700|Montserrat:300,700|Tinos:300,700|Oswald:300,700|Sriracha|Paytone One:300,700|Lobster:300,700|Dancing Script:300,700|Play:300,700|Literata:300,700|Roboto:300,700|Roboto:300,700|Roboto:300,700|Roboto:300,700|Roboto:300,700|Roboto:300,700|Roboto:300,700|">
-    
-    <style>
-        
-    </style>
+
+    {{-- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,700|Montserrat:300,700|Montserrat:300,700|Montserrat:300,700|Roboto Slab:300,700|Montserrat:300,700|Montserrat:300,700|Montserrat:300,700|Tinos:300,700|Oswald:300,700|Sriracha|Paytone One:300,700|Lobster:300,700|Dancing Script:300,700|Play:300,700|Literata:300,700|Roboto:300,700|Roboto:300,700|Roboto:300,700|Roboto:300,700|Roboto:300,700|Roboto:300,700|Roboto:300,700|"> --}}
     @yield('styles')
     <link rel="stylesheet" href="{{ auto_version('assets/frontend/css/css.css') }}">
 </head>
