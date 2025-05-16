@@ -7,7 +7,7 @@
         <div class="swiper-wrapper">
             @foreach ($banners as $banner)
                 <div class="swiper-slide">
-                    <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 21/9;" src="{{ asset('uploads/' . $banner->image->ten) }}" alt="">
+                    <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 8/5;" src="{{ asset('uploads/' . $banner->image->ten) }}" alt="">
                 </div>
             @endforeach
         </div>

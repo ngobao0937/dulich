@@ -41,12 +41,12 @@
                                     <label class="custom-control-label" for="filter1">Nghỉ dưỡng, khách sạn</label>
                                 </div>
                                 <div class="custom-control custom-checkbox mt-2">
-                                    <input type="checkbox" class="custom-control-input filter-checkbox" id="filter2" name="filters[]" value="10001" {{ in_array(10001, request('filters', [])) ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="filter2">Vui chơi giải trí</label>
+                                    <input type="checkbox" class="custom-control-input filter-checkbox" id="filter3" name="filters[]" value="10001" {{ in_array(10001, request('filters', [])) ? 'checked' : '' }}>
+                                    <label class="custom-control-label" for="filter3">Ẩm thực nhà hàng</label>
                                 </div>
                                 <div class="custom-control custom-checkbox mt-2">
-                                    <input type="checkbox" class="custom-control-input filter-checkbox" id="filter3" name="filters[]" value="10002" {{ in_array(10002, request('filters', [])) ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="filter3">Ẩm thực nhà hàng</label>
+                                    <input type="checkbox" class="custom-control-input filter-checkbox" id="filter2" name="filters[]" value="10002" {{ in_array(10002, request('filters', [])) ? 'checked' : '' }}>
+                                    <label class="custom-control-label" for="filter2">Vui chơi giải trí</label>
                                 </div>
                             </div>
                         </div>
@@ -123,22 +123,22 @@
                                     <div class="promotion-badge">{{ $product->promotionThuongMain->name }}</div>
                                     <h5 class="item-title">{{ $product->name }}</h5>
                                     <p class="item-desc">{{ $product->promotionThuongMain->description }}</p>
-                                    <div class="timer">
+                                    <div class="timer" data-target="{{ $targetDate->toIso8601String() }}">
                                         <div class="row text-center">
                                             <div class="col-3">
                                                 <span class="time-value">00</span>
                                                 <div>Ngày</div>
                                             </div>
                                             <div class="col-3">
-                                                <span class="time-value">11</span>
+                                                <span class="time-value">00</span>
                                                 <div>Giờ</div>
                                             </div>
                                             <div class="col-3">
-                                                <span class="time-value">57</span>
+                                                <span class="time-value">00</span>
                                                 <div>Phút</div>
                                             </div>
                                             <div class="col-3">
-                                                <span class="time-value">54</span>
+                                                <span class="time-value">00</span>
                                                 <div>Giây</div>
                                             </div>
                                         </div>
@@ -197,6 +197,35 @@
         cb.addEventListener('change', () => {
             document.getElementById('filterForm').submit();
         });
+    });
+
+    document.querySelectorAll('.timer').forEach(function (container) {
+        const targetDate = new Date(container.dataset.target);
+        const mode = container.dataset.mode;
+        const values = container.querySelectorAll('.time-value');
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                values.forEach(v => v.textContent = '00');
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            values[0].textContent = String(days).padStart(2, '0');
+            values[1].textContent = String(hours).padStart(2, '0');
+            values[2].textContent = String(minutes).padStart(2, '0');
+            values[3].textContent = String(seconds).padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
     });
 </script>
 @endsection

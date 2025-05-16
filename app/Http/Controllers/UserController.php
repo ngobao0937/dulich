@@ -84,7 +84,7 @@ class UserController extends Controller
 
     public function delete(Request $request){
         $id = $request->input('id');
-        if($id == 1){
+        if($id == 10000){
             return redirect()->back()
                 ->withErrors(['Không được xóa tài khoản này.'])
                 ->withInput();

@@ -9,7 +9,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>Bạn có thật sự muốn xóa menu này và các menu con (nếu có) ?</p>
+                    <p>Bạn có muốn xóa danh mục này?</p>
                     <input type="text" id="deleteId" name="id" hidden>
                 </div>
                 <div class="modal-footer justify-content-between">
