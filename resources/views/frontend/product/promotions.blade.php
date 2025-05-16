@@ -121,8 +121,8 @@
                                 </div>
                                 <div class="item-details">
                                     <div class="promotion-badge">{{ $product->promotionThuongMain->name }}</div>
-                                    <h5 class="item-title">{{ $product->name }}</h5>
-                                    <p class="item-desc">{{ $product->promotionThuongMain->description }}</p>
+                                    <div class="item-title">{{ $product->name }}</div>
+                                    <div class="item-desc">{{ $product->promotionThuongMain->description }}</div>
                                     <div class="timer" data-target="{{ $targetDate->toIso8601String() }}">
                                         <div class="row text-center">
                                             <div class="col-3">

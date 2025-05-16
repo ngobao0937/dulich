@@ -19,9 +19,15 @@
         <div class="text-center">
             <div class="title1">CƠ HỘI TRẢI NGHIỆM TUYỆT VỜI</div>
             <div class="title2">ĐỪNG BỎ LỠ!</div>
-            <div class="title3 text-danger mb-2">👉 Bạn có đang lo lắng về việc tìm kiếm thông tin du lịch đáng tin cậy? </div>
-            <div class="title3 text-danger mb-2">👉 Không biết nơi nào ở, ăn gì, hay chơi gì tại Bà Rịa - Vũng Tàu? </div>
-            <div class="title3 text-danger mb-2">👉 Nếu bỏ lỡ các ưu đãi từ Sở Du lịch và các đối tác, bạn có <br>thể <span style="color: black">tốn nhiều</span> chi phí hơn <span style="color: black">và bỏ qua</span> những trải nghiệm độc đáo!</div>
+            <div class="w-100 d-flex justify-content-center mt-2">
+                <div class="con-desc">
+                    <div class="title3 text-danger mb-2">👉 Bạn có đang lo lắng về việc tìm kiếm thông tin du lịch đáng tin cậy? </div>
+                    <div class="title3 text-danger mb-2">👉 Không biết nơi nào ở, ăn gì, hay chơi gì tại Bà Rịa - Vũng Tàu? </div>
+                    <div class="title3 text-danger mb-2">👉 Nếu bỏ lỡ các ưu đãi từ Sở Du lịch và các đối tác, bạn có thể <span style="color: black">tốn nhiều</span> chi phí hơn <span style="color: black">và bỏ qua</span> những trải nghiệm độc đáo!</div>
+                </div>
+            </div>
+            
+            
             <div class="d-flex justify-content-center mt-4">
                 <img style="width: 60px; height: 60px;" src="{{ asset('assets/frontend/images/arrow-right-click-here-animated.gif') }}" alt="Tham gia ngay">
                 <button class="btn-1"><span>THAM GIA NGAY NẾU KHÔNG BỎ LỠ!</span></button>
@@ -197,7 +203,7 @@
                     <div class="resort-card">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 8/5;" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
                             </a>
                         </div>
                         <div class="resort-details">
@@ -206,7 +212,9 @@
                             </div>
                             <div class="discount-info">
                                 <i class="fas fa-tag discount-icon"></i>
-                                {{ $product->promotionThuongMain->description }}
+                                <div class="promotion-description">
+                                    {{ $product->promotionThuongMain->description }}
+                                </div>
                             </div>
                             <div class="countdown-container" 
                                 data-target="{{ $targetDate->toIso8601String() }}" 
@@ -258,7 +266,7 @@
                     <div class="resort-card">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 8/5;" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
                             </a>
                         </div>
                         <div class="resort-details">
@@ -267,7 +275,9 @@
                             </div>
                             <div class="discount-info">
                                 <i class="fas fa-tag discount-icon"></i>
-                                {{ $product->promotionThuongMain->description }}
+                                <div class="promotion-description">
+                                    {{ $product->promotionThuongMain->description }}
+                                </div>
                             </div>
                             <div class="countdown-container" 
                                 data-target="{{ $targetDate->toIso8601String() }}" 
@@ -319,7 +329,7 @@
                     <div class="resort-card">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 8/5;" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
                             </a>
                         </div>
                         <div class="resort-details">
@@ -328,7 +338,9 @@
                             </div>
                             <div class="discount-info">
                                 <i class="fas fa-tag discount-icon"></i>
-                                {{ $product->promotionThuongMain->description }}
+                                <div class="promotion-description">
+                                    {{ $product->promotionThuongMain->description }}
+                                </div>
                             </div>
                             <div class="countdown-container" 
                                 data-target="{{ $targetDate->toIso8601String() }}" 

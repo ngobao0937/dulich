@@ -69,32 +69,32 @@
 }
 
 .item-image {
-	height: 200px;
+	height: 100%;
 	overflow: hidden;
 }
 
 .item-image img {
 	width: 100%;
 	height: 100%;
+	aspect-ratio: 8/5;
 	object-fit: cover;
 }
 
 .item-details {
-	padding: 15px;
+	padding: 10px;
 	background-color: #fff;
 }
 
 .item-title {
 	font-size: 1.2rem;
 	font-weight: 600;
-	margin-bottom: 8px;
 	color: rgb(28, 77, 114);
+	
 }
 
 .item-desc {
 	font-size: 1rem;
 	color: #666;
-	margin-bottom: 10px;
 }
 
 .promotion-badge {
@@ -103,7 +103,7 @@
 	padding: 3px 8px;
 	font-size: 0.8rem;
 	border-radius: 3px;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 	display: inline-block;
 }
 

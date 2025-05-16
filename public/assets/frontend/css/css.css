@@ -1037,9 +1037,9 @@ a{
 }
 
 .resort-image {
-    height: 200px;
     background-size: cover;
     background-position: center;
+    aspect-ratio: 8/5;
 }
 
 .resort-details {
@@ -1148,23 +1148,18 @@ a{
 
 .title1{
     font-weight: bold;
-    -webkit-text-fill-color: unset;
     color: rgb(8, 34, 62);
-    /* font-size: 35px; */
-	font-size: clamp(25px, 4vw, 35px);
+	font-size: clamp(22px, 4vw, 35px);
 }
 .title2{
 	margin: 0px;
     font-weight: bold;
-    -webkit-text-fill-color: unset;
     color: rgb(28, 77, 114);
-    /* font-size: 51px; */
-	font-size: clamp(35px, 4vw, 51px);
+	font-size: clamp(30px, 4vw, 51px);
 }
 .title3{
-    font-size: 19px;
+    font-size: clamp(16px, 4vw, 19px);
     font-weight: bold;
-    -webkit-text-fill-color: unset;
 }
 
 .btn-1{
@@ -1358,12 +1353,6 @@ a{
     color: rgb(255, 255, 255);
 }
 
-@media screen and (max-width: 767px) {
-	.logo-footer-c{
-		display: none;
-	}
-}
-
 .mobile-sidebar {
     position: fixed;
     top: 0;
@@ -1405,7 +1394,29 @@ a{
 .overlay-sidebar.show {
     display: block;
 }
+.promotion-description, .item-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5em;
+    max-height: 3em;
+}
 
+.con-desc{
+    max-width: 650px;
+    text-align: left !important;
+}
+
+@media screen and (max-width: 767px) {
+	.logo-footer-c{
+		display: none;
+	}
+    .con-desc{
+        max-width: 100%;
+    }
+}
 
 @media screen and (max-width: 991.20px) {
 	.title-sodl{
@@ -1418,6 +1429,9 @@ a{
 		padding-right: 1em;
 	}
 }
+
+
+
 
 
 

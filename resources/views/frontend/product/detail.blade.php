@@ -132,7 +132,9 @@
                             <div class="resort-name">{{ $promotion->name }}</div>
                             <div class="discount-info">
                                 <i class="fas fa-tag discount-icon"></i>
-                                {{ $promotion->description }}
+                                <div class="promotion-description">
+                                    {{ $promotion->description }}
+                                </div>
                             </div>
                             <div class="countdown-container" 
                                 data-target="{{ $targetDate->toIso8601String() }}" 
@@ -183,7 +185,9 @@
                             <div class="room-price">{{ $promotion->price ? number_format($promotion->price, 0, ',', '.') . ' VNĐ/đêm' : '' }} </div>
                             <div class="discount-info">
                                 <i class="fas fa-tag discount-icon"></i>
-                                {!! $promotion->description !!}
+                                <div class="promotion-description">
+                                    {!! $promotion->description !!}
+                                </div>
                             </div>
                             <div class="room-price" style="color: green; font-size: 14px;">{{ $promotion->tagline }} </div>
 
