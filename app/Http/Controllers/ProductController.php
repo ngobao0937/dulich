@@ -311,7 +311,7 @@ class ProductController extends Controller
 
     public function promotions(Request $request)
     {
-        $banners = Banner::where('type', 'main')
+        $banners = Banner::where('type', 'promotion')
             ->orderBy('position', 'asc')
             ->where('active', 1)
             ->get();

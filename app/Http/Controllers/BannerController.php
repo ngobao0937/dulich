@@ -23,7 +23,11 @@ class BannerController extends Controller
             });
         }
 
-        $banners = $query->where('type', 'main')->orderby('position', 'asc')->paginate(20);
+        $banners = $query
+				->whereIn('type', ['main', 'event', 'promotion', 'blog'])
+				->orderByRaw("FIELD(type, 'main', 'event', 'promotion', 'blog')")
+				->orderBy('position', 'asc')
+				->paginate(20);
 
         return view('backend.banner.index', compact('banners'));
     }
@@ -73,7 +77,7 @@ class BannerController extends Controller
 			SaveImage($request, $obj->id, 'banner', 'picture', 100);
 		}
 
-		if($request->type != 'main'){
+		if($request->type != 'main' && $request->type != 'promotion' && $request->type != 'event' && $request->type != 'blog'){
 			$html = view('backend.product.banner_row', ['banner' => $obj])->render();
 
 			return response()->json([

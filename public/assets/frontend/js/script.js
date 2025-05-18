@@ -85,4 +85,125 @@ document.addEventListener('DOMContentLoaded', function () {
 
     closeBtn.addEventListener('click', closeSidebar);
     overlay.addEventListener('click', closeSidebar);
+
+    $('#customerForm').validate({
+        errorElement: 'div',
+        errorClass: 'invalid-feedback',
+        highlight: function (element) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element) {
+            $(element).removeClass('is-invalid');
+        },
+        rules: {
+            name: {
+                required: true,
+                maxlength: 50
+            },
+            email: {
+                required: true,
+                email: true,
+                maxlength: 50
+            },
+            phone: {
+                required: true,
+                maxlength: 20
+            },
+            content: {
+                maxlength: 200
+            },
+            agree: {
+                required: true
+            }
+        },
+        messages: {
+            name: {
+                required: "Vui lòng nhập họ tên",
+                maxlength: "Họ tên không được vượt quá 50 ký tự"
+            },
+            email: {
+                required: "Vui lòng nhập email",
+                email: "Email không đúng định dạng",
+                maxlength: "Email không được vượt quá 50 ký tự"
+            },
+            phone: {
+                required: "Vui lòng nhập số điện thoại",
+                maxlength: "Số điện thoại không được vượt quá 20 ký tự"
+            },
+            content: {
+                maxlength: "Lời nhắn không được vượt quá 200 ký tự"
+            },
+            agree: {
+                required: "Bạn phải đồng ý với Điều khoản dịch vụ"
+            }
+        },
+        errorPlacement: function (error, element) {
+            if (element.attr("type") === "checkbox") {
+                error.insertAfter(element.closest('.icheck-primary'));
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+
+    $('#registerForm').validate({
+        errorElement: 'div',
+        errorClass: 'invalid-feedback-re',
+        highlight: function (element) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element) {
+            $(element).removeClass('is-invalid');
+        },
+        rules: {
+            name: {
+                required: true,
+                maxlength: 50
+            },
+            email: {
+                required: true,
+                email: true,
+                maxlength: 50
+            },
+            phone: {
+                required: true,
+                maxlength: 20
+            },
+            content: {
+                maxlength: 200
+            },
+            agree: {
+                required: true
+            }
+        },
+        messages: {
+            name: {
+                required: "Vui lòng nhập họ tên",
+                maxlength: "Họ tên tối đa 50 ký tự"
+            },
+            email: {
+                required: "Vui lòng nhập email",
+                email: "Email không hợp lệ",
+                maxlength: "Email tối đa 50 ký tự"
+            },
+            phone: {
+                required: "Vui lòng nhập số điện thoại",
+                maxlength: "Số điện thoại tối đa 20 ký tự"
+            },
+            content: {
+                maxlength: "Lời nhắn tối đa 200 ký tự"
+            },
+            agree: {
+                required: "Bạn phải đồng ý với Điều khoản dịch vụ"
+            }
+        },
+        errorPlacement: function (error, element) {
+            if (element.attr("type") === "checkbox") {
+                error.insertAfter(element.closest('.icheck-primary'));
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+
 });

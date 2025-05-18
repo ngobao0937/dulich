@@ -111,57 +111,57 @@
     });
 
     $('#picture').on('change', function(event) {
-    var file = event.target.files[0];
-    if (file) {
-        var fileType = file.type;
+        var file = event.target.files[0];
+        if (file) {
+            var fileType = file.type;
 
-        if (fileType.startsWith('image/')) {
-            // Nếu là ảnh
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#imagePreview').attr('src', e.target.result);
-                $('#removeIcon').show();
-            };
-            reader.readAsDataURL(file);
-        } else if (fileType.startsWith('video/')) {
-            // Nếu là video
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                var video = document.createElement('video');
-                video.preload = 'metadata';
-                video.muted = true;
-                video.src = e.target.result;
-                video.playsInline = true;
-
-                // Load metadata trước để biết duration
-                video.onloadedmetadata = function() {
-                    // Nếu video dài hơn 1s thì seek đến 1s
-                    var seekTime = Math.min(1, video.duration / 2);
-
-                    video.currentTime = seekTime;
-                };
-
-                // Khi seek xong
-                video.onseeked = function() {
-                    var canvas = document.createElement('canvas');
-                    canvas.width = video.videoWidth;
-                    canvas.height = video.videoHeight;
-
-                    var ctx = canvas.getContext('2d');
-                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                    var thumbnail = canvas.toDataURL('image/png');
-                    $('#imagePreview').attr('src', thumbnail);
+            if (fileType.startsWith('image/')) {
+                // Nếu là ảnh
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#imagePreview').attr('src', e.target.result);
                     $('#removeIcon').show();
-
-                    // Clean up
-                    video.remove();
                 };
-            };
-            reader.readAsDataURL(file);
+                reader.readAsDataURL(file);
+            } else if (fileType.startsWith('video/')) {
+                // Nếu là video
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var video = document.createElement('video');
+                    video.preload = 'metadata';
+                    video.muted = true;
+                    video.src = e.target.result;
+                    video.playsInline = true;
+
+                    // Load metadata trước để biết duration
+                    video.onloadedmetadata = function() {
+                        // Nếu video dài hơn 1s thì seek đến 1s
+                        var seekTime = Math.min(1, video.duration / 2);
+
+                        video.currentTime = seekTime;
+                    };
+
+                    // Khi seek xong
+                    video.onseeked = function() {
+                        var canvas = document.createElement('canvas');
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+
+                        var ctx = canvas.getContext('2d');
+                        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                        var thumbnail = canvas.toDataURL('image/png');
+                        $('#imagePreview').attr('src', thumbnail);
+                        $('#removeIcon').show();
+
+                        // Clean up
+                        video.remove();
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
         }
-    }
-});
+    });
 
     $('#removeIcon').on('click', function() {
         $('#picture').val('');

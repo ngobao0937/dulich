@@ -25,9 +25,8 @@
                     <thead class="thead-light">
                         <tr class="table-bg">
                             <th style="width: 60px;">#</th>
-                            <th>Họ tên</th>
-                            <th>Email</th>
-                            <th>Điện thoại</th>
+                            <th style="width: 250px">Thông tin</th>
+                            <th>Nội dung</th>
                             <th style="width: 150px;">Ngày đăng ký</th>
                             <th style="width: 100px;">Hành động</th>
                         </tr>
@@ -40,10 +39,11 @@
                         <tr>
                             <td><?php echo $i++; ?></td>
                             <td>
-                                {{ $customer->name }}
+                                {{ $customer->name }} <br>
+                                {{ $customer->email }} <br>
+                                {{ $customer->phone }}
                             </td>
-                            <td>{{ $customer->email }}</td>
-                            <td>{{ $customer->phone }}</td>
+                            <td>{{ $customer->content }}</td>
                             <td>{{ \Carbon\Carbon::parse($customer->created_at)->format('d/m/Y H:i') }}</td>
                             <td class="text-center">
                                 {{-- <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#customerModal" onclick="alertCustomer({{ $customer->id }})">

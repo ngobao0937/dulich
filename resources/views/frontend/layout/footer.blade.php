@@ -19,16 +19,14 @@
                 </div>
                 <div class="col-md-3">
                     <div class="title-follow-white mb-2">FOLLOW US</div>
-                    <div >
-                        <a href="#" style="width: 40px; margin-right: 10px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 18 18">
-                                <foreignObject x="0" y="0" width="18" height="18"><i class="fab     fa-facebook" style="font-size: 18px; color: rgb(255, 255, 255); cursor: pointer;"></i></foreignObject>
-                            </svg>
+                    <div class="d-flex">
+                        <a href="#" style="width: 40px; margin-right: 10px; display: block; padding-bottom: 10px">
+                            <i class="fab fa-facebook" style="color: #ffffff; font-size: 40px;"></i>
                         </a>
-                        <a href="#" style="width: 40px;  margin-right: 10px;">
+                        <a href="#" style="width: 40px; margin-right: 10px; display: block">
                             <img class="w-100" src="{{ asset('assets/frontend/images/icon-zalo9.png') }}" alt="zalo">
                         </a>
-                        <a href="#" style="width: 40px">
+                        <a href="#" style="width: 40px; display: block">
                             <img class="w-100" src="{{ asset('assets/frontend/images/tiktok.png') }}" alt="tiktok">
                         </a>
                         

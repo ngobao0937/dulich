@@ -26,16 +26,17 @@
     <link rel="stylesheet" href="{{ auto_version('assets/frontend/lib/swiper/swiper-bundle.min.css') }}">
     <link rel="stylesheet" href="{{ auto_version('assets/backend/plugins/fontawesome-free/css/all.min.css') }}">
 
-    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/light.min.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/light.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/solid.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/brands.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/regular.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/duotone.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/duotone.min.css') }}"> --}}
     {{-- <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/animate.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/animate_text.css') }}"> --}}
 
-    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/fontawesome.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/reset_css.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/fontawesome.css') }}"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{ auto_version('assets/frontend/css/reset_css.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('assets/backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 
     {{-- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,700|Montserrat:300,700|Montserrat:300,700|Montserrat:300,700|Roboto Slab:300,700|Montserrat:300,700|Montserrat:300,700|Montserrat:300,700|Tinos:300,700|Oswald:300,700|Sriracha|Paytone One:300,700|Lobster:300,700|Dancing Script:300,700|Play:300,700|Literata:300,700|Roboto:300,700|Roboto:300,700|Roboto:300,700|Roboto:300,700|Roboto:300,700|Roboto:300,700|Roboto:300,700|"> --}}
     @yield('styles')

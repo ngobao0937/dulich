@@ -53,13 +53,14 @@
                 <a class="nav-link text-white" href="/" style="font-weight: bold;">TRANG CHỦ</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#" style="font-weight: bold;">SỰ KIỆN DU LỊCH</a>
+                <a class="nav-link text-white" href="{{ route('frontend.home.event') }}" style="font-weight: bold;">SỰ KIỆN DU LỊCH</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('frontend.product.promotions') }}" style="font-weight: bold;">KHUYẾN MÃI & ƯU ĐÃI</a>
             </li>
             <li class="nav-item ml-lg-3">
-                <a href="#" class="btn pl-3 pr-3" style="background: white; border-radius: 20px;"><b style="color: rgb(28, 77, 114);">ĐĂNG KÝ</b></a>
+                {{-- <button onclick="openPopup()" class="btn pl-3 pr-3" style="background: white; border-radius: 20px;"><b style="color: rgb(28, 77, 114);">ĐĂNG KÝ</b></button> --}}
+                <a data-toggle="modal" data-target="#myModal" class="btn pl-3 pr-3" style="background: white; border-radius: 20px;"><b style="color: rgb(28, 77, 114);">ĐĂNG KÝ</b></a>
             </li>
         </ul>
     </nav>
@@ -69,9 +70,9 @@
             <button id="sidebarClose" class="close-btn">&times;</button>
             <ul class="list-unstyled mt-4">
                 <li><a class="text-white d-block py-2" href="/" style="font-weight: bold;">TRANG CHỦ</a></li>
-                <li><a class="text-white d-block py-2" href="#" style="font-weight: bold;">SỰ KIỆN DU LỊCH</a></li>
+                <li><a class="text-white d-block py-2" href="{{ route('frontend.home.event') }}" style="font-weight: bold;">SỰ KIỆN DU LỊCH</a></li>
                 <li><a class="text-white d-block py-2" href="{{ route('frontend.product.promotions') }}" style="font-weight: bold;">KHUYẾN MÃI & ƯU ĐÃI</a></li>
-                <li><a class="btn pl-3 pr-3 mt-3" href="#" style="background: white; border-radius: 20px;"><b style="color: rgb(28, 77, 114);">ĐĂNG KÝ</b></a></li>
+                <li><a class="btn pl-3 pr-3 mt-3" data-toggle="modal" data-target="#myModal" style="background: white; border-radius: 20px;"><b style="color: rgb(28, 77, 114);">ĐĂNG KÝ</b></a></li>
             </ul>
         </div>
     </div>

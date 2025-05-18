@@ -28,7 +28,7 @@
                             <th style="width: 60px;">#</th>
                             <th style="width: 90px;">Hình ảnh</th>
                             <th>Tên Banner</th>
-                            <th>Link</th>
+                            <th style="width: 200px;">Thuộc trang</th>
                             <th style="width: 100px;">Thứ tự</th>
                             <th style="width: 100px;">Trạng thái</th>
                             <th style="width: 100px;">Hành động</th>
@@ -46,30 +46,24 @@
                                 <div style="background: #ededed  url('{{$banner->image ? 'https://s3-hcm-r1.longvan.net/kaholding/'.$banner->image->ten : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
                             </td> --}}
                             <td>
-                                @php
-                                    $isVideo = false;
-                                    if ($banner->image) {
-                                        $extension = pathinfo($banner->image->ten, PATHINFO_EXTENSION);
-                                        $isVideo = in_array(strtolower($extension), ['mp4', 'mov', 'avi', 'wmv', 'webm']);
-                                    }
-                                @endphp
-                            
-                                @if ($isVideo)
-                                    <video src="{{ asset('uploads/' . $banner->image->ten) }}" 
-                                        muted 
-                                        preload="metadata" 
-                                        style="background: #ededed; object-fit: contain; width: 100%;height: 30px;">
-                                    </video>
-                                @else
-                                    <div style="background: #ededed url('{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}') no-repeat center center; background-size: contain; width: 100%;height: 30px;">
-                                    </div>
-                                @endif
+                                <div style="background: #ededed url('{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}') no-repeat center center; background-size: contain; width: 100%;height: 30px;">
+                                </div>
                             </td>
                             
                             <td>
                                 {{ $banner->name }}
                             </td>
-                            <td>{{ $banner->link ? $banner->link : '#' }}</td>
+                            <td>
+                                @if ($banner->type == 'main')
+                                    Trang chủ
+                                @elseif ($banner->type == 'event')
+                                    Trang sự kiện
+                                @elseif ($banner->type == 'promotion')
+                                    Trang ưu đãi
+                                @elseif ($banner->type == 'blog')
+                                    Trang blog
+                                @endif
+                            </td>
                             <td>{{ $banner->position }}</td>
                             <td class="text-center">
                                 @if ($banner->active != 1)
@@ -119,6 +113,7 @@
         $('#id').val('');
         $('#name').val('');
         $('#position').val('');
+        $('#type').val('main');
         $('#link').val('');
         $('#active').prop('checked', false);
         $('#picture').val('');
@@ -132,6 +127,7 @@
                 $('#id').val(data.banner.id);
                 $('#name').val(data.banner.name ?? '');
                 $('#position').val(data.banner.position ?? '');
+                $('#type').val(data.banner.type ?? 'main');
                 $('#link').val(data.banner.link ?? '');
                 if(data.banner.active == 1){
                     $('#active').prop('checked', true);

@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Banner;
+use App\Models\Blog;
 use App\Models\Page;
 use App\Models\Product;
 use App\Models\Menu;
 use App\Models\Contact;
+use App\Models\Event;
 use Mews\Captcha\Facades\Captcha;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -45,16 +48,82 @@ class HomeController extends Controller
             ->take(5)
             ->get();
 
-        $menus_public = Menu::where('active', 1)->where('public', 1)->get();
-        $trang_chu = Page::find(10000);
-        $banner_trangchu = Banner::find(10000);
         $banners = Banner::where('type', 'main')->orderby('position', 'asc')->where('active', 1)->get();
+
+        $blogs = Blog::where('active', 1)->orderby('id', 'desc')->take(3)->get();
         return view('frontend.home.index', [
-            // 'products' => $products,
-            'menus_public' => $menus_public,
-            'trang_chu' => $trang_chu,
-            'banner_trangchu' => $banner_trangchu,
             'banners' => $banners,
+            'blogs' => $blogs,
+            'products_KS' => $products_KS,
+            'products_NH' => $products_NH,
+            'products_KVC' => $products_KVC
+        ]);
+    }
+
+    public function event(Request $request){
+        $query = Event::query();
+        $types = $request->input('loai', ['now', 'coming']);
+
+        $now = Carbon::now();
+
+        $query->where(function ($q) use ($types, $now) {
+            foreach ($types as $type) {
+                if ($type === 'coming') {
+                    $q->orWhere('date_start', '>', $now);
+                }
+
+                if ($type === 'now') {
+                    $q->orWhere(function ($q2) use ($now) {
+                        $q2->where('date_start', '<=', $now)
+                            ->where('date_end', '>=', $now);
+                    });
+                }
+
+                if ($type === 'end') {
+                    $q->orWhere('date_end', '<', $now);
+                }
+            }
+        });
+
+        $events = $query->where('active', 1)->orderby('id', 'desc')->paginate(10);
+
+        $banners = Banner::where('type', 'event')->orderby('position', 'asc')->where('active', 1)->get();
+
+        // $events = Event::where('active', 1)->orderby('id', 'desc')->paginate(10);
+
+        $products_KS = Product::where('active', 1)
+            ->where('isdelete', 0)
+            ->whereHas('menus', function ($query) {
+                $query->where('menus.id', 10000);
+            })
+            ->whereHas('promotionThuongMain')
+            ->orderBy('id', 'desc')
+            ->take(5)
+            ->get();
+
+        $products_NH = Product::where('active', 1)
+            ->where('isdelete', 0)
+            ->whereHas('menus', function ($query) {
+                $query->where('menus.id', 10001);
+            })
+            ->whereHas('promotionThuongMain')
+            ->orderBy('id', 'desc')
+            ->take(5)
+            ->get();
+
+        $products_KVC = Product::where('active', 1)
+            ->where('isdelete', 0)
+            ->whereHas('menus', function ($query) {
+                $query->where('menus.id', 10002);
+            })
+            ->whereHas('promotionThuongMain')
+            ->orderBy('id', 'desc')
+            ->take(5)
+            ->get();
+
+        return view('frontend.home.event', [
+            'banners' => $banners,
+            'events' => $events,
             'products_KS' => $products_KS,
             'products_NH' => $products_NH,
             'products_KVC' => $products_KVC

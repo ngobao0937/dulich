@@ -8,13 +8,6 @@
                 <div class="swiper-slide">
                     <div class="position-relative">
                         <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 21/9;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->name }}">
-                        
-                        {{-- <div id="TITLE360" style="z-index: 2">
-                            <h3>{{ $banner->name }}</h3>
-                        </div>
-                        <div id="PARAGRAPH26" style="z-index: 2">
-                            <p>{{ $banner->description }}</p>
-                        </div> --}}
                     </div>
                     <div class="overlay d-flex align-items-center" style="border-radius: 0;">
                         <div class="text-white container">
@@ -38,13 +31,13 @@
             <div class="col-md-6 mb-3">
                 <div class="title-welcome">Chào mừng đến với</div>
                 <div class="title155">{{ $product->name }}</div>
-                <div><i class=" far  fa-map-marker-alt" style="font-size: 18px; color: rgb(51, 51, 51); cursor: pointer;"></i> <b>Vị trí địa lý:</b></div>
+                <div><i class="fas fa-map-marker-alt" style="font-size: 18px; color: rgb(51, 51, 51);"></i> <b>Vị trí địa lý:</b></div>
                 <div><b>- Địa chỉ:</b> {{ $product->address }}</div>
                 <div><b>- Vị trí & Điểm tham quan gần:</b></div>
                 <div class="ml-4">{!! $product->location !!}</div>
-                <div><i class=" far  fa-user-headset" style="font-size: 18px; color: rgb(51, 51, 51); cursor: pointer;"></i> <b>Hotline:</b> {{ $product->hotline }}</div>
-                <div><i class=" far  fa-at" style="font-size: 18px; color: rgb(51, 51, 51); cursor: pointer;"></i> <b>Email: </b> {{ $product->email }}</div>
-                <div><i class=" far  fa-browser" style="font-size: 18px; color: rgb(51, 51, 51); cursor: pointer;"></i> <b>Website:</b> {{ $product->website }}</div>
+                <div><i class=" fas  fa-headset" style="font-size: 18px; color: rgb(51, 51, 51);"></i> <b>Hotline:</b> {{ $product->hotline }}</div>
+                <div><i class=" fas  fa-envelope" style="font-size: 18px; color: rgb(51, 51, 51);"></i> <b>Email: </b> {{ $product->email }}</div>
+                <div><i class=" far  fa-window-maximize" style="font-size: 18px; color: rgb(51, 51, 51);"></i> <b>Website:</b> {{ $product->website }}</div>
             </div>
         </div>
         <div class="row">
@@ -146,7 +139,7 @@
                                 <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Phút</div></div>
                                 <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giây</div></div>
                             </div>
-                            <button class="btn-get-offer" onclick="openPopup()">Nhận ưu đãi</button>
+                            <button class="btn-get-offer" data-toggle="modal" data-target="#myModal">Nhận ưu đãi</button>
                         </div>
                     </div>
                 </div>
@@ -193,7 +186,7 @@
 
                             
                             <div class="d-flex justify-content-between mt-3">
-                                <button class="btn-get-offer" style="width: fit-content;"  onclick="{{ $isComing ? '' : 'openPopup()' }}">{{ $isComing ? 'Sắp có sau' : 'Nhận ưu đãi' }}</button>
+                                <button class="btn-get-offer" style="width: fit-content;" @if(!$isComing) data-toggle="modal" data-target="#myModal" @endif>{{ $isComing ? 'Sắp có sau' : 'Nhận ưu đãi' }}</button>
                                 <div class="countdown-container"  
                                     data-target="{{ $targetDate->toIso8601String() }}" 
                                     data-mode="{{ $isComing ? 'coming' : 'expiring' }}" style="margin: 0;">                                    
@@ -225,6 +218,100 @@
     </iframe>
 
 </section>
+
+<div class="container pt-4 pb-4">
+    <div class="title-blue mb-3">PHẢN HỒI</div>
+    <div class="d-flex align-items-center">
+        <div style="font-weight: bold; font-size: 19px; margin-right: 5px;">Đánh giá chung: </div>
+                
+        <div class="rating" style="height: 48px">
+            <input type="radio" {{ $product->average_rating == 5 ? 'checked' : '' }} disabled>
+            <label style="cursor: inherit;"></label>
+            <input type="radio" {{ $product->average_rating == 4 ? 'checked' : '' }} disabled>
+            <label style="cursor: inherit;"></label>
+            <input type="radio" {{ $product->average_rating == 3 ? 'checked' : '' }} disabled>
+            <label style="cursor: inherit;"></label>
+            <input type="radio" {{ $product->average_rating == 2 ? 'checked' : '' }} disabled>
+            <label style="cursor: inherit;"></label>
+            <input type="radio" {{ $product->average_rating == 1 ? 'checked' : '' }} disabled>
+            <label style="cursor: inherit;"></label>
+        </div>
+    </div>
+
+    @foreach ($product->approvedComments()->get() as $comment)
+        <div class="w-100 mb-3" style="border-radius: 5px; border: 1px solid gainsboro; padding: 10px">
+            <div class="d-flex">
+                <div class="mr-3">
+                    <div class="w-100 d-flex justify-content-center">
+                        <img style="width: 60px; aspect-ratio: 1/1; border-radius: 50%" src="{{ asset('assets/frontend/images/duong-mai-linh.jpg') }}" alt="user">
+
+                    </div>
+                    
+                </div>
+                <div>
+                    <div class="d-flex align-items-center">
+                        <span style="font-weight: bold; font-size: 18px;">{{ $comment->name }}</span>
+
+                        <div class="d-flex justify-content-center" style="width: 100px; height: 30px;">
+                            <div class="ratingCmt">
+                                <input type="radio" {{ $comment->rating == 5 ? 'checked' : '' }} disabled>
+                                <label></label>
+                                <input type="radio" {{ $comment->rating == 4 ? 'checked' : '' }} disabled>
+                                <label></label>
+                                <input type="radio" {{ $comment->rating == 3 ? 'checked' : '' }} disabled>
+                                <label></label>
+                                <input type="radio" {{ $comment->rating == 2 ? 'checked' : '' }} disabled>
+                                <label></label>
+                                <input type="radio" {{ $comment->rating == 1 ? 'checked' : '' }} disabled>
+                                <label></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-1" style="font-size: 16px;">
+                        {{ $comment->content }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    
+
+    
+
+    <form action="{{ route('frontend.comment.store') }}" method="POST" id="commentForm"> 
+        @csrf
+        <input type="hidden" name="product_fk" value="{{ $product->id }}">
+        <div class="d-flex align-items-center">
+            <div style="font-weight: bold; font-size: 19px; margin-right: 5px;">Đánh giá của bạn: </div>
+            
+            <div class="rating mr-3" style="height: 48px">
+                <input value="5" name="rating" id="star5" type="radio">
+                <label for="star5"></label>
+                <input value="4" name="rating" id="star4" type="radio">
+                <label for="star4"></label>
+                <input value="3" name="rating" id="star3" type="radio">
+                <label for="star3"></label>
+                <input value="2" name="rating" id="star2" type="radio">
+                <label for="star2"></label>
+                <input value="1" name="rating" id="star1" type="radio">
+                <label for="star1"></label>
+            </div>
+
+            <div class="rating-error"></div>
+        </div>
+        
+        <div class="form-group">
+            <textarea name="content" class="form-control" placeholder="Để lại cảm nhận của bạn cho chúng tôi (tối đa 300 ký tự)" rows="3" maxlength="300" minlength="10" required></textarea>
+        </div>
+        <div class="form-group">
+            <input type="text" name="name" class="form-control" placeholder="Họ tên của bạn" maxlength="50" minlength="2" required>
+        </div>
+        <button type="submit" class="btn btn-dark-blue w-100">GỬI PHẢN HỒI</button>
+    </form>
+
+</div>
 
 <div id="customGalleryModal" class="custom-modal">
     <div class="custom-modal-content">
@@ -302,6 +389,57 @@
             pagination: false,
             navigation: false,
         });
+
+        $('#commentForm').validate({
+            ignore: [],
+            rules: {
+                rating: {
+                    required: true
+                },
+                content: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 300
+                },
+                name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 50
+                }
+            },
+            messages: {
+                rating: {
+                    required: "Vui lòng chọn đánh giá sao."
+                },
+                content: {
+                    required: "Vui lòng nhập nội dung phản hồi.",
+                    minlength: "Nội dung phải có ít nhất 10 ký tự.",
+                    maxlength: "Nội dung không được vượt quá 300 ký tự."
+                },
+                name: {
+                    required: "Vui lòng nhập họ tên.",
+                    minlength: "Họ tên phải có ít nhất 2 ký tự.",
+                    maxlength: "Họ tên không được vượt quá 50 ký tự."
+                }
+            },
+            errorElement: 'div',
+            errorClass: 'text-danger',
+            highlight: function(element) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid');
+            },
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "rating") {
+                    error.appendTo(".rating-error");
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+
+
     });
 </script>
 

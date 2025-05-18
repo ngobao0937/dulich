@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -93,6 +94,23 @@ class Product extends Model
 			->where('type', 2)
 			->where('isdelete', 0)
 			->where('position', 1);
+	}
+
+	public function approvedComments()
+	{
+		return $this->hasMany('App\Models\Comment', 'product_fk')
+					->where('active', 1);
+	}
+
+	public function getAverageRatingAttribute()
+	{
+		$average = $this->approvedComments()->avg('rating');
+		return $average ? round($average) : 0;
+	}
+
+	public function approvedCommentsCount()
+	{
+		return $this->approvedComments()->count();
 	}
 
 }

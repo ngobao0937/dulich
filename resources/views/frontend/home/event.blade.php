@@ -1,862 +1,412 @@
 @extends('frontend.layout.app')
 @section('title', 'Sự kiện')
 @section('content')
-<section id="SECTION3">
-    <div class="sp_container">
-        <div id="GROUP2">
-            <div>
-                <div id="TITLE9">
-                    <h3>Khám phá Bà Rịa - Vũng Tàu với ưu đãi ngập tràn!<br>Sự kiện hiện tại của VT</h3>
-                </div>
-                <div id="TITLE10">
-                    <h3>Một số mô tả về sự kiện. Ví dụ vân vân mây mây gì đấy, đại đại. Nói chung là nhỏ xíu</h3>
-                </div>
-                <div id="BUTTON2" class="event_scoll_action" data_topoffset="633" style="cursor: pointer;"><button type="button" data-funnel="yes"> <span> Đăng ký ngay!</span> </button></div>
-                <div id="BUTTON3"><button type="button" data-funnel="yes"> <span>  Tìm hiểu thêm</span> </button></div>
+<div class="swiper bannerSwiper" style="width: 100%;">
+    <div class="swiper-wrapper">
+        @foreach ($banners as $banner)
+            <div class="swiper-slide">
+                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 8/5;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->name }}">
             </div>
+        @endforeach
+    </div>
+</div>
+
+<div class="w-100" style="background: rgba(28, 77, 114, 0.1)">
+    <div class="container pt-4">
+        <div class="title-blue mb-3">LỊCH TRÌNH SỰ KIỆN</div>
+        <button class="btn btn-default mb-3" data-toggle="modal" data-target="#typeModal" style="color: rgb(28, 77, 114); font-size: clamp(17px, 4vw, 18px); font-weight: bold; background: white; border-radius: 7px; padding: 5px 10px"><i class="fas fa-list"></i> Các sự kiện đang / sắp diễn ra</button>
+        
+        @foreach ($events as $event)
+            @php
+                $startDate = \Carbon\Carbon::parse($event->date_start);
+                $endDate = \Carbon\Carbon::parse($event->date_end);
+                $now = \Carbon\Carbon::now();
+                $isComing = $now->lt($startDate);
+                $targetDate = $isComing ? $startDate : $endDate;
+            @endphp
+            <div class="w-100 mb-3" style="background: white; padding: 15px 15px 0 15px; border-radius: 7px;">
+                <div class="row">
+                    <div class="col-md-3" style="margin-bottom: 15px">
+                        <img class="w-100" style="aspect-ratio: 4/3; border-radius: 5px;" src="{{ $event->image ? asset('uploads/'.$event->image->ten) : asset('assets/frontend/images/event-photo.jpg') }}" alt="event">
+                    </div>
+                    <div class="col-md-9" style="margin-bottom: 15px">
+                        <div class="mb-2" style="background: rgba(28, 77, 114, 0.1); color: rgb(28, 77, 114); width: fit-content; padding: 5px; border-radius: 5px">
+                            <i class="far fa-clock"></i> {{ $event->time_start }} - {{ $event->time_end }}
+                            <span class="ml-3 mr-3" style="height: 100%; border-right: 2px solid rgb(28, 77, 114)"></span>
+                            <i class="far fa-calendar-alt"></i> {{ $event->date_range }}
+                            <span class="ml-3 mr-3" style="height: 100%; border-right: 2px solid rgb(28, 77, 114)"></span>
+                            <i class="fas fa-map-marker-alt"></i> {{ $event->address }}
+                        </div>
+                        <div class="title-blue text-left mb-1" style="font-size: clamp(22px, 4vw, 26px);">{{ $event->name }}</div>
+                        <div class="mb-2 line-clamp-3" style="color: rgb(28, 77, 114); min-height: 4em;">
+                            {{ $event->description }}
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{{ $event->link ?? '#' }}" target="_blank" class="btn btn-dark-blue" style="width: fit-content; height: fit-content;">Chi tiết sự kiện</a>
+                            <div class="countdown-event-container" data-start="{{ $startDate->toIso8601String() }}" data-end="{{ $endDate->toIso8601String() }}">
+                                <div class="countdown-event-box">
+                                    <div class="countdown-event-value">00</div>
+                                    <div class="countdown-event-label">Ngày</div>
+                                </div>
+                                <div class="countdown-event-box">
+                                    <div class="countdown-event-value">00</div>
+                                    <div class="countdown-event-label">Giờ</div>
+                                </div>
+                                <div class="countdown-event-box">
+                                    <div class="countdown-event-value">00</div>
+                                    <div class="countdown-event-label">Phút</div>
+                                </div>
+                                <div class="countdown-event-box">
+                                    <div class="countdown-event-value">00</div>
+                                    <div class="countdown-event-label">Giây</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        @endforeach
+
+        <div class="justify-content-center d-flex mt-4">
+            {{ $events->links('pagination::bootstrap-4') }}
         </div>
-        <div id="GROUP14">
-            <div>
-                <div id="GROUP3">
-                    <div>
-                        <div id="BOX1">
-                            <div></div>
+            
+    </div>
+</div>
+
+<section class="w-100" class="promotion_section">
+    <div class="container pt-5">
+        <h1 class="title-blue mb-3">ƯU ĐÃI KHÁCH SẠN</h1>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="special-offer-card" style="background-image: url({{ asset('assets/frontend/images/uudai-bg.png') }});">
+                    <div class="special-overlay"></div>
+                    <div class="special-offer-overlay">
+                        <div class="special-offer-title">Ưu đãi đặc biệt</div>
+                        <div class="special-offer-description">Những ngày cuối khuyến mãi độc quyền cho ưu đãi khách sạn!</div>
+                        <a class="btn-view-offer" href="{{ route('frontend.product.promotions') }}">Khám phá ngay</a>
+                    </div>
+                </div>
+            </div>
+            
+            @foreach ($products_KS as $product)
+                @php
+                    $startDate = \Carbon\Carbon::parse($product->promotionThuongMain->start_date);
+                    $endDate = $startDate->copy()->addDays($product->promotionThuongMain->end_in);
+                    $now = \Carbon\Carbon::now();
+                    $isComing = $now->lt($startDate);
+                    $targetDate = $isComing ? $startDate : $endDate;
+                @endphp
+                <div class="col-md-4 mb-4">
+                    
+                    <div class="resort-card">
+                        <div class="resort-image">
+                            <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100 h-100">
+                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 8/5;" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
+                            </a>
                         </div>
-                        <div id="TITLE11">
-                            <h3>103</h3>
-                        </div>
-                        <div id="TITLE12">
-                            <h3>Ngày</h3>
+                        <div class="resort-details">
+                            <div class="resort-name">
+                                <a style="color: unset;" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">{{ $product->promotionThuongMain->name }}</a>
+                            </div>
+                            <div class="discount-info">
+                                <i class="fas fa-tag discount-icon"></i>
+                                <div class="promotion-description">
+                                    {{ $product->promotionThuongMain->description }}
+                                </div>
+                            </div>
+                            <div class="countdown-container" 
+                                data-target="{{ $targetDate->toIso8601String() }}" 
+                                data-mode="{{ $isComing ? 'coming' : 'expiring' }}">
+                                <div class="mr-2 mt-1">{{ $isComing ? 'Có sau:' : 'Hết hạn:' }}</div>
+                                
+                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Ngày</div></div>
+                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giờ</div></div>
+                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Phút</div></div>
+                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giây</div></div>
+                            </div>
+                            <a class="btn-get-offer" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">Nhận ưu đãi</a>
                         </div>
                     </div>
                 </div>
-                <div id="GROUP11">
-                    <div>
-                        <div id="BOX6">
-                            <div></div>
+            @endforeach
+            
+        </div>
+        
+        <a class="btn-view-more" href="{{ route('frontend.product.promotions') }}">Xem thêm về các ưu đãi</a>
+    </div>
+</section>
+
+<section class="w-100" class="promotion_section mt-5">
+    <div class="container pt-5">
+        <h1 class="title-blue mb-3">ƯU ĐÃI NHÀ HÀNG ẨM THỰC</h1>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="special-offer-card" style="background-image: url({{ asset('assets/frontend/images/uudai-bg.png') }});">
+                    <div class="special-overlay"></div>
+                    <div class="special-offer-overlay">
+                        <div class="special-offer-title">Ưu đãi đặc biệt</div>
+                        <div class="special-offer-description">Những ngày cuối khuyến mãi độc quyền cho ưu đãi nhà hàng ẩm thực!</div>
+                        <a class="btn-view-offer" href="{{ route('frontend.product.promotions') }}">Khám phá ngay</a>
+                    </div>
+                </div>
+            </div>
+            
+            @foreach ($products_NH as $product)
+                @php
+                    $startDate = \Carbon\Carbon::parse($product->promotionThuongMain->start_date);
+                    $endDate = $startDate->copy()->addDays($product->promotionThuongMain->end_in);
+                    $now = \Carbon\Carbon::now();
+                    $isComing = $now->lt($startDate);
+                    $targetDate = $isComing ? $startDate : $endDate;
+                @endphp
+                <div class="col-md-4 mb-4">
+                    <div class="resort-card">
+                        <div class="resort-image">
+                            <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100 h-100">
+                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 8/5;" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
+                            </a>
                         </div>
-                        <div id="TITLE21">
-                            <h3>20</h3>
-                        </div>
-                        <div id="TITLE22">
-                            <h3>Giờ</h3>
+                        <div class="resort-details">
+                            <div class="resort-name">
+                                <a style="color: unset;" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">{{ $product->promotionThuongMain->name }}</a>
+                            </div>
+                            <div class="discount-info">
+                                <i class="fas fa-tag discount-icon"></i>
+                                <div class="promotion-description">
+                                    {{ $product->promotionThuongMain->description }}
+                                </div>
+                            </div>
+                            <div class="countdown-container" 
+                                data-target="{{ $targetDate->toIso8601String() }}" 
+                                data-mode="{{ $isComing ? 'coming' : 'expiring' }}">
+                                <div class="mr-2 mt-1">{{ $isComing ? 'Có sau:' : 'Hết hạn:' }}</div>
+                                
+                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Ngày</div></div>
+                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giờ</div></div>
+                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Phút</div></div>
+                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giây</div></div>
+                            </div>
+                            <a class="btn-get-offer" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">Nhận ưu đãi</a>
                         </div>
                     </div>
                 </div>
-                <div id="GROUP12">
-                    <div>
-                        <div id="BOX7">
-                            <div></div>
+            @endforeach
+            
+        </div>
+        
+        <a class="btn-view-more" href="{{ route('frontend.product.promotions') }}">Xem thêm về các ưu đãi</a>
+    </div>
+</section>
+
+<section class="w-100" class="promotion_section mt-5">
+    <div class="container pt-5">
+        <h1 class="title-blue mb-3">ƯU ĐÃI VUI CHƠI GIẢI TRÍ</h1>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="special-offer-card" style="background-image: url({{ asset('assets/frontend/images/uudai-bg.png') }});">
+                    <div class="special-overlay"></div>
+                    <div class="special-offer-overlay">
+                        <div class="special-offer-title">Ưu đãi đặc biệt</div>
+                        <div class="special-offer-description">Những ngày cuối khuyến mãi độc quyền cho ưu đãi vui chơi giải trí!</div>
+                        <a class="btn-view-offer" href="{{ route('frontend.product.promotions') }}">Khám phá ngay</a>
+                    </div>
+                </div>
+            </div>
+            
+            @foreach ($products_KVC as $product)
+                @php
+                    $startDate = \Carbon\Carbon::parse($product->promotionThuongMain->start_date);
+                    $endDate = $startDate->copy()->addDays($product->promotionThuongMain->end_in);
+                    $now = \Carbon\Carbon::now();
+                    $isComing = $now->lt($startDate);
+                    $targetDate = $isComing ? $startDate : $endDate;
+                @endphp
+                <div class="col-md-4 mb-4">
+                    <div class="resort-card">
+                        <div class="resort-image">
+                            <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100 h-100">
+                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 8/5;" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
+                            </a>
                         </div>
-                        <div id="TITLE23">
-                            <h3>54</h3>
-                        </div>
-                        <div id="TITLE24">
-                            <h3>Phút</h3>
+                        <div class="resort-details">
+                            <div class="resort-name">
+                                <a style="color: unset;" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">{{ $product->promotionThuongMain->name }}</a>
+                            </div>
+                            <div class="discount-info">
+                                <i class="fas fa-tag discount-icon"></i>
+                                <div class="promotion-description">
+                                    {{ $product->promotionThuongMain->description }}
+                                </div>
+                            </div>
+                            <div class="countdown-container" 
+                                data-target="{{ $targetDate->toIso8601String() }}" 
+                                data-mode="{{ $isComing ? 'coming' : 'expiring' }}">
+                                <div class="mr-2 mt-1">{{ $isComing ? 'Có sau:' : 'Hết hạn:' }}</div>
+                                
+                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Ngày</div></div>
+                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giờ</div></div>
+                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Phút</div></div>
+                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giây</div></div>
+                            </div>
+                            <a class="btn-get-offer" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">Nhận ưu đãi</a>
                         </div>
                     </div>
                 </div>
-                <div id="GROUP13">
-                    <div>
-                        <div id="BOX8">
-                            <div></div>
+            @endforeach
+            
+        </div>
+        
+        <a class="btn-view-more" href="{{ route('frontend.product.promotions') }}">Xem thêm về các ưu đãi</a>
+    </div>
+</section>
+
+<div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
+    <div class="container pb-5 pt-5">
+        <div class="row">
+            <div class="col-md-7 mb-3">
+                <div class="title-blue text-left mb-2" style="font-size: clamp(20px, 4vw, 25px);">ĐĂNG KÝ NGAY ĐỂ NHẬN ƯU ĐÃI ĐỘC QUYỀN</div>
+                <div class="text-normal text-left mb-2" style="font-size: clamp(16px, 4vw, 17px);">Hãy để chúng tôi mang đến cho bạn những thông tin du lịch mới nhất, các chương trình khuyến mãi hấp dẫn từ Sở Du lịch và các đối tác. Chỉ một bước đơn giản, bạn sẽ không bỏ lỡ bất kỳ cơ hội tiết kiệm nào cho chuyến đi đến Bà Rịa - Vũng Tàu!</div>
+            </div>
+            <div class="col-md-5">
+                <form action="{{ route('frontend.customer.store') }}" method="post" id="customerForm" style="display: block; border-radius: 10px; border: 1px solid rgb(184, 184, 184); padding: 15px; background: white;">
+                    @csrf
+                     <div class="form-group">
+                        <input type="text" name="name" class="form-control w-100" placeholder="Họ tên" maxlength="50" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-control w-100" placeholder="Email" maxlength="50" required>
+                            </div>
                         </div>
-                        <div id="TITLE25">
-                            <h3>12</h3>
-                        </div>
-                        <div id="TITLE26">
-                            <h3>Giây</h3>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="tel" name="phone" class="form-control w-100" placeholder="Số điện thoại" maxlength="20" required>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="form-group">
+                        <textarea name="content" class="form-control" maxlength="200" style="resize: vertical;" placeholder="Lời nhắn (tối đa 200 ký tự)"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="icheck-primary d-inline">
+                            <input type="checkbox" name="agree" id="agreeS" checked required>
+                            @php
+                                $page1 = App\Models\Page::find(10000);
+                                $page2 = App\Models\Page::find(10001);
+                            @endphp
+                            <label for="agreeS">Tôi đồng ý với <a href="{{ route('frontend.page.detail', ['id'=>10000, 'slug'=>$page1->slug]) }}" style="color: rgb(28, 77, 114); font-weight: bold;" target="_blank">Điều khoản dịch vụ</a> và <a href="{{ route('frontend.page.detail', ['id'=>10001, 'slug'=>$page2->slug]) }}" style="color: rgb(28, 77, 114); font-weight: bold;" target="_blank">Chính sách quyền riêng tư</a></label>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-register-submit w-100 mb-2" type="submit"><span>Gửi thông tin</span></button>
+                    <span class="text-muted" style="font-size: 12px;">Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn theo chính sách bảo mật.</span>
+                </form>
             </div>
         </div>
     </div>
-    <div id="OVERLAY1"></div>
-</section>
-<section id="SECTION7">
-    <div class="sp_container">
-        <div id="GROUP48">
-            <div>
-                <div id="BUTTON7" class="event_scoll_action" data_topoffset="846" style="cursor: pointer;"><button type="button" data-funnel="yes"> <span> &nbsp;Các sự kiện đang / sắp diễn ra&nbsp;<br></span> </button></div>
-                <div id="SHAPE13" open-popup="POPUP1" class="event_scoll_action" data_topoffset="854" style="cursor: pointer;">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 18 18">
-                        <foreignObject x="0" y="0" width="18" height="18"><i class=" far  fa-list" style="font-size: 18px; color: rgb(28, 77, 114); cursor: pointer;"></i></foreignObject>
-                    </svg>
+</div>
+
+<div id="typeModal" class="modal fade" role="dialog" style="z-index: 1050; display: none;">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <form action="{{ route('frontend.home.event') }}" method="get" style="display: block;">
+                <div class="modal-header">
+                    <div class="modal-title" style="font-weight: bold; font-size: 20px;">Các loại sự kiện</div>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-            </div>
-        </div>
-        <div id="TITLE119">
-            <h3>LỊCH TRÌNH SỰ KIỆN</h3>
-        </div>
-        <div id="GROUP68">
-            <div>
-                <div id="BOX37">
-                    <div></div>
-                </div>
-                <div id="IMAGE7">
-                    <div class="image_background"></div>
-                </div>
-                <div id="TITLE101">
-                    <h3>DẤU ẤN HÈ NĂM 2025</h3>
-                </div>
-                <div id="TITLE102">
-                    <h3>Lễ hội văn hóa, du lịch và thể thao biển lớn nhất mùa hè tại Bà Rịa - Vũng Tàu<br>Sự kiện nhằm quảng bá, kích cầu du lịch hè, mang đến những trải nghiệm văn hóa độc đáo và hấp dẫn nhất cho người dân và du khách.</h3>
-                </div>
-                <a id="BUTTON8" href="https://giaiphap.vtlink.vn/event_con" class="event_scoll_action" data_topoffset="1110" style="cursor: pointer;"><button type="button" data-funnel="yes"> <span> Chi tiết sự kiện</span> </button></a>
-                <div id="TITLE116">
-                    <h3>Đang diễn ra</h3>
-                </div>
-                <div id="BOX38">
-                    <div></div>
-                </div>
-                <div id="GROUP49">
-                    <div>
-                        <div id="SHAPE11">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 18 18">
-                                <foreignObject x="0" y="0" width="18" height="18"><i class=" far  fa-clock" style="font-size: 18px; color: rgb(28, 77, 114); cursor: pointer;"></i></foreignObject>
-                            </svg>
+                <div class="modal-body position-relative">
+                    <div class="form-group">
+                        <div class="icheck-primary d-inline">
+                            <input type="checkbox" id="now" name="loai[]" value="now"
+                                    {{ in_array('now', request('loai', ['now', 'coming'])) ? 'checked' : '' }}>
+                            <label style="font-weight: bold" for="now">Sự kiện đang diễn ra</label>
                         </div>
-                        <div id="TITLE96">
-                            <h3>08:00 AM&nbsp; - 10:00 PM</h3>
+                    </div>
+                    <div class="form-group">
+                        <div class="icheck-primary d-inline">
+                            <input type="checkbox" id="coming" name="loai[]" value="coming"
+                                    {{ in_array('coming', request('loai', ['now', 'coming'])) ? 'checked' : '' }}>
+                            <label style="font-weight: bold" for="coming">Sự kiện sắp diễn ra</label>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0">
+                        <div class="icheck-primary d-inline">
+                            <input type="checkbox" id="end" name="loai[]" value="end"
+                                    {{ in_array('end', request('loai', ['now', 'coming'])) ? 'checked' : '' }}>
+                            <label style="font-weight: bold" for="end">Sự kiện đã kết thúc</label>
                         </div>
                     </div>
                 </div>
-                <div id="GROUP53">
-                    <div>
-                        <div id="SHAPE12">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 13.5 18">
-                                <foreignObject x="0" y="0" width="13.5" height="18"><i class=" far  fa-map-marker-alt" style="font-size: 18px; color: rgb(28, 77, 114); cursor: pointer;"></i></foreignObject>
-                            </svg>
-                        </div>
-                        <div id="TITLE97">
-                            <h3>Công viên biển Hồ Tràm, Huyện Xuyên Mộc</h3>
-                        </div>
-                    </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-success">Áp dụng</button>
                 </div>
-                <div id="GROUP54">
-                    <div>
-                        <div id="TITLE100">
-                            <h3>14-15/06/2025</h3>
-                        </div>
-                        <div id="SHAPE18">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 15.75 18">
-                                <foreignObject x="0" y="0" width="15.75" height="18"><i class=" far  fa-calendar-alt" style="font-size: 18px; color: rgb(28, 77, 114); cursor: pointer;"></i></foreignObject>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div id="LINE1" class="hide_item_mobile">
-                    <div></div>
-                </div>
-                <div id="LINE2" class="hide_item_mobile">
-                    <div></div>
-                </div>
-            </div>
-        </div>
-        <div id="GROUP74">
-            <div>
-                <div id="TITLE117">
-                    <h3>Chúng tôi sẽ cập nhật sau khi có thêm sự kiện...</h3>
-                </div>
-                <div id="SHAPE22" class="animate__animated animate__spin animate__infinite" style="--animate-duration: 1s;">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 18 18">
-                        <foreignObject x="0" y="0" width="18" height="18"><i class=" far  fa-spinner-third" style="font-size: 18px; color: rgb(28, 77, 114); cursor: pointer;"></i></foreignObject>
-                    </svg>
-                </div>
-            </div>
-        </div>
-        <div id="GROUP112">
-            <div>
-                <div id="BOX39">
-                    <div></div>
-                </div>
-                <div id="IMAGE12">
-                    <div class="image_background"></div>
-                </div>
-                <div id="TITLE120">
-                    <h3>DẤU ẤN HÈ NĂM 2025</h3>
-                </div>
-                <div id="TITLE121">
-                    <h3>Lễ hội văn hóa, du lịch và thể thao biển lớn nhất mùa hè tại Bà Rịa - Vũng Tàu<br>Sự kiện nhằm quảng bá, kích cầu du lịch hè, mang đến những trải nghiệm văn hóa độc đáo và hấp dẫn nhất cho người dân và du khách.</h3>
-                </div>
-                <a id="BUTTON9" href="https://giaiphap.vtlink.vn/event_con"><button type="button" data-funnel="yes"> <span> Chi tiết sự kiện</span> </button></a>
-                <div id="BOX40">
-                    <div></div>
-                </div>
-                <div id="GROUP70">
-                    <div>
-                        <div id="SHAPE27">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 18 18">
-                                <foreignObject x="0" y="0" width="18" height="18"><i class=" far  fa-clock" style="font-size: 18px; color: rgb(28, 77, 114); cursor: pointer;"></i></foreignObject>
-                            </svg>
-                        </div>
-                        <div id="TITLE123">
-                            <h3>08:00 AM&nbsp; - 10:00 PM</h3>
-                        </div>
-                    </div>
-                </div>
-                <div id="GROUP71">
-                    <div>
-                        <div id="SHAPE28">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 13.5 18">
-                                <foreignObject x="0" y="0" width="13.5" height="18"><i class=" far  fa-map-marker-alt" style="font-size: 18px; color: rgb(28, 77, 114); cursor: pointer;"></i></foreignObject>
-                            </svg>
-                        </div>
-                        <div id="TITLE124">
-                            <h3>Công viên biển Hồ Tràm, Huyện Xuyên Mộc</h3>
-                        </div>
-                    </div>
-                </div>
-                <div id="GROUP72">
-                    <div>
-                        <div id="TITLE125">
-                            <h3>14-15/06/2025</h3>
-                        </div>
-                        <div id="SHAPE29">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 15.75 18">
-                                <foreignObject x="0" y="0" width="15.75" height="18"><i class=" far  fa-calendar-alt" style="font-size: 18px; color: rgb(28, 77, 114); cursor: pointer;"></i></foreignObject>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div id="LINE3" class="hide_item_mobile">
-                    <div></div>
-                </div>
-                <div id="LINE4" class="hide_item_mobile">
-                    <div></div>
-                </div>
-                <div id="GROUP76">
-                    <div>
-                        <div id="COUNTDOWN1">
-                            <div>
-                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="day reset_fontSize ">00</div>
-                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="hours reset_fontSize ">11</div>
-                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="minute reset_fontSize ">41</div>
-                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="second reset_fontSize ">51</div>
-                            </div>
-                        </div>
-                        <div id="GROUP75">
-                            <div>
-                                <div id="PARAGRAPH9">
-                                    <p><span style="font-size: 13px;"></span>Ngày</p>
-                                </div>
-                                <div id="PARAGRAPH10">
-                                    <p>Giờ</p>
-                                </div>
-                                <div id="PARAGRAPH11">
-                                    <p><span style="font-size: 13px;"></span>Phút</p>
-                                </div>
-                                <div id="PARAGRAPH12">
-                                    <p><span style="font-size: 13px;"></span>Giây</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
-</section>
-<section id="SECTION12">
-    <div class="sp_container">
-        <div id="GROUP113">
-            <div>
-                <div id="GROUP114">
-                    <div>
-                        <div id="GROUP115">
-                            <div></div>
-                        </div>
-                        <div id="GROUP116">
-                            <div>
-                                <div id="IMAGE28">
-                                    <div class="image_background"></div>
-                                    <div id="OVERLAY8"></div>
-                                </div>
-                                <div id="GROUP117">
-                                    <div>
-                                        <div id="TITLE199">
-                                            <h3>Ưu đãi đặc biệt</h3>
-                                        </div>
-                                        <a id="BUTTON23" href="https://giaiphap.vtlink.vn/uu_dai" target="_blank"><button type="button" data-funnel="yes"> <span> Khám phá ngay</span> </button></a>
-                                        <div id="TITLE200">
-                                            <h3>Nhận ngay các khuyến mãi độc quyền cho ưu đãi khách sạn!</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="GROUP118" class="hide_item_mobile">
-                            <div>
-                                <div id="BOX59">
-                                    <div></div>
-                                </div>
-                                <div id="IMAGE29">
-                                    <div class="image_background"></div>
-                                </div>
-                                <div id="BOX60">
-                                    <div></div>
-                                </div>
-                                <div id="TITLE201">
-                                    <h3>Resort Biển Xanh</h3>
-                                </div>
-                                <div id="BUTTON24"><button type="button" data-funnel="yes"> <span> Nhận ưu đãi</span> </button></div>
-                                <div id="GROUP119">
-                                    <div>
-                                        <div id="TITLE202">
-                                            <h3>Hết hạn:</h3>
-                                        </div>
-                                        <div id="COUNTDOWN11">
-                                            <div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="day reset_fontSize ">00</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="hours reset_fontSize ">11</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="minute reset_fontSize ">41</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="second reset_fontSize ">51</div>
-                                            </div>
-                                        </div>
-                                        <div id="TITLE203">
-                                            <h3>Ngày</h3>
-                                        </div>
-                                        <div id="TITLE204">
-                                            <h3>Giờ</h3>
-                                        </div>
-                                        <div id="TITLE205">
-                                            <h3>Phút</h3>
-                                        </div>
-                                        <div id="TITLE206">
-                                            <h3>Giây</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="TITLE207">
-                                    <h3>Giảm 30% phòng Deluxe</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="GROUP120" class="hide_item_mobile">
-                            <div>
-                                <div id="BOX61">
-                                    <div></div>
-                                </div>
-                                <div id="IMAGE30">
-                                    <div class="image_background"></div>
-                                </div>
-                                <div id="BOX62">
-                                    <div></div>
-                                </div>
-                                <div id="TITLE208">
-                                    <h3>Resort Biển Xanh</h3>
-                                </div>
-                                <div id="BUTTON25"><button type="button" data-funnel="yes"> <span> Nhận ưu đãi</span> </button></div>
-                                <div id="GROUP121">
-                                    <div>
-                                        <div id="TITLE209">
-                                            <h3>Hết hạn:</h3>
-                                        </div>
-                                        <div id="COUNTDOWN12">
-                                            <div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="day reset_fontSize ">00</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="hours reset_fontSize ">11</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="minute reset_fontSize ">41</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="second reset_fontSize ">51</div>
-                                            </div>
-                                        </div>
-                                        <div id="TITLE210">
-                                            <h3>Ngày</h3>
-                                        </div>
-                                        <div id="TITLE211">
-                                            <h3>Giờ</h3>
-                                        </div>
-                                        <div id="TITLE212">
-                                            <h3>Phút</h3>
-                                        </div>
-                                        <div id="TITLE213">
-                                            <h3>Giây</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="TITLE214">
-                                    <h3>Giảm 30% phòng Deluxe</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="GROUP122">
-                            <div>
-                                <div id="BOX63">
-                                    <div></div>
-                                </div>
-                                <div id="IMAGE31">
-                                    <div class="image_background"></div>
-                                </div>
-                                <div id="BOX64">
-                                    <div></div>
-                                </div>
-                                <div id="TITLE215">
-                                    <h3>Resort Biển Xanh</h3>
-                                </div>
-                                <div id="BUTTON26"><button type="button" data-funnel="yes"> <span> Nhận ưu đãi</span> </button></div>
-                                <div id="GROUP123">
-                                    <div>
-                                        <div id="TITLE216">
-                                            <h3>Hết hạn:</h3>
-                                        </div>
-                                        <div id="COUNTDOWN13">
-                                            <div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="day reset_fontSize ">00</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="hours reset_fontSize ">11</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="minute reset_fontSize ">41</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="second reset_fontSize ">51</div>
-                                            </div>
-                                        </div>
-                                        <div id="TITLE217">
-                                            <h3>Ngày</h3>
-                                        </div>
-                                        <div id="TITLE218">
-                                            <h3>Giờ</h3>
-                                        </div>
-                                        <div id="TITLE219">
-                                            <h3>Phút</h3>
-                                        </div>
-                                        <div id="TITLE220">
-                                            <h3>Giây</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="TITLE221">
-                                    <h3>Giảm 30% phòng Deluxe</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="SHAPE40">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 15.75 18">
-                        <foreignObject x="0" y="0" width="15.75" height="18"><i class=" far  fa-chevron-double-right" style="font-size: 18px; color: rgb(28, 77, 114); cursor: pointer;"></i></foreignObject>
-                    </svg>
-                </div>
-                <div id="SHAPE41" class="hide_item_desktop">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 15.75 18">
-                        <foreignObject x="0" y="0" width="15.75" height="18"><i class=" far  fa-chevron-double-left" style="font-size: 18px; color: rgb(28, 77, 114); cursor: pointer;"></i></foreignObject>
-                    </svg>
-                </div>
-            </div>
-        </div>
-        <div id="GROUP124">
-            <div>
-                <div id="GROUP125">
-                    <div>
-                        <div id="GROUP126">
-                            <div></div>
-                        </div>
-                        <div id="GROUP127">
-                            <div>
-                                <div id="IMAGE32">
-                                    <div class="image_background"></div>
-                                    <div id="OVERLAY9"></div>
-                                </div>
-                                <div id="GROUP128">
-                                    <div>
-                                        <div id="TITLE222">
-                                            <h3>Ưu đãi đặc biệt</h3>
-                                        </div>
-                                        <a id="BUTTON27" href="https://giaiphap.vtlink.vn/uu_dai" target="_blank"><button type="button" data-funnel="yes"> <span> Khám phá ngay</span> </button></a>
-                                        <div id="TITLE223">
-                                            <h3>Nhận ngay các khuyến mãi độc quyền cho ưu đãi khách sạn!</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="GROUP129" class="hide_item_mobile">
-                            <div>
-                                <div id="BOX65">
-                                    <div></div>
-                                </div>
-                                <div id="IMAGE33">
-                                    <div class="image_background"></div>
-                                </div>
-                                <div id="BOX66">
-                                    <div></div>
-                                </div>
-                                <div id="TITLE224">
-                                    <h3>Resort Biển Xanh</h3>
-                                </div>
-                                <div id="BUTTON28"><button type="button" data-funnel="yes"> <span> Nhận ưu đãi</span> </button></div>
-                                <div id="GROUP130">
-                                    <div>
-                                        <div id="TITLE225">
-                                            <h3>Hết hạn:</h3>
-                                        </div>
-                                        <div id="COUNTDOWN14">
-                                            <div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="day reset_fontSize ">00</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="hours reset_fontSize ">11</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="minute reset_fontSize ">41</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="second reset_fontSize ">51</div>
-                                            </div>
-                                        </div>
-                                        <div id="TITLE226">
-                                            <h3>Ngày</h3>
-                                        </div>
-                                        <div id="TITLE227">
-                                            <h3>Giờ</h3>
-                                        </div>
-                                        <div id="TITLE228">
-                                            <h3>Phút</h3>
-                                        </div>
-                                        <div id="TITLE229">
-                                            <h3>Giây</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="TITLE230">
-                                    <h3>Giảm 30% phòng Deluxe</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="GROUP131" class="hide_item_mobile">
-                            <div>
-                                <div id="BOX67">
-                                    <div></div>
-                                </div>
-                                <div id="IMAGE34">
-                                    <div class="image_background"></div>
-                                </div>
-                                <div id="BOX68">
-                                    <div></div>
-                                </div>
-                                <div id="TITLE231">
-                                    <h3>Resort Biển Xanh</h3>
-                                </div>
-                                <div id="BUTTON29"><button type="button" data-funnel="yes"> <span> Nhận ưu đãi</span> </button></div>
-                                <div id="GROUP132">
-                                    <div>
-                                        <div id="TITLE232">
-                                            <h3>Hết hạn:</h3>
-                                        </div>
-                                        <div id="COUNTDOWN15">
-                                            <div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="day reset_fontSize ">00</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="hours reset_fontSize ">11</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="minute reset_fontSize ">41</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="second reset_fontSize ">51</div>
-                                            </div>
-                                        </div>
-                                        <div id="TITLE233">
-                                            <h3>Ngày</h3>
-                                        </div>
-                                        <div id="TITLE234">
-                                            <h3>Giờ</h3>
-                                        </div>
-                                        <div id="TITLE235">
-                                            <h3>Phút</h3>
-                                        </div>
-                                        <div id="TITLE236">
-                                            <h3>Giây</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="TITLE237">
-                                    <h3>Giảm 30% phòng Deluxe</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="GROUP133">
-                            <div>
-                                <div id="BOX69">
-                                    <div></div>
-                                </div>
-                                <div id="IMAGE35">
-                                    <div class="image_background"></div>
-                                </div>
-                                <div id="BOX70">
-                                    <div></div>
-                                </div>
-                                <div id="TITLE238">
-                                    <h3>Resort Biển Xanh</h3>
-                                </div>
-                                <div id="BUTTON30"><button type="button" data-funnel="yes"> <span> Nhận ưu đãi</span> </button></div>
-                                <div id="GROUP134">
-                                    <div>
-                                        <div id="TITLE239">
-                                            <h3>Hết hạn:</h3>
-                                        </div>
-                                        <div id="COUNTDOWN16">
-                                            <div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="day reset_fontSize ">00</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="hours reset_fontSize ">11</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="minute reset_fontSize ">41</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="second reset_fontSize ">51</div>
-                                            </div>
-                                        </div>
-                                        <div id="TITLE240">
-                                            <h3>Ngày</h3>
-                                        </div>
-                                        <div id="TITLE241">
-                                            <h3>Giờ</h3>
-                                        </div>
-                                        <div id="TITLE242">
-                                            <h3>Phút</h3>
-                                        </div>
-                                        <div id="TITLE243">
-                                            <h3>Giây</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="TITLE244">
-                                    <h3>Giảm 30% phòng Deluxe</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="SHAPE42">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 15.75 18">
-                        <foreignObject x="0" y="0" width="15.75" height="18"><i class=" far  fa-chevron-double-right" style="font-size: 18px; color: rgb(28, 77, 114); cursor: pointer;"></i></foreignObject>
-                    </svg>
-                </div>
-                <div id="SHAPE43" class="hide_item_desktop">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 15.75 18">
-                        <foreignObject x="0" y="0" width="15.75" height="18"><i class=" far  fa-chevron-double-left" style="font-size: 18px; color: rgb(28, 77, 114); cursor: pointer;"></i></foreignObject>
-                    </svg>
-                </div>
-            </div>
-        </div>
-        <div id="GROUP135">
-            <div>
-                <div id="GROUP136">
-                    <div>
-                        <div id="GROUP137">
-                            <div></div>
-                        </div>
-                        <div id="GROUP138">
-                            <div>
-                                <div id="IMAGE36">
-                                    <div class="image_background"></div>
-                                    <div id="OVERLAY10"></div>
-                                </div>
-                                <div id="GROUP139">
-                                    <div>
-                                        <div id="TITLE245">
-                                            <h3>Ưu đãi đặc biệt</h3>
-                                        </div>
-                                        <a id="BUTTON31" href="https://giaiphap.vtlink.vn/uu_dai" target="_blank"><button type="button" data-funnel="yes"> <span> Khám phá ngay</span> </button></a>
-                                        <div id="TITLE246">
-                                            <h3>Nhận ngay các khuyến mãi độc quyền cho ưu đãi khách sạn!</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="GROUP140" class="hide_item_mobile">
-                            <div>
-                                <div id="BOX71">
-                                    <div></div>
-                                </div>
-                                <div id="IMAGE37">
-                                    <div class="image_background"></div>
-                                </div>
-                                <div id="BOX72">
-                                    <div></div>
-                                </div>
-                                <div id="TITLE247">
-                                    <h3>Resort Biển Xanh</h3>
-                                </div>
-                                <div id="BUTTON32"><button type="button" data-funnel="yes"> <span> Nhận ưu đãi</span> </button></div>
-                                <div id="GROUP141">
-                                    <div>
-                                        <div id="TITLE248">
-                                            <h3>Hết hạn:</h3>
-                                        </div>
-                                        <div id="COUNTDOWN17">
-                                            <div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="day reset_fontSize ">00</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="hours reset_fontSize ">11</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="minute reset_fontSize ">41</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="second reset_fontSize ">51</div>
-                                            </div>
-                                        </div>
-                                        <div id="TITLE249">
-                                            <h3>Ngày</h3>
-                                        </div>
-                                        <div id="TITLE250">
-                                            <h3>Giờ</h3>
-                                        </div>
-                                        <div id="TITLE251">
-                                            <h3>Phút</h3>
-                                        </div>
-                                        <div id="TITLE252">
-                                            <h3>Giây</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="TITLE253">
-                                    <h3>Giảm 30% phòng Deluxe</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="GROUP142" class="hide_item_mobile">
-                            <div>
-                                <div id="BOX73">
-                                    <div></div>
-                                </div>
-                                <div id="IMAGE38">
-                                    <div class="image_background"></div>
-                                </div>
-                                <div id="BOX74">
-                                    <div></div>
-                                </div>
-                                <div id="TITLE254">
-                                    <h3>Resort Biển Xanh</h3>
-                                </div>
-                                <div id="BUTTON33"><button type="button" data-funnel="yes"> <span> Nhận ưu đãi</span> </button></div>
-                                <div id="GROUP143">
-                                    <div>
-                                        <div id="TITLE255">
-                                            <h3>Hết hạn:</h3>
-                                        </div>
-                                        <div id="COUNTDOWN18">
-                                            <div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="day reset_fontSize ">00</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="hours reset_fontSize ">11</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="minute reset_fontSize ">41</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="second reset_fontSize ">51</div>
-                                            </div>
-                                        </div>
-                                        <div id="TITLE256">
-                                            <h3>Ngày</h3>
-                                        </div>
-                                        <div id="TITLE257">
-                                            <h3>Giờ</h3>
-                                        </div>
-                                        <div id="TITLE258">
-                                            <h3>Phút</h3>
-                                        </div>
-                                        <div id="TITLE259">
-                                            <h3>Giây</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="TITLE260">
-                                    <h3>Giảm 30% phòng Deluxe</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="GROUP144">
-                            <div>
-                                <div id="BOX75">
-                                    <div></div>
-                                </div>
-                                <div id="IMAGE39">
-                                    <div class="image_background"></div>
-                                </div>
-                                <div id="BOX76">
-                                    <div></div>
-                                </div>
-                                <div id="TITLE261">
-                                    <h3>Resort Biển Xanh</h3>
-                                </div>
-                                <div id="BUTTON34"><button type="button" data-funnel="yes"> <span> Nhận ưu đãi</span> </button></div>
-                                <div id="GROUP145">
-                                    <div>
-                                        <div id="TITLE262">
-                                            <h3>Hết hạn:</h3>
-                                        </div>
-                                        <div id="COUNTDOWN19">
-                                            <div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="day reset_fontSize ">00</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="hours reset_fontSize ">11</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="minute reset_fontSize ">41</div>
-                                                <div style="width: 100%; height: 100%; display: flex; justify-content: center;align-items: center;" class="second reset_fontSize ">51</div>
-                                            </div>
-                                        </div>
-                                        <div id="TITLE263">
-                                            <h3>Ngày</h3>
-                                        </div>
-                                        <div id="TITLE264">
-                                            <h3>Giờ</h3>
-                                        </div>
-                                        <div id="TITLE265">
-                                            <h3>Phút</h3>
-                                        </div>
-                                        <div id="TITLE266">
-                                            <h3>Giây</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="TITLE267">
-                                    <h3>Giảm 30% phòng Deluxe</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="SHAPE44">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 15.75 18">
-                        <foreignObject x="0" y="0" width="15.75" height="18"><i class=" far  fa-chevron-double-right" style="font-size: 18px; color: rgb(28, 77, 114); cursor: pointer;"></i></foreignObject>
-                    </svg>
-                </div>
-                <div id="SHAPE45" class="hide_item_desktop">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 15.75 18">
-                        <foreignObject x="0" y="0" width="15.75" height="18"><i class=" far  fa-chevron-double-left" style="font-size: 18px; color: rgb(28, 77, 114); cursor: pointer;"></i></foreignObject>
-                    </svg>
-                </div>
-            </div>
-        </div>
-        <a id="BUTTON35" href="https://giaiphap.vtlink.vn/uu_dai" target="_blank"><button type="button" data-funnel="yes"> <span> Xem thêm về các ưu đãi</span> </button></a>
-        <div id="TITLE268">
-            <h3>ƯU ĐÃI KHÁCH SẠN</h3>
-        </div>
-        <div id="GROUP146">
-            <div></div>
-        </div>
-        <div id="TITLE269">
-            <h3>ƯU ĐÃI NHÀ HÀNG ẨM THỰC</h3>
-        </div>
-        <div id="GROUP147">
-            <div></div>
-        </div>
-        <div id="TITLE270">
-            <h3>ƯU ĐÃI VUI CHƠI GIẢI TRÍ</h3>
-        </div>
-    </div>
-</section>
-<section id="SECTION5">
-    <div class="sp_container">
-        <div id="BOX5">
-            <div></div>
-        </div>
-        <div id="TITLE20">
-            <h2>ĐĂNG KÝ NGAY ĐỂ NHẬN ƯU ĐÃI ĐỘC QUYỀN</h2>
-        </div>
-        <div id="PARAGRAPH3">
-            <p>Hãy để chúng tôi mang đến cho bạn những thông tin du lịch mới nhất, các chương trình khuyến mãi hấp dẫn từ Sở Du lịch và các đối tác. Chỉ một bước đơn giản, bạn sẽ không bỏ lỡ bất kỳ cơ hội tiết kiệm nào cho chuyến đi đến Bà Rịa - Vũng Tàu!</p>
-        </div>
-        <div id="GROUP10">
-            <div>
-                <div id="FORM1" data-type="lead">
-                    <form>
-                        <div id="INPUT1"><input data-require="true" name="full_name" value="" type="text" data-type="text" placeholder="Họ tên"></div>
-                        <div id="INPUT2"><input data-require="true" name="email" value="" type="email" data-type="email" placeholder="Email"></div>
-                        <div id="INPUT3"><input data-require="true" name="phone" value="" type="text" data-type="phone" placeholder="Số điện thoại"></div>
-                        <div id="BUTTON4"><button type="submit"> <span> Gửi thông tin</span> </button></div>
-                    </form>
-                    <div class="data_thankyou" type="popup" style="display: none;">Cảm ơn bạn đã quan tâm!</div>
-                </div>
-                <div id="PARAGRAPH4">
-                    <p>Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn theo chính sách bảo mật.</p>
-                </div>
-            </div>
-        </div>
-        <div id="GROUP25">
-            <div></div>
-        </div>
-    </div>
-</section>
+</div>
+
 @endsection
 @section('styles')
 <link rel="stylesheet" href="{{ asset('assets/frontend/css/event.css') }}">
+
 @endsection
 @section('script')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const bannerSwiper = new Swiper('.bannerSwiper', {
+            effect: 'fade',
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: false,
+            navigation: false,
+        });
 
+        document.querySelectorAll('.countdown-event-container').forEach(function (container) {
+            const startDate = new Date(container.dataset.start);
+            const endDate = new Date(container.dataset.end);
+            const values = container.querySelectorAll('.countdown-event-value');
+            const labels = container.querySelectorAll('.countdown-event-label');
+
+            function updateCountdown() {
+                const now = new Date();
+
+                if (now < startDate) {
+                    // Sự kiện sắp diễn ra - đếm ngược đến ngày bắt đầu
+                    const diff = startDate - now;
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+                    const seconds = Math.floor((diff / 1000) % 60);
+
+                    values[0].textContent = String(days).padStart(2, '0');
+                    values[1].textContent = String(hours).padStart(2, '0');
+                    values[2].textContent = String(minutes).padStart(2, '0');
+                    values[3].textContent = String(seconds).padStart(2, '0');
+                } else if (now >= startDate && now <= endDate) {
+                    // Sự kiện đang diễn ra
+                    container.innerHTML = `<div class="countdown-event-status" style="color: green; font-weight: bold; font-size: clamp(17px, 4vw, 20px)">Đang diễn ra</div>`;
+                } else {
+                    // Sự kiện đã kết thúc
+                    container.innerHTML = `<div class="countdown-event-status" style="color: red; font-weight: bold; font-size: clamp(17px, 4vw, 20px)">Đã kết thúc</div>`;
+                }
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
+
+    });
+</script>
 @endsection

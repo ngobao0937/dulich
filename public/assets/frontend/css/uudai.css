@@ -40,7 +40,7 @@
 }
 
 .custom-checkbox .custom-control-label {
-	font-size: 1.2em;    
+	font-size: 1.1em;    
 }
 
 .custom-control-input:checked ~ .custom-control-label::before {
@@ -143,16 +143,6 @@
 
 #filterSection{
 	display: block;
-}
-
-.page-item.active .page-link {
-	background-color: rgb(28, 77, 114);
-	color: #fff !important;
-	border-color: rgb(28, 77, 114); 
-}
-
-.page-link {
-	color: rgb(28, 77, 114);
 }
 
 /* Responsive Styles */

@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\Image;
 use Carbon\Carbon;
 
-function compressImage($file, $quality = 60, $resizeWidth = 1200) {
+function compressImage($file, $quality = 60, $resizeWidth = 1920) {
     $image = ImageIntervention::make($file);
 
     // Nếu resizeWidth không phải null, thực hiện resize ảnh

@@ -63,12 +63,28 @@ class EventController extends Controller
 
 		$id = $request->input('id', null);  
 
+        $dateRange = $request->input('dateRange'); // Lấy chuỗi "dd/mm/yyyy đến dd/mm/yyyy"
+
+        $date_start = null;
+        $date_end = null;
+
+        if ($dateRange && str_contains($dateRange, 'đến')) {
+            [$start, $end] = explode('đến', $dateRange);
+
+            $date_start = Carbon::createFromFormat('d-m-Y', trim($start))->format('Y-m-d');
+            $date_end = Carbon::createFromFormat('d-m-Y', trim($end))->format('Y-m-d');
+        }
+
 		$data = [
 			'name' => $request->input('name'),
+            'link' => $request->input('link'),
 			'slug' => Str::slug($request->input('name')),
             'address' => $request->input('address'),
             'description' => $request->input('description'),
-            'content' => $request->input('content'),
+            'date_start' => $date_start,
+            'date_end' => $date_end,
+            'time_start' => $request->time_start,
+            'time_end' => $request->time_end,
 			'active' => $request->active ? 1 : 0,
 		];
 

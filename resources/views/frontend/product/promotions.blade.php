@@ -1,19 +1,17 @@
 @extends('frontend.layout.app')
 @section('title', 'Khuyến mãi & ưu đãi')
 @section('content')
-<div>
-    <div class="swiper bannerSwiper sp_container" style="width: 100%;">
-        <div class="swiper-wrapper">
-            @foreach ($banners as $banner)
-                <div class="swiper-slide position-relative">
-                    <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 21/5;" src="{{ asset('uploads/' . $banner->image->ten) }}" alt="{{ $banner->ten }}">
+<div class="swiper bannerSwiper sp_container" style="width: 100%;">
+    <div class="swiper-wrapper">
+        @foreach ($banners as $banner)
+            <div class="swiper-slide position-relative">
+                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 21/5;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->ten }}">
 
-                    <div class="overlay position-absolute w-100 h-100 top-0 start-0" style="position: absolute; top: 0; left: 0;;background-color: rgba(0, 0, 0, 0.281); display: flex; justify-content: center; align-items: center; z-index: 1;">
-                        <h1 style="color: white; font-weight: bold; font-size: clamp(20px, 4vw, 40px);;">ƯU ĐÃI CHO HÔM NAY!</h1>
-                    </div>
+                <div class="overlay position-absolute w-100 h-100 top-0 start-0" style="position: absolute; top: 0; left: 0;background-color: rgba(0, 0, 0, 0.281); display: flex; justify-content: center; align-items: center; z-index: 1; border-radius: 0">
+                    <h1 style="color: white; font-weight: bold; font-size: clamp(20px, 4vw, 40px);;">ƯU ĐÃI CHO HÔM NAY!</h1>
                 </div>
-            @endforeach
-        </div>
+            </div>
+        @endforeach
     </div>
 </div>
 
@@ -164,7 +162,7 @@
 
 @endsection
 @section('styles')
-<link rel="stylesheet" href="{{ auto_version('assets/frontend/css/style.css') }}">
+{{-- <link rel="stylesheet" href="{{ auto_version('assets/frontend/css/style.css') }}"> --}}
 <link rel="stylesheet" href="{{ auto_version('assets/frontend/css/uudai.css') }}">
 
 @endsection

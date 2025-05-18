@@ -18,14 +18,25 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 
 Route::get('/', [HomeController::class, 'index'])->name('frontend.home.index');
+
+Route::get('/tr{id}-{slug}', [PageController::class, 'detail'])->name('frontend.page.detail');
+
+Route::get('/su-kien', [HomeController::class, 'event'])->name('frontend.home.event');
+
+Route::get('/blog{id}-{slug}', [BlogController::class, 'detail'])->name('frontend.blog.detail');
 
 Route::get('/khuyen-mai-uu-dai', [ProductController::class, 'promotions'])->name('frontend.product.promotions');
 
 Route::get('/ks{id}-{slug}', [ProductController::class, 'detail'])->name('frontend.product.detail');
 
+Route::post('/gui-phan-hoi', [CommentController::class, 'store'])->name('frontend.comment.store');
+
 Route::post('/dang-ky-nhan-khuyen-mai', [CustomerController::class, 'store'])->name('frontend.customer.store');
+
 
 // Route::get('/uudai', function(){
 //     return view('frontend.home.uudai');
@@ -67,6 +78,11 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::delete('/user/delete', [UserController::class, 'delete'])->name('backend.user.delete');
     Route::post('/user/store', [UserController::class, 'store'])->name('backend.user.store');
 
+    Route::get('/blog', [BlogController::class, 'index'])->name('backend.blog.index');
+    Route::get('/blog/edit', [BlogController::class, 'edit'])->name('backend.blog.edit');
+    Route::delete('/blog/delete', [BlogController::class, 'delete'])->name('backend.blog.delete');
+    Route::post('/blog/store', [BlogController::class, 'store'])->name('backend.blog.store');
+
     Route::get('/banner', [BannerController::class,'index'])->name('backend.banner.index');
     Route::post('/banner/store', [BannerController::class,'store'])->name('backend.banner.store');
     Route::get('/banner/edit', [BannerController::class,'edit'])->name('backend.banner.edit');
@@ -77,10 +93,10 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/menu/edit', [MenuController::class, 'edit'])->name('backend.menu.edit');
     Route::delete('/menu/delete', [MenuController::class, 'delete'])->name('backend.menu.delete');
 
-    Route::get('/extension', [ExtensionController::class, 'index'])->name('backend.extension.index');
-    Route::post('/extension/store', [ExtensionController::class, 'store'])->name('backend.extension.store');
-    Route::get('/extension/edit', [ExtensionController::class, 'edit'])->name('backend.extension.edit');
-    Route::delete('/extension/delete', [ExtensionController::class, 'delete'])->name('backend.extension.delete');
+    // Route::get('/extension', [ExtensionController::class, 'index'])->name('backend.extension.index');
+    // Route::post('/extension/store', [ExtensionController::class, 'store'])->name('backend.extension.store');
+    // Route::get('/extension/edit', [ExtensionController::class, 'edit'])->name('backend.extension.edit');
+    // Route::delete('/extension/delete', [ExtensionController::class, 'delete'])->name('backend.extension.delete');
 
     Route::get('/page', [PageController::class, 'index'])->name('backend.page.index');
     Route::post('/page/store', [PageController::class, 'store'])->name('backend.page.store');
@@ -93,18 +109,18 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::delete('/product/delete', [ProductController::class,'delete'])->name('backend.product.delete');
     Route::delete('/product/delete-img', [ProductController::class,'deleteImg'])->name('backend.product.delete.img');
 
-    Route::get('/room', [RoomController::class,'index'])->name('backend.room.index');
-    Route::post('/room/store', [RoomController::class,'store'])->name('backend.room.store');
-    Route::get('/room/create', [RoomController::class,'create'])->name('backend.room.create');
-    Route::get('/room/edit', [RoomController::class,'edit'])->name('backend.room.edit');
-    Route::delete('/room/delete', [RoomController::class,'delete'])->name('backend.room.delete');
-    Route::delete('/room/delete-img', [RoomController::class,'deleteImg'])->name('backend.room.delete.img');
+    // Route::get('/room', [RoomController::class,'index'])->name('backend.room.index');
+    // Route::post('/room/store', [RoomController::class,'store'])->name('backend.room.store');
+    // Route::get('/room/create', [RoomController::class,'create'])->name('backend.room.create');
+    // Route::get('/room/edit', [RoomController::class,'edit'])->name('backend.room.edit');
+    // Route::delete('/room/delete', [RoomController::class,'delete'])->name('backend.room.delete');
+    // Route::delete('/room/delete-img', [RoomController::class,'deleteImg'])->name('backend.room.delete.img');
 
-    Route::get('/voucher', [VoucherController::class,'index'])->name('backend.voucher.index');
-    Route::post('/voucher/store', [VoucherController::class,'store'])->name('backend.voucher.store');
-    Route::get('/voucher/create', [VoucherController::class,'create'])->name('backend.voucher.create');
-    Route::get('/voucher/edit', [VoucherController::class,'edit'])->name('backend.voucher.edit');
-    Route::delete('/voucher/delete', [VoucherController::class,'delete'])->name('backend.voucher.delete');
+    // Route::get('/voucher', [VoucherController::class,'index'])->name('backend.voucher.index');
+    // Route::post('/voucher/store', [VoucherController::class,'store'])->name('backend.voucher.store');
+    // Route::get('/voucher/create', [VoucherController::class,'create'])->name('backend.voucher.create');
+    // Route::get('/voucher/edit', [VoucherController::class,'edit'])->name('backend.voucher.edit');
+    // Route::delete('/voucher/delete', [VoucherController::class,'delete'])->name('backend.voucher.delete');
 
     Route::get('/event', [EventController::class,'index'])->name('backend.event.index');
     Route::post('/event/store', [EventController::class,'store'])->name('backend.event.store');
@@ -114,10 +130,16 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::delete('/event/delete-img', [EventController::class,'deleteImg'])->name('backend.event.delete.img');
 
 
-    Route::get('/contact', [ContactController::class, 'index'])->name('backend.contact.index');
-    Route::post('/contact/store', [ContactController::class, 'store'])->name('backend.contact.store');
-    Route::delete('/contact/delete', [ContactController::class, 'delete'])->name('backend.contact.delete');
-    Route::get('/contact/edit', [ContactController::class, 'edit'])->name('backend.contact.edit');
+    // Route::get('/contact', [ContactController::class, 'index'])->name('backend.contact.index');
+    // Route::post('/contact/store', [ContactController::class, 'store'])->name('backend.contact.store');
+    // Route::delete('/contact/delete', [ContactController::class, 'delete'])->name('backend.contact.delete');
+    // Route::get('/contact/edit', [ContactController::class, 'edit'])->name('backend.contact.edit');
+
+    Route::get('/comment', [CommentController::class, 'index'])->name('backend.comment.index');
+    Route::post('/comment/store', [CommentController::class, 'store'])->name('backend.comment.store');
+    Route::delete('/comment/delete', [CommentController::class, 'delete'])->name('backend.comment.delete');
+    Route::get('/comment/edit', [CommentController::class, 'edit'])->name('backend.comment.edit');
+    Route::get('/comment/get-products', [CommentController::class, 'get_products'])->name('backend.comment.get_products');
 
     Route::get('/promotion', [PromotionController::class, 'index'])->name('backend.promotion.index');
     Route::post('/promotion/store', [PromotionController::class, 'store'])->name('backend.promotion.store');

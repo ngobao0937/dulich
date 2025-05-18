@@ -46,23 +46,30 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ route('backend.blog.index') }}" class="nav-link {{ request()->routeIs('backend.blog.*') ? 'active' : '' }}">
+              <i class="nav-icon far fa-newspaper"></i>
+              <p>Blog</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('backend.comment.index') }}" class="nav-link {{ request()->routeIs('backend.comment.*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-comment"></i>
+              <p>Phản hồi</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('backend.customer.index') }}" class="nav-link {{ request()->routeIs('backend.customer.*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-user-tag"></i>
               <p>Người đăng ký</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ route('backend.menu.index') }}" class="nav-link {{ request()->routeIs('backend.menu.*') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-bars"></i>
-              <p>Danh mục</p>
-            </a>
-          </li>
-          <li class="nav-item">
+          
+          {{-- <li class="nav-item">
             <a href="{{ route('backend.extension.index') }}" class="nav-link {{ request()->routeIs('backend.extension.*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-puzzle-piece"></i>
               <p>Tiện ích</p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a href="{{ route('backend.banner.index') }}" class="nav-link {{ request()->routeIs('backend.banner.*') ? 'active' : '' }}">
               <i class="nav-icon far fa-image"></i>
@@ -73,6 +80,12 @@
             <a href="{{ route('backend.page.index') }}" class="nav-link {{ request()->routeIs('backend.page.*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-newspaper"></i>
               <p>Trang</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('backend.menu.index') }}" class="nav-link {{ request()->routeIs('backend.menu.*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-bars"></i>
+              <p>Danh mục</p>
             </a>
           </li>
           <li class="nav-item">

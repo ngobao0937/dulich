@@ -26,15 +26,25 @@
                 <div class="modal-body">
                     @csrf
                     <input type="text" id="id" name="id" value="" hidden />
-                    <input type="hidden" name="type" value="main">
+                    {{-- <input type="hidden" name="type" value="main"> --}}
+                    <div class="form-group">
+                        <label>Tên Banner <span class="text-danger">*</span></label>
+                        <input name="name" id="name" type="text" class="form-control" placeholder="Nhập tên ..." required />
+                    </div>
+
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-7">
                             <div class="form-group">
-                                <label>Tên Banner <span class="text-danger">*</span></label>
-                                <input name="name" id="name" type="text" class="form-control" placeholder="Nhập tên ..." required />
+                                <label for="type">Thuộc trang</label>
+                                <select name="type" id="type" class="form-control" required>
+                                    <option value="main">Trang chủ</option>
+                                    <option value="event">Trang sự kiện</option>
+                                    <option value="promotion">Trang ưu đãi</option>
+                                    <option value="blog">Trang blog</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label>Thứ tự <span class="text-danger">*</span></label>
                                 <input name="position" id="position" type="number" class="form-control" placeholder="Thứ tự ..." required />
@@ -42,10 +52,10 @@
                         </div>
                     </div>
                     
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label>Link</label>
                         <input name="link" id="link" type="text" class="form-control" placeholder="Liên kết ..."/>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group" style="margin-bottom: -5px;">
                         <label style="margin-bottom: 0;">Hình ảnh</label>
