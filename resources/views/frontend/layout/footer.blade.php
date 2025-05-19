@@ -3,7 +3,7 @@
     <div class="position-relative pt-4 pb-4" style="z-index: 2">
         <div class="row mb-4">
             <div class="col-md-3">
-                <div class="w-100 d-flex justify-content-center mb-3" style="aspect-ratio: 4/3">
+                <div class="w-100 d-flex justify-content-center mb-3" style="aspect-ratio: 5/3">
                     <img class="logo-footer-c w-100" style="object-fit: contain;" src="{{ asset('images/logo-1.png') }}" alt="Logo">
                 </div>
                 <div class="title-logo-white mb-2">Sở Du Lịch Bà Rịa - Vũng Tàu</div>
@@ -36,10 +36,17 @@
 
             <div class="col-md-3">
                 <div class="title-logo-white mb-3">Videos</div>
-                <div class="w-100 mb-3" style="height: 200px; background: white">
-
+                <div class="w-100 mb-3" style="height: 180px; background: white">
+                    <div class="embed-responsive embed-responsive-16by9 h-100">
+                        <iframe class="embed-responsive-item" 
+                                src="https://www.youtube.com/embed/aY7F3NKR6VA?si=gTc1nuFzogIKN8eM" 
+                                allowfullscreen 
+                                style="width: 100%; height: 100%; border: none;">
+                        </iframe>
+                    </div>
                 </div>
             </div>
+
             <div class="col-md-3">
                 <div class="title-logo-white mb-3">Điều hướng</div>
                 <a href="/" class="mb-2 d-block">

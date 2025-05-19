@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', function () {
     let isSticky = false;
 
     window.addEventListener('scroll', function () {
-        if (window.scrollY > 400 && !isSticky) {
+        if (window.scrollY > 200 && !isSticky) {
             header.classList.remove('transparent-header');
             header.classList.add('sticky');
             isSticky = true;
-        } else if (window.scrollY <= 400 && isSticky) {
+        } else if (window.scrollY <= 200 && isSticky) {
             header.classList.remove('sticky');
             header.classList.add('transparent-header');
             isSticky = false;

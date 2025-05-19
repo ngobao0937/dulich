@@ -1711,7 +1711,7 @@ a{
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     z-index: 1;
 }
@@ -1907,6 +1907,30 @@ a{
 .padding-header{
     padding-top: 1em;
     padding-bottom: 1em;
+}
+
+.nav-link {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    left: 50%;
+    bottom: 0;
+    background-color: white; 
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 80%;
 }
 
 

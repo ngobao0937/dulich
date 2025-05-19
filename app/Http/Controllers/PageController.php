@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Banner;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Page;
@@ -57,8 +58,10 @@ class PageController extends Controller
 
     public function detail(Request $request){
         $page = Page::find($request->id);
+        $banners = Banner::where('type', 'main')->orderby('position', 'asc')->where('active', 1)->get();
         return view('frontend.page.detail', [
-            'page' => $page
+            'page' => $page,
+            'banners' => $banners
         ]);
     }
 }

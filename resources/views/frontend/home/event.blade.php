@@ -7,6 +7,7 @@
             <div class="swiper-slide">
                 <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 8/5;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->name }}">
             </div>
+            <div class="overlay" style="border-radius: 0"></div>
         @endforeach
     </div>
 </div>

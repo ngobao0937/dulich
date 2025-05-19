@@ -14,14 +14,14 @@
         </div>
 
         <ul class="navbar-nav align-items-center d-none d-lg-flex justify-content-center" style="position: absolute; top: 15px; width: 100%; left: 0">
-            <li class="nav-item">
-                <a class="nav-link text-white" href="/" style="font-weight: bold;">TRANG CHỦ</a>
+            <li class="nav-item mr-4">
+                <a class="nav-link text-white {{ Route::is('frontend.home.index') ? 'active' : '' }}" href="/" style="font-weight: bold;">TRANG CHỦ</a>
+            </li>
+            <li class="nav-item mr-4">
+                <a class="nav-link text-white {{ Route::is('frontend.home.event') ? 'active' : '' }}" href="{{ route('frontend.home.event') }}" style="font-weight: bold;">SỰ KIỆN DU LỊCH</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('frontend.home.event') }}" style="font-weight: bold;">SỰ KIỆN DU LỊCH</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('frontend.product.promotions') }}" style="font-weight: bold;">KHUYẾN MÃI & ƯU ĐÃI</a>
+                <a class="nav-link text-white {{ Route::is('frontend.product.promotions') ? 'active' : '' }}" href="{{ route('frontend.product.promotions') }}" style="font-weight: bold;">KHUYẾN MÃI & ƯU ĐÃI</a>
             </li>
         </ul>
     </nav>
