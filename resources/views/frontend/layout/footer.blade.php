@@ -1,86 +1,76 @@
-<footer class="w-100">
-    <div style="background: rgb(28, 77, 114); width: 100%;">
-        <div class="container pt-4 pb-4">
-            <div class="row">
-                <div class="col-md-2">
-                    <img class="logo-footer-c w-100" src="{{ asset('images/logo-1.png') }}" alt="Logo">
+<footer class="w-100 footer-background">
+    <div class="overlay-footer"></div>
+    <div class="position-relative pt-4 pb-4" style="z-index: 2">
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="w-100 d-flex justify-content-center mb-3" style="aspect-ratio: 4/3">
+                    <img class="logo-footer-c w-100" style="object-fit: contain;" src="{{ asset('images/logo-1.png') }}" alt="Logo">
                 </div>
-                <div class="col-md-7">
-                    <div class="title-logo-white mb-2">SỞ DU LỊCH TỈNH BÀ RỊA - VŨNG TÀU</div>
-                    <div class="des-logo-footer mb-2">
-                        <i class="fas fa-map-marked-alt mr-2" style="color: #ffffff; font-size: 18px;"></i> Địa chỉ: SỐ 1 - PHẠM VĂN ĐỒNG - P. PHƯỚC TRUNG - TP. BÀ RỊA - T. BRVT
-                    </div>
-                    <div class="des-logo-footer mb-2">
-                        <i class="fas fa-phone-square-alt mr-2" style="color: #ffffff; font-size: 18px;"></i> (84-254) 3727.444 - Fax: (84-254) 3570.888
-                    </div>
-                     <div class="des-logo-footer mb-3">
-                        <i class="fas fa-envelope-open mr-2" style="color: #ffffff; font-size: 18px;"></i> sodl@baria-vungtau.gov.vn
-                    </div>
+                <div class="title-logo-white mb-2">Sở Du Lịch Bà Rịa - Vũng Tàu</div>
+                <div class="des-logo-footer mb-2">
+                    <i class="fas fa-map-marked-alt mr-2" style="color: #ffffff; font-size: 18px;"></i> Số 1 - Phạm Văn Đồng - P. Phước Trung - TP. Bà Rịa - Tỉnh Bà Rịa Vũng Tàu
                 </div>
-                <div class="col-md-3">
-                    <div class="title-follow-white mb-2">FOLLOW US</div>
-                    <div class="d-flex">
-                        <a href="#" style="width: 40px; margin-right: 10px; display: block; padding-bottom: 10px">
-                            <i class="fab fa-facebook" style="color: #ffffff; font-size: 40px;"></i>
-                        </a>
-                        <a href="#" style="width: 40px; margin-right: 10px; display: block">
-                            <img class="w-100" src="{{ asset('assets/frontend/images/icon-zalo9.png') }}" alt="zalo">
-                        </a>
-                        <a href="#" style="width: 40px; display: block">
-                            <img class="w-100" src="{{ asset('assets/frontend/images/tiktok.png') }}" alt="tiktok">
-                        </a>
-                        
-                    </div>
+                <div class="des-logo-footer mb-2">
+                    <i class="fas fa-phone-square-alt mr-2" style="color: #ffffff; font-size: 18px;"></i> (84-254) 3727.444 - Fax: (84-254) 3570.888
+                </div>
+                    <div class="des-logo-footer mb-3">
+                    <i class="fas fa-envelope-open mr-2" style="color: #ffffff; font-size: 18px;"></i> sodl@baria-vungtau.gov.vn
                 </div>
             </div>
-        </div>
-        
-    </div>
-    {{-- <section id="SECTION35" class="w-100">
-        <div class="sp_container">
-            <div id="PARAGRAPH30">
-                <p>FOLLOW US</p>
-            </div>
-            <div id="IMAGE604">
-                <div class="image_background"></div>
-            </div>
-            <div id="TITLE654">
-                <h3>SỞ DU LỊCH TỈNH BÀ RỊA - VŨNG TÀU</h3>
-            </div>
-            <div id="GROUP776">
-                <div>
-                    <a id="SHAPE87" href="https://www.facebook.com/salekit.io" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 18 18">
-                            <foreignObject x="0" y="0" width="18" height="18"><i class="fab     fa-facebook" style="font-size: 18px; color: rgb(255, 255, 255); cursor: pointer;"></i></foreignObject>
-                        </svg>
+            <div class="col-md-3">
+                <div class="title-logo-white">Bài viết mới</div>
+                @foreach ($blogsF as $blog)
+                    <a href="{{ route('frontend.blog.detail', ['id'=>$blog->id,'slug'=>$blog->slug]) }}">
+                        <div class="post-content mb-3 mt-3">
+                            <div class="post-description mb-2">
+                                {{ $blog->name }}
+                            </div>
+                            <div><i class="post-date">{{ \Carbon\Carbon::parse($blog->created_at)->format('d/m/y') }}</i></div>
+                        </div>
+                        @unless ($loop->last)
+                            <div class="post-divider"></div>
+                        @endunless
                     </a>
-                    <div id="IMAGE605">
-                        <div class="image_background"></div>
-                    </div>
-                    <div id="IMAGE606">
-                        <div class="image_background"></div>
-                    </div>
+                @endforeach
+            </div>
+
+            <div class="col-md-3">
+                <div class="title-logo-white mb-3">Videos</div>
+                <div class="w-100 mb-3" style="height: 200px; background: white">
+
                 </div>
             </div>
-            <div id="PARAGRAPH31">
-                <p>Địa chỉ: SỐ 1 - PHẠM VĂN ĐỒNG - P. PHƯỚC TRUNG - TP. BÀ RỊA - T. BRVT<br>(84-254) 3727.444 - Fax: (84-254) 3570.888<br> sodl@baria-vungtau.gov.vn</p>
-            </div>
-            <div id="SHAPE88">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 20.25 18">
-                    <foreignObject x="0" y="0" width="20.25" height="18"><i class=" fas    fa-map-marked-alt" style="font-size: 18px; color: rgb(255, 255, 255); cursor: pointer;"></i></foreignObject>
-                </svg>
-            </div>
-            <div id="SHAPE89">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 15.75 18">
-                    <foreignObject x="0" y="0" width="15.75" height="18"><i class=" fas    fa-phone-square-alt" style="font-size: 18px; color: rgb(255, 255, 255); cursor: pointer;"></i></foreignObject>
-                </svg>
-            </div>
-            <div id="SHAPE90">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 18 18">
-                    <foreignObject x="0" y="0" width="18" height="18"><i class=" fas    fa-envelope-open" style="font-size: 18px; color: rgb(255, 255, 255); cursor: pointer;"></i></foreignObject>
-                </svg>
+            <div class="col-md-3">
+                <div class="title-logo-white mb-3">Điều hướng</div>
+                <a href="/" class="mb-2 d-block">
+                    <div>Trang chủ</div>
+                </a>
+                <a href="{{ route('frontend.home.event') }}" class="mb-2 d-block">
+                    <div>Sự kiện du lịch</div>
+                </a>
+                <a href="{{ route('frontend.product.promotions') }}" class="mb-2 d-block">
+                    <div>Khuyến mãi & ưu đãi</div>
+                </a>
+                <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal" class="mb-2 d-block">
+                    <div>Đăng ký</div>
+                </a>
             </div>
         </div>
-        <div id="OVERLAY11"></div>
-    </section> --}}
+        <div class="post-divider"></div>
+        <div class="d-flex justify-content-between mt-3">
+            <div style="font-size: 14px">Copy right © 2025 All rights reserved</div>
+            <div class="d-flex">
+                <a href="#" style="width: 40px; margin-right: 10px; display: block;">
+                    <i class="fab fa-facebook" style="color: #ffffff; font-size: 40px;"></i>
+                </a>
+                <a href="#" style="width: 40px; margin-right: 10px; display: block">
+                    <img class="w-100" src="{{ asset('assets/frontend/images/icon-zalo9.png') }}" alt="zalo">
+                </a>
+                <a href="#" style="width: 40px; display: block">
+                    <img class="w-100" src="{{ asset('assets/frontend/images/tiktok.png') }}" alt="tiktok">
+                </a>
+                
+            </div>
+        </div>
+    </div>
 </footer>

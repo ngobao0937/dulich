@@ -1,7 +1,23 @@
+
 document.addEventListener('DOMContentLoaded', function () {
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+        }
+    });
+
+    const header = document.querySelector('header');
+    let isSticky = false;
+
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 400 && !isSticky) {
+            header.classList.remove('transparent-header');
+            header.classList.add('sticky');
+            isSticky = true;
+        } else if (window.scrollY <= 400 && isSticky) {
+            header.classList.remove('sticky');
+            header.classList.add('transparent-header');
+            isSticky = false;
         }
     });
 
