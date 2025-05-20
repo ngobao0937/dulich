@@ -10,7 +10,7 @@
                 <span class="title-sodl ml-2" style="color: white;">Du lịch Bà Rịa - Vũng Tàu</span>
             </a>
 
-            <a href="javascript:void(0)" class="btn pl-3 pr-3 register-header" data-toggle="modal" data-target="#myModal" style="background: white; border-radius: 20px; z-index: 2;"><b style="color: rgb(28, 77, 114);">ĐĂNG KÝ</b></a>
+            <a href="javascript:void(0)" class="btn pl-3 pr-3 register-header" onclick="openFormRegister(0)" style="background: white; border-radius: 20px; z-index: 2;"><b style="color: rgb(28, 77, 114);">ĐĂNG KÝ</b></a>
         </div>
 
         <ul class="navbar-nav align-items-center d-none d-lg-flex justify-content-center" style="position: absolute; top: 15px; width: 100%; left: 0">
@@ -33,7 +33,7 @@
             <li><a class="text-white d-block py-2" href="/" style="font-weight: bold;">TRANG CHỦ</a></li>
             <li><a class="text-white d-block py-2" href="{{ route('frontend.home.event') }}" style="font-weight: bold;">SỰ KIỆN DU LỊCH</a></li>
             <li><a class="text-white d-block py-2" href="{{ route('frontend.product.promotions') }}" style="font-weight: bold;">KHUYẾN MÃI & ƯU ĐÃI</a></li>
-            <li><a class="btn pl-3 pr-3 mt-3" data-toggle="modal" data-target="#myModal" style="background: white; border-radius: 20px;"><b style="color: rgb(28, 77, 114);">ĐĂNG KÝ</b></a></li>
+            <li><a href="javascript:void(0)" class="btn pl-3 pr-3 mt-3" onclick="openFormRegister(0)" style="background: white; border-radius: 20px;"><b style="color: rgb(28, 77, 114);">ĐĂNG KÝ</b></a></li>
         </ul>
     </div>
 </div>

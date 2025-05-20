@@ -52,11 +52,13 @@ class CustomerController extends Controller
 				'name' => $request->name,
 				'email' => $request->email,
 				'phone' => $request->phone,
-				'content' => $request->content
+				'content' => $request->content,
+				'promotion_fk' => $request->promotion_fk ? $request->promotion_fk : 0
 			]
 		);
 
-		return redirect()->back();
+		return redirect()->back()->with('success', 'Xin chúc mừng! Bạn đã đăng ký thành công 🎉');
+
 	}
 
 

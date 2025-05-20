@@ -97,7 +97,7 @@ class BannerController extends Controller
 		$banner = Banner::find($id);
 		$banner->delete();
 		$banner->image()->delete();
-		if($request->type != 'main'){
+		if($request->type != 'main' && $request->type != 'promotion' && $request->type != 'event' && $request->type != 'blog'){
 			return response()->json(['success' => true]);
 		}else{
 			return redirect(route('backend.banner.index', $request->query()));

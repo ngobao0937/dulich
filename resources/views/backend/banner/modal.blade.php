@@ -10,6 +10,7 @@
                 <div class="modal-body">
                     <p>Bạn có thật sự muốn xóa banner này?</p>
                     <input type="text" id="deleteId" name="id" hidden />
+                    <input type="hidden" name="type" id="deleteType">
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Không</button>

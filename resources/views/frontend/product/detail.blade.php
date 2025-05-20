@@ -8,11 +8,11 @@
                 <div class="swiper-slide">
                     <div class="position-relative">
                         <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 21/9;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->name }}">
-                    </div>
-                    <div class="overlay d-flex align-items-center" style="border-radius: 0;">
-                        <div class="text-white container">
-                            <div style="font-size: clamp(18px, 4vw, 30px); font-weight: bold;">{{ $banner->name }}</div>
-                            <div style="font-size: clamp(13px, 4vw, 20px);">{{ $banner->description }}</div>
+                        <div class="overlay d-flex align-items-center" style="border-radius: 0;">
+                            <div class="text-white container">
+                                <div style="font-size: clamp(18px, 4vw, 30px); font-weight: bold;">{{ $banner->name }}</div>
+                                <div style="font-size: clamp(13px, 4vw, 20px);">{{ $banner->description }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -118,10 +118,10 @@
                     $isComing = $now->lt($startDate);
                     $targetDate = $isComing ? $startDate : $endDate;
                 @endphp
-                <div class="col-md-4 mb-4">
-                    <div class="resort-card">
+                <div class="col-lg-4 col-md-6 mb-4 d-flex">
+                    <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image" style="background-image: url({{ $promotion->image ? asset('uploads/'.$promotion->image->ten) : asset('images/default.jpg') }});"></div>
-                        <div class="resort-details">
+                        <div class="resort-details d-flex flex-column flex-grow-1">
                             <div class="resort-name">{{ $promotion->name }}</div>
                             <div class="discount-info">
                                 <i class="fas fa-tag discount-icon"></i>
@@ -129,24 +129,25 @@
                                     {{ $promotion->description }}
                                 </div>
                             </div>
-                            <div class="countdown-container" 
-                                data-target="{{ $targetDate->toIso8601String() }}" 
-                                data-mode="{{ $isComing ? 'coming' : 'expiring' }}">
-                                <div class="mr-2 mt-1">{{ $isComing ? 'Có sau:' : 'Hết hạn:' }}</div>
-                                
-                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Ngày</div></div>
-                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giờ</div></div>
-                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Phút</div></div>
-                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giây</div></div>
+                            <div class="mt-auto">
+                                <div class="countdown-container" 
+                                    data-target="{{ $targetDate->toIso8601String() }}" 
+                                    data-mode="{{ $isComing ? 'coming' : 'expiring' }}">
+                                    <div class="mr-2 mt-1">{{ $isComing ? 'Có sau:' : 'Hết hạn:' }}</div>
+                                    
+                                    <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Ngày</div></div>
+                                    <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giờ</div></div>
+                                    <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Phút</div></div>
+                                    <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giây</div></div>
+                                </div>
+                                <button class="btn-get-offer" @if(!$isComing) onclick="openFormRegister({{ $promotion->id }})" @else onclick="sweetAlertInfo()" @endif>Nhận ưu đãi</button>
                             </div>
-                            <button class="btn-get-offer" data-toggle="modal" data-target="#myModal">Nhận ưu đãi</button>
+                            
                         </div>
                     </div>
                 </div>
             @endforeach
-            
         </div>
-        
         <a class="btn-view-more" href="{{ route('frontend.product.promotions') }}">Xem thêm về các ưu đãi</a>
     </div>
 </section>
@@ -164,29 +165,29 @@
                     $isComing = $now->lt($startDate);
                     $targetDate = $isComing ? $startDate : $endDate;
                 @endphp
-                <div class="col-md-4 mb-4">
-                    <div class="resort-card">
+                <div class="col-lg-4 col-md-6 d-flex">
+                    <div class="resort-card d-flex flex-column h-100">
                         <div class="resort-image">
                             @if ($promotion->link360)
                                 <iframe id="embed_iframe_box" src="{{ $promotion->link360 }}" scrolling="no" frameborder="0" allowvr="yes" allow="vr; xr; accelerometer; magnetometer; gyroscope; autoplay;" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" style="width: 100%; height: 100%;"></iframe>
                             @else
-                                <img class="w-100 h-100" style="object-fit: cover" src="{{ $promotion->image ? asset('uploads/'.$promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion->ten }}">
+                                <img class="w-100" style="object-fit: cover; aspect-ratio: 8/5" src="{{ $promotion->image ? asset('uploads/'.$promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion->ten }}">
                             @endif
                         </div>
-                        <div class="resort-details">
+                        <div class="resort-details flex-grow-1 d-flex flex-column">
                             <div class="resort-name">{{ $promotion->name }}</div>
                             <div class="room-price">{{ $promotion->price ? number_format($promotion->price, 0, ',', '.') . ' VNĐ/đêm' : '' }} </div>
                             <div class="discount-info">
                                 <i class="fas fa-tag discount-icon"></i>
-                                <div class="promotion-description">
+                                <div class="promotion-description mb-2">
                                     {!! $promotion->description !!}
                                 </div>
                             </div>
                             <div class="room-price" style="color: green; font-size: 14px;">{{ $promotion->tagline }} </div>
 
                             
-                            <div class="d-flex justify-content-between mt-3">
-                                <button class="btn-get-offer" style="width: fit-content;" @if(!$isComing) data-toggle="modal" data-target="#myModal" @endif>{{ $isComing ? 'Sắp có sau' : 'Nhận ưu đãi' }}</button>
+                            <div class="d-flex justify-content-between mt-auto">
+                                <button class="btn-get-offer" style="width: fit-content;" @if(!$isComing) onclick="openFormRegister({{ $promotion->id }})" @else onclick="sweetAlertInfo()" @endif>{{ $isComing ? 'Sắp có sau' : 'Nhận ưu đãi' }}</button>
                                 <div class="countdown-container"  
                                     data-target="{{ $targetDate->toIso8601String() }}" 
                                     data-mode="{{ $isComing ? 'coming' : 'expiring' }}" style="margin: 0;">                                    
@@ -224,21 +225,21 @@
     <div class="d-flex align-items-center">
         <div style="font-weight: bold; font-size: 19px; margin-right: 5px;">Đánh giá chung: </div>
                 
-        <div class="rating" style="height: 48px">
+        <div class="ratingG" style="height: 48px">
             <input type="radio" {{ $product->average_rating == 5 ? 'checked' : '' }} disabled>
-            <label style="cursor: inherit;"></label>
+            <label></label>
             <input type="radio" {{ $product->average_rating == 4 ? 'checked' : '' }} disabled>
-            <label style="cursor: inherit;"></label>
+            <label></label>
             <input type="radio" {{ $product->average_rating == 3 ? 'checked' : '' }} disabled>
-            <label style="cursor: inherit;"></label>
+            <label></label>
             <input type="radio" {{ $product->average_rating == 2 ? 'checked' : '' }} disabled>
-            <label style="cursor: inherit;"></label>
+            <label></label>
             <input type="radio" {{ $product->average_rating == 1 ? 'checked' : '' }} disabled>
-            <label style="cursor: inherit;"></label>
+            <label></label>
         </div>
     </div>
 
-    @foreach ($product->approvedComments()->get() as $comment)
+    @forelse ($product->approvedComments()->get() as $comment)
         <div class="w-100 mb-3" style="border-radius: 5px; border: 1px solid gainsboro; padding: 10px">
             <div class="d-flex">
                 <div class="mr-3">
@@ -274,7 +275,9 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @empty
+        <div style="color: gray">Chưa có phản hồi nào.</div>
+    @endforelse
 
     
 

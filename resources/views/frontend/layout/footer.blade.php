@@ -29,7 +29,7 @@
                                     <div class="post-description mb-2">
                                         {{ $blog->name }}
                                     </div>
-                                    <div><i class="post-date">{{ \Carbon\Carbon::parse($blog->created_at)->format('d/m/y') }}</i></div>
+                                    <div><i class="post-date">{{ \Carbon\Carbon::parse($blog->created_at)->format('d/m/Y') }}</i></div>
                                 </div>
                                 @unless ($loop->last)
                                     <div class="post-divider"></div>

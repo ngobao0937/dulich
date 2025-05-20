@@ -7,7 +7,7 @@
             <div class="swiper-slide position-relative">
                 <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 21/5;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->ten }}">
 
-                <div class="overlay position-absolute w-100 h-100 top-0 start-0" style="position: absolute; top: 0; left: 0;background-color: rgba(0, 0, 0, 0.2); display: flex; justify-content: center; align-items: center; z-index: 1; border-radius: 0">
+                <div class="overlay position-absolute w-100 h-100 top-0 start-0" style="display: flex; justify-content: center; align-items: center; z-index: 1; border-radius: 0">
                     <h1 style="color: white; font-weight: bold; font-size: clamp(20px, 4vw, 40px);;">ƯU ĐÃI CHO HÔM NAY!</h1>
                 </div>
             </div>
@@ -110,39 +110,45 @@
                             $isComing = $now->lt($startDate);
                             $targetDate = $isComing ? $startDate : $endDate;
                         @endphp
-                        <div class="col-md-6 col-lg-4">
-                            <div class="item-card">
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <div class="item-card d-flex flex-column h-100">
                                 <div class="item-image">
-                                    <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100 h-100">
+                                    <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100">
                                         <img src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
                                     </a>
                                 </div>
-                                <div class="item-details">
-                                    <div class="promotion-badge">{{ $product->promotionThuongMain->name }}</div>
-                                    <div class="item-title">{{ $product->name }}</div>
-                                    <div class="item-desc">{{ $product->promotionThuongMain->description }}</div>
-                                    <div class="timer" data-target="{{ $targetDate->toIso8601String() }}">
-                                        <div class="row text-center">
-                                            <div class="col-3">
-                                                <span class="time-value">00</span>
-                                                <div>Ngày</div>
-                                            </div>
-                                            <div class="col-3">
-                                                <span class="time-value">00</span>
-                                                <div>Giờ</div>
-                                            </div>
-                                            <div class="col-3">
-                                                <span class="time-value">00</span>
-                                                <div>Phút</div>
-                                            </div>
-                                            <div class="col-3">
-                                                <span class="time-value">00</span>
-                                                <div>Giây</div>
+
+                                <div class="item-details d-flex flex-column flex-grow-1">
+                                    <div class="flex-grow-1">
+                                        <div class="promotion-badge">{{ $product->promotionThuongMain->name }}</div>
+                                        <div class="item-title">{{ $product->name }}</div>
+                                        <div class="item-desc">{{ $product->promotionThuongMain->description }}</div>
+                                    </div>
+
+                                    <div class="mt-auto">
+                                        <div class="timer" data-target="{{ $targetDate->toIso8601String() }}">
+                                            <div class="row text-center">
+                                                <div class="col-3">
+                                                    <span class="time-value">00</span>
+                                                    <div class="time-d">Ngày</div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <span class="time-value">00</span>
+                                                    <div class="time-d">Giờ</div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <span class="time-value">00</span>
+                                                    <div class="time-d">Phút</div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <span class="time-value">00</span>
+                                                    <div class="time-d">Giây</div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="text-center mt-3">
-                                        <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="btn action-button btn-block" style="font-weight: bold; border-radius: 10px;">Nhận ưu đãi ngay</a>
+                                        <div class="text-center mt-3">
+                                            <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="btn action-button btn-block" style="font-weight: bold; border-radius: 10px;">Nhận ưu đãi ngay</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

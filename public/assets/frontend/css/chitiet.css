@@ -15079,6 +15079,25 @@
 	left: 30px;
 }
 
+.ratingG {
+  display: inline-block;
+}
+
+.ratingG input {
+  display: none;
+}
+
+.ratingG label {
+  float: right;
+  cursor: default;
+  color: #ccc;
+}
+
+.ratingG label:before {
+  content: '\2605';
+  font-size: 30px;
+}
+
 .rating {
   display: inline-block;
 }
@@ -15117,7 +15136,6 @@
 .ratingCmt label {
   float: right;
   color: #ccc;
-  transition: color 0.3s;
 }
 
 .ratingCmt label:before {
@@ -15125,11 +15143,8 @@
   font-size: 20px;
 }
 
-.ratingCmt input:checked ~ label,
-.ratingCmt label:hover,
-.ratingCmt label:hover ~ label {
+.ratingCmt input:checked ~ label {
   color: rgb(255, 153, 0);
-  transition: color 0.3s;
 }
 @media screen and (max-width: 767px) {
 	.custom-modal .swiper-button-next, .custom-modal .swiper-button-prev{

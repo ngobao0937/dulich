@@ -6,9 +6,7 @@
         @foreach ($banners as $banner)
             <div class="swiper-slide position-relative">
                 <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 21/5;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->ten }}">
-
-                <div class="overlay" style="border-radius: 0">
-                </div>
+                <div class="overlay" style="border-radius: 0"></div>
             </div>
         @endforeach
     </div>

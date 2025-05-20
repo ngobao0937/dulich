@@ -34,6 +34,11 @@ document.addEventListener('DOMContentLoaded', function () {
         return false;
     });
 
+    window.openFormRegister = function(promotion_fk) {
+        $('#myModal').modal('toggle');
+        $('#register_promotion_fk').val(promotion_fk);
+    }
+
     document.querySelectorAll('.countdown-container').forEach(function (container) {
         const targetDate = new Date(container.dataset.target);
         const mode = container.dataset.mode;

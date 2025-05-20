@@ -3,6 +3,7 @@
         <div class="modal-content" style="background: rgb(28, 77, 114); color: white;">
             <form action="{{ route('frontend.customer.store') }}" method="post" id="registerForm" style="display: block;">
                 @csrf
+                <input type="hidden" name="promotion_fk" id="register_promotion_fk" value="0">
                 <div class="modal-body position-relative">
                     <button type="button" class="close" data-dismiss="modal" style="color: white; font-weight: bold;">&times;</button>
                     <div class="text-center mb-3" style="font-size: clamp(20px, 4vw, 25px); font-weight: bold;">ĐĂNG KÝ NHẬN ƯU ĐÃI NGAY</div>
@@ -51,4 +52,42 @@
 <script src="{{ auto_version('assets/frontend/lib/bootstrap-4.6.2-dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ auto_version('assets/frontend/lib/bootstrap-4.6.2-dist/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ auto_version('assets/frontend/lib/swiper/swiper-bundle.min.js') }}"></script>
+<script src="{{ auto_version('assets/backend/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ auto_version('assets/frontend/js/script.js') }}"></script>
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 5000,
+        background: '#ffffff',
+        customClass: {
+            popup: 'border border-success shadow-lg rounded-lg'
+        },
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+
+    @if (session('success'))
+        Toast.fire({
+            icon: 'success',
+            title: '{{ session('success') }}'
+        });
+    @endif
+
+    function sweetAlertInfo(){
+        Toast.fire({
+            icon: 'info',
+            title: 'Ưu đãi này hiện tại chưa hoạt động. Xin quý khách quay lại sau !'
+        });
+    }
+
+    // $('.swalDefaultSuccess').click(function() {
+    //     Toast.fire({
+    //         icon: 'success',
+    //         title: 'Xin chúc mừng! Bạn đã đăng ký thành công 🎉'
+    //     });
+    // });
+</script>

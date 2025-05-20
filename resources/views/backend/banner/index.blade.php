@@ -76,7 +76,7 @@
                                 <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#bannerModal" onclick="alertBanner({{ $banner->id }})">
                                 <i class="fa fa-edit"></i>
                                 </button>
-                                <button type="button" class="btn btn-danger btn-sm" onclick="alertDelete({{ $banner->id }})">
+                                <button type="button" class="btn btn-danger btn-sm" onclick="alertDelete({{ $banner->id }}, '{{ $banner->type }}')">
                                 <i class="fa fa-trash"></i>
                                 </button>
                             </td>
@@ -103,10 +103,11 @@
 @endsection
 @section('scripts')
 <script>
-    function alertDelete(id) {
+    function alertDelete(id,type) {
         $('#myModal').data('id', id);
         $('#myModal').modal('toggle');
         $('#deleteId').val(id);
+        $('#deleteType').val(type);
     }
 
     $('#bannerModal').on('hidden.bs.modal', function() {

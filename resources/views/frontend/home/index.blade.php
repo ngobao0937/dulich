@@ -6,10 +6,10 @@
     <div class="swiper bannerSwiper" style="width: 100%;">
         <div class="swiper-wrapper">
             @foreach ($banners as $banner)
-                <div class="swiper-slide">
+                <div class="swiper-slide position-relative">
                     <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 8/5;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->name }}">
+                    <div class="overlay" style="border-radius: 0"></div>
                 </div>
-                <div class="overlay" style="border-radius: 0"></div>
             @endforeach
         </div>
     </div>
@@ -73,15 +73,15 @@
     <div class="title-blue">CÁC SỰ KIỆN NỔI BẬT</div>
     <div class="d-flex justify-content-center mt-4 mb-5"><div style="border-bottom: 2px solid rgb(255, 136, 0); width: 30%;"></div></div>
     <div class="row">
-        <div class="col-md-9 mb-3">
+        <div class="col-lg-9 mb-3">
             <div class="w-100 h-100">
                 <img class="w-100 h-100" style="border-radius: 10px; object-fit: cover;" src="{{ asset('assets/frontend/images/h4.jpg') }}" alt="h4">
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-lg-3">
             <div class="row">
-                <div class="col-md-12 col-6 pb-3">
+                <div class="col-lg-12 col-6 pb-3">
                     <div class="position-relative w-100">
                         <img class="w-100" style="border-radius: 10px; object-fit: cover; aspect-ratio: 1/1;" src="{{ asset('assets/frontend/images/h5.jpg') }}" alt="h5">
                         <div class="overlay d-flex align-items-center justify-content-center" style="padding-left: 10px; padding-right: 10px; background-color: rgba(0, 0, 0, 0.4);">
@@ -94,7 +94,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 col-6 pb-3">
+                <div class="col-lg-12 col-6 pb-3">
                     <div class="position-relative w-100">
                         <img class="w-100" style="border-radius: 10px; object-fit: cover; aspect-ratio: 1/1;" src="{{ asset('assets/frontend/images/h5.jpg') }}" alt="h5">
                         <div class="overlay d-flex align-items-center justify-content-center" style="padding-left: 10px; padding-right: 10px; background-color: rgba(0, 0, 0, 0.4);">
@@ -178,7 +178,7 @@
         <h1 class="title-blue mb-3">ƯU ĐÃI KHÁCH SẠN</h1>
         
         <div class="row">
-            <div class="col-md-4 mb-4">
+            <div class="col-lg-4 col-md-6 mb-4">
                 <div class="special-offer-card" style="background-image: url({{ asset('assets/frontend/images/uudai-bg.png') }});">
                     <div class="special-overlay"></div>
                     <div class="special-offer-overlay">
@@ -197,15 +197,14 @@
                     $isComing = $now->lt($startDate);
                     $targetDate = $isComing ? $startDate : $endDate;
                 @endphp
-                <div class="col-md-4 mb-4">
-                    
-                    <div class="resort-card">
+                <div class="col-lg-4 col-md-6 mb-4 d-flex">
+                    <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100 h-100">
                                 <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 8/5;" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
                             </a>
                         </div>
-                        <div class="resort-details">
+                        <div class="resort-details d-flex flex-column flex-grow-1">
                             <div class="resort-name">
                                 <a style="color: unset;" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">{{ $product->promotionThuongMain->name }}</a>
                             </div>
@@ -215,17 +214,19 @@
                                     {{ $product->promotionThuongMain->description }}
                                 </div>
                             </div>
-                            <div class="countdown-container" 
-                                data-target="{{ $targetDate->toIso8601String() }}" 
-                                data-mode="{{ $isComing ? 'coming' : 'expiring' }}">
-                                <div class="mr-2 mt-1">{{ $isComing ? 'Có sau:' : 'Hết hạn:' }}</div>
-                                
-                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Ngày</div></div>
-                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giờ</div></div>
-                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Phút</div></div>
-                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giây</div></div>
+                            <div class="mt-auto">
+                                <div class="countdown-container" 
+                                    data-target="{{ $targetDate->toIso8601String() }}" 
+                                    data-mode="{{ $isComing ? 'coming' : 'expiring' }}">
+                                    <div class="mr-2 mt-1">{{ $isComing ? 'Có sau:' : 'Hết hạn:' }}</div>
+                                    
+                                    <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Ngày</div></div>
+                                    <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giờ</div></div>
+                                    <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Phút</div></div>
+                                    <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giây</div></div>
+                                </div>
+                                <a class="btn-get-offer" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">Nhận ưu đãi</a>
                             </div>
-                            <a class="btn-get-offer" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">Nhận ưu đãi</a>
                         </div>
                     </div>
                 </div>
@@ -242,7 +243,7 @@
         <h1 class="title-blue mb-3">ƯU ĐÃI NHÀ HÀNG ẨM THỰC</h1>
         
         <div class="row">
-            <div class="col-md-4 mb-4">
+            <div class="col-lg-4 col-md-6 mb-4">
                 <div class="special-offer-card" style="background-image: url({{ asset('assets/frontend/images/uudai-bg.png') }});">
                     <div class="special-overlay"></div>
                     <div class="special-offer-overlay">
@@ -261,14 +262,14 @@
                     $isComing = $now->lt($startDate);
                     $targetDate = $isComing ? $startDate : $endDate;
                 @endphp
-                <div class="col-md-4 mb-4">
-                    <div class="resort-card">
+                <div class="col-lg-4 col-md-6 mb-4 d-flex">
+                    <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100 h-100">
                                 <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 8/5;" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
                             </a>
                         </div>
-                        <div class="resort-details">
+                        <div class="resort-details d-flex flex-column flex-grow-1">
                             <div class="resort-name">
                                 <a style="color: unset;" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">{{ $product->promotionThuongMain->name }}</a>
                             </div>
@@ -278,17 +279,19 @@
                                     {{ $product->promotionThuongMain->description }}
                                 </div>
                             </div>
-                            <div class="countdown-container" 
-                                data-target="{{ $targetDate->toIso8601String() }}" 
-                                data-mode="{{ $isComing ? 'coming' : 'expiring' }}">
-                                <div class="mr-2 mt-1">{{ $isComing ? 'Có sau:' : 'Hết hạn:' }}</div>
-                                
-                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Ngày</div></div>
-                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giờ</div></div>
-                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Phút</div></div>
-                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giây</div></div>
+                            <div class="mt-auto">
+                                <div class="countdown-container" 
+                                    data-target="{{ $targetDate->toIso8601String() }}" 
+                                    data-mode="{{ $isComing ? 'coming' : 'expiring' }}">
+                                    <div class="mr-2 mt-1">{{ $isComing ? 'Có sau:' : 'Hết hạn:' }}</div>
+                                    
+                                    <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Ngày</div></div>
+                                    <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giờ</div></div>
+                                    <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Phút</div></div>
+                                    <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giây</div></div>
+                                </div>
+                                <a class="btn-get-offer" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">Nhận ưu đãi</a>
                             </div>
-                            <a class="btn-get-offer" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">Nhận ưu đãi</a>
                         </div>
                     </div>
                 </div>
@@ -305,7 +308,7 @@
         <h1 class="title-blue mb-3">ƯU ĐÃI VUI CHƠI GIẢI TRÍ</h1>
         
         <div class="row">
-            <div class="col-md-4 mb-4">
+            <div class="col-lg-4 col-md-6 mb-4">
                 <div class="special-offer-card" style="background-image: url({{ asset('assets/frontend/images/uudai-bg.png') }});">
                     <div class="special-overlay"></div>
                     <div class="special-offer-overlay">
@@ -324,14 +327,14 @@
                     $isComing = $now->lt($startDate);
                     $targetDate = $isComing ? $startDate : $endDate;
                 @endphp
-                <div class="col-md-4 mb-4">
-                    <div class="resort-card">
+                <div class="col-lg-4 col-md-6 mb-4 d-flex">
+                    <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100 h-100">
                                 <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 8/5;" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
                             </a>
                         </div>
-                        <div class="resort-details">
+                        <div class="resort-details d-flex flex-column flex-grow-1">
                             <div class="resort-name">
                                 <a style="color: unset;" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">{{ $product->promotionThuongMain->name }}</a>
                             </div>
@@ -341,17 +344,19 @@
                                     {{ $product->promotionThuongMain->description }}
                                 </div>
                             </div>
-                            <div class="countdown-container" 
-                                data-target="{{ $targetDate->toIso8601String() }}" 
-                                data-mode="{{ $isComing ? 'coming' : 'expiring' }}">
-                                <div class="mr-2 mt-1">{{ $isComing ? 'Có sau:' : 'Hết hạn:' }}</div>
-                                
-                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Ngày</div></div>
-                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giờ</div></div>
-                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Phút</div></div>
-                                <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giây</div></div>
+                            <div class="mt-auto">
+                                <div class="countdown-container" 
+                                    data-target="{{ $targetDate->toIso8601String() }}" 
+                                    data-mode="{{ $isComing ? 'coming' : 'expiring' }}">
+                                    <div class="mr-2 mt-1">{{ $isComing ? 'Có sau:' : 'Hết hạn:' }}</div>
+                                    
+                                    <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Ngày</div></div>
+                                    <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giờ</div></div>
+                                    <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Phút</div></div>
+                                    <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giây</div></div>
+                                </div>
+                                <a class="btn-get-offer" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">Nhận ưu đãi</a>
                             </div>
-                            <a class="btn-get-offer" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">Nhận ưu đãi</a>
                         </div>
                     </div>
                 </div>
@@ -429,11 +434,11 @@
 <div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
     <div class="container pb-5 pt-5">
         <div class="row">
-            <div class="col-md-7 mb-3">
+            <div class="col-lg-7 mb-3">
                 <div class="title-blue text-left mb-2" style="font-size: clamp(20px, 4vw, 25px);">ĐĂNG KÝ NGAY ĐỂ NHẬN ƯU ĐÃI ĐỘC QUYỀN</div>
                 <div class="text-normal text-left mb-2" style="font-size: clamp(16px, 4vw, 17px);">Hãy để chúng tôi mang đến cho bạn những thông tin du lịch mới nhất, các chương trình khuyến mãi hấp dẫn từ Sở Du lịch và các đối tác. Chỉ một bước đơn giản, bạn sẽ không bỏ lỡ bất kỳ cơ hội tiết kiệm nào cho chuyến đi đến Bà Rịa - Vũng Tàu!</div>
             </div>
-            <div class="col-md-5">
+            <div class="col-lg-5">
                 <form action="{{ route('frontend.customer.store') }}" method="post" style="border-radius: 10px; border: 1px solid rgb(184, 184, 184); padding: 15px; background: white; display: block;" id="customerForm">
                     @csrf
                      <div class="form-group">
