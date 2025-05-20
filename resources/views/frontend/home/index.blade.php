@@ -84,7 +84,7 @@
                 <div class="col-md-12 col-6 pb-3">
                     <div class="position-relative w-100">
                         <img class="w-100" style="border-radius: 10px; object-fit: cover; aspect-ratio: 1/1;" src="{{ asset('assets/frontend/images/h5.jpg') }}" alt="h5">
-                        <div class="overlay d-flex align-items-center justify-content-center" style="padding-left: 10px; padding-right: 10px;">
+                        <div class="overlay d-flex align-items-center justify-content-center" style="padding-left: 10px; padding-right: 10px; background-color: rgba(0, 0, 0, 0.4);">
                             <div class="text-center">
                                 <div class="des-event mb-2">Các sự kiện đang diễn ra</div>
                                 <div class="w-100 d-flex justify-content-center">
@@ -97,7 +97,7 @@
                 <div class="col-md-12 col-6 pb-3">
                     <div class="position-relative w-100">
                         <img class="w-100" style="border-radius: 10px; object-fit: cover; aspect-ratio: 1/1;" src="{{ asset('assets/frontend/images/h5.jpg') }}" alt="h5">
-                        <div class="overlay d-flex align-items-center justify-content-center" style="padding-left: 10px; padding-right: 10px;">
+                        <div class="overlay d-flex align-items-center justify-content-center" style="padding-left: 10px; padding-right: 10px; background-color: rgba(0, 0, 0, 0.4);">
                             <div class="text-center">
                                 <div class="des-event mb-2">Các sự kiện đang diễn ra</div>
                                 <div class="w-100 d-flex justify-content-center">

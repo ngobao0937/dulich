@@ -7,7 +7,7 @@
             <div class="swiper-slide position-relative">
                 <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 21/5;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->ten }}">
 
-                <div class="overlay position-absolute w-100 h-100 top-0 start-0" style="position: absolute; top: 0; left: 0;background-color: rgba(0, 0, 0, 0.2); display: flex; justify-content: center; align-items: center; z-index: 1; border-radius: 0">
+                <div class="overlay" style="border-radius: 0">
                 </div>
             </div>
         @endforeach

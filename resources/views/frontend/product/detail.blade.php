@@ -11,8 +11,8 @@
                     </div>
                     <div class="overlay d-flex align-items-center" style="border-radius: 0;">
                         <div class="text-white container">
-                            <div style="font-size: clamp(20px, 4vw, 30px); font-weight: bold;">{{ $banner->name }}</div>
-                            <div style="font-size: clamp(14px, 4vw, 20px);">{{ $banner->description }}</div>
+                            <div style="font-size: clamp(18px, 4vw, 30px); font-weight: bold;">{{ $banner->name }}</div>
+                            <div style="font-size: clamp(13px, 4vw, 20px);">{{ $banner->description }}</div>
                         </div>
                     </div>
                 </div>
