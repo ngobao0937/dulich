@@ -1,5 +1,5 @@
 @extends('frontend.layout.app')
-@section('title', 'Du lịch')
+@section('title', $page->name)
 @section('content')
 <div class="swiper bannerSwiper sp_container" style="width: 100%;">
     <div class="swiper-wrapper">

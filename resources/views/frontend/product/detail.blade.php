@@ -165,8 +165,8 @@
                     $isComing = $now->lt($startDate);
                     $targetDate = $isComing ? $startDate : $endDate;
                 @endphp
-                <div class="col-lg-4 col-md-6 d-flex">
-                    <div class="resort-card d-flex flex-column h-100">
+                <div class="col-lg-4 col-md-6 mb-4 d-flex">
+                    <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
                             @if ($promotion->link360)
                                 <iframe id="embed_iframe_box" src="{{ $promotion->link360 }}" scrolling="no" frameborder="0" allowvr="yes" allow="vr; xr; accelerometer; magnetometer; gyroscope; autoplay;" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" style="width: 100%; height: 100%;"></iframe>
@@ -276,7 +276,7 @@
             </div>
         </div>
     @empty
-        <div style="color: gray">Chưa có phản hồi nào.</div>
+        <div style="color: gray">Hiên tại chưa có phản hồi nào.</div>
     @endforelse
 
     

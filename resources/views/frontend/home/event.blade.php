@@ -1,5 +1,5 @@
 @extends('frontend.layout.app')
-@section('title', 'Sự kiện')
+@section('title', 'Sự kiện du lịch')
 @section('content')
 <div class="swiper bannerSwiper" style="width: 100%;">
     <div class="swiper-wrapper">
