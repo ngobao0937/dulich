@@ -1496,6 +1496,10 @@ a{
     display: block;
 }
 
+.btn-get-offer:hover{
+    background-color: rgb(21, 57, 85);
+}
+
 .btn-view-more {
     background-color: white;
     color: #084c7e;
