@@ -167,11 +167,11 @@
                 @endphp
                 <div class="col-lg-4 col-md-6 mb-4 d-flex">
                     <div class="resort-card d-flex flex-column h-100 w-100">
-                        <div class="resort-image">
+                        <div class="resort-image card-hang-phong">
                             @if ($promotion->link360)
                                 <iframe id="embed_iframe_box" src="{{ $promotion->link360 }}" scrolling="no" frameborder="0" allowvr="yes" allow="vr; xr; accelerometer; magnetometer; gyroscope; autoplay;" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" style="width: 100%; height: 100%;"></iframe>
                             @else
-                                <img class="w-100" style="object-fit: cover; aspect-ratio: 8/5" src="{{ $promotion->image ? asset('uploads/'.$promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion->ten }}">
+                                <img class="w-100 h-100" style="object-fit: cover;" src="{{ $promotion->image ? asset('uploads/'.$promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion->ten }}">
                             @endif
                         </div>
                         <div class="resort-details flex-grow-1 d-flex flex-column">

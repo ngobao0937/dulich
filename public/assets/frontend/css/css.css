@@ -1425,7 +1425,7 @@ a{
 .resort-image {
     background-size: cover;
     background-position: center;
-    aspect-ratio: 8/5;
+    aspect-ratio: 16/9;
 }
 
 .resort-details {
@@ -1936,6 +1936,11 @@ a{
 .nav-link:hover::after,
 .nav-link.active::after {
     width: 80%;
+}
+
+.card-hang-phong{
+    aspect-ratio: unset !important;
+    height: 55vh !important;
 }
 
 @media screen and (max-width: 1250px) {
