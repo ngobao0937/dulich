@@ -2,67 +2,81 @@
 @section('title', 'Sở du lịch - Trang chủ')
 @section('content')
 
-<div>
-    <div class="swiper bannerSwiper" style="width: 100%;">
+<section>
+    <div class="swiper bannerSwiper" style="width: 100%; height: 100vh; overflow: hidden;">
         <div class="swiper-wrapper">
             @foreach ($banners as $banner)
                 <div class="swiper-slide position-relative">
-                    <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 8/5;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->name }}">
+                    <img class="w-100 h-100" style="object-fit: cover;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->name }}">
                     <div class="overlay" style="border-radius: 0"></div>
                 </div>
             @endforeach
         </div>
     </div>
-</div>
+</section>
 
-<div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
+<div style="width: 100%;">
     <div class="container pb-5 pt-5" >
-        <div class="text-center">
-            <div class="title1">CƠ HỘI TRẢI NGHIỆM TUYỆT VỜI</div>
-            <div class="title2">ĐỪNG BỎ LỠ!</div>
-            <div class="w-100 d-flex justify-content-center mt-2">
-                <div class="con-desc">
-                    <div class="title3 text-danger mb-2">👉 Bạn có đang lo lắng về việc tìm kiếm thông tin du lịch đáng tin cậy? </div>
-                    <div class="title3 text-danger mb-2">👉 Không biết nơi nào ở, ăn gì, hay chơi gì tại Bà Rịa - Vũng Tàu? </div>
-                    <div class="title3 text-danger mb-2">👉 Nếu bỏ lỡ các ưu đãi từ Sở Du lịch và các đối tác, bạn có thể <span style="color: black">tốn nhiều</span> chi phí hơn <span style="color: black">và bỏ qua</span> những trải nghiệm độc đáo!</div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="w-100 h-100" style="background: #38b19e">
+
                 </div>
             </div>
-            
-            <div class="d-flex justify-content-center mt-4">
-                <img style="width: 60px; height: 60px;" src="{{ asset('assets/frontend/images/arrow-right-click-here-animated.gif') }}" alt="Tham gia ngay">
-                <button class="btn-1"><span>THAM GIA NGAY NẾU KHÔNG BỎ LỠ!</span></button>
+            <div class="col-md-8">
+                <div class="text-center">
+                    <div class="title1">TRẢI NGHIỆM VŨNG TÀU TRỌN VẸN</div>
+                    <div class="title2">ĐỪNG BỎ LỠ!</div>
+                    <div class="text-normal">Bạn đang tìm chuyến đi vừa chất, vừa chill?</div>
+                    <div class="text-normal mb-4">Tất cả đã có tại đây</div>
+                    <div class="text-normal mb-2">👉 Gợi ý <b><i>điểm đến đẹp, quán ăn "xịn"</i></b>, nơi <b><i>lưu trú sang trọng</i></b> 👈</div>
+                    <div class="text-normal mb-2">🎁 Đừng bỏ lỡ <b><i>ưu đãi độc quyền</i></b> từ Sở Du lịch & đối tác 🎁</div>
+                    <div class="text-normal mb-4">📍 Vũng Tàu đang chờ bạn khám phá theo cách riêng của mình 📍</div>
+                    
+                    <div class="d-flex justify-content-center">
+                        <button class="btn-1"><span>KHÁM PHÁ NGAY</span></button>
+                        <button class="btn-2">Xem Ưu Đãi</button>
+                    </div>
+                </div>
             </div>
         </div>
+        
     </div>
 </div>
 
-<div style="background: rgb(28, 77, 114); width: 100%;">
+<div style="background: #38b19e; width: 100%;">
     <div class="container pb-5 pt-5">
         <div class="title-white">TẠI SAO NÊN CHỌN CHÚNG TÔI?</div>
         <div class="d-flex justify-content-center mt-4 mb-5"><div class="div-hr"></div></div>
         <div class="row">
             <div class="col-md-4 mb-3">
-                <div class="w-100 text-center">
-                    <img class="w-100 mb-2" style="aspect-ratio: 5/3; object-fit: cover; border-radius: 10px" src="{{ asset('assets/frontend/images/h1.png') }}" alt="h1">
-                    <div class="title-image mb-2">Ở đâu?</div>
-                    <div class="w-100 mb-3" style="border-bottom: 1px solid white;"></div>
-                    <div class="des-image">Khám phá các khách sạn với ưu đãi độc quyền, từ resort sang trọng đến homestay ấm cúng.</div>
+                <div class="hover-box position-relative overflow-hidden" style="aspect-ratio: 1/1; border-radius: 10px;">
+                    <img class="w-100 h-100 position-absolute top-0 start-0" src="{{ asset('assets/frontend/images/h1.png') }}" alt="h1" style="object-fit: cover; z-index: 1;">
+                    
+                    <div class="hover-content position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center px-2" style="z-index: 2;">
+                        <div class="title-image fs-5 fw-bold mb-2">Ở đâu?</div>
+                        <div class="subtitle">Khám phá các khách sạn với ưu đãi độc quyền, từ resort sang trọng đến homestay ấm cúng.</div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4 mb-3">
-                <div class="w-100 text-center">
-                    <img class="w-100 mb-2" style="aspect-ratio: 5/3; object-fit: cover; border-radius: 10px" src="{{ asset('assets/frontend/images/h2.png') }}" alt="h2">
-                    <div class="title-image mb-2">Ăn gì?</div>
-                    <div class="w-100 mb-3" style="border-bottom: 1px solid white;"></div>
-                    <div class="des-image">Thưởng thức ẩm thực địa phương và quốc tế với các chương trình giảm giá hấp dẫn.</div>
+                <div class="hover-box position-relative overflow-hidden" style="aspect-ratio: 1/1; border-radius: 10px;">
+                    <img class="w-100 h-100 position-absolute top-0 start-0" src="{{ asset('assets/frontend/images/h2.png') }}" alt="h2" style="object-fit: cover; z-index: 1;">
+                    
+                    <div class="hover-content position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center px-2" style="z-index: 2;">
+                        <div class="title-image fs-5 fw-bold mb-2">Ăn gì?</div>
+                        <div class="subtitle">Thưởng thức ẩm thực địa phương và quốc tế với các chương trình giảm giá hấp dẫn.</div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="w-100 text-center">
-                    <img class="w-100 mb-2" style="aspect-ratio: 5/3; object-fit: cover; border-radius: 10px" src="{{ asset('assets/frontend/images/h3.png') }}" alt="h3">
-                    <div class="title-image mb-2">Chơi gì?</div>
-                    <div class="w-100 mb-3" style="border-bottom: 1px solid white;"></div>
-                    <div class="des-image">Trải nghiệm các hoạt động giải trí, từ bãi biển đến công viên với vé ưu đãi.</div>
+            <div class="col-md-4 mb-3">
+                <div class="hover-box position-relative overflow-hidden" style="aspect-ratio: 1/1; border-radius: 10px;">
+                    <img class="w-100 h-100 position-absolute top-0 start-0" src="{{ asset('assets/frontend/images/h3.png') }}" alt="h3" style="object-fit: cover; z-index: 1;">
+                    
+                    <div class="hover-content position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center px-2" style="z-index: 2;">
+                        <div class="title-image fs-5 fw-bold mb-2">Chơi gì?</div>
+                        <div class="subtitle">Trải nghiệm các hoạt động giải trí, từ bãi biển đến công viên với vé ưu đãi..</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,10 +131,10 @@
 <div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
     <div class="container pb-5 pt-5" >
         <div class="text-center">
-            <div class="title-blue mb-3">CHÚNG TÔI LÀ NGƯỜI HƯỚNG DẪN ĐÁNG TIN CẬY CỦA BẠN!</div>
+            <div class="title-mint mb-3">CHÚNG TÔI LÀ NGƯỜI HƯỚNG DẪN ĐÁNG TIN CẬY CỦA BẠN!</div>
             <div class="text-normal">Được bảo chứng bởi Sở Du lịch Bà Rịa - Vũng Tàu, chúng tôi cung cấp thông tin đầy đủ và chính xác về khách sạn, nhà hàng, và địa điểm vui chơi. Hãy để chúng tôi đồng hành cùng bạn trong hành trình khám phá!</div>
             <div class="d-flex justify-content-center mt-4">
-                <button class="btn-learn-more"><span>Tìm hiểu thêm về chúng tôi</span></button>
+                <button class="btn-learn-more-mint"><span>Về chúng tôi</span></button>
             </div>
         </div>
     </div>
@@ -164,10 +178,10 @@
 <div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
     <div class="container pb-5 pt-5" >
         <div class="text-center">
-            <div class="title-blue mb-3">HÀNH TRÌNH ĐÁNG NHỚ ĐANG CHỜ BẠN!</div>
+            <div class="title-mint mb-3">HÀNH TRÌNH ĐÁNG NHỚ ĐANG CHỜ BẠN!</div>
             <div class="text-normal">Hãy tưởng tượng bạn đang thư giãn tại một resort sang trọng với giá ưu đãi, thưởng thức hải sản tươi ngon tại nhà hàng địa phương, và tham gia các hoạt động thú vị mà không lo về chi phí. Tất cả đều bắt đầu từ đây!</div>
             <div class="d-flex justify-content-center mt-4">
-                <button class="btn-learn-more"><span>Đăng ký để trải nghiệm</span></button>
+                <button class="btn-learn-more-mint"><span>Đăng ký để trải nghiệm</span></button>
             </div>
         </div>
     </div>
@@ -371,8 +385,52 @@
 <div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
     <div class="container pb-5 pt-5" >
         <div class="text-center">
-            <div class="title-blue mb-3">TÀI NGUYÊN HỖ TRỢ DU LỊCH</div>
+            <div class="title-mint mb-3">HỖ TRỢ DU LỊCH</div>
             <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="w-100 text-center">
+                                <img style="width: 80px;" src="{{ asset('assets/frontend/images/maps.png') }}" alt="map">
+                                <div class="title-black mt-2 mb-1">Bản đồ du lịch Vũng Tàu</div>
+                                <div class="text-normal mb-1">Tìm kiếm resort, nhà hàng và hoạt động tại Vũng Tàu.</div>
+                                <div class="title-blue" style="font-size: 16px;">Xem bản đồ</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="w-100 text-center">
+                                <img style="width: 80px;" src="{{ asset('assets/frontend/images/maps.png') }}" alt="map">
+                                <div class="title-black mt-2 mb-1">Tham quan Tp. Vũng Tàu</div>
+                                <div class="text-normal mb-1">Khám phá các địa điểm nổi bật chỉ với 1 chạm.</div>
+                                <div class="title-blue" style="font-size: 16px;">Xem bản đồ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="w-100 text-center">
+                                <img style="width: 80px;" src="{{ asset('assets/frontend/images/maps.png') }}" alt="map">
+                                <div class="title-black mt-2 mb-1">Tham quan Hồ Tràm</div>
+                                <div class="text-normal mb-1">Khám phá bãi biển Hồ Tràm bằng VR360.</div>
+                                <div class="title-blue" style="font-size: 16px;">Xem bản đồ</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="w-100 text-center">
+                                <img style="width: 80px;" src="{{ asset('assets/frontend/images/maps.png') }}" alt="map">
+                                <div class="title-black mt-2 mb-1">Booking khách sạn</div>
+                                <div class="text-normal mb-1">Đặt khách sạn thuận tiện với nhiều ưu đãi hấp dẫn .</div>
+                                <div class="title-blue" style="font-size: 16px;">Xem bản đồ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- <div class="row">
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-3">
@@ -397,12 +455,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
 
-<div style="background: rgb(28, 77, 114); width: 100%;">
+<div style="background: #38b19e; width: 100%;">
     <div class="container pb-5 pt-5">
         <div class="title-white">CÁC BLOG MỚI NHẤT</div>
         <div class="d-flex justify-content-center mt-4 mb-5"><div class="div-hr"></div></div>
@@ -420,7 +478,7 @@
                             </div>
                             
                             <div class="d-flex justify-content-center mt-3 mb-3"> 
-                                <div style="border-bottom: 5px solid rgb(28, 77, 114); width: 50%; border-radius: 10px"></div>
+                                <div style="border-bottom: 5px solid #38b19e; width: 50%; border-radius: 10px"></div>
                             </div>
                         </div>
                     </a>
@@ -435,8 +493,8 @@
     <div class="container pb-5 pt-5">
         <div class="row">
             <div class="col-lg-7 mb-3">
-                <div class="title-blue text-left mb-2" style="font-size: clamp(20px, 4vw, 25px);">ĐĂNG KÝ NGAY ĐỂ NHẬN ƯU ĐÃI ĐỘC QUYỀN</div>
-                <div class="text-normal text-left mb-2" style="font-size: clamp(16px, 4vw, 17px);">Hãy để chúng tôi mang đến cho bạn những thông tin du lịch mới nhất, các chương trình khuyến mãi hấp dẫn từ Sở Du lịch và các đối tác. Chỉ một bước đơn giản, bạn sẽ không bỏ lỡ bất kỳ cơ hội tiết kiệm nào cho chuyến đi đến Bà Rịa - Vũng Tàu!</div>
+                <div class="title-mint text-left mb-2" style="font-size: clamp(20px, 4vw, 25px);">NHẬN ƯU ĐÃI ĐẶC QUYỀN CỦA CHÚNG TÔI</div>
+                <div class="text-normal text-left mb-2" style="font-size: clamp(16px, 4vw, 17px);">Hãy để chúng tôi mang đến cho bạn những thông tin du lịch mới nhất, các chương trình khuyến mãi hấp dẫn từ Sở Du lịch tỉnh Bà Rịa - Vũng Tàu và các đối tác. Chỉ một bước đơn giản, bạn sẽ không bỏ lỡ bất kỳ cơ hội tiết kiệm nào cho chuyến đi của mình.</div>
             </div>
             <div class="col-lg-5">
                 <form action="{{ route('frontend.customer.store') }}" method="post" style="border-radius: 10px; border: 1px solid rgb(184, 184, 184); padding: 15px; background: white; display: block;" id="customerForm">
@@ -480,6 +538,23 @@
     </div>
 </div>
 
+<div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
+    <div class="container pb-5">
+        <div class="title-mint text-left mb-2" style="font-size: clamp(20px, 4vw, 25px);">NHÀ TÀI TRỢ</div>
+        <div class="swiper sponsorSwiper">
+            <div class="swiper-wrapper">
+                @for ($i = 0; $i < 20; $i++)
+                    <div class="swiper-slide d-flex justify-content-center align-items-center">
+                        <img src="{{ asset('assets/frontend/images/images1.png') }}" alt="sponsor"
+                             style="border: 2px solid #1c4d72; border-radius: 10px; width: 150px; height: 120px; object-fit: cover;">
+                    </div>
+                @endfor
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @endsection
 @section('styles')
 {{-- <link rel="stylesheet" href="{{ auto_version('assets/frontend/css/style.css') }}"> --}}
@@ -497,6 +572,53 @@
             },
             pagination: false,
             navigation: false,
+        });
+
+        new Swiper(".sponsorSwiper", {
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            slidesPerView: 6,
+            spaceBetween: 10,
+            breakpoints: {
+                320: {
+                    slidesPerView: 2,
+                },
+                576: {
+                    slidesPerView: 3,
+                },
+                769: {
+                    slidesPerView: 4,
+                },
+                992: {
+                    slidesPerView: 6,
+                }
+            }
+        });
+
+        let bannerSection = document.querySelector(".bannerSwiper");
+        let nextSection = bannerSection.parentElement.nextElementSibling;
+
+        let scrolled = false;
+        const headerHeight = 50;
+
+        window.addEventListener("wheel", function (e) {
+            if (window.scrollY === 0) {
+                scrolled = false;
+            }
+
+            if (!scrolled && e.deltaY > 0 && window.scrollY < 50) {
+                scrolled = true;
+                if (nextSection) {
+                    const offsetTop = nextSection.getBoundingClientRect().top + window.scrollY - headerHeight;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
         });
     });
 </script>

@@ -1534,14 +1534,14 @@ a{
 
 .title1{
     font-weight: bold;
-    color: rgb(8, 34, 62);
-	font-size: clamp(22px, 4vw, 35px);
+    color: black;
+	font-size: clamp(20px, 4vw, 28px);
 }
 .title2{
 	margin: 0px;
     font-weight: bold;
-    color: rgb(28, 77, 114);
-	font-size: clamp(30px, 4vw, 51px);
+    color: #38b19e;
+	font-size: clamp(30px, 4vw, 45px);
 }
 .title3{
     font-size: clamp(16px, 4vw, 19px);
@@ -1549,29 +1549,27 @@ a{
 }
 
 .btn-1{
-	background-position: initial;
-    background-size: initial;
-    background-repeat: initial;
-    background-attachment: initial;
-    background-origin: initial;
-    background-clip: initial;
-    background-color: rgb(28, 77, 114);
+    border: none;
+    background-color: #38b19e;
     text-align: center;
     color: rgb(255, 255, 255);
-    width: 406px;
-    height: 59px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     border-radius: 25px;
+    padding: 7px 20px;
 }
 
 .btn-1>span{
-	font-size: clamp(16px, 4vw, 20px);
+	font-size: clamp(15px, 4vw, 17px);
     width: 100% !important;
     height: auto;
     font-weight: bold;
+}
+
+.btn-2{
+    color: #38b19e;
+    background: none;
+    border: none;
+    font-weight: bold;
+    padding: 7px 20px;
 }
 
 .title-white{
@@ -1589,7 +1587,7 @@ a{
 
 .title-image{
 	font-size: clamp(18px, 4vw, 26px);
-	color: white;
+	color: black;
 	font-weight: bold;
 }
 
@@ -1602,6 +1600,14 @@ a{
 	font-size: clamp(20px, 4vw, 35px);
 	font-weight: bold;
 	color: rgb(28, 77, 114);
+	/* font-family: Montserrat-Bold; */
+	text-align: center;
+}
+
+.title-mint{
+	font-size: clamp(20px, 4vw, 35px);
+	font-weight: bold;
+	color: #38b19e;
 	/* font-family: Montserrat-Bold; */
 	text-align: center;
 }
@@ -1669,6 +1675,38 @@ a{
     width: 100% !important;
     height: auto;
     color: rgb(28, 77, 114);
+    font-weight: bold;
+}
+
+.btn-learn-more-mint{
+	background-position: initial;
+    background-size: initial;
+    background-repeat: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: rgba(255, 255, 255, 0);
+    text-align: center;
+    color: rgb(255, 255, 255);
+    width: fit-content;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #38b19e;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.btn-learn-more-mint>span{
+	font-size: clamp(17px, 4vw, 19px);
+    width: 100% !important;
+    height: auto;
+    color: #38b19e;
     font-weight: bold;
 }
 
@@ -1952,6 +1990,39 @@ a{
     aspect-ratio: unset !important;
     height: 55vh !important;
 }
+
+.hover-box img {
+    transition: transform 0.4s ease;
+    object-fit: cover;
+}
+
+.hover-box .hover-content {
+    background: rgba(223, 200, 137, 0.884);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.hover-box:hover img {
+    transform: scale(1.05);
+}
+
+.hover-box:hover .hover-content {
+    opacity: 1;
+}
+
+.hover-box .subtitle {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.hover-box:hover .subtitle {
+    color: black;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
 
 @media screen and (max-width: 1250px) {
 	.title-sodl{

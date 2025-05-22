@@ -320,6 +320,22 @@
     </div>
 </div>
 
+<div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
+    <div class="container pb-5">
+        <div class="title-mint text-left mb-2" style="font-size: clamp(20px, 4vw, 25px);">NHÀ TÀI TRỢ</div>
+        <div class="swiper sponsorSwiper">
+            <div class="swiper-wrapper">
+                @for ($i = 0; $i < 20; $i++)
+                    <div class="swiper-slide d-flex justify-content-center align-items-center">
+                        <img src="{{ asset('assets/frontend/images/images1.png') }}" alt="sponsor"
+                             style="border: 2px solid #1c4d72; border-radius: 10px; width: 150px; height: 120px; object-fit: cover;">
+                    </div>
+                @endfor
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="typeModal" class="modal fade" role="dialog" style="z-index: 1050; display: none;">
     <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
@@ -377,6 +393,30 @@
             },
             pagination: false,
             navigation: false,
+        });
+
+        new Swiper(".sponsorSwiper", {
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            slidesPerView: 6,
+            spaceBetween: 10,
+            breakpoints: {
+                320: {
+                    slidesPerView: 2,
+                },
+                576: {
+                    slidesPerView: 3,
+                },
+                769: {
+                    slidesPerView: 4,
+                },
+                992: {
+                    slidesPerView: 6,
+                }
+            }
         });
 
         document.querySelectorAll('.countdown-event-container').forEach(function (container) {
