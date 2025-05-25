@@ -68,7 +68,11 @@ class PromotionPublicController extends Controller
         $offset = ($page - 1) * $limit;
 
         $baseQuery = Promotion::with('product')
-            ->where('isdelete', 0);
+                ->where('isdelete', 0)
+                ->whereHas('product', function ($query) {
+                    $query->where('isdelete', 0);
+                });
+
 
         if (!empty($query)) {
             $baseQuery->where(function ($q) use ($query) {
