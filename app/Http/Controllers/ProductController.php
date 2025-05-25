@@ -336,7 +336,7 @@ class ProductController extends Controller
             })
             ->whereHas('promotionThuongMain')
             ->orderBy('id', 'desc')
-            ->paginate(20);
+            ->paginate(12);
 
         return view('frontend.product.promotions', [
             'banners' => $banners,

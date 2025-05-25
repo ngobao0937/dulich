@@ -10,7 +10,7 @@ class Promotion extends Model
 
 	public $timestamps = false;
 
-	protected $fillable = ['id', 'name', 'active', 'position', 'link', 'type', 'isdelete', 'description', 'start_date', 'end_in', 'product_fk', 'email', 'tagline', 'issave', 'price', 'link360'];
+	protected $fillable = ['id', 'name', 'active', 'position', 'link', 'type', 'isdelete', 'description', 'start_date', 'end_in', 'product_fk', 'email', 'tagline', 'issave', 'price', 'link360', 'menu_fk', 'stt'];
 
 	public function image() {
 		return $this->hasOne('App\Models\Image', 'id_fk','id')->where('type','promotion');
@@ -18,5 +18,9 @@ class Promotion extends Model
 
 	public function product() {
 		return $this->belongsTo('App\Models\Product', 'product_fk');
+	}
+
+	public function menu() {
+		return $this->belongsTo('App\Models\Menu', 'menu_fk');
 	}
 }

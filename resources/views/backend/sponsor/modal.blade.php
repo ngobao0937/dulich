@@ -1,16 +1,15 @@
 <div id="myModal" class="modal fade" role="dialog" data-id="0">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <form action="{{ route('backend.banner.delete', request()->query()) }}" method="post">
+            <form action="{{ route('backend.sponsor.delete', request()->query()) }}" method="post">
                 @csrf @method('DELETE')
                 <div class="modal-header">
                     <h4 class="modal-title">Xác nhận xóa</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>Bạn có thật sự muốn xóa banner này?</p>
+                    <p>Bạn có thật sự muốn xóa nhà tài trợ này?</p>
                     <input type="text" id="deleteId" name="id" hidden />
-                    <input type="hidden" name="type" id="deleteType">
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
@@ -20,32 +19,22 @@
         </div>
     </div>
 </div>
-<div id="bannerModal" class="modal fade" role="dialog" aria-labelledby="bannerModalLabel">
+<div id="sponsorModal" class="modal fade" role="dialog" aria-labelledby="sponsorModalLabel">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="{{ route('backend.banner.store', request()->query()) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('backend.sponsor.store', request()->query()) }}" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <input type="text" id="id" name="id" value="" hidden />
-                    {{-- <input type="hidden" name="type" value="main"> --}}
-                    <div class="form-group">
-                        <label>Tên Banner <span class="text-danger">*</span></label>
-                        <input name="name" id="name" type="text" class="form-control" placeholder="Nhập tên ..." required />
-                    </div>
-
+                    
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-8">
                             <div class="form-group">
-                                <label for="type">Thuộc trang</label>
-                                <select name="type" id="type" class="form-control" required>
-                                    <option value="main">Trang chủ</option>
-                                    <option value="event">Trang sự kiện</option>
-                                    <option value="promotion">Trang ưu đãi</option>
-                                    <option value="blog">Trang blog</option>
-                                </select>
+                                <label>Tên nhà tài trợ <span class="text-danger">*</span></label>
+                                <input name="name" id="name" type="text" class="form-control" placeholder="Nhập tên ..." required />
                             </div>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Thứ tự <span class="text-danger">*</span></label>
                                 <input name="position" id="position" type="number" min="1" class="form-control" placeholder="Thứ tự ..." required />

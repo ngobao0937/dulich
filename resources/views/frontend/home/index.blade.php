@@ -59,23 +59,27 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-3">
-                <div class="hover-box position-relative overflow-hidden" style="aspect-ratio: 1/1; border-radius: 10px;">
-                    <img class="w-100 h-100 position-absolute top-0 start-0" src="{{ asset('assets/frontend/images/h2.png') }}" alt="h2" style="object-fit: cover; z-index: 1;">
-                    
-                    <div class="hover-content position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center px-2" style="z-index: 2;">
-                        <div class="title-image fs-5 fw-bold mb-2">Ăn gì?</div>
-                        <div class="subtitle">Thưởng thức ẩm thực địa phương và quốc tế với các chương trình giảm giá hấp dẫn.</div>
+            <div class="col-md-8 mb-3">
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <div class="hover-box position-relative overflow-hidden" style="aspect-ratio: 1/1; border-radius: 10px;">
+                            <img class="w-100 h-100 position-absolute top-0 start-0" src="{{ asset('assets/frontend/images/h2.png') }}" alt="h2" style="object-fit: cover; z-index: 1;">
+                            
+                            <div class="hover-content position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center px-2" style="z-index: 2;">
+                                <div class="title-image fs-5 fw-bold mb-2">Ăn gì?</div>
+                                <div class="subtitle">Thưởng thức ẩm thực địa phương và quốc tế với các chương trình giảm giá hấp dẫn.</div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="hover-box position-relative overflow-hidden" style="aspect-ratio: 1/1; border-radius: 10px;">
-                    <img class="w-100 h-100 position-absolute top-0 start-0" src="{{ asset('assets/frontend/images/h3.png') }}" alt="h3" style="object-fit: cover; z-index: 1;">
-                    
-                    <div class="hover-content position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center px-2" style="z-index: 2;">
-                        <div class="title-image fs-5 fw-bold mb-2">Chơi gì?</div>
-                        <div class="subtitle">Trải nghiệm các hoạt động giải trí, từ bãi biển đến công viên với vé ưu đãi..</div>
+                    <div class="col-6 mb-3">
+                        <div class="hover-box position-relative overflow-hidden" style="aspect-ratio: 1/1; border-radius: 10px;">
+                            <img class="w-100 h-100 position-absolute top-0 start-0" src="{{ asset('assets/frontend/images/h3.png') }}" alt="h3" style="object-fit: cover; z-index: 1;">
+                            
+                            <div class="hover-content position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center px-2" style="z-index: 2;">
+                                <div class="title-image fs-5 fw-bold mb-2">Chơi gì?</div>
+                                <div class="subtitle">Trải nghiệm các hoạt động giải trí, từ bãi biển đến công viên với vé ưu đãi..</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -203,10 +207,10 @@
                 </div>
             </div>
             
-            @foreach ($products_KS as $product)
+            @foreach ($promotions_KS as $promotion_p)
                 @php
-                    $startDate = \Carbon\Carbon::parse($product->promotionThuongMain->start_date);
-                    $endDate = $startDate->copy()->addDays($product->promotionThuongMain->end_in);
+                    $startDate = \Carbon\Carbon::parse($promotion_p->promotion->start_date);
+                    $endDate = $startDate->copy()->addDays($promotion_p->promotion->end_in);
                     $now = \Carbon\Carbon::now();
                     $isComing = $now->lt($startDate);
                     $targetDate = $isComing ? $startDate : $endDate;
@@ -214,18 +218,18 @@
                 <div class="col-lg-4 col-md-6 mb-4 d-flex">
                     <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
-                            <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 16/9;" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
+                            <a href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}" class="w-100 h-100">
+                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 16/9;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
                             </a>
                         </div>
                         <div class="resort-details d-flex flex-column flex-grow-1">
                             <div class="resort-name">
-                                <a style="color: unset;" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">{{ $product->promotionThuongMain->name }}</a>
+                                <a style="color: unset;" href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}">{{ $promotion_p->promotion->name }}</a>
                             </div>
                             <div class="discount-info">
                                 <i class="fas fa-tag discount-icon"></i>
                                 <div class="promotion-description">
-                                    {{ $product->promotionThuongMain->description }}
+                                    {{ $promotion_p->promotion->description }}
                                 </div>
                             </div>
                             <div class="mt-auto">
@@ -239,7 +243,7 @@
                                     <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Phút</div></div>
                                     <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giây</div></div>
                                 </div>
-                                <a class="btn-get-offer" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">Nhận ưu đãi</a>
+                                <a class="btn-get-offer" href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}">Nhận ưu đãi</a>
                             </div>
                         </div>
                     </div>
@@ -268,10 +272,10 @@
                 </div>
             </div>
             
-            @foreach ($products_NH as $product)
+            @foreach ($promotions_NH as $promotion_p)
                 @php
-                    $startDate = \Carbon\Carbon::parse($product->promotionThuongMain->start_date);
-                    $endDate = $startDate->copy()->addDays($product->promotionThuongMain->end_in);
+                    $startDate = \Carbon\Carbon::parse($promotion_p->promotion->start_date);
+                    $endDate = $startDate->copy()->addDays($promotion_p->promotion->end_in);
                     $now = \Carbon\Carbon::now();
                     $isComing = $now->lt($startDate);
                     $targetDate = $isComing ? $startDate : $endDate;
@@ -279,18 +283,18 @@
                 <div class="col-lg-4 col-md-6 mb-4 d-flex">
                     <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
-                            <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 16/9;" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
+                            <a href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}" class="w-100 h-100">
+                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 16/9;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
                             </a>
                         </div>
                         <div class="resort-details d-flex flex-column flex-grow-1">
                             <div class="resort-name">
-                                <a style="color: unset;" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">{{ $product->promotionThuongMain->name }}</a>
+                                <a style="color: unset;" href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}">{{ $promotion_p->promotion->name }}</a>
                             </div>
                             <div class="discount-info">
                                 <i class="fas fa-tag discount-icon"></i>
                                 <div class="promotion-description">
-                                    {{ $product->promotionThuongMain->description }}
+                                    {{ $promotion_p->promotion->description }}
                                 </div>
                             </div>
                             <div class="mt-auto">
@@ -304,7 +308,7 @@
                                     <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Phút</div></div>
                                     <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giây</div></div>
                                 </div>
-                                <a class="btn-get-offer" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">Nhận ưu đãi</a>
+                                <a class="btn-get-offer" href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}">Nhận ưu đãi</a>
                             </div>
                         </div>
                     </div>
@@ -333,10 +337,10 @@
                 </div>
             </div>
             
-            @foreach ($products_KVC as $product)
+            @foreach ($promotions_KVC as $promotion_p)
                 @php
-                    $startDate = \Carbon\Carbon::parse($product->promotionThuongMain->start_date);
-                    $endDate = $startDate->copy()->addDays($product->promotionThuongMain->end_in);
+                    $startDate = \Carbon\Carbon::parse($promotion_p->promotion->start_date);
+                    $endDate = $startDate->copy()->addDays($promotion_p->promotion->end_in);
                     $now = \Carbon\Carbon::now();
                     $isComing = $now->lt($startDate);
                     $targetDate = $isComing ? $startDate : $endDate;
@@ -344,18 +348,18 @@
                 <div class="col-lg-4 col-md-6 mb-4 d-flex">
                     <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
-                            <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 16/9;" src="{{ $product->promotionThuongMain->image ? asset('uploads/'.$product->promotionThuongMain->image->ten) : asset('images/default.jpg') }}" alt="{{ $product->name }}">
+                            <a href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}" class="w-100 h-100">
+                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 16/9;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
                             </a>
                         </div>
                         <div class="resort-details d-flex flex-column flex-grow-1">
                             <div class="resort-name">
-                                <a style="color: unset;" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">{{ $product->promotionThuongMain->name }}</a>
+                                <a style="color: unset;" href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}">{{ $promotion_p->promotion->name }}</a>
                             </div>
                             <div class="discount-info">
                                 <i class="fas fa-tag discount-icon"></i>
                                 <div class="promotion-description">
-                                    {{ $product->promotionThuongMain->description }}
+                                    {{ $promotion_p->promotion->description }}
                                 </div>
                             </div>
                             <div class="mt-auto">
@@ -369,7 +373,7 @@
                                     <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Phút</div></div>
                                     <div class="countdown-box"><div class="countdown-value">00</div><div class="countdown-label">Giây</div></div>
                                 </div>
-                                <a class="btn-get-offer" href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}">Nhận ưu đãi</a>
+                                <a class="btn-get-offer" href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}">Nhận ưu đãi</a>
                             </div>
                         </div>
                     </div>
@@ -543,12 +547,12 @@
         <div class="title-mint text-left mb-2" style="font-size: clamp(20px, 4vw, 25px);">NHÀ TÀI TRỢ</div>
         <div class="swiper sponsorSwiper">
             <div class="swiper-wrapper">
-                @for ($i = 0; $i < 20; $i++)
+                @foreach ($sponsors as $sponsor)
                     <div class="swiper-slide d-flex justify-content-center align-items-center">
-                        <img src="{{ asset('assets/frontend/images/images1.png') }}" alt="sponsor"
+                        <img src="{{ $sponsor->image ? asset('uploads/'.$sponsor->image->ten) : asset('assets/frontend/images/images1.png') }}" alt="{{ $sponsor->name }}"
                              style="border: 2px solid #1c4d72; border-radius: 10px; width: 150px; height: 120px; object-fit: cover;">
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </div>

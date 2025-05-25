@@ -17,9 +17,11 @@ use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\PromotionController;
+use App\Http\Controllers\PromotionPublicController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\SponsorController;
 
 Route::get('/', [HomeController::class, 'index'])->name('frontend.home.index');
 
@@ -88,6 +90,11 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/banner/edit', [BannerController::class,'edit'])->name('backend.banner.edit');
     Route::delete('/banner/delete', [BannerController::class,'delete'])->name('backend.banner.delete');
 
+    Route::get('/sponsor', [SponsorController::class,'index'])->name('backend.sponsor.index');
+    Route::post('/sponsor/store', [SponsorController::class,'store'])->name('backend.sponsor.store');
+    Route::get('/sponsor/edit', [SponsorController::class,'edit'])->name('backend.sponsor.edit');
+    Route::delete('/sponsor/delete', [SponsorController::class,'delete'])->name('backend.sponsor.delete');
+
     Route::get('/menu', [MenuController::class, 'index'])->name('backend.menu.index');
     Route::post('/menu/store', [MenuController::class, 'store'])->name('backend.menu.store');
     Route::get('/menu/edit', [MenuController::class, 'edit'])->name('backend.menu.edit');
@@ -145,6 +152,13 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::post('/promotion/store', [PromotionController::class, 'store'])->name('backend.promotion.store');
     Route::get('/promotion/edit', [PromotionController::class, 'edit'])->name('backend.promotion.edit');
     Route::delete('/promotion/delete', [PromotionController::class, 'delete'])->name('backend.promotion.delete');
+
+    Route::get('/promotion_public', [PromotionPublicController::class, 'index'])->name('backend.promotion_public.index');
+    Route::post('/promotion_public/store', [PromotionPublicController::class, 'store'])->name('backend.promotion_public.store');
+    Route::get('/promotion_public/edit', [PromotionPublicController::class, 'edit'])->name('backend.promotion_public.edit');
+    Route::delete('/promotion_public/delete', [PromotionPublicController::class, 'delete'])->name('backend.promotion_public.delete');
+    Route::get('/promotion_public/search-promotions', [PromotionPublicController::class, 'searchPromotions'])->name('backend.promotion_public.searchPromotions');
+
 
     Route::get('/customer', [CustomerController::class, 'index'])->name('backend.customer.index');
     Route::post('/customer/store', [CustomerController::class, 'store'])->name('backend.customer.store');

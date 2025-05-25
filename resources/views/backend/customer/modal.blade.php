@@ -37,7 +37,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Thứ tự <span class="text-danger">*</span></label>
-                                <input name="position" id="position" type="number" class="form-control" placeholder="Thứ tự ..." required />
+                                <input name="position" id="position" type="number" min="1" class="form-control" placeholder="Thứ tự ..." required />
                             </div>
                         </div>
                     </div>

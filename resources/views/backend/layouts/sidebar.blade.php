@@ -46,6 +46,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ route('backend.promotion_public.index') }}" class="nav-link {{ request()->routeIs('backend.promotion_public.*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-ticket-alt"></i>
+              <p>Ưu đãi</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('backend.blog.index') }}" class="nav-link {{ request()->routeIs('backend.blog.*') ? 'active' : '' }}">
               <i class="nav-icon far fa-newspaper"></i>
               <p>Blog</p>
@@ -74,6 +80,12 @@
             <a href="{{ route('backend.banner.index') }}" class="nav-link {{ request()->routeIs('backend.banner.*') ? 'active' : '' }}">
               <i class="nav-icon far fa-image"></i>
               <p>Banner</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('backend.sponsor.index') }}" class="nav-link {{ request()->routeIs('backend.sponsor.*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-handshake"></i>
+              <p>Nhà tài trợ</p>
             </a>
           </li>
           <li class="nav-item">

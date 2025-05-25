@@ -7,8 +7,10 @@ use App\Models\Banner;
 use App\Models\Blog;
 use App\Models\Page;
 use App\Models\Product;
+use App\Models\PromotionPublic;
 use App\Models\Menu;
 use App\Models\Contact;
+use App\Models\Sponsor;
 use App\Models\Event;
 use Mews\Captcha\Facades\Captcha;
 use Illuminate\Support\Facades\Validator;
@@ -18,45 +20,68 @@ use Carbon\Carbon;
 class HomeController extends Controller
 {
     public function index(){
-        $products_KS = Product::where('active', 1)
-            ->where('isdelete', 0)
-            ->whereHas('menus', function ($query) {
-                $query->where('menus.id', 10000);
-            })
-            ->whereHas('promotionThuongMain')
-            ->orderBy('id', 'desc')
-            ->take(5)
-            ->get();
+        // $products_KS = Product::where('active', 1)
+        //     ->where('isdelete', 0)
+        //     ->whereHas('menus', function ($query) {
+        //         $query->where('menus.id', 10000);
+        //     })
+        //     ->whereHas('promotionThuongMain')
+        //     ->orderBy('id', 'desc')
+        //     ->take(5)
+        //     ->get();
 
-        $products_NH = Product::where('active', 1)
-            ->where('isdelete', 0)
-            ->whereHas('menus', function ($query) {
-                $query->where('menus.id', 10001);
-            })
-            ->whereHas('promotionThuongMain')
-            ->orderBy('id', 'desc')
-            ->take(5)
-            ->get();
+        // $products_NH = Product::where('active', 1)
+        //     ->where('isdelete', 0)
+        //     ->whereHas('menus', function ($query) {
+        //         $query->where('menus.id', 10001);
+        //     })
+        //     ->whereHas('promotionThuongMain')
+        //     ->orderBy('id', 'desc')
+        //     ->take(5)
+        //     ->get();
 
-        $products_KVC = Product::where('active', 1)
-            ->where('isdelete', 0)
-            ->whereHas('menus', function ($query) {
-                $query->where('menus.id', 10002);
-            })
-            ->whereHas('promotionThuongMain')
-            ->orderBy('id', 'desc')
-            ->take(5)
-            ->get();
+        // $products_KVC = Product::where('active', 1)
+        //     ->where('isdelete', 0)
+        //     ->whereHas('menus', function ($query) {
+        //         $query->where('menus.id', 10002);
+        //     })
+        //     ->whereHas('promotionThuongMain')
+        //     ->orderBy('id', 'desc')
+        //     ->take(5)
+        //     ->get();
+
+        $promotionPublics = PromotionPublic::with(['promotion.product'])
+                ->where('position', '>', 0)
+                ->whereHas('promotion.product', function ($query) {
+                    $query->where('active', 1)
+                        ->where('isdelete', 0);
+                })
+                ->whereIn('menu_fk', [10000, 10001, 10002])
+                ->orderBy('menu_fk')
+                ->orderBy('position')
+                ->get()
+                ->groupBy('menu_fk');
+
+        $promotions_KS = $promotionPublics[10000] ?? collect();
+        $promotions_NH = $promotionPublics[10001] ?? collect();
+        $promotions_KVC = $promotionPublics[10002] ?? collect();
 
         $banners = Banner::where('type', 'main')->orderby('position', 'asc')->where('active', 1)->get();
 
         $blogs = Blog::where('active', 1)->orderby('id', 'desc')->take(3)->get();
+
+        $sponsors = Sponsor::where('active', 1)->orderby('position', 'asc')->get();
+
         return view('frontend.home.index', [
             'banners' => $banners,
             'blogs' => $blogs,
-            'products_KS' => $products_KS,
-            'products_NH' => $products_NH,
-            'products_KVC' => $products_KVC
+            'promotions_KS' => $promotions_KS,
+            'promotions_NH' => $promotions_NH,
+            'promotions_KVC' => $promotions_KVC,
+            'sponsors' => $sponsors
+            // 'products_KS' => $products_KS,
+            // 'products_NH' => $products_NH,
+            // 'products_KVC' => $products_KVC
         ]);
     }
 
@@ -91,42 +116,31 @@ class HomeController extends Controller
 
         // $events = Event::where('active', 1)->orderby('id', 'desc')->paginate(10);
 
-        $products_KS = Product::where('active', 1)
-            ->where('isdelete', 0)
-            ->whereHas('menus', function ($query) {
-                $query->where('menus.id', 10000);
-            })
-            ->whereHas('promotionThuongMain')
-            ->orderBy('id', 'desc')
-            ->take(5)
-            ->get();
+        $sponsors = Sponsor::where('active', 1)->orderby('position', 'asc')->get();
 
-        $products_NH = Product::where('active', 1)
-            ->where('isdelete', 0)
-            ->whereHas('menus', function ($query) {
-                $query->where('menus.id', 10001);
-            })
-            ->whereHas('promotionThuongMain')
-            ->orderBy('id', 'desc')
-            ->take(5)
-            ->get();
+        $promotionPublics = PromotionPublic::with(['promotion.product'])
+                ->where('position', '>', 0)
+                ->whereHas('promotion.product', function ($query) {
+                    $query->where('active', 1)
+                        ->where('isdelete', 0);
+                })
+                ->whereIn('menu_fk', [10000, 10001, 10002])
+                ->orderBy('menu_fk')
+                ->orderBy('position')
+                ->get()
+                ->groupBy('menu_fk');
 
-        $products_KVC = Product::where('active', 1)
-            ->where('isdelete', 0)
-            ->whereHas('menus', function ($query) {
-                $query->where('menus.id', 10002);
-            })
-            ->whereHas('promotionThuongMain')
-            ->orderBy('id', 'desc')
-            ->take(5)
-            ->get();
+        $promotions_KS = $promotionPublics[10000] ?? collect();
+        $promotions_NH = $promotionPublics[10001] ?? collect();
+        $promotions_KVC = $promotionPublics[10002] ?? collect();
 
         return view('frontend.home.event', [
             'banners' => $banners,
             'events' => $events,
-            'products_KS' => $products_KS,
-            'products_NH' => $products_NH,
-            'products_KVC' => $products_KVC
+            'promotions_KS' => $promotions_KS,
+            'promotions_NH' => $promotions_NH,
+            'promotions_KVC' => $promotions_KVC,
+            'sponsors' => $sponsors
         ]);
     }
 
