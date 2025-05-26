@@ -15146,6 +15146,18 @@
 .ratingCmt input:checked ~ label {
   color: rgb(255, 153, 0);
 }
+.lg-img-wrap, 
+.lg-inner {
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+}
+
+.lg-current .lg-image {
+	max-width: 100vw !important;
+	max-height: 85vh !important;
+	object-fit: contain;
+}
 @media screen and (max-width: 767px) {
 	.custom-modal .swiper-button-next, .custom-modal .swiper-button-prev{
 		display: none;

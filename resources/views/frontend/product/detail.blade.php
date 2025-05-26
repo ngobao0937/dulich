@@ -50,7 +50,7 @@
 </section>
 
 @php
-    $galleryImages = $product->images->where('active', 1)->take(5)->values(); // ->values() để có chỉ số tuần tự
+    $galleryImages = $product->images->where('active', 1)->take(5)->values();
 @endphp
 
 <section style="background-color: rgb(227, 239, 249); padding-top: 29px;">
@@ -316,71 +316,66 @@
 
 </div>
 
-<div id="customGalleryModal" class="custom-modal">
-    <div class="custom-modal-content">
-        <button class="custom-modal-close" id="closeGalleryModal">&times;</button>
-
-        <div class="position-relative w-100 h-100">
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                    @foreach ($product->images->where('active', 1)->values() as $img)
-                        <div class="swiper-slide text-center">
-                            <img src="{{ $img->image->ten ? asset('uploads/' . $img->image->ten) : asset('assets/frontend/images/image-lib.png') }}"
-                                class="img-fluid"
-                                style="max-height: 80vh; object-fit: contain;"
-                                alt="Gallery Image">
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-        </div>
-
-        
-    </div>
+<!-- LightGallery container - Ẩn -->
+<div id="fullGallery" style="display: none;">
+    @foreach ($product->images->where('active', 1)->values() as $img)
+        @php
+            $src = $img->image->ten ? asset('uploads/' . $img->image->ten) : asset('assets/frontend/images/image-lib.png');
+        @endphp
+        <a href="{{ $src }}">
+            <img src="{{ $src }}" />
+        </a>
+    @endforeach
 </div>
+
 
 
 @endsection
 @section('styles')
 <link rel="stylesheet" href="{{ auto_version('assets/frontend/css/chitiet.css') }}">
-<style>
-    
-</style>
+
+<link rel="stylesheet" href="{{ asset('assets/frontend/lib/lightgallery/css/lightgallery-bundle.min.css') }}">
+
+<script src="{{ asset('assets/frontend/lib/lightgallery/lightgallery.min.js') }}"></script>
+
+<script src="{{ asset('assets/frontend/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js') }}"></script>
+<script src="{{ asset('assets/frontend/lib/lightgallery/plugins/zoom/lg-zoom.min.js') }}"></script>
+<script src="{{ asset('assets/frontend/lib/lightgallery/plugins/fullscreen/lg-fullscreen.min.js') }}"></script>
+<script src="{{ asset('assets/frontend/lib/lightgallery/plugins/autoplay/lg-autoplay.min.js') }}"></script>
+<script src="{{ asset('assets/frontend/lib/lightgallery/plugins/rotate/lg-rotate.min.js') }}"></script>
+<script src="{{ asset('assets/frontend/lib/lightgallery/plugins/share/lg-share.min.js') }}"></script>
+
 @endsection
 @section('script')
+<script>
+    const lgInstance = lightGallery(document.getElementById('fullGallery'), {
+        selector: 'a',
+        plugins: [lgZoom, lgThumbnail, lgFullscreen, lgAutoplay, lgRotate, lgShare],
+        speed: 500,
+        download: true,
+        zoomFromOrigin: true,
+        allowMediaOverlap: true,
+        toggleThumb: true,
+        showZoomInOutIcons: true,
+        actualSize: true,
+        fullScreen: true,
+        mode: 'lg-slide',
+        licenseKey: '0000-0000-000-0000',
+    });
+
+    document.querySelectorAll('.gallery-img').forEach(function (img) {
+        img.addEventListener('click', function () {
+            const index = parseInt(this.getAttribute('data-index'));
+            lgInstance.openGallery(index);
+        });
+    });
+</script>
+
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var swiper;
-        const modal = document.getElementById('customGalleryModal');
-        const closeBtn = document.getElementById('closeGalleryModal');
-
-        document.querySelectorAll('.gallery-img').forEach(function (img) {
-            img.addEventListener('click', function () {
-                const index = parseInt(this.dataset.index) || 0;
-                modal.classList.add('show');
-
-                setTimeout(() => {
-                    if (!swiper) {
-                        swiper = new Swiper('.mySwiper', {
-                            loop: true,
-                            navigation: {
-                                nextEl: '.swiper-button-next',
-                                prevEl: '.swiper-button-prev',
-                            },
-                        });
-                    }
-                    swiper.slideToLoop(index);
-                }, 200);
-            });
-        });
-
-        closeBtn.addEventListener('click', function () {
-            modal.classList.remove('show');
-            if (swiper) swiper.slideToLoop(0);
-        });
+        
 
         const productBannerSwiper = new Swiper('.product-banner-swiper', {
             effect: 'fade',
