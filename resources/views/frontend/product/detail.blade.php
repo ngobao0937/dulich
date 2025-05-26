@@ -53,7 +53,7 @@
     $galleryImages = $product->images->where('active', 1)->take(5)->values(); // ->values() để có chỉ số tuần tự
 @endphp
 
-<section class="pt-4" style="background-color: rgb(227, 239, 249);">
+<section style="background-color: rgb(227, 239, 249); padding-top: 29px;">
     <div class="container">
         <div class="banner-grid-wrapper">
             <div class="row">
@@ -83,7 +83,7 @@
                                     @php
                                         $srcSmall = $imgSmall->image->ten ? asset('uploads/' . $imgSmall->image->ten) : asset('assets/frontend/images/image-lib.png');
                                     @endphp
-                                    <div class="col-6 mb-4">
+                                    <div class="col-6" style="margin-bottom: 29px;">
                                         <div class="col-inner">
                                             <div class="img">
                                                 <a href="javascript:void(0);">

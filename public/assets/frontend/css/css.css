@@ -1793,7 +1793,7 @@ a{
     background-color: rgb(28, 77, 114);
     color: white;
     transition: left 0.3s ease;
-    z-index: 9999;
+    z-index: 999;
     padding: 1rem;
 }
 

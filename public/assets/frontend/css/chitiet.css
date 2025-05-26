@@ -14975,7 +14975,7 @@
 }
 
 .section-description *:not([class*="fa"]) {
-	font-family: 'Open Sans';
+	font-family: 'Roboto';
 	font-size: 17px;
 	line-height: 1.7;
 }
