@@ -15097,6 +15097,9 @@
   content: '\2605';
   font-size: 30px;
 }
+.ratingG input:checked ~ label {
+  color: rgb(255, 153, 0);
+}
 
 .rating {
   display: inline-block;
