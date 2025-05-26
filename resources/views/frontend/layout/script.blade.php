@@ -1,6 +1,6 @@
 <div id="myModal" class="modal fade" role="dialog" style="z-index: 1050; display: none;">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="background: rgb(28, 77, 114); color: white;">
+        <div class="modal-content" style="background: #38b19e; color: white;">
             <form action="{{ route('frontend.customer.store') }}" method="post" id="registerForm" style="display: block;">
                 @csrf
                 <input type="hidden" name="promotion_fk" id="register_promotion_fk" value="0">
@@ -27,13 +27,13 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="icheck-primary d-inline">
+                        <div class="icheck-success d-inline">
                             <input type="checkbox" name="agree" id="agree" checked required>
                             @php
                                 $page1 = App\Models\Page::find(10000);
                                 $page2 = App\Models\Page::find(10001);
                             @endphp
-                            <label for="agree">Tôi đồng ý với <a href="{{ route('frontend.page.detail', ['id'=>10000, 'slug'=>$page1->slug]) }}" style="color: #64bfff; font-weight: bold;" target="_blank">Điều khoản dịch vụ</a> và <a href="{{ route('frontend.page.detail', ['id'=>10001, 'slug'=>$page2->slug]) }}" style="color: #64bfff; font-weight: bold;" target="_blank">Chính sách quyền riêng tư</a></label>
+                            <label for="agree">Tôi đồng ý với <a href="{{ route('frontend.page.detail', ['id'=>10000, 'slug'=>$page1->slug]) }}" style="color: rgb(255, 211, 130); font-weight: bold;" target="_blank">Điều khoản dịch vụ</a> và <a href="{{ route('frontend.page.detail', ['id'=>10001, 'slug'=>$page2->slug]) }}" style="color: rgb(255, 211, 130); font-weight: bold;" target="_blank">Chính sách quyền riêng tư</a></label>
                         </div>
                     </div>
                     
@@ -45,7 +45,7 @@
 </div>
 
 <button id="scrollToTop" type="button" class="btn btn-lg">
-    <i class="fas fa-chevron-up" style="font-size: 17px; color: #084c7e;"></i>
+    <i class="fas fa-chevron-up" style="font-size: 17px; color: #38b19e;"></i>
 </button>
 <script src="{{ auto_version('assets/backend/plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{ auto_version('assets/backend/plugins/jquery-validation/jquery.validate.min.js') }}"></script>

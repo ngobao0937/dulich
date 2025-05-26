@@ -49,7 +49,7 @@
         <div class="title-white">TẠI SAO NÊN CHỌN CHÚNG TÔI?</div>
         <div class="d-flex justify-content-center mt-4 mb-5"><div class="div-hr"></div></div>
         <div class="row">
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-4">
                 <div class="hover-box position-relative overflow-hidden" style="aspect-ratio: 1/1; border-radius: 10px;">
                     <img class="w-100 h-100 position-absolute top-0 start-0" src="{{ asset('assets/frontend/images/h1.png') }}" alt="h1" style="object-fit: cover; z-index: 1;">
                     
@@ -59,9 +59,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8 mb-3">
+            <div class="col-md-8">
                 <div class="row">
-                    <div class="col-6 mb-3">
+                    <div class="col-6">
                         <div class="hover-box position-relative overflow-hidden" style="aspect-ratio: 1/1; border-radius: 10px;">
                             <img class="w-100 h-100 position-absolute top-0 start-0" src="{{ asset('assets/frontend/images/h2.png') }}" alt="h2" style="object-fit: cover; z-index: 1;">
                             
@@ -71,7 +71,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 mb-3">
+                    <div class="col-6">
                         <div class="hover-box position-relative overflow-hidden" style="aspect-ratio: 1/1; border-radius: 10px;">
                             <img class="w-100 h-100 position-absolute top-0 start-0" src="{{ asset('assets/frontend/images/h3.png') }}" alt="h3" style="object-fit: cover; z-index: 1;">
                             
@@ -389,13 +389,13 @@
 <div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
     <div class="container pb-5 pt-5" >
         <div class="text-center">
-            <div class="title-mint mb-3">HỖ TRỢ DU LỊCH</div>
+            <div class="title-mint mb-4">HỖ TRỢ DU LỊCH</div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-6">
                             <div class="w-100 text-center">
-                                <img style="width: 80px;" src="{{ asset('assets/frontend/images/maps.png') }}" alt="map">
+                                <img style="width: 80px;" src="{{ asset('assets/frontend/images/virtual-reality.png') }}" alt="map">
                                 <div class="title-black mt-2 mb-1">Bản đồ du lịch Vũng Tàu</div>
                                 <div class="text-normal mb-1">Tìm kiếm resort, nhà hàng và hoạt động tại Vũng Tàu.</div>
                                 <div class="title-blue" style="font-size: 16px;">Xem bản đồ</div>
@@ -403,7 +403,7 @@
                         </div>
                         <div class="col-6">
                             <div class="w-100 text-center">
-                                <img style="width: 80px;" src="{{ asset('assets/frontend/images/maps.png') }}" alt="map">
+                                <img style="width: 80px;" src="{{ asset('assets/frontend/images/hotel.png') }}" alt="map">
                                 <div class="title-black mt-2 mb-1">Tham quan Tp. Vũng Tàu</div>
                                 <div class="text-normal mb-1">Khám phá các địa điểm nổi bật chỉ với 1 chạm.</div>
                                 <div class="title-blue" style="font-size: 16px;">Xem bản đồ</div>
@@ -416,7 +416,7 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="w-100 text-center">
-                                <img style="width: 80px;" src="{{ asset('assets/frontend/images/maps.png') }}" alt="map">
+                                <img style="width: 80px;" src="{{ asset('assets/frontend/images/sunbed.png') }}" alt="map">
                                 <div class="title-black mt-2 mb-1">Tham quan Hồ Tràm</div>
                                 <div class="text-normal mb-1">Khám phá bãi biển Hồ Tràm bằng VR360.</div>
                                 <div class="title-blue" style="font-size: 16px;">Xem bản đồ</div>
@@ -424,7 +424,7 @@
                         </div>
                         <div class="col-6">
                             <div class="w-100 text-center">
-                                <img style="width: 80px;" src="{{ asset('assets/frontend/images/maps.png') }}" alt="map">
+                                <img style="width: 80px;" src="{{ asset('assets/frontend/images/online-booking.png') }}" alt="map">
                                 <div class="title-black mt-2 mb-1">Booking khách sạn</div>
                                 <div class="text-normal mb-1">Đặt khách sạn thuận tiện với nhiều ưu đãi hấp dẫn .</div>
                                 <div class="title-blue" style="font-size: 16px;">Xem bản đồ</div>
@@ -466,7 +466,7 @@
 
 <div style="background: #38b19e; width: 100%;">
     <div class="container pb-5 pt-5">
-        <div class="title-white">CÁC BLOG MỚI NHẤT</div>
+        <div class="title-white">BÀI VIẾT MỚI</div>
         <div class="d-flex justify-content-center mt-4 mb-5"><div class="div-hr"></div></div>
         <div class="row">
             @foreach ($blogs as $blog)
@@ -496,11 +496,11 @@
 <div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
     <div class="container pb-5 pt-5">
         <div class="row">
-            <div class="col-lg-7 mb-3">
+            <div class="col-lg-6 mb-3">
                 <div class="title-mint text-left mb-2" style="font-size: clamp(20px, 4vw, 25px);">NHẬN ƯU ĐÃI ĐẶC QUYỀN CỦA CHÚNG TÔI</div>
                 <div class="text-normal text-left mb-2" style="font-size: clamp(16px, 4vw, 17px);">Hãy để chúng tôi mang đến cho bạn những thông tin du lịch mới nhất, các chương trình khuyến mãi hấp dẫn từ Sở Du lịch tỉnh Bà Rịa - Vũng Tàu và các đối tác. Chỉ một bước đơn giản, bạn sẽ không bỏ lỡ bất kỳ cơ hội tiết kiệm nào cho chuyến đi của mình.</div>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-6">
                 <form action="{{ route('frontend.customer.store') }}" method="post" style="border-radius: 10px; border: 1px solid rgb(184, 184, 184); padding: 15px; background: white; display: block;" id="customerForm">
                     @csrf
                      <div class="form-group">
@@ -524,13 +524,13 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="icheck-primary d-inline">
+                        <div class="icheck-success d-inline">
                             <input type="checkbox" name="agree" id="agreeS" checked required>
                             @php
                                 $page1 = App\Models\Page::find(10000);
                                 $page2 = App\Models\Page::find(10001);
                             @endphp
-                            <label for="agreeS">Tôi đồng ý với <a href="{{ route('frontend.page.detail', ['id'=>10000, 'slug'=>$page1->slug]) }}" style="color: rgb(28, 77, 114); font-weight: bold;" target="_blank">Điều khoản dịch vụ</a> và <a href="{{ route('frontend.page.detail', ['id'=>10001, 'slug'=>$page2->slug]) }}" style="color: rgb(28, 77, 114); font-weight: bold;" target="_blank">Chính sách quyền riêng tư</a></label>
+                            <label for="agreeS">Tôi đồng ý với <a href="{{ route('frontend.page.detail', ['id'=>10000, 'slug'=>$page1->slug]) }}" style="color: #38b19e; font-weight: bold;" target="_blank">Điều khoản dịch vụ</a> và <a href="{{ route('frontend.page.detail', ['id'=>10001, 'slug'=>$page2->slug]) }}" style="color: #38b19e; font-weight: bold;" target="_blank">Chính sách quyền riêng tư</a></label>
                         </div>
                     </div>
                     
@@ -550,7 +550,7 @@
                 @foreach ($sponsors as $sponsor)
                     <div class="swiper-slide d-flex justify-content-center align-items-center">
                         <img src="{{ $sponsor->image ? asset('uploads/'.$sponsor->image->ten) : asset('assets/frontend/images/images1.png') }}" alt="{{ $sponsor->name }}"
-                             style="border: 2px solid #1c4d72; border-radius: 10px; width: 150px; height: 120px; object-fit: cover;">
+                             style="border: 2px solid #38b19e; border-radius: 10px; width: 150px; height: 120px; object-fit: cover;">
                     </div>
                 @endforeach
             </div>

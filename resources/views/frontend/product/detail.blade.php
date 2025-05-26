@@ -278,9 +278,6 @@
     @empty
         <div style="color: gray">Hiên tại chưa có phản hồi nào.</div>
     @endforelse
-
-    
-
     
 
     <form action="{{ route('frontend.comment.store') }}" method="POST" id="commentForm"> 
@@ -316,7 +313,6 @@
 
 </div>
 
-<!-- LightGallery container - Ẩn -->
 <div id="fullGallery" style="display: none;">
     @foreach ($product->images->where('active', 1)->values() as $img)
         @php
@@ -327,8 +323,6 @@
         </a>
     @endforeach
 </div>
-
-
 
 @endsection
 @section('styles')
@@ -369,14 +363,8 @@
             lgInstance.openGallery(index);
         });
     });
-</script>
 
-
-
-<script>
     document.addEventListener('DOMContentLoaded', function () {
-        
-
         const productBannerSwiper = new Swiper('.product-banner-swiper', {
             effect: 'fade',
             loop: true,
@@ -436,8 +424,6 @@
                 }
             }
         });
-
-
     });
 </script>
 

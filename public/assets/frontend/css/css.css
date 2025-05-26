@@ -394,7 +394,7 @@ body{
     background-attachment: initial;
     background-origin: initial;
     background-clip: initial;
-    background-color: rgb(28, 77, 114);
+    background-color: #38b19e;
     
 }
 
@@ -609,7 +609,7 @@ body{
     width: 100%;
     height: auto;
     font-weight: bold;
-    color: rgb(28, 77, 114) !important;
+    color: #38b19e !important;
 }
 
 #TITLE650 {
@@ -629,7 +629,7 @@ body{
     padding: 0px 4px;
     box-sizing: border-box;
     border-radius: 0px;
-    color: rgb(28, 77, 114);
+    color: #38b19e;
     text-align: center;
     -webkit-text-fill-color: unset;
 }
@@ -643,7 +643,7 @@ body{
 	background-attachment: initial;
 	background-origin: initial;
 	background-clip: initial;
-	background-color: rgb(28, 77, 114);
+	background-color: #38b19e;
 }
 
 #PARAGRAPH30 {
@@ -859,7 +859,7 @@ body{
         background-attachment: initial;
         background-origin: initial;
         background-clip: initial;
-        background-color: rgb(28, 77, 114);
+        background-color: #38b19e;
     }
     #SHAPE78 {
         position: absolute;
@@ -1088,7 +1088,7 @@ body{
         padding: 0px 4px;
         box-sizing: border-box;
         border-radius: 0px;
-        color: rgb(28, 77, 114);
+        color: #38b19e;
         text-align: center;
         -webkit-text-fill-color: unset;
     }
@@ -1101,7 +1101,7 @@ body{
 		background-attachment: initial;
 		background-origin: initial;
 		background-clip: initial;
-		background-color: rgb(28, 77, 114);
+		background-color: #38b19e;
 	}
 
 	#PARAGRAPH30 {
@@ -1315,7 +1315,7 @@ header.transparent-header .navbar {
 
 header.sticky {
     position: fixed;
-    background-color: rgb(28, 77, 114) !important;
+    background-color: #38b19e !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.322);
     animation: slideDown 0.4s ease forwards;
 }
@@ -1354,7 +1354,7 @@ a{
 }
 
 .section-title {
-    color: #084c7e;
+    color: #38b19e;
     font-weight: bold;
     text-align: center;
     margin: 30px 0;
@@ -1406,12 +1406,15 @@ a{
 
 .btn-view-offer {
     background-color: white;
-    color: #084c7e;
+    color: #38b19e;
     border: none;
     border-radius: 5px;
     padding: 5px 15px;
     font-size: 14px;
     font-weight: bold;
+}
+.btn-view-offer:hover {
+    color: #38b19e;
 }
 
 .resort-card {
@@ -1440,7 +1443,7 @@ a{
 }
 
 .resort-name {
-    color: #084c7e;
+    color: #333;
     font-weight: bold;
     margin-bottom: 5px;
     font-size: 18px;
@@ -1448,14 +1451,14 @@ a{
 }
 
 .discount-info {
-    color: rgb(28, 77, 114);
+    color: #333;
     font-size: 14px;
     display: flex;
     /* align-items: center; */    
 }
 
 .discount-icon {
-    color: #084c7e;
+    color: #333;
     margin-right: 5px;
     margin-top: 3px;
 }
@@ -1466,7 +1469,7 @@ a{
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 14px;
-    color: rgb(28, 77, 114);
+    color: #333;
 }
 
 .countdown-box {
@@ -1481,7 +1484,7 @@ a{
     border-radius: 4px;
     padding: 3px 8px;
     font-weight: bold;
-    color: #084c7e;
+    color: #38b19e;
     font-size: 18px;
 }
 
@@ -1491,7 +1494,7 @@ a{
 }
 
 .btn-get-offer {
-    background-color: #084c7e;
+    background-color: #38b19e;
     color: white !important;
     border: none;
     border-radius: 10px;
@@ -1503,13 +1506,13 @@ a{
 }
 
 .btn-get-offer:hover{
-    background-color: rgb(21, 57, 85);
+    background-color: #2d8376;
 }
 
 .btn-view-more {
     background-color: white;
-    color: #084c7e;
-    border: 2px solid #084c7e;
+    color: #38b19e !important;
+    border: 2px solid #38b19e;
     border-radius: 25px;
     padding: 6px 50px;
     font-weight: bold;
@@ -1599,7 +1602,7 @@ a{
 .title-blue{
 	font-size: clamp(20px, 4vw, 35px);
 	font-weight: bold;
-	color: rgb(28, 77, 114);
+	color: #38b19e;
 	/* font-family: Montserrat-Bold; */
 	text-align: center;
 }
@@ -1637,7 +1640,7 @@ a{
 .btn-more-event>span{
 	font-size: clamp(14px, 4vw, 17px);
     height: auto;
-    color: rgb(28, 77, 114);
+    color: #38b19e;
     font-weight: bold;
     width: 100% !important;
 }
@@ -1665,7 +1668,7 @@ a{
     border-radius: 25px;
     border-width: 2px;
     border-style: solid;
-    border-color: rgb(28, 77, 114);
+    border-color: #38b19e;
 	padding-left: 20px;
 	padding-right: 20px;
 }
@@ -1674,7 +1677,7 @@ a{
 	font-size: clamp(17px, 4vw, 19px);
     width: 100% !important;
     height: auto;
-    color: rgb(28, 77, 114);
+    color: #38b19e;
     font-weight: bold;
 }
 
@@ -1732,7 +1735,7 @@ a{
     background-attachment: initial;
     background-origin: initial;
     background-clip: initial;
-    background-color: rgb(28, 77, 114);
+    background-color: #38b19e;
     text-align: center;
     box-sizing: border-box;
     color: rgb(255, 255, 255);
@@ -1741,6 +1744,12 @@ a{
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+    border: none;
+}
+
+.btn-register-submit:hover{
+    background-color: #2d8577;
+    color: rgb(255, 255, 255);
 }
 
 .btn-register-submit>span{
@@ -1790,7 +1799,7 @@ a{
     left: -260px;
     width: 260px;
     height: 100%;
-    background-color: rgb(28, 77, 114);
+    background-color: #38b19e;
     color: white;
     transition: left 0.3s ease;
     z-index: 999;
@@ -1855,7 +1864,7 @@ a{
 }
 
 .btn-dark-blue {
-    background-color: rgb(28, 77, 114);
+    background-color: #38b19e;
     color: white;
     font-size: clamp(16px, 4vw, 17px);
     font-weight: bold;
@@ -1864,18 +1873,18 @@ a{
 }
 
 .btn-dark-blue:hover {
-    background-color: rgb(19, 51, 75);
+    background-color: #2d8577;
     color: white;
 }
 
 .page-item.active .page-link {
-	background-color: rgb(28, 77, 114);
+	background-color: #38b19e;
 	color: #fff !important;
-	border-color: rgb(28, 77, 114); 
+	border-color: #38b19e; 
 }
 
 .page-link {
-	color: rgb(28, 77, 114);
+	color: #38b19e;
 }
 
 .invalid-feedback-re{
@@ -1897,7 +1906,7 @@ a{
 }
 
 .form-control:focus {
-  border-color: rgb(28, 77, 114);
+  border-color: #38b19e;
   box-shadow: none;
 }
 
@@ -1930,7 +1939,7 @@ a{
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(28, 77, 114, 0.8);
+    background-color: rgba(56, 177, 158, 0.8);
     z-index: 1;
 }
 

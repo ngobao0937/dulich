@@ -15,7 +15,7 @@
 <div class="w-100" style="background: rgba(28, 77, 114, 0.1)">
     <div class="container pt-4">
         <div class="title-blue mb-3">LỊCH TRÌNH SỰ KIỆN</div>
-        <button class="btn btn-default mb-3" data-toggle="modal" data-target="#typeModal" style="color: rgb(28, 77, 114); font-size: clamp(17px, 4vw, 18px); font-weight: bold; background: white; border-radius: 7px; padding: 5px 10px"><i class="fas fa-list"></i> Các sự kiện đang / sắp diễn ra</button>
+        <button class="btn btn-default mb-3" data-toggle="modal" data-target="#typeModal" style="color: #38b19e; font-size: clamp(17px, 4vw, 18px); font-weight: bold; background: white; border-radius: 7px; padding: 5px 10px"><i class="fas fa-list"></i> Các sự kiện đang / sắp diễn ra</button>
         
         @foreach ($events as $event)
             @php
@@ -31,15 +31,15 @@
                         <img class="w-100" style="aspect-ratio: 4/3; border-radius: 5px;" src="{{ $event->image ? asset('uploads/'.$event->image->ten) : asset('assets/frontend/images/event-photo.jpg') }}" alt="event">
                     </div>
                     <div class="col-md-9" style="margin-bottom: 15px">
-                        <div class="mb-2" style="background: rgba(28, 77, 114, 0.1); color: rgb(28, 77, 114); width: fit-content; padding: 5px; border-radius: 5px">
+                        <div class="mb-2" style="background: rgba(28, 77, 114, 0.1); color: #333; width: fit-content; padding: 5px; border-radius: 5px">
                             <i class="far fa-clock"></i> {{ $event->time_start }} - {{ $event->time_end }}
-                            <span class="ml-3 mr-3" style="height: 100%; border-right: 2px solid rgb(28, 77, 114)"></span>
+                            <span class="ml-3 mr-3" style="height: 100%; border-right: 2px solid #333"></span>
                             <i class="far fa-calendar-alt"></i> {{ $event->date_range }}
-                            <span class="ml-3 mr-3" style="height: 100%; border-right: 2px solid rgb(28, 77, 114)"></span>
+                            <span class="ml-3 mr-3" style="height: 100%; border-right: 2px solid #333"></span>
                             <i class="fas fa-map-marker-alt"></i> {{ $event->address }}
                         </div>
                         <div class="title-blue text-left mb-1" style="font-size: clamp(22px, 4vw, 26px);">{{ $event->name }}</div>
-                        <div class="mb-2 line-clamp-3" style="color: rgb(28, 77, 114); min-height: 4em;">
+                        <div class="mb-2 line-clamp-3" style="color: #333; min-height: 4em;">
                             {{ $event->description }}
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
@@ -274,12 +274,12 @@
 <div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
     <div class="container pb-5 pt-5">
         <div class="row">
-            <div class="col-lg-7 mb-3">
-                <div class="title-blue text-left mb-2" style="font-size: clamp(20px, 4vw, 25px);">ĐĂNG KÝ NGAY ĐỂ NHẬN ƯU ĐÃI ĐỘC QUYỀN</div>
-                <div class="text-normal text-left mb-2" style="font-size: clamp(16px, 4vw, 17px);">Hãy để chúng tôi mang đến cho bạn những thông tin du lịch mới nhất, các chương trình khuyến mãi hấp dẫn từ Sở Du lịch và các đối tác. Chỉ một bước đơn giản, bạn sẽ không bỏ lỡ bất kỳ cơ hội tiết kiệm nào cho chuyến đi đến Bà Rịa - Vũng Tàu!</div>
+            <div class="col-lg-6 mb-3">
+                <div class="title-mint text-left mb-2" style="font-size: clamp(20px, 4vw, 25px);">NHẬN ƯU ĐÃI ĐẶC QUYỀN CỦA CHÚNG TÔI</div>
+                <div class="text-normal text-left mb-2" style="font-size: clamp(16px, 4vw, 17px);">Hãy để chúng tôi mang đến cho bạn những thông tin du lịch mới nhất, các chương trình khuyến mãi hấp dẫn từ Sở Du lịch tỉnh Bà Rịa - Vũng Tàu và các đối tác. Chỉ một bước đơn giản, bạn sẽ không bỏ lỡ bất kỳ cơ hội tiết kiệm nào cho chuyến đi của mình.</div>
             </div>
-            <div class="col-lg-5">
-                <form action="{{ route('frontend.customer.store') }}" method="post" id="customerForm" style="display: block; border-radius: 10px; border: 1px solid rgb(184, 184, 184); padding: 15px; background: white;">
+            <div class="col-lg-6">
+                <form action="{{ route('frontend.customer.store') }}" method="post" style="border-radius: 10px; border: 1px solid rgb(184, 184, 184); padding: 15px; background: white; display: block;" id="customerForm">
                     @csrf
                      <div class="form-group">
                         <input type="text" name="name" class="form-control w-100" placeholder="Họ tên" maxlength="50" required>
@@ -302,13 +302,13 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="icheck-primary d-inline">
+                        <div class="icheck-success d-inline">
                             <input type="checkbox" name="agree" id="agreeS" checked required>
                             @php
                                 $page1 = App\Models\Page::find(10000);
                                 $page2 = App\Models\Page::find(10001);
                             @endphp
-                            <label for="agreeS">Tôi đồng ý với <a href="{{ route('frontend.page.detail', ['id'=>10000, 'slug'=>$page1->slug]) }}" style="color: rgb(28, 77, 114); font-weight: bold;" target="_blank">Điều khoản dịch vụ</a> và <a href="{{ route('frontend.page.detail', ['id'=>10001, 'slug'=>$page2->slug]) }}" style="color: rgb(28, 77, 114); font-weight: bold;" target="_blank">Chính sách quyền riêng tư</a></label>
+                            <label for="agreeS">Tôi đồng ý với <a href="{{ route('frontend.page.detail', ['id'=>10000, 'slug'=>$page1->slug]) }}" style="color: #38b19e; font-weight: bold;" target="_blank">Điều khoản dịch vụ</a> và <a href="{{ route('frontend.page.detail', ['id'=>10001, 'slug'=>$page2->slug]) }}" style="color: #38b19e; font-weight: bold;" target="_blank">Chính sách quyền riêng tư</a></label>
                         </div>
                     </div>
                     
@@ -328,7 +328,7 @@
                 @foreach ($sponsors as $sponsor)
                     <div class="swiper-slide d-flex justify-content-center align-items-center">
                         <img src="{{ $sponsor->image ? asset('uploads/'.$sponsor->image->ten) : asset('assets/frontend/images/images1.png') }}" alt="{{ $sponsor->name }}"
-                             style="border: 2px solid #1c4d72; border-radius: 10px; width: 150px; height: 120px; object-fit: cover;">
+                             style="border: 2px solid #38b19e; border-radius: 10px; width: 150px; height: 120px; object-fit: cover;">
                     </div>
                 @endforeach
             </div>
@@ -346,21 +346,21 @@
                 </div>
                 <div class="modal-body position-relative">
                     <div class="form-group">
-                        <div class="icheck-primary d-inline">
+                        <div class="icheck-success d-inline">
                             <input type="checkbox" id="now" name="loai[]" value="now"
                                     {{ in_array('now', request('loai', ['now', 'coming'])) ? 'checked' : '' }}>
                             <label style="font-weight: bold" for="now">Sự kiện đang diễn ra</label>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="icheck-primary d-inline">
+                        <div class="icheck-success d-inline">
                             <input type="checkbox" id="coming" name="loai[]" value="coming"
                                     {{ in_array('coming', request('loai', ['now', 'coming'])) ? 'checked' : '' }}>
                             <label style="font-weight: bold" for="coming">Sự kiện sắp diễn ra</label>
                         </div>
                     </div>
                     <div class="form-group" style="margin-bottom: 0">
-                        <div class="icheck-primary d-inline">
+                        <div class="icheck-success d-inline">
                             <input type="checkbox" id="end" name="loai[]" value="end"
                                     {{ in_array('end', request('loai', ['now', 'coming'])) ? 'checked' : '' }}>
                             <label style="font-weight: bold" for="end">Sự kiện đã kết thúc</label>
