@@ -50,7 +50,7 @@ function compressImage($file, $quality = 60, $resizeWidth = 1920) {
 //     $image->save($path); 
 // }
 
-function SaveImage(Request $request, $id, $type, $inputType = 'picture', $quality = 60, $resizeWidth = 1200) {
+function SaveImage(Request $request, $id, $type, $inputType = 'picture', $quality = 60, $resizeWidth = 1200, $skipCompression = false) {
     $file = $request->file($inputType);
 
     if (!$file) {
@@ -61,7 +61,6 @@ function SaveImage(Request $request, $id, $type, $inputType = 'picture', $qualit
 
     // Nếu là hình ảnh
     if (str_starts_with($mimeType, 'image/')) {
-        $image = compressImage($file, $quality, $resizeWidth);
 
         $file_name = Str::uuid() . '_' . time() . '.jpg';
 
@@ -76,7 +75,14 @@ function SaveImage(Request $request, $id, $type, $inputType = 'picture', $qualit
         );
 
         $path = public_path('uploads/' . $file_name);
-        $image->save($path);
+         if ($skipCompression) {
+            // Lưu ảnh gốc
+            $file->move(public_path('uploads/'), $file_name);
+        } else {
+            // Gọi hàm nén ảnh
+            $image = compressImage($file, $quality, $resizeWidth);
+            $image->save($path);
+        }
 
     } 
     // Nếu là video

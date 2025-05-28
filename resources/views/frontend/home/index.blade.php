@@ -2,7 +2,7 @@
 @section('title', 'Sở du lịch - Trang chủ')
 @section('content')
 
-<section>
+{{-- <section>
     <div class="swiper bannerSwiper" style="width: 100%; height: 100vh; overflow: hidden;">
         <div class="swiper-wrapper">
             @foreach ($banners as $banner)
@@ -13,9 +13,35 @@
             @endforeach
         </div>
     </div>
+</section> --}}
+
+<section class="d-none d-md-block banner-desktop">
+    <div class="swiper bannerSwiper" style="width: 100%; height: 100vh; overflow: hidden;">
+        <div class="swiper-wrapper">
+            @foreach ($desktopBanners as $banner)
+                <div class="swiper-slide position-relative">
+                    <img class="w-100 h-100" style="object-fit: cover;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->name }}">
+                    <div class="overlay" style="border-radius: 0"></div>
+                </div>
+            @endforeach
+        </div>
+    </div>
 </section>
 
-<div style="width: 100%;">
+<section class="d-block d-md-none banner-mobile">
+    <div class="swiper bannerSwiper" style="width: 100%; height: 100vh; overflow: hidden;">
+        <div class="swiper-wrapper">
+            @foreach ($mobileBanners as $banner)
+                <div class="swiper-slide position-relative">
+                    <img class="w-100 h-100" style="object-fit: cover;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->name }}">
+                    <div class="overlay" style="border-radius: 0"></div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+<section id="nextSection" style="width: 100%;">
     <div class="container pb-5 pt-5" >
         <div class="row">
             <div class="col-md-4">
@@ -42,7 +68,7 @@
         </div>
         
     </div>
-</div>
+</section>
 
 <div style="background: #38b19e; width: 100%;">
     <div class="container pb-5 pt-5">
@@ -544,7 +570,7 @@
 
 <div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
     <div class="container pb-5">
-        <div class="title-mint text-left mb-2" style="font-size: clamp(20px, 4vw, 25px);">NHÀ TÀI TRỢ</div>
+        <div class="title-mint mb-4">CÁC NHÀ TÀI TRỢ</div>
         <div class="swiper sponsorSwiper">
             <div class="swiper-wrapper">
                 @foreach ($sponsors as $sponsor)
@@ -602,28 +628,39 @@
             }
         });
 
-        let bannerSection = document.querySelector(".bannerSwiper");
-        let nextSection = bannerSection.parentElement.nextElementSibling;
+        function isVisible(el) {
+            return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+        }
 
-        let scrolled = false;
-        const headerHeight = 50;
+        let allBanners = document.querySelectorAll(".bannerSwiper");
 
-        window.addEventListener("wheel", function (e) {
-            if (window.scrollY === 0) {
-                scrolled = false;
-            }
+        // Lấy bannerSwiper đầu tiên đang hiển thị (tùy thiết bị: desktop hoặc mobile)
+        let bannerSection = Array.from(allBanners).find(isVisible);
 
-            if (!scrolled && e.deltaY > 0 && window.scrollY < 50) {
-                scrolled = true;
-                if (nextSection) {
-                    const offsetTop = nextSection.getBoundingClientRect().top + window.scrollY - headerHeight;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
+        if (bannerSection) {
+            let nextSection = document.querySelector("#nextSection");
+
+            let scrolled = false;
+            const headerHeight = 50;
+
+            window.addEventListener("wheel", function (e) {
+                if (window.scrollY === 0) {
+                    scrolled = false;
                 }
-            }
-        });
+
+                if (!scrolled && e.deltaY > 0 && window.scrollY < 50) {
+                    scrolled = true;
+                    if (nextSection) {
+                        const offsetTop = nextSection.getBoundingClientRect().top + window.scrollY - headerHeight;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        }
+
     });
 </script>
 

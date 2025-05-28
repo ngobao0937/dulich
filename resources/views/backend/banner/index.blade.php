@@ -113,6 +113,7 @@
     $('#bannerModal').on('hidden.bs.modal', function() {
         $('#id').val('');
         $('#name').val('');
+        $('#isMobile').val(0);
         $('#position').val('');
         $('#type').val('main');
         $('#link').val('');
@@ -127,6 +128,7 @@
             success: function(data){
                 $('#id').val(data.banner.id);
                 $('#name').val(data.banner.name ?? '');
+                $('#isMobile').val(data.banner.isMobile ?? 0);
                 $('#position').val(data.banner.position ?? '');
                 $('#type').val(data.banner.type ?? 'main');
                 $('#link').val(data.banner.link ?? '');

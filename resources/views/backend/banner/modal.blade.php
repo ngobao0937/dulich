@@ -34,9 +34,9 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-5">
                             <div class="form-group">
-                                <label for="type">Thuộc trang</label>
+                                <label for="type">Thuộc trang <span class="text-danger">*</span></label>
                                 <select name="type" id="type" class="form-control" required>
                                     <option value="main">Trang chủ</option>
                                     <option value="event">Trang sự kiện</option>
@@ -45,12 +45,27 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label>Thứ tự <span class="text-danger">*</span></label>
-                                <input name="position" id="position" type="number" min="1" class="form-control" placeholder="Thứ tự ..." required />
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Thứ tự <span class="text-danger">*</span></label>
+                                        <input name="position" id="position" type="number" min="1" class="form-control" placeholder="Thứ tự ..." required />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Loại</label> <i class="fas fa-question-circle ml-1" data-toggle="tooltip" title="Áp dụng cho trang chủ"></i>
+
+                                        <select name="isMobile" id="isMobile" class="form-control" required>
+                                            <option value="0">Desktop</option>
+                                            <option value="1">Mobile</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        
                     </div>
                     
                     {{-- <div class="form-group">

@@ -68,12 +68,26 @@ class HomeController extends Controller
 
         $banners = Banner::where('type', 'main')->orderby('position', 'asc')->where('active', 1)->get();
 
+        $desktopBanners = Banner::where('type', 'main')
+            ->where('active', 1)
+            ->where('isMobile', 0)
+            ->orderBy('position', 'asc')
+            ->get();
+
+        $mobileBanners = Banner::where('type', 'main')
+            ->where('active', 1)
+            ->where('isMobile', 1)
+            ->orderBy('position', 'asc')
+            ->get();
+
         $blogs = Blog::where('active', 1)->orderby('id', 'desc')->take(3)->get();
 
         $sponsors = Sponsor::where('active', 1)->orderby('position', 'asc')->get();
 
         return view('frontend.home.index', [
             'banners' => $banners,
+            'desktopBanners' => $desktopBanners,
+            'mobileBanners' => $mobileBanners,
             'blogs' => $blogs,
             'promotions_KS' => $promotions_KS,
             'promotions_NH' => $promotions_NH,

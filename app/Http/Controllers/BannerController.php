@@ -68,13 +68,14 @@ class BannerController extends Controller
 				'position' => $request->position,
 				'link' => $request->link,
 				'product_fk' => $request->product_fk,
-				'type' => $request->type
+				'type' => $request->type,
+				'isMobile' => $request->isMobile
 			]
 		);
 
 
-		if($request->hasfile('picture')){
-			SaveImage($request, $obj->id, 'banner', 'picture', 100);
+		if ($request->hasFile('picture')) {
+			SaveImage($request, $obj->id, 'banner', 'picture', 100, 1200, true);
 		}
 
 		if($request->type != 'main' && $request->type != 'promotion' && $request->type != 'event' && $request->type != 'blog'){
