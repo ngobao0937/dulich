@@ -26,6 +26,7 @@ class BannerController extends Controller
         $banners = $query
 				->whereIn('type', ['main', 'event', 'promotion', 'blog'])
 				->orderByRaw("FIELD(type, 'main', 'event', 'promotion', 'blog')")
+				->orderBy('isMobile', 'asc')
 				->orderBy('position', 'asc')
 				->paginate(20);
 

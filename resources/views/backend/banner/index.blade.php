@@ -55,7 +55,7 @@
                             </td>
                             <td>
                                 @if ($banner->type == 'main')
-                                    Trang chủ
+                                    Trang chủ ({{$banner->isMobile == 1 ? 'M' : 'D'}})
                                 @elseif ($banner->type == 'event')
                                     Trang sự kiện
                                 @elseif ($banner->type == 'promotion')
