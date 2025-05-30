@@ -280,7 +280,7 @@
                     <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 1/1;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
                             </a>
                         </div>
                         <div class="resort-details d-flex flex-column flex-grow-1">
@@ -345,7 +345,7 @@
                     <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 1/1;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
                             </a>
                         </div>
                         <div class="resort-details d-flex flex-column flex-grow-1">
@@ -410,7 +410,7 @@
                     <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 1/1;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
                             </a>
                         </div>
                         <div class="resort-details d-flex flex-column flex-grow-1">
@@ -494,33 +494,6 @@
                     </div>
                 </div>
             </div>
-
-            {{-- <div class="row">
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-3">
-                            <img class="w-100 h-100" style="aspect-ratio: 1/1; object-fit: contain" src="{{ asset('assets/frontend/images/maps.png') }}" alt="maps">
-                        </div>
-                        <div class="col-9">
-                            <div class="title-black mt-3 mb-2 text-left">Bản đồ tham quan Vũng Tàu</div>
-                            <div class="text-normal text-left mb-2">Khám phá các điểm đến nổi bật chỉ với 1 chạm.</div>
-                            <div class="title-blue text-left" style="font-size: 17px;">Xem bản đồ</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-3">
-                            <img class="w-100 h-100" style="aspect-ratio: 1/1; object-fit: contain" src="{{ asset('assets/frontend/images/maps.png') }}" alt="maps">
-                        </div>
-                        <div class="col-9">
-                            <div class="title-black mt-3 mb-2 text-left">Bản đồ du lịch Hồ Tràm</div>
-                            <div class="text-normal text-left mb-2">Tìm kiếm resort, nhà hàng và hoạt động tại Hồ Tràm dễ dàng.</div>
-                            <div class="title-blue text-left" style="font-size: 17px;">Xem bản đồ</div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </div>
 </div>
@@ -618,7 +591,6 @@
     </div>
 </div>
 
-
 @endsection
 @section('styles')
 
@@ -640,7 +612,7 @@
             breakpoints: {
                 0: {
                     slidesPerView: 1,
-                    centeredSlides: false, // nên tắt trên mobile cho dễ đọc
+                    centeredSlides: false,
                 },
                 768: {
                     slidesPerView: 2,
@@ -695,7 +667,6 @@
 
         let allBanners = document.querySelectorAll(".bannerSwiper");
 
-        // Lấy bannerSwiper đầu tiên đang hiển thị (tùy thiết bị: desktop hoặc mobile)
         let bannerSection = Array.from(allBanners).find(isVisible);
 
         if (bannerSection) {

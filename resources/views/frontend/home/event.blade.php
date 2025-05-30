@@ -104,7 +104,7 @@
                     <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 1/1;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
                             </a>
                         </div>
                         <div class="resort-details d-flex flex-column flex-grow-1">
@@ -169,7 +169,7 @@
                     <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 1/1;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
                             </a>
                         </div>
                         <div class="resort-details d-flex flex-column flex-grow-1">
@@ -234,7 +234,7 @@
                     <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 1/1;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
                             </a>
                         </div>
                         <div class="resort-details d-flex flex-column flex-grow-1">
