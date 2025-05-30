@@ -15161,6 +15161,31 @@
 	max-height: 85vh !important;
 	object-fit: contain;
 }
+
+.product-description-content {
+    overflow: hidden;
+	height: 120px;
+}
+
+.product-description-content.expanded {
+    max-height: 9999px;
+}
+
+.fade-out {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    background: linear-gradient(to bottom, transparent, white);
+    pointer-events: none;
+}
+
+
+#toggleDescription {
+    transition: background-color 0.3s ease;
+}
 @media screen and (max-width: 767px) {
 	.custom-modal .swiper-button-next, .custom-modal .swiper-button-prev{
 		display: none;

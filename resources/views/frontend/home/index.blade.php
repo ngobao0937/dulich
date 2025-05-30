@@ -41,69 +41,97 @@
     </div>
 </section>
 
-<section id="nextSection" style="width: 100%;">
+<section id="nextSection" style="width: 100%;background-image: url('{{ asset('assets/frontend/images/bg-home-1.png') }}');background-repeat: no-repeat;background-position: bottom center;background-size: 100% auto;">
     <div class="container pb-5 pt-5" >
         <div class="row">
-            <div class="col-md-4">
-                <div class="w-100 h-100" style="background: #38b19e">
-
-                </div>
+            <div class="col-md-6">
+                <img src="{{ asset('assets/frontend/images/bariavungtau-h1.jpg') }}" alt="home1" class="w-100 h-100" style="object-fit: cover; border-radius: 10px;">
             </div>
-            <div class="col-md-8">
-                <div class="text-center">
+            <div class="col-md-6">
+                <div class="pt-3 pb-3">
                     <div class="title1">TRẢI NGHIỆM VŨNG TÀU TRỌN VẸN</div>
-                    <div class="title2">ĐỪNG BỎ LỠ!</div>
-                    <div class="text-normal">Bạn đang tìm chuyến đi vừa chất, vừa chill?</div>
-                    <div class="text-normal mb-4">Tất cả đã có tại đây</div>
-                    <div class="text-normal mb-2">👉 Gợi ý <b><i>điểm đến đẹp, quán ăn "xịn"</i></b>, nơi <b><i>lưu trú sang trọng</i></b> 👈</div>
-                    <div class="text-normal mb-2">🎁 Đừng bỏ lỡ <b><i>ưu đãi độc quyền</i></b> từ Sở Du lịch & đối tác 🎁</div>
-                    <div class="text-normal mb-4">📍 Vũng Tàu đang chờ bạn khám phá theo cách riêng của mình 📍</div>
+                    <div class="title2 mb-4">ĐỪNG BỎ LỠ!</div>
                     
-                    <div class="d-flex justify-content-center">
+                    <div class="text-s1 mb-2"><i class="far fa-hand-point-right"></i> Gợi ý <b><i>điểm đến đẹp, quán ăn "xịn"</i></b>, nơi <b><i>lưu trú sang trọng</i></b></div>
+                    <div class="pl-2 mb-2">
+                        <div class="pl-3 text-des-s1 text-justify" style="border-left: 2px solid #38b19e">
+                            Bà Rịa - Vũng Tàu không chỉ nổi tiếng với bãi biển tuyệt đẹp mà còn là thiên đường ẩm thực với những quán ăn "xịn" chuẩn vị biển. Du khách có thể lựa chọn nghỉ dưỡng tại các resort sang trọng ven biển, tận hưởng không gian yên bình và dịch vụ đẳng cấp.
+                        </div>
+                    </div>
+                    
+                    <div class="text-s1 mb-2"><i class="far fa-hand-point-right"></i> Không bỏ lỡ <b><i>ưu đãi độc quyền</i></b> từ Sở Du lịch & đối tác</div>
+                    <div class="pl-2 mb-2">
+                        <div class="pl-3 text-des-s1 text-justify" style="border-left: 2px solid #38b19e">
+                            Đừng bỏ lỡ những ưu đãi độc quyền hấp dẫn từ Sở Du lịch Bà Rịa - Vũng Tàu và các đối tác uy tín! Hàng loạt voucher nghỉ dưỡng, ẩm thực và trải nghiệm du lịch đang chờ bạn khám phá, giúp chuyến đi thêm phần trọn vẹn mà vẫn tiết kiệm chi phí.
+                        </div>
+                    </div>
+
+                    <div class="text-s1 mb-2"><i class="far fa-hand-point-right"></i> Vũng Tàu chờ bạn khám phá theo cách riêng của mình</div>
+                    <div class="pl-2 mb-5">
+                        <div class="pl-3 text-des-s1 text-justify" style="border-left: 2px solid #38b19e">
+                            Nhiều chương trình khuyến mãi hấp dẫn, combo nghỉ dưỡng – ẩm thực – vui chơi đang được triển khai, mang đến cho du khách trải nghiệm trọn vẹn tại Bà Rịa – Vũng Tàu với chi phí cực kỳ ưu đãi.
+                        </div>
+                    </div>
+
+                    <div class="w-100 d-flex justify-content-center">
                         <button class="btn-1"><span>KHÁM PHÁ NGAY</span></button>
-                        <button class="btn-2">Xem Ưu Đãi</button>
                     </div>
                 </div>
             </div>
         </div>
-        
     </div>
 </section>
 
-<div style="background: #38b19e; width: 100%;">
+<div style="background: rgba(112, 113, 113, 0.1); width: 100%;">
     <div class="container pb-5 pt-5">
-        <div class="title-white">TẠI SAO NÊN CHỌN CHÚNG TÔI?</div>
-        <div class="d-flex justify-content-center mt-4 mb-5"><div class="div-hr"></div></div>
+        <div class="title-gray mb-4">TẠI SAO NÊN CHỌN CHÚNG TÔI?</div>
         <div class="row">
             <div class="col-md-4 mb-4">
-                <div class="hover-box position-relative overflow-hidden" style="aspect-ratio: 1/1; border-radius: 10px;">
-                    <img class="w-100 h-100 position-absolute top-0 start-0" src="{{ asset('assets/frontend/images/h1.png') }}" alt="h1" style="object-fit: cover; z-index: 1;">
-                    
-                    <div class="hover-content position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center px-2" style="z-index: 2;">
-                        <div class="title-image fs-5 fw-bold mb-2">Ở đâu?</div>
-                        <div class="subtitle">Khám phá các khách sạn với ưu đãi độc quyền, từ resort sang trọng đến homestay ấm cúng.</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="hover-box position-relative overflow-hidden" style="aspect-ratio: 1/1; border-radius: 10px;">
-                            <img class="w-100 h-100 position-absolute top-0 start-0" src="{{ asset('assets/frontend/images/h2.png') }}" alt="h2" style="object-fit: cover; z-index: 1;">
-                            
-                            <div class="hover-content position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center px-2" style="z-index: 2;">
-                                <div class="title-image fs-5 fw-bold mb-2">Ăn gì?</div>
-                                <div class="subtitle">Thưởng thức ẩm thực địa phương và quốc tế với các chương trình giảm giá hấp dẫn.</div>
+                <div class="flip-box">
+                    <div class="flip-inner">
+                        <div class="flip-front" style="background-image: url('{{ asset('assets/frontend/images/h1.png') }}');">
+                            <div class="special-overlay w-100 h-100 d-flex align-items-center justify-content-center"><span style="font-size: clamp(1.5rem, 2vw, 2rem)">Ở ĐÂU</span></div>
+                        </div>
+                        <div class="flip-back" style="background-image: url('{{ asset('assets/frontend/images/h1.png') }}');">
+                            <div class="special-overlay"></div>
+                            <div class="w-100 position-absolute p-3" style="bottom: 0; background: #38b19e; color: white">
+                                Khám phá các khách sạn với ưu đãi độc quyền, từ resort sang trọng đến homestay ấm cúng.
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="row">
                     <div class="col-6">
-                        <div class="hover-box position-relative overflow-hidden" style="aspect-ratio: 1/1; border-radius: 10px;">
-                            <img class="w-100 h-100 position-absolute top-0 start-0" src="{{ asset('assets/frontend/images/h3.png') }}" alt="h3" style="object-fit: cover; z-index: 1;">
-                            
-                            <div class="hover-content position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center px-2" style="z-index: 2;">
-                                <div class="title-image fs-5 fw-bold mb-2">Chơi gì?</div>
-                                <div class="subtitle">Trải nghiệm các hoạt động giải trí, từ bãi biển đến công viên với vé ưu đãi..</div>
+                        <div class="flip-box">
+                            <div class="flip-inner">
+                                <div class="flip-front" style="background-image: url('{{ asset('assets/frontend/images/h2.png') }}');">
+                                    <div class="special-overlay w-100 h-100 d-flex align-items-center justify-content-center"><span style="font-size: clamp(1.5rem, 2vw, 2rem)">ĂN GÌ?</span></div>
+                                </div>
+                                <div class="flip-back" style="background-image: url('{{ asset('assets/frontend/images/h2.png') }}');">
+                                    <div class="special-overlay"></div>
+                                    <div class="w-100 position-absolute p-3" style="bottom: 0; background: #38b19e; color: white">
+                                        Thưởng thức ẩm thực địa phương và quốc tế với các chương trình giảm giá hấp dẫn.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="flip-box">
+                            <div class="flip-inner">
+                                <div class="flip-front" style="background-image: url('{{ asset('assets/frontend/images/h3.png') }}');">
+                                    <div class="special-overlay w-100 h-100 d-flex align-items-center justify-content-center"><span style="font-size: clamp(1.5rem, 2vw, 2rem)">CHƠI GÌ?</span></div>
+                                </div>
+                                <div class="flip-back" style="background-image: url('{{ asset('assets/frontend/images/h3.png') }}');">
+                                    <div class="special-overlay"></div>
+                                    <div class="w-100 position-absolute p-3" style="bottom: 0; background: #38b19e; color: white">
+                                        Trải nghiệm các hoạt động giải trí, từ bãi biển đến công viên với vé ưu đãi.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -158,60 +186,67 @@
 
 </div>
 
-<div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
-    <div class="container pb-5 pt-5" >
-        <div class="text-center">
-            <div class="title-mint mb-3">CHÚNG TÔI LÀ NGƯỜI HƯỚNG DẪN ĐÁNG TIN CẬY CỦA BẠN!</div>
-            <div class="text-normal">Được bảo chứng bởi Sở Du lịch Bà Rịa - Vũng Tàu, chúng tôi cung cấp thông tin đầy đủ và chính xác về khách sạn, nhà hàng, và địa điểm vui chơi. Hãy để chúng tôi đồng hành cùng bạn trong hành trình khám phá!</div>
-            <div class="d-flex justify-content-center mt-4">
-                <button class="btn-learn-more-mint"><span>Về chúng tôi</span></button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="w-100">
-    <div class="container pb-5 pt-5" >
-        <div class="title-blue mb-3">3 BƯỚC ĐƠN GIẢN ĐỂ NHẬN ƯU ĐÃI</div>
+<div class="w-100" style="background: rgba(112, 113, 113, 0.1)">
+    <div class="container pb-4 pt-5 position-relative" >
+        <div class="timeline-line d-none d-md-block"></div>
+        <div class="title-gray mb-4">3 BƯỚC ĐƠN GIẢN ĐỂ NHẬN ƯU ĐÃI</div>
         <div class="row">
-            <div class="col-md-8">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="w-100 text-center">
-                            <img style="width: 80px;" src="{{ asset('assets/frontend/images/add.png') }}" alt="add">
-                            <div class="title-black mt-2 mb-2">Đăng ký</div>
-                            <div class="text-normal">Tạo tài khoản để nhận thông tin ưu đãi và sự kiện.</div>
+            <div class="col-md-4 mb-4">
+                <div class="step-wrapper">
+                    <div class="step-wrapper">
+                        <div class="d-flex justify-content-center mb-3">
+                            <div class="d-flex justify-content-center image-circle">
+                                <svg style="width: 30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center w-100">
+                            <div class="w-75 text-center p-4 step-box">
+                                <div class="mb-2 step-title">Đăng ký</div>
+                                <div class="step-desc">Tạo tài khoản để nhận thông tin ưu đãi và sự kiện.</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="w-100 text-center">
-                            <img style="width: 80px;" src="{{ asset('assets/frontend/images/checked.png') }}" alt="add">
-                            <div class="title-black mt-2 mb-2">Xác nhận</div>
-                            <div class="text-normal">Liên hệ cơ sở để sử dụng ưu đãi hoặc khuyến mãi.</div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="step-wrapper">
+                    <div class="d-flex justify-content-center mb-3">
+                        <div class="d-flex justify-content-center image-circle" style="background: white;">
+                            <svg style="width: 30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center w-100">
+                        <div class="w-75 text-center p-4 step-box">
+                            <div class="mb-2 step-title">Xác nhận</div>
+                            <div class="step-desc">Liên hệ cơ sở để sử dụng ưu đãi hoặc khuyến mãi.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="step-wrapper">
+                    <div class="d-flex justify-content-center mb-3">
+                        <div class="d-flex justify-content-center image-circle" style="background: white;">
+                            <svg style="width: 30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm177.6 62.1C192.8 334.5 218.8 352 256 352s63.2-17.5 78.4-33.9c9-9.7 24.2-10.4 33.9-1.4s10.4 24.2 1.4 33.9c-22 23.8-60 49.4-113.6 49.4s-91.7-25.5-113.6-49.4c-9-9.7-8.4-24.9 1.4-33.9s24.9-8.4 33.9 1.4zm40-89.3s0 0 0 0c0 0 0 0 0 0l-.2-.2c-.2-.2-.4-.5-.7-.9c-.6-.8-1.6-2-2.8-3.4c-2.5-2.8-6-6.6-10.2-10.3c-8.8-7.8-18.8-14-27.7-14s-18.9 6.2-27.7 14c-4.2 3.7-7.7 7.5-10.2 10.3c-1.2 1.4-2.2 2.6-2.8 3.4c-.3 .4-.6 .7-.7 .9l-.2 .2c0 0 0 0 0 0c0 0 0 0 0 0s0 0 0 0c-2.1 2.8-5.7 3.9-8.9 2.8s-5.5-4.1-5.5-7.6c0-17.9 6.7-35.6 16.6-48.8c9.8-13 23.9-23.2 39.4-23.2s29.6 10.2 39.4 23.2c9.9 13.2 16.6 30.9 16.6 48.8c0 3.4-2.2 6.5-5.5 7.6s-6.9 0-8.9-2.8c0 0 0 0 0 0s0 0 0 0zm160 0c0 0 0 0 0 0l-.2-.2c-.2-.2-.4-.5-.7-.9c-.6-.8-1.6-2-2.8-3.4c-2.5-2.8-6-6.6-10.2-10.3c-8.8-7.8-18.8-14-27.7-14s-18.9 6.2-27.7 14c-4.2 3.7-7.7 7.5-10.2 10.3c-1.2 1.4-2.2 2.6-2.8 3.4c-.3 .4-.6 .7-.7 .9l-.2 .2c0 0 0 0 0 0c0 0 0 0 0 0s0 0 0 0c-2.1 2.8-5.7 3.9-8.9 2.8s-5.5-4.1-5.5-7.6c0-17.9 6.7-35.6 16.6-48.8c9.8-13 23.9-23.2 39.4-23.2s29.6 10.2 39.4 23.2c9.9 13.2 16.6 30.9 16.6 48.8c0 3.4-2.2 6.5-5.5 7.6s-6.9 0-8.9-2.8c0 0 0 0 0 0s0 0 0 0s0 0 0 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center w-100">
+                        <div class="w-75 text-center p-4 step-box">
+                            <div class="mb-2 step-title">Tận hưởng</div>
+                            <div class="step-desc">Thoả sức khám phá Bà Rịa - Vũng Tàu với chi phí tiết kiệm!</div>
                         </div>
                     </div>
                 </div>
                 
-            </div>
-            
-            <div class="col-md-4">
-                <div class="w-100 text-center">
-                    <img style="width: 80px;" src="{{ asset('assets/frontend/images/happiness.png') }}" alt="add">
-                    <div class="title-black mt-2 mb-2">Tận hưởng</div>
-                    <div class="text-normal">Thoả sức khám phá Bà Rịa - Vũng Tàu với chi phí tiết kiệm!</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
-    <div class="container pb-5 pt-5" >
-        <div class="text-center">
-            <div class="title-mint mb-3">HÀNH TRÌNH ĐÁNG NHỚ ĐANG CHỜ BẠN!</div>
-            <div class="text-normal">Hãy tưởng tượng bạn đang thư giãn tại một resort sang trọng với giá ưu đãi, thưởng thức hải sản tươi ngon tại nhà hàng địa phương, và tham gia các hoạt động thú vị mà không lo về chi phí. Tất cả đều bắt đầu từ đây!</div>
-            <div class="d-flex justify-content-center mt-4">
-                <button class="btn-learn-more-mint"><span>Đăng ký để trải nghiệm</span></button>
             </div>
         </div>
     </div>
@@ -245,7 +280,7 @@
                     <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 16/9;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
                             </a>
                         </div>
                         <div class="resort-details d-flex flex-column flex-grow-1">
@@ -310,7 +345,7 @@
                     <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 16/9;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
                             </a>
                         </div>
                         <div class="resort-details d-flex flex-column flex-grow-1">
@@ -375,7 +410,7 @@
                     <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 16/9;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
                             </a>
                         </div>
                         <div class="resort-details d-flex flex-column flex-grow-1">
@@ -412,12 +447,12 @@
     </div>
 </section>
 
-<div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
-    <div class="container pb-5 pt-5" >
+<div style="background: rgba(112, 113, 113, 0.1); width: 100%;">
+    <div class="container pb-4 pt-5" >
         <div class="text-center">
             <div class="title-mint mb-4">HỖ TRỢ DU LỊCH</div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 mb-4">
                     <div class="row">
                         <div class="col-6">
                             <div class="w-100 text-center">
@@ -438,7 +473,7 @@
                     </div>
                 </div>
                 
-                <div class="col-md-6">
+                <div class="col-md-6 mb-4">
                     <div class="row">
                         <div class="col-6">
                             <div class="w-100 text-center">
@@ -490,41 +525,40 @@
     </div>
 </div>
 
-<div style="background: #38b19e; width: 100%;">
-    <div class="container pb-5 pt-5">
-        <div class="title-white">BÀI VIẾT MỚI</div>
-        <div class="d-flex justify-content-center mt-4 mb-5"><div class="div-hr"></div></div>
-        <div class="row">
-            @foreach ($blogs as $blog)
-                <div class="col-md-4 mb-3 d-flex">
-                    <a href="{{ route('frontend.blog.detail', ['id'=>$blog->id, 'slug'=>$blog->slug]) }}" style="all: unset; cursor: pointer;">
-                        <div class="w-100 text-center d-flex flex-column h-100" style="background: white; border-radius: 10px; padding: 5px">
-                            <img class="w-100 mb-3" style="aspect-ratio: 5/3; object-fit: cover; border-radius: 10px" src="{{ $blog->image ? asset('uploads/'.$blog->image->ten) : asset('assets/frontend/images/blog.jpg') }}" alt="h1">
-                        
-                            <div class="title-blue mb-2" style="font-size: 18px;">{{ $blog->name }}</div>
-                            
-                            <div class="text-normal text-left flex-grow-1 line-clamp-3" style="padding: 0 10px; font-size: 16px;">
-                                {{ $blog->description }}
-                            </div>
-                            
-                            <div class="d-flex justify-content-center mt-3 mb-3"> 
-                                <div style="border-bottom: 5px solid #38b19e; width: 50%; border-radius: 10px"></div>
+<div style="width: 100%; background-image: url('{{ asset('assets/frontend/images/bg-home-1.png') }}'); background-repeat: no-repeat; background-position: bottom center; background-size: 100% auto;">
+    <div class="container pt-5">
+        <div class="title-mint mb-2">BLOG MỚI NHẤT</div>
+        <div class="swiper blog-swiper">
+            <div class="swiper-wrapper mt-3">
+                @foreach ($blogs as $blog)
+                    <div class="swiper-slide">
+                        <div class="blog-item text-center d-flex flex-column h-100">
+                            <img class="w-100 blog-image" style="aspect-ratio: 5/3; object-fit: cover; border-rasdius: 10px" 
+                                src="{{ $blog->image ? asset('uploads/'.$blog->image->ten) : asset('assets/frontend/images/blog.jpg') }}" alt="{{ $blog->name }}">
+                            <div class="blog-content mt-3 text-left">
+                                <div class="mb-1"><i class="far fa-calendar-alt"></i> {{ \Carbon\Carbon::parse($blog->created_at)->format('d/m/Y') }}</div>
+                                <div class="blog-title mb-1">{{ $blog->name }}</div>
+                                <div class="text-normal text-left flex-grow-1 line-clamp-3 mb-3" style="font-size: 16px; font-weight: 350;">
+                                    {{ $blog->description }}
+                                </div>
+                                <a class="btn-get-offer" href="{{ route('frontend.blog.detail', ['id'=>$blog->id, 'slug'=>$blog->slug]) }}">
+                                    Đọc thêm
+                                </a>
                             </div>
                         </div>
-                    </a>
-                </div>
-            @endforeach
+                    </div>
+                @endforeach
+            </div>
         </div>
-
     </div>
 </div>
 
-<div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
+<div style="background: rgba(112, 113, 113, 0.1); width: 100%;">
     <div class="container pb-5 pt-5">
         <div class="row">
             <div class="col-lg-6 mb-3">
-                <div class="title-mint text-left mb-2" style="font-size: clamp(20px, 4vw, 25px);">NHẬN ƯU ĐÃI ĐẶC QUYỀN CỦA CHÚNG TÔI</div>
-                <div class="text-normal text-left mb-2" style="font-size: clamp(16px, 4vw, 17px);">Hãy để chúng tôi mang đến cho bạn những thông tin du lịch mới nhất, các chương trình khuyến mãi hấp dẫn từ Sở Du lịch tỉnh Bà Rịa - Vũng Tàu và các đối tác. Chỉ một bước đơn giản, bạn sẽ không bỏ lỡ bất kỳ cơ hội tiết kiệm nào cho chuyến đi của mình.</div>
+                <div class="title-gray text-left mb-2" style="font-size: clamp(20px, 4vw, 25px);">NHẬN ƯU ĐÃI ĐẶC QUYỀN CỦA CHÚNG TÔI</div>
+                <div class="text-s1 text-left mb-2" style="font-size: clamp(16px, 4vw, 17px);">Hãy để chúng tôi mang đến cho bạn những thông tin du lịch mới nhất, các chương trình khuyến mãi hấp dẫn từ Sở Du lịch tỉnh Bà Rịa - Vũng Tàu và các đối tác. Chỉ một bước đơn giản, bạn sẽ không bỏ lỡ bất kỳ cơ hội tiết kiệm nào cho chuyến đi của mình.</div>
             </div>
             <div class="col-lg-6">
                 <form action="{{ route('frontend.customer.store') }}" method="post" style="border-radius: 10px; border: 1px solid rgb(184, 184, 184); padding: 15px; background: white; display: block;" id="customerForm">
@@ -560,7 +594,7 @@
                         </div>
                     </div>
                     
-                    <button class="btn-register-submit w-100 mb-2" type="submit"><span>Gửi thông tin</span></button>
+                    <button class="btn-get-offer w-100 mb-2" type="submit"><span>Gửi thông tin</span></button>
                     <span class="text-muted" style="font-size: 12px;">Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn theo chính sách bảo mật.</span>
                 </form>
             </div>
@@ -568,8 +602,8 @@
     </div>
 </div>
 
-<div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
-    <div class="container pb-5">
+<div style="width: 100%;">
+    <div class="container pt-5 pb-5">
         <div class="title-mint mb-4">CÁC NHÀ TÀI TRỢ</div>
         <div class="swiper sponsorSwiper">
             <div class="swiper-wrapper">
@@ -587,12 +621,39 @@
 
 @endsection
 @section('styles')
-{{-- <link rel="stylesheet" href="{{ auto_version('assets/frontend/css/style.css') }}"> --}}
+
 @endsection
 @section('script')
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        const blogSwiper = new Swiper('.blog-swiper', {
+            slidesPerView: 3,
+            centeredSlides: true,
+            loop: true,
+            spaceBetween: 1,
+            grabCursor: true,
+            slideToClickedSlide: true,
+            watchSlidesProgress: true,
+            watchSlidesVisibility: true,
+
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                    centeredSlides: false, // nên tắt trên mobile cho dễ đọc
+                },
+                768: {
+                    slidesPerView: 2,
+                    centeredSlides: true,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    centeredSlides: true,
+                }
+            }
+        });
+
+
         const bannerSwiper = new Swiper('.bannerSwiper', {
             effect: 'fade',
             loop: true,

@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     
-                    <button type="submit" class="btn btn-orange w-100" style="color: white; font-size: clamp(17px, 4vw, 19px); font-weight: bold;">ĐĂNG KÝ NGAY</button>
+                    <button type="submit" class="btn-get-offer" style="color: white; font-size: clamp(17px, 4vw, 19px); font-weight: bold;">ĐĂNG KÝ NGAY</button>
                 </div>
             </form>
         </div>

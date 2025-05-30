@@ -4,7 +4,7 @@
         <div style="background: #ededed  url('{{$banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
     </td>
     
-    <td>
+    <td class="text-wrap">
         <b>{{ $banner->name }}</b> <br>
         {{ $banner->description }}
     </td>

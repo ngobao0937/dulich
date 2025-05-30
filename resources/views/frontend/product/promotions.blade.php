@@ -147,7 +147,7 @@
                                             </div>
                                         </div>
                                         <div class="text-center mt-3">
-                                            <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="btn action-button btn-block" style="font-weight: bold; border-radius: 10px;">Nhận ưu đãi ngay</a>
+                                            <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="btn-get-offer">Nhận ưu đãi ngay</a>
                                         </div>
                                     </div>
                                 </div>

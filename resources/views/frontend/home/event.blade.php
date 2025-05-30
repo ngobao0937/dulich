@@ -104,7 +104,7 @@
                     <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 16/9;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
                             </a>
                         </div>
                         <div class="resort-details d-flex flex-column flex-grow-1">
@@ -169,7 +169,7 @@
                     <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 16/9;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
                             </a>
                         </div>
                         <div class="resort-details d-flex flex-column flex-grow-1">
@@ -234,7 +234,7 @@
                     <div class="resort-card d-flex flex-column h-100 w-100">
                         <div class="resort-image">
                             <a href="{{ route('frontend.product.detail', ['id'=>$promotion_p->promotion->product->id, 'slug'=>$promotion_p->promotion->product->slug]) }}" class="w-100 h-100">
-                                <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 16/9;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
+                                <img class="w-100 h-100" style="object-fit: cover;" src="{{ $promotion_p->promotion->image ? asset('uploads/'.$promotion_p->promotion->image->ten) : asset('images/default.jpg') }}" alt="{{ $promotion_p->name }}">
                             </a>
                         </div>
                         <div class="resort-details d-flex flex-column flex-grow-1">
@@ -271,12 +271,12 @@
     </div>
 </section>
 
-<div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
+<div style="background: rgba(112, 113, 113, 0.1); width: 100%;">
     <div class="container pb-5 pt-5">
         <div class="row">
             <div class="col-lg-6 mb-3">
-                <div class="title-mint text-left mb-2" style="font-size: clamp(20px, 4vw, 25px);">NHẬN ƯU ĐÃI ĐẶC QUYỀN CỦA CHÚNG TÔI</div>
-                <div class="text-normal text-left mb-2" style="font-size: clamp(16px, 4vw, 17px);">Hãy để chúng tôi mang đến cho bạn những thông tin du lịch mới nhất, các chương trình khuyến mãi hấp dẫn từ Sở Du lịch tỉnh Bà Rịa - Vũng Tàu và các đối tác. Chỉ một bước đơn giản, bạn sẽ không bỏ lỡ bất kỳ cơ hội tiết kiệm nào cho chuyến đi của mình.</div>
+                <div class="title-gray text-left mb-2" style="font-size: clamp(20px, 4vw, 25px);">NHẬN ƯU ĐÃI ĐẶC QUYỀN CỦA CHÚNG TÔI</div>
+                <div class="text-s1 text-left mb-2" style="font-size: clamp(16px, 4vw, 17px);">Hãy để chúng tôi mang đến cho bạn những thông tin du lịch mới nhất, các chương trình khuyến mãi hấp dẫn từ Sở Du lịch tỉnh Bà Rịa - Vũng Tàu và các đối tác. Chỉ một bước đơn giản, bạn sẽ không bỏ lỡ bất kỳ cơ hội tiết kiệm nào cho chuyến đi của mình.</div>
             </div>
             <div class="col-lg-6">
                 <form action="{{ route('frontend.customer.store') }}" method="post" style="border-radius: 10px; border: 1px solid rgb(184, 184, 184); padding: 15px; background: white; display: block;" id="customerForm">
@@ -312,7 +312,7 @@
                         </div>
                     </div>
                     
-                    <button class="btn-register-submit w-100 mb-2" type="submit"><span>Gửi thông tin</span></button>
+                    <button class="btn-get-offer w-100 mb-2" type="submit"><span>Gửi thông tin</span></button>
                     <span class="text-muted" style="font-size: 12px;">Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn theo chính sách bảo mật.</span>
                 </form>
             </div>
@@ -320,9 +320,9 @@
     </div>
 </div>
 
-<div style="background: rgba(28, 77, 114, 0.1); width: 100%;">
-    <div class="container pb-5">
-        <div class="title-mint text-left mb-2" style="font-size: clamp(20px, 4vw, 25px);">NHÀ TÀI TRỢ</div>
+<div style="width: 100%;">
+    <div class="container pt-5 pb-5">
+        <div class="title-mint mb-4">CÁC NHÀ TÀI TRỢ</div>
         <div class="swiper sponsorSwiper">
             <div class="swiper-wrapper">
                 @foreach ($sponsors as $sponsor)

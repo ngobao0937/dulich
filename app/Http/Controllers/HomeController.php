@@ -80,7 +80,7 @@ class HomeController extends Controller
             ->orderBy('position', 'asc')
             ->get();
 
-        $blogs = Blog::where('active', 1)->orderby('id', 'desc')->take(3)->get();
+        $blogs = Blog::where('active', 1)->orderby('id', 'desc')->take(6)->get();
 
         $sponsors = Sponsor::where('active', 1)->orderby('position', 'asc')->get();
 

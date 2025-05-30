@@ -21,8 +21,8 @@
     </div>
 </div>
 
-<section class="mt-4 mb-4 section-description">
-    <div class="container">
+<section class="mt-4 section-description">
+    <div class="container" style="color: #5a5b5b;">
         <div class="row">
             <div class="col-md-6 mb-3">
                 {{-- <img src="{{ asset('images/default.jpg') }}" alt="" class="w-100 h-100" style="aspect-ratio: 4/3; object-fit: cover;"> --}}
@@ -31,20 +31,30 @@
             <div class="col-md-6 mb-3">
                 <div class="title-welcome">Chào mừng đến với</div>
                 <div class="title155">{{ $product->name }}</div>
-                <div><i class="fas fa-map-marker-alt" style="font-size: 18px; color: rgb(51, 51, 51);"></i> <b>Vị trí địa lý:</b></div>
+                <div><i class="fas fa-map-marker-alt" style="font-size: 18px;"></i> <b>Vị trí địa lý:</b></div>
                 <div><b>- Địa chỉ:</b> {{ $product->address }}</div>
                 <div><b>- Vị trí & Điểm tham quan gần:</b></div>
                 <div class="ml-4">{!! $product->location !!}</div>
-                <div><i class=" fas  fa-headset" style="font-size: 18px; color: rgb(51, 51, 51);"></i> <b>Hotline:</b> {{ $product->hotline }}</div>
-                <div><i class=" fas  fa-envelope" style="font-size: 18px; color: rgb(51, 51, 51);"></i> <b>Email: </b> {{ $product->email }}</div>
-                <div><i class=" far  fa-window-maximize" style="font-size: 18px; color: rgb(51, 51, 51);"></i> <b>Website:</b> {{ $product->website }}</div>
+                <div><i class=" fas  fa-headset" style="font-size: 18px;"></i> <b>Hotline:</b> {{ $product->hotline }}</div>
+                <div><i class=" fas  fa-envelope" style="font-size: 18px;"></i> <b>Email: </b> {{ $product->email }}</div>
+                <div><i class=" far  fa-window-maximize" style="font-size: 18px;"></i> <b>Website:</b> {{ $product->website }}</div>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                {!! $product->content !!}
+                <div class="position-relative">
+                    <div class="product-description-container">
+                        <div class="product-description-content collapsed">
+                            {!! $product->content !!}
+                        </div>
+                        <div class="fade-out"></div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <button id="toggleDescription" class="btn-view-more">Xem thêm</button>
+                </div>
             </div>
-            
         </div>
     </div>
 </section>
@@ -308,7 +318,7 @@
         <div class="form-group">
             <input type="text" name="name" class="form-control" placeholder="Họ tên của bạn" maxlength="50" minlength="2" required>
         </div>
-        <button type="submit" class="btn btn-dark-blue w-100">GỬI PHẢN HỒI</button>
+        <button type="submit" class="btn-get-offer">GỬI PHẢN HỒI</button>
     </form>
 
 </div>
@@ -376,6 +386,19 @@
             navigation: false,
         });
 
+        const content = document.getElementById("productDescription");
+        const toggleBtn = document.getElementById("toggleDescription");
+
+        toggleBtn.addEventListener("click", function () {
+            content.classList.toggle("expanded");
+
+            if (content.classList.contains("expanded")) {
+                toggleBtn.textContent = "Rút gọn";
+            } else {
+                toggleBtn.textContent = "Xem thêm";
+            }
+        });
+
         $('#commentForm').validate({
             ignore: [],
             rules: {
@@ -425,6 +448,34 @@
             }
         });
     });
+
+    $(document).ready(function () {
+        const content = $(".product-description-content");
+        const fade = $(".fade-out");
+        const btn = $("#toggleDescription");
+        const collapsedHeight = 120;
+
+        content.css("height", collapsedHeight);
+        fade.show();
+
+        btn.click(function () {
+            if (content.hasClass("expanded")) {
+                content.animate({ height: collapsedHeight }, 400, function () {
+                    content.removeClass("expanded");
+                    btn.text("Xem thêm");
+                    fade.fadeIn(200);
+                });
+            } else {
+                const fullHeight = content.prop("scrollHeight");
+                content.animate({ height: fullHeight }, 400, function () {
+                    content.addClass("expanded");
+                    btn.text("Rút gọn");
+                    fade.fadeOut(200);
+                });
+            }
+        });
+    });
+
 </script>
 
 

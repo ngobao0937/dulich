@@ -1432,9 +1432,10 @@ a{
 }
 
 .resort-image {
+    width: 100%;
     background-size: cover;
     background-position: center;
-    aspect-ratio: 16/9;
+    aspect-ratio: 1/1;
 }
 
 .resort-details {
@@ -1443,7 +1444,7 @@ a{
 }
 
 .resort-name {
-    color: #333;
+    color: #5a5b5b;
     font-weight: bold;
     margin-bottom: 5px;
     font-size: 18px;
@@ -1451,14 +1452,14 @@ a{
 }
 
 .discount-info {
-    color: #333;
+    color: #5a5b5b;
     font-size: 14px;
     display: flex;
     /* align-items: center; */    
 }
 
 .discount-icon {
-    color: #333;
+    color: #5a5b5b;
     margin-right: 5px;
     margin-top: 3px;
 }
@@ -1469,7 +1470,7 @@ a{
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 14px;
-    color: #333;
+    color: #5a5b5b;
 }
 
 .countdown-box {
@@ -1494,20 +1495,23 @@ a{
 }
 
 .btn-get-offer {
-    background-color: #38b19e;
+    background: linear-gradient(120deg, #f1934c, #fbaa52);
     color: white !important;
     border: none;
-    border-radius: 10px;
+    border-radius: 25px;
     padding: 8px 15px;
     width: 100%;
     font-weight: bold;
     text-align: center;
     display: block;
+    transition: all 0.3s ease;
 }
 
-.btn-get-offer:hover{
-    background-color: #2d8376;
+.btn-get-offer:hover {
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
 }
+
 
 .btn-view-more {
     background-color: white;
@@ -1537,14 +1541,14 @@ a{
 
 .title1{
     font-weight: bold;
-    color: black;
-	font-size: clamp(20px, 4vw, 28px);
+    color: #5a5b5b;
+	font-size: clamp(18px, 4vw, 20px);
 }
 .title2{
 	margin: 0px;
     font-weight: bold;
     color: #38b19e;
-	font-size: clamp(30px, 4vw, 45px);
+	font-size: clamp(35px, 4vw, 50px);
 }
 .title3{
     font-size: clamp(16px, 4vw, 19px);
@@ -1553,11 +1557,16 @@ a{
 
 .btn-1{
     border: none;
-    background-color: #38b19e;
+    padding: 10px 20px;
+    background: linear-gradient(120deg, rgb(241, 147, 76), rgb(251, 170, 82));
     text-align: center;
     color: rgb(255, 255, 255);
-    border-radius: 25px;
-    padding: 7px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25.0724px;
+    box-shadow: rgba(0, 0, 0, 0.133) 6px 6px 7px 1px;
 }
 
 .btn-1>span{
@@ -1580,6 +1589,14 @@ a{
     font-weight: bold;
     -webkit-text-fill-color: unset;
     color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.title-gray{
+	font-size: clamp(20px, 4vw, 35px);
+    font-weight: bold;
+    -webkit-text-fill-color: unset;
+    color: rgb(112, 113, 113);
     text-align: center;
 }
 
@@ -1646,7 +1663,20 @@ a{
 }
 
 .text-normal{
+    color: #5a5b5b;
 	font-size: clamp(16px, 4vw, 18px);
+}
+
+.text-s1{
+    color: #5a5b5b;
+    font-weight: 350;
+    font-size: clamp(16px, 4vw, 18px);
+}
+
+.text-des-s1{
+    color: #5a5b5b;
+    font-weight: 350;
+    font-size: 15px;
 }
 
 .btn-learn-more{
@@ -2031,6 +2061,140 @@ a{
     transform: translateY(0);
 }
 
+.flip-box {
+  perspective: 1000px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.flip-box:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front, .flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-front {
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: justify;
+  font-weight: 350;
+}
+
+.image-circle{
+    height: 70px; 
+    width: 70px; 
+    border-radius: 50%;
+    background: white;
+}
+
+.image-circle svg {
+    fill: #38b19e;
+    transition: fill 0.3s ease;
+}
+
+.step-box {
+    border-radius: 10px;
+    background: white;
+    color: #5a5b5b;
+    transition: all 0.3s ease;
+}
+
+.step-box .step-title {
+    color: #38b19e;
+    transition: color 0.3s ease;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.step-box .step-desc {
+    color: #5a5b5b;
+    transition: color 0.3s ease;
+}
+
+.step-wrapper:hover .step-box {
+    background: linear-gradient(120deg, rgb(56, 177, 158), rgb(115, 213, 197));
+    color: white;
+}
+
+.step-wrapper:hover .step-title,
+.step-wrapper:hover .step-desc {
+    color: white !important;
+}
+
+.step-wrapper:hover .image-circle {
+    background: #38b19e !important;
+    transition: background 0.3s ease;
+}
+
+.step-wrapper:hover .image-circle svg {
+    fill: white !important;
+}
+
+
+.blog-swiper .swiper-slide {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.4;
+    transform: scale(0.8);
+}
+.blog-swiper .swiper-slide-active {
+    transform: scale(1);
+    opacity: 1;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.188);
+
+}
+
+.blog-title{
+    color: #5a5b5b;
+    font-size: clamp(20px, 4vw, 23px);
+    font-weight: bold;
+}
+.blog-content {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-weight: 350;
+}
+.swiper-slide-active .blog-content {
+    display: block;
+    opacity: 1;
+}
+
+.blog-item {
+    background: white;
+    border-radius: 15px;
+    padding: 10px;
+    height: 100%;
+}
 
 
 @media screen and (max-width: 1250px) {
@@ -2087,6 +2251,19 @@ a{
         padding-bottom: 0.5em;
     }
 }
+
+@media (min-width: 768px) {
+    .timeline-line {
+        position: absolute;
+        top: 160px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        border-top: 2px dashed #8f8f8f;
+        z-index: 0;
+    }
+}
+
 
 
 
