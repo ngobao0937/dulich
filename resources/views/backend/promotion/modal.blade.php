@@ -27,7 +27,7 @@
                     @csrf
                     <input type="text" id="id" name="id" value="" hidden />
                     <div class="form-group">
-                        <label>Chọn ưu đãi <span class="text-danger">*</span></label>
+                        <label class="form-label">Chọn ưu đãi <span class="text-danger">*</span></label> <i class="fas fa-question-circle ml-1" data-toggle="tooltip" title="Những ưu đãi có độ ưu tiên là 1."></i>
                         <select name="promotion_fk" id="promotion_fk" class="form-control select2-ajax" style="width: 100%;" required></select>
 
                         {{-- <select name="promotion_fk" id="promotion_fk" class="form-control" required>

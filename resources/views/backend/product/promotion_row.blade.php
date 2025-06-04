@@ -3,7 +3,7 @@
     <td>
         <div style="background: #ededed  url('{{ $item->image ? asset('uploads/' . $item->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
     </td>
-    <td>{{ $item->name }}</td>
+    <td class="text-wrap">{{ $item->name }}</td>
     <td class="text-center">{{ $item->position }}</td>
     <td class="text-center">{{ \Carbon\Carbon::parse($item->start_date)->format('d-m-Y') }}</td>
     <td class="text-center">{{ $item->end_in }} ngày</td>

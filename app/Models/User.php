@@ -26,7 +26,8 @@ class User extends Authenticatable
         'sex',
         'user_name',
         'phone',
-        'super_user'
+        'super_user',
+        'role_fk'
     ];
 
     public function isSuperUser()
@@ -37,6 +38,22 @@ class User extends Authenticatable
     public function image() {
 		return $this->hasOne('App\Models\Image', 'id_fk','id')->where('type','user_hinh_dai_dien');
 	}
+
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role', 'role_fk');
+    }
+
+    public function hasPermission($permissionId)
+    {
+        return $this->role && $this->role->permissions->contains('id', $permissionId);
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany('App\Models\Product', 'product_user', 'user_fk', 'product_fk');
+    }
+
 
     /**
      * The attributes that should be hidden for arrays.

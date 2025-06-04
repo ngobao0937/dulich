@@ -9,6 +9,8 @@ use App\Models\Menu;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Models\Promotion;
 
 class CustomerController extends Controller
 {
@@ -56,6 +58,25 @@ class CustomerController extends Controller
 				'promotion_fk' => $request->promotion_fk ? $request->promotion_fk : 0
 			]
 		);
+
+		$data = $request->only(['name', 'email', 'phone', 'content']);
+
+		if($request->has('promotion_fk') && $request->promotion_fk != 0) {
+			$promotion = Promotion::with('product')->find($request->promotion_fk);
+
+			Mail::send('frontend.email.customer-register', ['data' => $data, 'promotion' => $promotion, 'created_at' => $obj->created_at], function ($message) use ($promotion) {
+				$message->to('ngobao0937@gmail.com')
+						->subject('Khách hàng đăng ký ưu đãi: ' . $promotion->name);
+			});
+		} else {
+			Mail::send('frontend.email.customer-register-general', [
+				'data' => $data,
+				'created_at' => $obj->created_at
+			], function ($message) {
+				$message->to('ngobao0937@gmail.com')
+						->subject('Khách hàng đăng ký nhận ưu đãi');
+			});
+		}
 
 		return redirect()->back()->with('success', 'Xin chúc mừng! Bạn đã đăng ký thành công 🎉');
 

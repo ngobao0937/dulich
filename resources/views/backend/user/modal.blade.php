@@ -95,3 +95,30 @@
         </div>
     </div>
 </div>
+
+<div id="roleModal" class="modal fade" role="dialog" aria-labelledby="roleModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('backend.user.set.role', request()->query()) }}" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    @csrf
+                    <input type="text" id="user_id" name="id" value="" hidden>
+                    <div class="form-group">
+                        <label for="role_fk">Chọn vai trò</label>
+                        <select name="role_fk" id="role_fk" class="form-control" required>
+                            <option value="">-- Chọn vai trò --</option>
+                            <option value="0">Không có</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-success">Lưu thông tin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

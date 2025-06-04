@@ -100,6 +100,12 @@
               <p>Danh mục</p>
             </a>
           </li>
+          {{-- <li class="nav-item">
+            <a href="{{ route('backend.role.index') }}" class="nav-link {{ request()->routeIs('backend.role.*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-cogs"></i>
+              <p>Quyền & Vai trò</p>
+            </a>
+          </li> --}}
           <li class="nav-item">
             <a href="{{ route('backend.user.index') }}" class="nav-link {{ request()->routeIs('backend.user.*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>

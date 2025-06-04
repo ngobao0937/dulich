@@ -22,6 +22,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\RoleController;
 
 Route::get('/', [HomeController::class, 'index'])->name('frontend.home.index');
 
@@ -79,6 +80,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/user/edit', [UserController::class, 'edit'])->name('backend.user.edit');
     Route::delete('/user/delete', [UserController::class, 'delete'])->name('backend.user.delete');
     Route::post('/user/store', [UserController::class, 'store'])->name('backend.user.store');
+    Route::post('/user/set-role', [UserController::class, 'setRole'])->name('backend.user.set.role');
 
     Route::get('/blog', [BlogController::class, 'index'])->name('backend.blog.index');
     Route::get('/blog/edit', [BlogController::class, 'edit'])->name('backend.blog.edit');
@@ -159,9 +161,15 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::delete('/promotion_public/delete', [PromotionPublicController::class, 'delete'])->name('backend.promotion_public.delete');
     Route::get('/promotion_public/search-promotions', [PromotionPublicController::class, 'searchPromotions'])->name('backend.promotion_public.searchPromotions');
 
-
     Route::get('/customer', [CustomerController::class, 'index'])->name('backend.customer.index');
     Route::post('/customer/store', [CustomerController::class, 'store'])->name('backend.customer.store');
     Route::get('/customer/edit', [CustomerController::class, 'edit'])->name('backend.customer.edit');
     Route::delete('/customer/delete', [CustomerController::class, 'delete'])->name('backend.customer.delete');
+
+    Route::get('/role', [RoleController::class, 'index'])->name('backend.role.index');
+    Route::post('/role/store', [RoleController::class, 'store'])->name('backend.role.store');
+    Route::get('/role/edit', [RoleController::class, 'edit'])->name('backend.role.edit');
+    Route::delete('/role/delete', [RoleController::class, 'delete'])->name('backend.role.delete');
+    Route::post('/role/update-permissions', [RoleController::class, 'updatePermissions'])->name('backend.role.updatePermissions');
+
 });

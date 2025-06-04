@@ -2063,8 +2063,6 @@ a{
 
 .flip-box {
   perspective: 1000px;
-  border-radius: 10px;
-  overflow: hidden;
 }
 
 .flip-inner {
@@ -2079,16 +2077,19 @@ a{
   transform: rotateY(180deg);
 }
 
-.flip-front, .flip-back {
+.flip-front,
+.flip-back {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .flip-front {
-  background-size: cover;
-  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2100,8 +2101,6 @@ a{
 
 .flip-back {
   transform: rotateY(180deg);
-  background-size: cover;
-  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2109,6 +2108,7 @@ a{
   text-align: justify;
   font-weight: 350;
 }
+
 
 .image-circle{
     height: 70px; 

@@ -315,7 +315,7 @@
                                             <div style="background: #ededed  url('{{$image->image ? asset('uploads/' . $image->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
                                         </td>
                                         
-                                        <td>
+                                        <td class="text-wrap">
                                             <b>{{ $image->name }}</b>
                                         </td>
                                         <td>{{ $image->link ? $image->link : '#' }}</td>
@@ -382,7 +382,7 @@
                                             <td>
                                                 <div style="background: #ededed  url('{{$item->image ? asset('uploads/' . $item->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
                                             </td>
-                                            <td>{{ $item->name}}</td>
+                                            <td class="text-wrap">{{ $item->name}}</td>
                                             <td class="text-center">{{ $item->position }}</td>
                                             <td class="text-center">{{ \Carbon\Carbon::parse($item->start_date)->format('d-m-Y') }}</td>
 
@@ -450,7 +450,7 @@
                                             <td>
                                                 <div style="background: #ededed  url('{{$item->image ? asset('uploads/' . $item->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
                                             </td>
-                                            <td>{{ $item->name}}</td>
+                                            <td class="text-wrap">{{ $item->name}}</td>
                                             <td class="text-center">{{ number_format($item->price, 0, ',', '.') }}</td>
                                             <td class="text-center">{{ $item->position }}</td>
                                             <td class="text-center">{{ \Carbon\Carbon::parse($item->start_date)->format('d-m-Y') }}</td>

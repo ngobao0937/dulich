@@ -113,4 +113,10 @@ class Product extends Model
 		return $this->approvedComments()->count();
 	}
 
+	public function users()
+	{
+		return $this->belongsToMany('App\Models\User', 'product_user', 'product_fk', 'user_fk');
+	}
+
+
 }

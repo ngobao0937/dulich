@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use App\Models\Role;
 
 class UserController extends Controller
 {
@@ -28,7 +29,9 @@ class UserController extends Controller
 
         $users = $query->orderby('id', 'asc')->paginate(20);
 
-        return view('backend.user.index', compact('users'));
+        $roles = Role::where('isdelete', 0)->where('id', '<>', 1)->get();
+
+        return view('backend.user.index', compact('users', 'roles'));
     }
 
     public function store(Request $request)
@@ -74,6 +77,26 @@ class UserController extends Controller
 		}
 
         return redirect(route('backend.user.index', $request->query()));
+    }
+
+    public function setRole(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:users,id',
+            'role_fk' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $user = User::find($request->input('id'));
+        if ($user) {
+            $user->role_fk = $request->input('role_fk');
+            $user->save();
+            return redirect(route('backend.user.index', $request->query()));
+        }
+        return redirect()->back()->withErrors(['User not found.']);
     }
 
     public function edit(Request $request){

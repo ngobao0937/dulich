@@ -502,7 +502,7 @@
     <div class="container pt-5">
         <div class="title-mint mb-2">BLOG MỚI NHẤT</div>
         <div class="swiper blog-swiper">
-            <div class="swiper-wrapper mt-3">
+            <div class="swiper-wrapper mt-3 mb-3">
                 @foreach ($blogs as $blog)
                     <div class="swiper-slide">
                         <div class="blog-item text-center d-flex flex-column h-100">

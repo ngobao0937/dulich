@@ -34,7 +34,7 @@
                             <th>Điện thoại</th>
                             <th>Email</th>
                             <th>Vai trò</th>
-                            <th style="width: 100px;">Hành động</th>
+                            <th class="text-center" style="width: 100px;">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,8 +44,6 @@
                             <td>{{ $i++ }}</td>
                             <td>
                                 <div style="background: #ededed  url('{{$user->image ? '/uploads/'.$user->image->ten : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
-
-                                {{-- <div style="background: #ededed  url('{{$user->image ? 'https://s3-hcm-r1.longvan.net/kaholding/'.$user->image->ten : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div> --}}
                             </td>
                             <td>{{ $user->name }}</td>
                             <td>{{ \Carbon\Carbon::parse($user->birthday)->format('d-m-Y') }}</td>
@@ -53,12 +51,22 @@
                             <td>{{ $user->phone }}</td>
                             <td>{{ $user->email }}</td>
                             @if ($user->super_user == 1)
-                                <td><span class="badge badge-success">Quản lý</span></td>
+                                <td><span class="badge badge-success">{{ $user->role->name }}</span></td>
                             @else
-                                <td><span class="badge badge-info">Nhân viên</span></td>
+                                @if ($user->role_fk == 0)
+                                    <td><span class="badge badge-danger">Không có</span></td>
+                                @else
+                                    <td><span class="badge badge-info">{{ $user->role->name }}</span></td>
+                                @endif
                             @endif
                         
-                            <td class="text-center">
+                            <td class="text-right">
+                                @if ($user->super_user != 1)
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#roleModal" onclick="alertRole({{ $user->id }})">
+                                        <i class="fa fa-user-cog"></i>
+                                    </button>
+                                @endif
+                                
                                 <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#userModal" onclick="alertUser({{ $user->id }})">
                                     <i class="fa fa-edit"></i>
                                 </button>
@@ -87,7 +95,6 @@
 @section('styles')
 @endsection
 @section('scripts')
-
 <script>
     function alertDelete(id) {
         $('#myModal').data('id', id);
@@ -130,6 +137,24 @@
                     originalImage = '/uploads/' + data.user.image.ten;
 
                 }
+            },
+            error: function(error){
+                console.log(error);
+            }
+        })
+    }
+
+    $('#roleModal').on('hidden.bs.modal', function() {
+        $('#user_id').val('');
+        $('#role_fk').val('');
+    });
+    function alertRole(userId){
+        $.ajax({
+            type: 'GET',
+            url: 'user/edit' + '?id=' + userId,
+            success: function(data){
+                $('#user_id').val(data.user.id);
+                $('#role_fk').val(data.user.role_fk);
             },
             error: function(error){
                 console.log(error);
