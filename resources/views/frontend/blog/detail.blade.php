@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<div class="w-100" style="background: rgba(28, 77, 114, 0.1);">
+<div style="width: 100%; background-image: url('{{ asset('assets/frontend/images/bg-home-1.png') }}'); background-repeat: no-repeat; background-position: bottom center; background-size: 100% auto;">
     <div class="container pb-4 pt-4">
         <div class="row">
             <div class="col-md-8 mb-3">
@@ -30,7 +30,7 @@
                 @foreach ($blogs as $blog)
                     <div class="w-100 mb-3">
                         <a href="{{ route('frontend.blog.detail', ['id'=>$blog->id, 'slug'=>$blog->slug]) }}" style="all: unset; cursor: pointer;">
-                            <div class="w-100 text-center d-flex flex-column h-100" style="background: white; border-radius: 10px; padding: 5px">
+                            <div class="w-100 text-center d-flex flex-column h-100" style="background: rgba(28, 114, 107, 0.07); border-radius: 10px; padding: 5px">
                                 <img class="w-100 mb-3" style="aspect-ratio: 5/3; object-fit: cover; border-radius: 10px" src="{{ $blog->image ? asset('uploads/'.$blog->image->ten) : asset('assets/frontend/images/blog.jpg') }}" alt="h1">
                             
                                 <div class="title-blue mb-2" style="font-size: 18px;">{{ $blog->name }}</div>

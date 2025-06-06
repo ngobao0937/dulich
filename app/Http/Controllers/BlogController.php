@@ -90,7 +90,7 @@ class BlogController extends Controller
 		}
 
 		$blogs = Blog::orderBy('view', 'desc')->where('id', '<>', $request->id)
-			->take(5)
+			->take(4)
 			->get();
 
 		$banners = Banner::where('type', 'blog')

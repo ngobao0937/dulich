@@ -30,7 +30,7 @@ Route::get('/tr{id}-{slug}', [PageController::class, 'detail'])->name('frontend.
 
 Route::get('/su-kien', [HomeController::class, 'event'])->name('frontend.home.event');
 
-Route::get('/blog{id}-{slug}', [BlogController::class, 'detail'])->name('frontend.blog.detail')->middleware('check.active');
+Route::get('/blog{id}-{slug}', [BlogController::class, 'detail'])->name('frontend.blog.detail');
 
 Route::get('/khuyen-mai-uu-dai', [ProductController::class, 'promotions'])->name('frontend.product.promotions');
 

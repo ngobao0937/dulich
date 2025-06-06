@@ -11,12 +11,15 @@
         @endforeach
     </div>
 </div>
-<div class="container pb-3 pt-4">
-    <h2 class="text-center" style="font-weight: bold; color: #38b19e">{{ $page->name }}</h2>
-    <div class="mt-3">
-        {!! $page->content !!}
+<div style="width: 100%; background-image: url('{{ asset('assets/frontend/images/bg-home-1.png') }}'); background-repeat: no-repeat; background-position: bottom center; background-size: 100% auto;">
+    <div class="container pb-3 pt-4">
+        <h2 class="text-center" style="font-weight: bold; color: #38b19e">{{ $page->name }}</h2>
+        <div class="mt-3">
+            {!! $page->content !!}
+        </div>
     </div>
 </div>
+
 @endsection
 @section('styles')
 
