@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\ProductUser;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Models\Role;
+use App\Models\Product;
 
 class UserController extends Controller
 {
@@ -90,19 +92,34 @@ class UserController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+
         $user = User::find($request->input('id'));
-        if ($user) {
-            $user->role_fk = $request->input('role_fk');
-            $user->save();
-            return redirect(route('backend.user.index', $request->query()));
+        if (!$user) {
+            return redirect()->back()->withErrors(['User not found.']);
         }
-        return redirect()->back()->withErrors(['User not found.']);
+
+        $user->role_fk = $request->input('role_fk');
+        $user->save();
+
+        $productIds = $request->input('product_fk', []);
+        $user->products()->sync($productIds);
+        
+        return redirect(route('backend.user.index', $request->query()));
     }
 
     public function edit(Request $request){
         $id = $request->input('id');
-        $user = User::where('id', $id)->with('image')->first();
-        return response()->json(['user'=>$user]);
+        $user = User::where('id', $id)->with(['image', 'products'])->first();
+        $products = $user->products->map(function ($product) {
+            return [
+                'id' => $product->id,
+                'text' => $product->name
+            ];
+        });
+        return response()->json([
+            'user'=>$user,
+            'products' => $products
+        ]);
     }
 
     public function delete(Request $request){
@@ -116,4 +133,47 @@ class UserController extends Controller
         if (!empty($user)) $user->delete();
         return redirect(route('backend.user.index', $request->query()));
     }
+
+    public function getUsers(Request $request)
+    {
+        $search = $request->q;
+        $page = $request->get('page', 1);
+        $perPage = 30;
+
+        $query = User::query()
+            ->whereIn('role_fk', [1, 2])
+            ->with('product'); // Giả sử User có quan hệ product() -> hasOne(Product::class, 'user_fk');
+
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('user_name', 'like', "%$search%")
+                ->orWhere('name', 'like', "%$search%");
+            });
+        }
+
+        $total = $query->count();
+
+        $results = $query->orderBy('id', 'desc')
+            ->skip(($page - 1) * $perPage)
+            ->take($perPage)
+            ->get();
+
+        return response()->json([
+            'items' => $results->map(function ($user) {
+                $text = $user->name;
+                if ($user->id != 10000 && $user->product) {
+                    $text .= ' - ' . $user->product->name;
+                }
+                return [
+                    'id' => $user->id,
+                    'text' => $text,
+                ];
+            }),
+            'pagination' => [
+                'more' => ($page * $perPage) < $total
+            ]
+        ]);
+    }
+
+
 }

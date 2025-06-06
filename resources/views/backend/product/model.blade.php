@@ -28,484 +28,594 @@
     $vr360 = isset($product->vr360) ? $product->vr360->ten : null;
     $images = $product->images ?? null;
     $banners = $product->banners ?? null;
+
+    $user = $product->user ?? null;
+
+    // if(isset($product) && $product->user != null) {
+    //     $user_user_name = $product->user->user_name ?? null;
+    //     $user_name = $product->user->name ?? null;
+    //     $user_email = $product->user->email ?? null;
+    //     $user_phone = $product->user->phone ?? null;
+    //     $user_sex = $product->user->sex ?? null;
+    //     $user_birthday = $product->user->birthday ?? null;
+
+    // } else {
+    //     $user_user_name = null;
+    //     $user_name = null;
+    //     $user_email = null;
+    //     $user_phone = null;
+    //     $user_sex = null;
+    //     $user_birthday = null;
+    // }
 ?>
 <section class="content-header">
     <div class="container-fluid" id="accordion">
+        @if(!Auth::user()->hasPermission(13) && !Auth::user()->hasPermission(14))
+        <h6 class="text-center">Vui lòng liên hệ quản trị viên để cấp thêm quyền chỉnh sửa.</h6>
+        @else
         <form action="{{ route('backend.product.store', request()->query()) }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="id" value="{{ $id }}">
-            <div class="row fixed-save">
-                <div class="col-lg-12">
-                    <button type="submit" class="btn btn-success rounded-circle btn-lg" title="Lưu" data-toggle="tooltip" data-placement="top" title="Lưu"><i class="fas fa-save"></i></button>
+            <input type="hidden" name="id" id="id" value="{{ $id }}">
+            @if (Auth::user()->hasPermission(13))
+                <div class="row fixed-save">
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-success rounded-circle btn-lg" title="Lưu" data-toggle="tooltip" data-placement="top" title="Lưu"><i class="fas fa-save"></i></button>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <a class="collapsed card-link w-100 d-flex" data-toggle="collapse" href="#collapseBanner">
-                        <span style="color: #333; font-weight: bold">Banner</span>
-                    </a>
-                </div>
-                <div id="collapseBanner" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#bannerModal">
-                                Thêm mới
-                            </a>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="table_" class="table table-hover text-nowrap">
-                                <thead class="thead-light">
-                                    <tr class="table-bg">
-                                        <th style="width: 60px;">#</th>
-                                        <th style="width: 90px;">Hình ảnh</th>
-                                        <th>Văn bản</th>
-                                        <th>Link</th>
-                                        <th style="width: 100px;">Thứ tự</th>
-                                        <th style="width: 100px;">Trạng thái</th>
-                                        <th style="width: 100px;">Hành động</th>
-                                    </tr>
-                                </thead>
-                                <tbody  id="table_tbodyBanner">
-                                    @forelse($product->banners as $banner)
-                                    <tr data-id="{{ $banner->id }}">
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            <div style="background: #ededed  url('{{$banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
-                                        </td>
-                                        
-                                        <td class="text-wrap">
-                                            <b>{{ $banner->name }}</b><br>
-                                            {{ $banner->description }}
-                                        </td>
-                                        <td>{{ $banner->link ? $banner->link : '#' }}</td>
-                                        <td>{{ $banner->position }}</td>
-                                        <td class="text-center">
-                                            @if ($banner->active != 1)
-                                            <span class="badge badge-warning">Tạm dừng</span>
-                                            @else
-                                            <span class="badge badge-success">Hoạt động</span>
-                                            @endif
-                                        </td>
-                                        <td class="text-center">
-                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#bannerModal" onclick="alertBanner({{ $banner->id }})">
-                                            <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-danger btn-sm" onclick="alertDeleteBanner({{ $banner->id }})">
-                                            <i class="fa fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    @empty
-                                    <tr>
-                                        <td colspan="10" class="text-center">Không có dữ liệu</td>
-                                    </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
+            
+                <div class="card">
+                    <div class="card-header">
+                        <a class="collapsed card-link w-100 d-flex" data-toggle="collapse" href="#collapseBanner">
+                            <span style="color: #333; font-weight: bold">Banner</span>
+                        </a>
+                    </div>
+                    <div id="collapseBanner" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#bannerModal">
+                                    Thêm mới
+                                </a>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="table_" class="table table-hover text-nowrap">
+                                    <thead class="thead-light">
+                                        <tr class="table-bg">
+                                            <th style="width: 60px;">#</th>
+                                            <th style="width: 90px;">Hình ảnh</th>
+                                            <th>Văn bản</th>
+                                            {{-- <th>Link</th> --}}
+                                            <th style="width: 100px;">Thứ tự</th>
+                                            <th style="width: 100px;">Trạng thái</th>
+                                            <th style="width: 100px;">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody  id="table_tbodyBanner">
+                                        @forelse($product->banners as $banner)
+                                        <tr data-id="{{ $banner->id }}">
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                <div style="background: #ededed  url('{{$banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
+                                            </td>
+                                            
+                                            <td class="text-wrap">
+                                                <b>{{ $banner->name }}</b><br>
+                                                {{ $banner->description }}
+                                            </td>
+                                            {{-- <td>{{ $banner->link ? $banner->link : '#' }}</td> --}}
+                                            <td>{{ $banner->position }}</td>
+                                            <td class="text-center">
+                                                @if ($banner->active != 1)
+                                                <span class="badge badge-warning">Tạm dừng</span>
+                                                @else
+                                                <span class="badge badge-success">Hoạt động</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#bannerModal" onclick="alertBanner({{ $banner->id }})">
+                                                <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="alertDeleteBanner({{ $banner->id }})">
+                                                <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <td colspan="10" class="text-center">Không có dữ liệu</td>
+                                        </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <a class="card-link w-100 d-flex" data-toggle="collapse" href="#collapseInfo" aria-expanded="true">
-                        <span style="color: #333; font-weight: bold">Thông tin</span>
-                    </a>
+                <div class="card">
+                    <div class="card-header">
+                        <a class="card-link w-100 d-flex" data-toggle="collapse" href="#collapseInfo" aria-expanded="true">
+                            <span style="color: #333; font-weight: bold">Thông tin</span>
+                        </a>
+                    </div>
+                    <div id="collapseInfo" class="collapse show" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="form-group" style="margin-bottom: -5px;">
+                                <label style="margin-bottom: 0;">Hình đại diện</label>
+                            </div>
+            
+                            <div class="image-upload-container mb-2">
+                                <img id="imagePreview" src="{{ $image ? asset('uploads/' . $image) : asset('images/upload.png') }}" class="preview-image" />
+                                <div class="upload-icon" id="uploadIcon">
+                                    <i class="fa fa-camera"></i>
+                                </div>
+                                <div class="remove-icon" id="removeIcon" style="display: none;">
+                                    <i class="fa fa-times"></i>
+                                </div>
+                                <input type="file" id="picture" name="picture" accept="image/*" hidden />
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="form-group">
+                                        <label for="name">Tên <span class="text-danger">*</span></label>
+                                        <input type="text" name="name" id="name" class="form-control" value="{{ $name }}" maxlength="250" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="address">Địa chỉ</label>
+                                        <input type="text" name="address" id="address" class="form-control" value="{{ $address }}" maxlength="250">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Thuộc danh mục</label> <small><span class="text-muted">(có thể chọn nhiều)</span></small>
+                                <div class="select2-primary">
+                                    <select name="menus_fk[]" id="menus_fk" class="select2-multiple" multiple="multiple" data-placeholder="-- Chọn các danh mục --">
+                                        @php
+                                            $selectedMenus = (isset($product) && $product != null) ? $product->menus->pluck('id')->toArray() : [];
+                                        @endphp
+                                        @foreach (\App\Models\Menu::where('menu_fk', 0)->get() as $menu)
+                                            <option value="{{ $menu->id }}" 
+                                                {{ in_array($menu->id, $selectedMenus) ? 'selected' : '' }}>
+                                                {{ $menu->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="location">Vị trí & điểm tham quan gần</label>
+                                <textarea name="location" id="location" class="form-control">{{ $location }}</textarea>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="hotline">Hotline</label>
+                                        <input type="tel" name="hotline" id="hotline" class="form-control" value="{{ $hotline }}" maxlength="20">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="phone">Điện thoại</label>
+                                        <input type="tel" name="phone" id="phone" class="form-control" value="{{ $phone }}" maxlength="20">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" id="email" class="form-control" value="{{ $email }}" maxlength="250">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="website">Website</label>
+                                        <input type="url" class="form-control" id="website" name="website" placeholder="https://example.com" value="{{ $website }}" maxlength="250">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="facebook">Facebook</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fab fa-facebook-f"></i></span>
+                                            </div>
+                                            <input type="url" class="form-control" id="facebook" name="facebook" placeholder="https://facebook.com/yourpage" value="{{ $facebook }}" maxlength="250">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="instagram">Instagram</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fab fa-instagram"></i></span>
+                                            </div>
+                                            <input type="url" class="form-control" id="instagram" name="instagram" placeholder="https://instagram.com/youraccount" value="{{ $instagram }}" maxlength="250">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="twitter">Twitter</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fab fa-twitter"></i></span>
+                                            </div>
+                                            <input type="url" class="form-control" id="twitter" name="twitter" placeholder="https://twitter.com/yourhandle" value="{{ $twitter }}" maxlength="250">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="youtube">YouTube</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fab fa-youtube"></i></span>
+                                            </div>
+                                            <input type="url" class="form-control" id="youtube" name="youtube" placeholder="https://youtube.com/yourchannel" value="{{ $youtube }}" maxlength="250">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="tiktok">Tiktok</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fab fa-tiktok"></i></span>
+                                            </div>
+                                            <input type="url" class="form-control" id="tiktok" name="tiktok" placeholder="https://tiktok.com/@youraccount" value="{{ $tiktok }}" maxlength="250">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="link360">Link VR 360</label>
+                                        <input type="url" name="link360" id="link360" class="form-control" value="{{ $link360 }}" placeholder="https://example.com/vr360" maxlength="250">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="chatbot">Chatbot</label>
+                                        <input type="url" name="chatbot" id="chatbot" class="form-control" value="{{ $chatbot }}" placeholder="Nhập link script chatbot" maxlength="250">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="map">Bản đồ</label>
+                                        <input type="url" name="map" id="map" class="form-control" value="{{ $map }}" maxlength="250" placeholder="Nhập link iframe bản đồ" maxlength="250">
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <label for="content">Giới thiệu</label>
+                                <textarea id="content" name="content" rows="10" cols="80">{{ $content }}</textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="collapseInfo" class="collapse show" data-parent="#accordion">
-                    <div class="card-body">
-                        <div class="form-group" style="margin-bottom: -5px;">
-                            <label style="margin-bottom: 0;">Hình đại diện</label>
-                        </div>
-        
-                        <div class="image-upload-container mb-2">
-                            <img id="imagePreview" src="{{ $image ? asset('uploads/' . $image) : asset('images/upload.png') }}" class="preview-image" />
-                            <div class="upload-icon" id="uploadIcon">
-                                <i class="fa fa-camera"></i>
-                            </div>
-                            <div class="remove-icon" id="removeIcon" style="display: none;">
-                                <i class="fa fa-times"></i>
-                            </div>
-                            <input type="file" id="picture" name="picture" accept="image/*" hidden />
-                        </div>
 
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="form-group">
-                                    <label for="name">Tên <span class="text-danger">*</span></label>
-                                    <input type="text" name="name" id="name" class="form-control" value="{{ $name }}" maxlength="250" required>
-                                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <a class="collapsed card-link w-100 d-flex" data-toggle="collapse" href="#collapseImage">
+                            <span style="color: #333; font-weight: bold">Thư viện ảnh</span>
+                        </a>
+                    </div>
+                    <div id="collapseImage" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#imagesModal">
+                                    Thêm mới
+                                </a>
                             </div>
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label for="address">Địa chỉ</label>
-                                    <input type="text" name="address" id="address" class="form-control" value="{{ $address }}" maxlength="250">
-                                </div>
+                            <div class="table-responsive">
+                                <table id="table_" class="table table-hover text-nowrap">
+                                    <thead class="thead-light">
+                                        <tr class="table-bg">
+                                            <th style="width: 60px;">#</th>
+                                            <th style="width: 90px;">Hình ảnh</th>
+                                            <th>Tiêu đề</th>
+                                            {{-- <th>Link</th> --}}
+                                            <th style="width: 100px;">Thứ tự</th>
+                                            <th style="width: 100px;">Trạng thái</th>
+                                            <th style="width: 100px;">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody  id="table_tbodyImages">
+                                        @forelse($product->images as $image)
+                                        <tr data-id="{{ $image->id }}">
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                <div style="background: #ededed  url('{{$image->image ? asset('uploads/' . $image->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
+                                            </td>
+                                            
+                                            <td class="text-wrap">
+                                                <b>{{ $image->name }}</b>
+                                            </td>
+                                            {{-- <td>{{ $image->link ? $image->link : '#' }}</td> --}}
+                                            <td>{{ $image->position }}</td>
+                                            <td class="text-center">
+                                                @if ($image->active != 1)
+                                                <span class="badge badge-warning">Tạm dừng</span>
+                                                @else
+                                                <span class="badge badge-success">Hoạt động</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#imagesModal" onclick="alertImages({{ $image->id }})">
+                                                <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="alertDeleteImages({{ $image->id }})">
+                                                <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <td colspan="10" class="text-center">Không có dữ liệu</td>
+                                        </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Thuộc danh mục</label> <small><span class="text-muted">(có thể chọn nhiều)</span></small>
-                            <div class="select2-primary">
-                                <select name="menus_fk[]" id="menus_fk" class="select2-multiple" multiple="multiple" data-placeholder="-- Chọn các danh mục --">
-                                    @php
-                                        $selectedMenus = (isset($product) && $product != null) ? $product->menus->pluck('id')->toArray() : [];
-                                    @endphp
-                                    @foreach (\App\Models\Menu::where('menu_fk', 0)->get() as $menu)
-                                        <option value="{{ $menu->id }}" 
-                                            {{ in_array($menu->id, $selectedMenus) ? 'selected' : '' }}>
-                                            {{ $menu->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                    </div>
+                </div>
+            @endif
+            
+            @if (Auth::user()->hasPermission(14))
+                <div class="card">
+                    <div class="card-header">
+                        <a class="collapsed card-link w-100 d-flex" data-toggle="collapse" href="#collapseUuDaiThuong">
+                            <span style="color: #333; font-weight: bold">Ưu đãi / khuyến mãi thông thường</span>
+                        </a>
+                    </div>
+                    <div id="collapseUuDaiThuong" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#uuDaiThuongModal">
+                                    Thêm mới
+                                </a>
                             </div>
-                        </div>
+                            <div class="table-responsive">
+                                <table id="table_" class="table table-hover text-nowrap">
+                                    <thead class="thead-light">
+                                        <tr class="table-bg">
+                                            <th style="width: 60px;">#</th>
+                                            <th style="width: 90px;">Hình ảnh</th>
+                                            <th>Tên chương trình</th>
+                                            <th style="width: 100px;">Độ ưu tiên</th>
+                                            <th style="width: 100px;">Ngày bắt đầu</th>
+                                            <th style="width: 100px;">Kết thúc sau</th>
+                                            <th style="width: 100px;">Trạng thái</th>
+                                            <th style="width: 100px;">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table_tbodyUuDaiThuong">
+                                        @forelse ($product->promotionsThuong as $item)
+                                            <tr data-id="{{ $item->id }}">
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>
+                                                    <div style="background: #ededed  url('{{$item->image ? asset('uploads/' . $item->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
+                                                </td>
+                                                <td class="text-wrap">{{ $item->name}}</td>
+                                                <td class="text-center">{{ $item->position }}</td>
+                                                <td class="text-center">{{ \Carbon\Carbon::parse($item->start_date)->format('d-m-Y') }}</td>
 
-                        <div class="form-group">
-                            <label for="location">Vị trí & điểm tham quan gần</label>
-                            <textarea name="location" id="location" class="form-control">{{ $location }}</textarea>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="hotline">Hotline</label>
-                                    <input type="tel" name="hotline" id="hotline" class="form-control" value="{{ $hotline }}" maxlength="20">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="phone">Điện thoại</label>
-                                    <input type="tel" name="phone" id="phone" class="form-control" value="{{ $phone }}" maxlength="20">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" name="email" id="email" class="form-control" value="{{ $email }}" maxlength="250">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="website">Website</label>
-                                    <input type="url" class="form-control" id="website" name="website" placeholder="https://example.com" value="{{ $website }}" maxlength="250">
-                                </div>
+                                                <td class="text-center">{{ $item->end_in }} ngày</td>
+                                                <td class="text-center">
+                                                    @if ($item->active != 1)
+                                                    <span class="badge badge-warning">Tạm dừng</span>
+                                                    @else
+                                                    <span class="badge badge-success">Hoạt động</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#uuDaiThuongModal" onclick="alertUuDaiThuong({{ $item->id }})">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-sm" onclick="alertDeleteUuDai({{ $item->id }})">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="10" class="text-center">Không có dữ liệu</td>
+                                            </tr>
+                                        @endforelse
+                                        
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <a class="collapsed card-link w-100 d-flex" data-toggle="collapse" href="#collapseUuDaiPhong">
+                            <span style="color: #333; font-weight: bold">Ưu đãi / khuyến mãi hạng phòng</span>
+                        </a>
+                    </div>
+                    <div id="collapseUuDaiPhong" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#uuDaiPhongModal">
+                                    Thêm mới
+                                </a>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="table_" class="table table-hover text-nowrap">
+                                    <thead class="thead-light">
+                                        <tr class="table-bg">
+                                            <th style="width: 60px;">#</th>
+                                            <th style="width: 90px;">Hình ảnh</th>
+                                            <th>Tên chương trình</th>
+                                            <th style="width: 100px;">Giá phòng</th>
+                                            <th style="width: 100px;">Độ ưu tiên</th>
+                                            <th style="width: 100px;">Ngày bắt đầu</th>
+                                            <th style="width: 100px;">Kết thúc sau</th>
+                                            <th style="width: 100px;">Trạng thái</th>
+                                            <th style="width: 100px;">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table_tbodyUuDaiPhong">
+                                        @forelse ($product->promotionsPhong as $item)
+                                            <tr data-id="{{ $item->id }}">
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>
+                                                    <div style="background: #ededed  url('{{$item->image ? asset('uploads/' . $item->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
+                                                </td>
+                                                <td class="text-wrap">{{ $item->name}}</td>
+                                                <td class="text-center">{{ number_format($item->price, 0, ',', '.') }}</td>
+                                                <td class="text-center">{{ $item->position }}</td>
+                                                <td class="text-center">{{ \Carbon\Carbon::parse($item->start_date)->format('d-m-Y') }}</td>
 
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="facebook">Facebook</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fab fa-facebook-f"></i></span>
-                                        </div>
-                                        <input type="url" class="form-control" id="facebook" name="facebook" placeholder="https://facebook.com/yourpage" value="{{ $facebook }}" maxlength="250">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="instagram">Instagram</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fab fa-instagram"></i></span>
-                                        </div>
-                                        <input type="url" class="form-control" id="instagram" name="instagram" placeholder="https://instagram.com/youraccount" value="{{ $instagram }}" maxlength="250">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="twitter">Twitter</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fab fa-twitter"></i></span>
-                                        </div>
-                                        <input type="url" class="form-control" id="twitter" name="twitter" placeholder="https://twitter.com/yourhandle" value="{{ $twitter }}" maxlength="250">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="youtube">YouTube</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fab fa-youtube"></i></span>
-                                        </div>
-                                        <input type="url" class="form-control" id="youtube" name="youtube" placeholder="https://youtube.com/yourchannel" value="{{ $youtube }}" maxlength="250">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="tiktok">Tiktok</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fab fa-tiktok"></i></span>
-                                        </div>
-                                        <input type="url" class="form-control" id="tiktok" name="tiktok" placeholder="https://tiktok.com/@youraccount" value="{{ $tiktok }}" maxlength="250">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="link360">Link VR 360</label>
-                                    <input type="url" name="link360" id="link360" class="form-control" value="{{ $link360 }}" placeholder="https://example.com/vr360" maxlength="250">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="chatbot">Chatbot</label>
-                                    <input type="url" name="chatbot" id="chatbot" class="form-control" value="{{ $chatbot }}" placeholder="Nhập link script chatbot" maxlength="250">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="map">Bản đồ</label>
-                                    <input type="url" name="map" id="map" class="form-control" value="{{ $map }}" maxlength="250" placeholder="Nhập link iframe bản đồ" maxlength="250">
-                                </div>
+                                                <td class="text-center">{{ $item->end_in }} ngày</td>
+                                                <td class="text-center">
+                                                    @if ($item->active != 1)
+                                                    <span class="badge badge-warning">Tạm dừng</span>
+                                                    @else
+                                                    <span class="badge badge-success">Hoạt động</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#uuDaiPhongModal" onclick="alertUuDaiPhong({{ $item->id }})">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-sm" onclick="alertDeleteUuDai({{ $item->id }})">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="10" class="text-center">Không có dữ liệu</td>
+                                            </tr>
+                                        @endforelse
+                                        
+                                    </tbody>
+                                </table>
                             </div>
                             
                         </div>
-
-                        <div class="form-group">
-                            <label for="content">Giới thiệu</label>
-                            <textarea id="content" name="content" rows="10" cols="80">{{ $content }}</textarea>
-                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
 
-            <div class="card">
+            {{-- <div class="card">
                 <div class="card-header">
-                    <a class="collapsed card-link w-100 d-flex" data-toggle="collapse" href="#collapseImage">
-                        <span style="color: #333; font-weight: bold">Thư viện ảnh</span>
+                    <a class="collapsed card-link w-100 d-flex" data-toggle="collapse" href="#collapseUser">
+                        <span style="color: #333; font-weight: bold">Tài khoản khách sạn</span>
                     </a>
                 </div>
-                <div id="collapseImage" class="collapse" data-parent="#accordion">
+                <div id="collapseUser" class="collapse" data-parent="#accordion">
                     <div class="card-body">
-                        <div class="form-group">
-                            <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#imagesModal">
-                                Thêm mới
-                            </a>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="table_" class="table table-hover text-nowrap">
-                                <thead class="thead-light">
-                                    <tr class="table-bg">
-                                        <th style="width: 60px;">#</th>
-                                        <th style="width: 90px;">Hình ảnh</th>
-                                        <th>Tiêu đề</th>
-                                        <th>Link</th>
-                                        <th style="width: 100px;">Thứ tự</th>
-                                        <th style="width: 100px;">Trạng thái</th>
-                                        <th style="width: 100px;">Hành động</th>
-                                    </tr>
-                                </thead>
-                                <tbody  id="table_tbodyImages">
-                                    @forelse($product->images as $image)
-                                    <tr data-id="{{ $image->id }}">
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            <div style="background: #ededed  url('{{$image->image ? asset('uploads/' . $image->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
-                                        </td>
-                                        
-                                        <td class="text-wrap">
-                                            <b>{{ $image->name }}</b>
-                                        </td>
-                                        <td>{{ $image->link ? $image->link : '#' }}</td>
-                                        <td>{{ $image->position }}</td>
-                                        <td class="text-center">
-                                            @if ($image->active != 1)
-                                            <span class="badge badge-warning">Tạm dừng</span>
-                                            @else
-                                            <span class="badge badge-success">Hoạt động</span>
-                                            @endif
-                                        </td>
-                                        <td class="text-center">
-                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#imagesModal" onclick="alertImages({{ $image->id }})">
-                                            <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-danger btn-sm" onclick="alertDeleteImages({{ $image->id }})">
-                                            <i class="fa fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    @empty
-                                    <tr>
-                                        <td colspan="10" class="text-center">Không có dữ liệu</td>
-                                    </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <a class="collapsed card-link w-100 d-flex" data-toggle="collapse" href="#collapseUuDaiThuong">
-                        <span style="color: #333; font-weight: bold">Ưu đãi / khuyến mãi thông thường</span>
-                    </a>
-                </div>
-                <div id="collapseUuDaiThuong" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#uuDaiThuongModal">
-                                Thêm mới
-                            </a>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="table_" class="table table-hover text-nowrap">
-                                <thead class="thead-light">
-                                    <tr class="table-bg">
-                                        <th style="width: 60px;">#</th>
-                                        <th style="width: 90px;">Hình ảnh</th>
-                                        <th>Tên chương trình</th>
-                                        <th style="width: 100px;">Độ ưu tiên</th>
-                                        <th style="width: 100px;">Ngày bắt đầu</th>
-                                        <th style="width: 100px;">Kết thúc sau</th>
-                                        <th style="width: 100px;">Trạng thái</th>
-                                        <th style="width: 100px;">Hành động</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table_tbodyUuDaiThuong">
-                                    @forelse ($product->promotionsThuong as $item)
-                                        <tr data-id="{{ $item->id }}">
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>
-                                                <div style="background: #ededed  url('{{$item->image ? asset('uploads/' . $item->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
-                                            </td>
-                                            <td class="text-wrap">{{ $item->name}}</td>
-                                            <td class="text-center">{{ $item->position }}</td>
-                                            <td class="text-center">{{ \Carbon\Carbon::parse($item->start_date)->format('d-m-Y') }}</td>
-
-                                            <td class="text-center">{{ $item->end_in }} ngày</td>
-                                            <td class="text-center">
-                                                @if ($item->active != 1)
-                                                <span class="badge badge-warning">Tạm dừng</span>
-                                                @else
-                                                <span class="badge badge-success">Hoạt động</span>
-                                                @endif
-                                            </td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#uuDaiThuongModal" onclick="alertUuDaiThuong({{ $item->id }})">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-sm" onclick="alertDeleteUuDai({{ $item->id }})">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="10" class="text-center">Không có dữ liệu</td>
-                                        </tr>
-                                    @endforelse
-                                    
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <a class="collapsed card-link w-100 d-flex" data-toggle="collapse" href="#collapseUuDaiPhong">
-                        <span style="color: #333; font-weight: bold">Ưu đãi / khuyến mãi hạng phòng</span>
-                    </a>
-                </div>
-                <div id="collapseUuDaiPhong" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#uuDaiPhongModal">
-                                Thêm mới
-                            </a>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="table_" class="table table-hover text-nowrap">
-                                <thead class="thead-light">
-                                    <tr class="table-bg">
-                                        <th style="width: 60px;">#</th>
-                                        <th style="width: 90px;">Hình ảnh</th>
-                                        <th>Tên chương trình</th>
-                                        <th style="width: 100px;">Giá phòng</th>
-                                        <th style="width: 100px;">Độ ưu tiên</th>
-                                        <th style="width: 100px;">Ngày bắt đầu</th>
-                                        <th style="width: 100px;">Kết thúc sau</th>
-                                        <th style="width: 100px;">Trạng thái</th>
-                                        <th style="width: 100px;">Hành động</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table_tbodyUuDaiPhong">
-                                    @forelse ($product->promotionsPhong as $item)
-                                        <tr data-id="{{ $item->id }}">
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>
-                                                <div style="background: #ededed  url('{{$item->image ? asset('uploads/' . $item->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
-                                            </td>
-                                            <td class="text-wrap">{{ $item->name}}</td>
-                                            <td class="text-center">{{ number_format($item->price, 0, ',', '.') }}</td>
-                                            <td class="text-center">{{ $item->position }}</td>
-                                            <td class="text-center">{{ \Carbon\Carbon::parse($item->start_date)->format('d-m-Y') }}</td>
-
-                                            <td class="text-center">{{ $item->end_in }} ngày</td>
-                                            <td class="text-center">
-                                                @if ($item->active != 1)
-                                                <span class="badge badge-warning">Tạm dừng</span>
-                                                @else
-                                                <span class="badge badge-success">Hoạt động</span>
-                                                @endif
-                                            </td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#uuDaiPhongModal" onclick="alertUuDaiPhong({{ $item->id }})">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-sm" onclick="alertDeleteUuDai({{ $item->id }})">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="10" class="text-center">Không có dữ liệu</td>
-                                        </tr>
-                                    @endforelse
-                                    
-                                </tbody>
-                            </table>
-                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Tài khoản <span style="color: red">*</span></label>
+                                    <input name="user_name" value="{{ $user_user_name }}" type="text" class="form-control" placeholder="Nhập tên tài khoản..." required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mật khẩu</label>
+                                    <input name="password" type="password" class="form-control" placeholder="Nhập mật khẩu..." autocomplete="new-password" required>
+                                </div>  
+                                <div class="form-group">
+                                    <label>Xác nhận mật khẩu</label>
+                                    <input name="password_confirmation" type="password" class="form-control" placeholder="Xác nhận lại mật khẩu...">
+                                </div>
+                                <div class="form-group" style="margin-bottom: -5px;">
+                                    <label style="margin-bottom: 0;">Hình đại diện</label>
+                                </div>
                         
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <div class="form-group">
-                        <label>Meta Keywords</label><i class="fas fa-question-circle ml-1" data-toggle="tooltip" title="Các từ khóa hỗ trợ trang web xuất hiện ưu tiên khi người dùng tìm kiếm, mỗi từ cách nhau bằng dấu phẩy và dấu cách (VD: 'key 1, key 2')"></i>
-                        <input type="text" name="meta_keywords" class="form-control" value="{{ $meta_keywords }}">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Meta Description</label><i class="fas fa-question-circle ml-1" data-toggle="tooltip" title="Hiển thị nội dung mô tả khi chia sẻ liên kết khách sạn qua Messenger, Zalo, ..."></i>
-                        <textarea type="text" name="meta_description" class="form-control" rows="2" style="resize: vertical;" maxlength="150">{{ $meta_description }}</textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="icheck-success d-inline">
-                            <input type="checkbox" name="active" id="active" {{ $active == 1 ? 'checked' : '' }}/>
-                            <label for="active">Hoạt động</label>
+                                <div class="image-upload-container">
+                                    <img id="imagePreviewUser" src="{{ asset('images/upload.png') }}" class="preview-image">   
+                                    <div class="upload-icon" id="uploadIconUser">
+                                        <i class="fa fa-camera"></i>
+                                    </div>
+                                    <div class="remove-icon" id="removeIconUser" style="display: none;">
+                                        <i class="fa fa-times"></i>
+                                    </div>
+                                    <input type="file" id="pictureUser" name="user_picture" accept="image/*" hidden>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Họ tên <span style="color: red">*</span></label>
+                                    <input name="user_name" value="{{ $user_name }}" type="text" class="form-control" placeholder="Nhập họ tên..." required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email <span style="color: red">*</span></label>
+                                    <input name="user_email" value="{{ $user_email }}" type="email" class="form-control" placeholder="Nhập Email..." required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Số điện thoại <span style="color: red">*</span></label>
+                                    <input name="user_phone" value="{{ $user_phone }}" type="tel" class="form-control" placeholder="Nhâp số điện thoại..." required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Ngày sinh <span style="color: red">*</span></label>
+                                    <input name="user_birthday" type="date" class="form-control" value="{{ $user_birthday }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Giới tính</label>
+                                    <select name="user_sex" id="user_sex" class="form-control" required>
+                                        <option value="1" {{ $user_sex == 1 ? 'selected' : '' }}>Nam</option>
+                                        <option value="0" {{ $user_sex == 0 ? 'selected' : '' }}>Nữ</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
+            
+            @if (Auth::user()->hasPermission(13))
+                <div class="card">
+                    <div class="card-body">
+                        @if (Auth::user()->isSuperUser())
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label">Chọn tài khoản sở hữu <span class="text-danger">*</span></label>
+                                        <select name="user_fk" id="user_fk" class="form-control select2-ajax" style="width: 100%;" required></select>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                        
+
+                        <div class="form-group">
+                            <label>Meta Keywords</label><i class="fas fa-question-circle ml-1" data-toggle="tooltip" title="Các từ khóa hỗ trợ trang web xuất hiện ưu tiên khi người dùng tìm kiếm, mỗi từ cách nhau bằng dấu phẩy và dấu cách (VD: 'key 1, key 2')"></i>
+                            <input type="text" name="meta_keywords" class="form-control" value="{{ $meta_keywords }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Meta Description</label><i class="fas fa-question-circle ml-1" data-toggle="tooltip" title="Hiển thị nội dung mô tả khi chia sẻ liên kết khách sạn qua Messenger, Zalo, ..."></i>
+                            <textarea type="text" name="meta_description" class="form-control" rows="2" style="resize: vertical;" maxlength="150">{{ $meta_description }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="icheck-success d-inline">
+                                <input type="checkbox" name="active" id="active" {{ $active == 1 ? 'checked' : '' }}/>
+                                <label for="active">Hoạt động</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </form>
+        @endif
     </div>
 </section>
 <div id="myModal" class="modal fade" role="dialog" data-id="0">
@@ -525,6 +635,8 @@
         </div>
     </div>
 </div>
+
+@if (Auth::user()->hasPermission(14))
 <div id="deleteUuDaiModal" class="modal fade" role="dialog" data-id="0">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -735,7 +847,9 @@
         </div>
     </div>
 </div>
+@endif
 
+@if (Auth::user()->hasPermission(13))
 <div id="bannerModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -765,10 +879,10 @@
                         <input name="description" id="descriptionBanner" type="text" class="form-control" maxlength="250"  placeholder="Mô tả ..."/>
                     </div>
                     
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label>Link</label>
                         <input name="link" id="linkBanner" type="url" class="form-control" placeholder="Liên kết ..." maxlength="250"/>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group" style="margin-bottom: -5px;">
                         <label style="margin-bottom: 0;">Hình ảnh</label>
@@ -848,10 +962,10 @@
                         </div>
                     </div>
                     
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label>Link</label>
                         <input name="link" id="linkImages" type="url" class="form-control" placeholder="Liên kết ..."/>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group" style="margin-bottom: -5px;">
                         <label style="margin-bottom: 0;">Hình ảnh</label>
@@ -906,6 +1020,7 @@
         </div>
     </div>
 </div>
+@endif
 @endsection
 @section('styles')
 <style>
@@ -1143,6 +1258,7 @@ $(document).ready(function () {
 </script>
 
 <script>
+    @if (Auth::user()->hasPermission(13))
     CKEDITOR.replace('content', options);
 
     CKEDITOR.replace('location', {
@@ -1156,6 +1272,7 @@ $(document).ready(function () {
         enterMode: CKEDITOR.ENTER_BR,
         shiftEnterMode: CKEDITOR.ENTER_P,
     });
+    @endif
 
     var uuDaiThuongImage = "";
 
@@ -1596,6 +1713,75 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#user_fk').select2({
+        placeholder: 'Chọn tài khoản...',
+        minimumInputLength: 0,
+        ajax: {
+            url: '{{ route("backend.user.get.users") }}',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    q: params.term,
+                    page: params.page || 1,
+                    product_id: $('#id').val()
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: data.items,
+                    pagination: {
+                        more: data.pagination.more
+                    }
+                };
+            },
+            cache: true
+        }
+    });
+
+    @if($user != null)
+        @php
+            $text = $user->name;
+            if ($user->id != 10000 && $user->product) {
+                $text .= ' - ' . $user->product->name;
+            }
+        @endphp
+        let defaultOption = new Option("{{ $text }}", {{ $user->id }}, true, true);
+        $('#user_fk').append(defaultOption).trigger('change');
+    @endif
+
+    // var userImage = "";
+
+    // $('#uploadIconUser').on('click', function() {
+    //     $('#pictureUser').click();
+    // });
+
+    // $('#imagePreviewUser').on('click', function() {
+    //     $('#pictureUser').click();
+    // });
+
+    // $('#pictureUser').on('change', function(event) {
+    //     var file = event.target.files[0];
+    //     if (file) {
+    //         var reader = new FileReader();
+    //         reader.onload = function(e) {
+    //             $('#imagePreviewUser').attr('src', e.target.result);
+    //             $('#removeIconUser').show();
+    //         };
+    //         reader.readAsDataURL(file);
+    //     }
+    // });
+
+    // $('#removeIconUser').on('click', function() {
+    //     $('#pictureUser').val('');
+    //     if (userImage) {
+    //         $('#imagePreviewUser').attr('src', userImage);
+    //     } else {
+    //         $('#imagePreviewUser').attr('src', defaultImage);
+    //     }
+    //     $('#removeIconUser').hide(); 
+    // });
 </script>
 
 @endsection

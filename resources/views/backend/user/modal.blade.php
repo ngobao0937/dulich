@@ -109,9 +109,17 @@
                             <option value="">-- Chọn vai trò --</option>
                             <option value="0">Không có</option>
                             @foreach ($roles as $role)
-                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                <option value="{{ $role->id }}" data-permissions="{{ $role->permissions->pluck('id')->implode(',') }}">{{ $role->name }}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Chọn khách sạn quản lý</label> <small><span class="text-muted">(có thể chọn nhiều)</span></small>
+                        <div class="select2-primary">
+                            <select name="product_fk[]" id="product_fk" class="select2-multiple" multiple="multiple" data-placeholder="-- Chọn khách sạn --">
+                                
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">

@@ -147,6 +147,8 @@
     $('#roleModal').on('hidden.bs.modal', function() {
         $('#user_id').val('');
         $('#role_fk').val('');
+        $('#product_fk').empty();
+        toggleHotelGroup();
     });
     function alertRole(userId){
         $.ajax({
@@ -155,11 +157,75 @@
             success: function(data){
                 $('#user_id').val(data.user.id);
                 $('#role_fk').val(data.user.role_fk);
+                toggleHotelGroup();
+                const $productSelect = $('#product_fk');
+                $productSelect.empty();
+
+                if (data.products && data.products.length > 0) {
+                    data.products.forEach(item => {
+                        const option = new Option(item.text, item.id, true, true);
+                        $productSelect.append(option).trigger('change');
+                    });
+                } else {
+                    $productSelect.val(null).trigger('change');
+                }
             },
             error: function(error){
                 console.log(error);
             }
         })
     }
+    const $roleSelect = $('#role_fk');
+    const $hotelGroup = $('#product_fk').closest('.form-group');
+
+    function toggleHotelGroup() {
+        const selectedOption = $roleSelect.find('option:selected');
+        const roleId = parseInt(selectedOption.val());
+        const permissions = selectedOption.data('permissions');
+
+        if (permissions && roleId !== 2) {
+            const permissionArray = permissions.toString().split(',').map(Number);
+            if (permissionArray.includes(12)) {
+                $hotelGroup.show();
+                return;
+            }
+        }
+
+        $hotelGroup.hide();
+    }
+
+
+    toggleHotelGroup();
+
+    $roleSelect.on('change', toggleHotelGroup);
+
+    $(document).ready(function () {
+        $('#product_fk').select2({
+            placeholder: "-- Chọn khách sạn --",
+            allowClear: true,
+            closeOnSelect: false,
+            ajax: {
+                url: '{{ route("backend.product.get.products") }}',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term,
+                        page: params.page || 1
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: data.results,
+                        pagination: {
+                            more: data.pagination.more
+                        }
+                    };
+                },
+                cache: true
+            },
+            minimumInputLength: 0
+        });
+    });
 </script>
 @endsection

@@ -12,7 +12,11 @@ class LoginController extends Controller
 {
     public function login() {
         if(Auth::check()){
-            return redirect()->route('backend.dashboard.index');
+            if(Auth::user()->role->id == 2){
+                return redirect()->route('backend.product.my.product');
+            }else{
+                return redirect(route('backend.dashboard.index'));
+            }
         }
         return view('backend.login');
     }
@@ -37,7 +41,12 @@ class LoginController extends Controller
         if (Hash::check($request->input('password'), $user->password)) {
             $remember = $request->has('remember') ? true : false;
             Auth::login($user, $remember);
-            return redirect(route('backend.dashboard.index'));
+            if(Auth::user()->role->id == 2){
+                return redirect()->route('backend.product.my.product');
+            }else{
+                return redirect(route('backend.dashboard.index'));
+            }
+            
         } else {
             return back()->withErrors(['message' => 'Sai mật khẩu.'])->withInput();
         }

@@ -62,6 +62,8 @@
                                     Trang ưu đãi
                                 @elseif ($banner->type == 'blog')
                                     Trang blog
+                                @elseif ($banner->type == 'other')
+                                    Khác
                                 @endif
                             </td>
                             <td>{{ $banner->position }}</td>

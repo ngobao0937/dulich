@@ -8,7 +8,7 @@
         <b>{{ $banner->name }}</b> <br>
         {{ $banner->description }}
     </td>
-    <td>{{ $banner->link ? $banner->link : '#' }}</td>
+    {{-- <td>{{ $banner->link ? $banner->link : '#' }}</td> --}}
     <td>{{ $banner->position }}</td>
     <td class="text-center">
         @if ($banner->active != 1)

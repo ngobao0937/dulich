@@ -30,11 +30,6 @@ class User extends Authenticatable
         'role_fk'
     ];
 
-    public function isSuperUser()
-    {
-        return $this->super_user == 1;
-    }
-
     public function image() {
 		return $this->hasOne('App\Models\Image', 'id_fk','id')->where('type','user_hinh_dai_dien');
 	}
@@ -44,8 +39,17 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Role', 'role_fk');
     }
 
+    public function isSuperUser()
+    {
+        return $this->super_user == 1;
+    }
+
     public function hasPermission($permissionId)
     {
+        if ($this->isSuperUser()) {
+            return true;
+        }
+
         return $this->role && $this->role->permissions->contains('id', $permissionId);
     }
 
@@ -53,6 +57,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Product', 'product_user', 'user_fk', 'product_fk');
     }
+
+    public function product() {
+		return $this->hasOne('App\Models\Product', 'user_fk');
+	}
 
 
     /**

@@ -24,8 +24,8 @@ class BannerController extends Controller
         }
 
         $banners = $query
-				->whereIn('type', ['main', 'event', 'promotion', 'blog'])
-				->orderByRaw("FIELD(type, 'main', 'event', 'promotion', 'blog')")
+				->whereIn('type', ['main', 'event', 'promotion', 'blog', 'other'])
+				->orderByRaw("FIELD(type, 'main', 'event', 'promotion', 'blog', 'other')")
 				->orderBy('isMobile', 'asc')
 				->orderBy('position', 'asc')
 				->paginate(20);
@@ -60,18 +60,23 @@ class BannerController extends Controller
 			}
 		}
 
+		$data = [
+			'name' => $request->name,
+			'description' => $request->description,
+			'active' => $request->active ? 1 : 0,
+			'position' => $request->position,
+			'link' => $request->link,
+			'product_fk' => $request->product_fk,
+			'isMobile' => $request->isMobile
+		];
+
+		if($request->has('type')){
+			$data['type'] = $request->type;
+		}
+
 		$obj = Banner::updateOrCreate(
 			['id' => $request->id],
-			[
-				'name' => $request->name,
-				'description' => $request->description,
-				'active' => $request->active ? 1 : 0,
-				'position' => $request->position,
-				'link' => $request->link,
-				'product_fk' => $request->product_fk,
-				'type' => $request->type,
-				'isMobile' => $request->isMobile
-			]
+			$data
 		);
 
 
@@ -79,19 +84,20 @@ class BannerController extends Controller
 			SaveImage($request, $obj->id, 'banner', 'picture', 100, 1200, true);
 		}
 
-		if($request->type != 'main' && $request->type != 'promotion' && $request->type != 'event' && $request->type != 'blog'){
+		if(!$request->has('type')){
+			return redirect(route('backend.banner.index', $request->query()));
+		}
+
+		if (!in_array($request->type, ['main', 'promotion', 'event', 'blog', 'other'])) {
 			$html = view('backend.product.banner_row', ['banner' => $obj])->render();
 
 			return response()->json([
 				'success' => true,
 				'html' => $html
 			]);
-		}else{
-			return redirect(route('backend.banner.index', $request->query()));
 		}
 
-		
- 
+		return redirect(route('backend.banner.index', $request->query()));
     }
 
 	public function delete(Request $request) {

@@ -38,14 +38,15 @@ class AppServiceProvider extends ServiceProvider
         $banners = Banner::where('active', 1)->orderby('position', 'asc')->get();
         $pages = Page::all();
         $menus = Menu::where('active', 1)->get();
-        $blogsF = Blog::where('active', 1)->take(4)->get();
-
+        $blogsF = Blog::where('active', 1)->orderby('id', 'desc')->take(4)->get();
+        $bannerList = Banner::whereBetween('id', [1000, 1010])->get()->keyBy('id');
 
         view()->share([
             'banners'=> $banners,
             'menus'=> $menus,
             'pages' => $pages,
             'blogsF' => $blogsF,
+            'bannerList' => $bannerList,
             'meta_title' => 'Bariavungtau tourism - Sở du lịch Bà Rịa Vũng Tàu',
             'meta_description' => 'Trang thông tin du lịch Bà Rịa Vũng Tàu Tourism.',
             'meta_keywords' => 'bariavungtau tourism, tourism, du lich, so du lich, so du lich ba ria vung tau',

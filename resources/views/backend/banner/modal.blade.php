@@ -42,6 +42,7 @@
                                     <option value="event">Trang sự kiện</option>
                                     <option value="promotion">Trang ưu đãi</option>
                                     <option value="blog">Trang blog</option>
+                                    <option value="other" disabled>Khác</option>
                                 </select>
                             </div>
                         </div>
@@ -68,10 +69,10 @@
                         
                     </div>
                     
-                    {{-- <div class="form-group">
-                        <label>Link</label>
-                        <input name="link" id="link" type="text" class="form-control" placeholder="Liên kết ..."/>
-                    </div> --}}
+                    <div class="form-group">
+                        <label>Link iframe</label>
+                        <input name="link" id="link" type="link" class="form-control" placeholder="Link iframe ..."/>
+                    </div>
 
                     <div class="form-group" style="margin-bottom: -5px;">
                         <label style="margin-bottom: 0;">Hình ảnh</label>

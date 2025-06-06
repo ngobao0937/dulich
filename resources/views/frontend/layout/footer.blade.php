@@ -46,7 +46,7 @@
                         <div class="w-100 mb-3" style="background: white">
                             <div class="embed-responsive embed-responsive-16by9 h-100">
                                 <iframe class="embed-responsive-item" 
-                                        src="https://www.youtube.com/embed/aY7F3NKR6VA?si=gTc1nuFzogIKN8eM" 
+                                        src="{{ $bannerList[1010]->link ? $bannerList[1010]->link : 'https://www.youtube.com/embed/aY7F3NKR6VA?si=gTc1nuFzogIKN8eM' }}"
                                         allowfullscreen 
                                         style="width: 100%; border: none; aspect-ratio: 16/9;">
                                 </iframe>

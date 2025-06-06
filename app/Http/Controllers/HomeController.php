@@ -92,7 +92,7 @@ class HomeController extends Controller
             'promotions_KS' => $promotions_KS,
             'promotions_NH' => $promotions_NH,
             'promotions_KVC' => $promotions_KVC,
-            'sponsors' => $sponsors
+            'sponsors' => $sponsors,
             // 'products_KS' => $products_KS,
             // 'products_NH' => $products_NH,
             // 'products_KVC' => $products_KVC

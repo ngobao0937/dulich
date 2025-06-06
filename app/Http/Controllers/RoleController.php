@@ -43,12 +43,11 @@ class RoleController extends Controller
     {
         $data = $request->input('data');
 
-        // Group theo role để xử lý mỗi vai trò 1 lần
         $grouped = collect($data)->groupBy('role_id');
 
         foreach ($grouped as $roleId => $permissions) {
             $role = Role::find($roleId);
-            if (!$role || $role->id == 1) continue;
+            if (!$role || $role->id == 1 || $role->id == 2) continue;
 
             $permissionIds = collect($permissions)
                         ->filter(function ($item) {

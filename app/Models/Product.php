@@ -30,14 +30,13 @@ class Product extends Model
 		'active',
 		'isdelete',
 		'slug',
+		'user_fk',
 		'meta_keywords',
 		'meta_description',
 	];
 
 	public $timestamps = false;
-	public function user() {
-		return $this->belongsTo('App\Models\User', 'user_id');
-	}
+
 	public function getUserNameAttribute() {
 		if (!empty($this->user)) return $this->user->user_name;
 		return 'empty';
@@ -111,6 +110,11 @@ class Product extends Model
 	public function approvedCommentsCount()
 	{
 		return $this->approvedComments()->count();
+	}
+
+	public function user()
+	{
+		return $this->belongsTo('App\Models\User', 'user_fk');
 	}
 
 	public function users()

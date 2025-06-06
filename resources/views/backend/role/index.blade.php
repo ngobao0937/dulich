@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="card-body table-responsive p-0">
-                <table id="table_" class="table table-bordered text-nowrap">
+                <table id="table_" class="table table-bordered table-hover text-nowrap">
                     <thead class="thead-light">
                         <tr>
                             <th class="text-center" style="width: 220px;">Quyền \ Vai trò</th>
@@ -36,7 +36,7 @@
                                                 {{ $role->permissions->contains($permission->id) ? 'checked' : '' }}  
                                                 data-role-id="{{ $role->id }}" 
                                                 data-permission-id="{{ $permission->id }}"
-                                                {{ $role->id == 1 ? 'disabled' : '' }}>
+                                                {{ $role->id == 1 || $role->id == 2 ? 'disabled' : '' }}>
                                             <label for="role-{{ $role->id }}-permission-{{ $permission->id }}"></label>
                                         </div>
                                     </td>
@@ -47,12 +47,16 @@
                             <td style="width: 220px;"><strong>Hành động</strong></td>
                             @foreach ($roles as $role)
                                 <td class="text-center">
-                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#roleModal" onclick="alertRole({{ $role->id }})">
-                                        <i class="fa fa-edit"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="alertDelete({{ $role->id }})">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
+                                    @if ($role->id == 1 || $role->id == 2)
+                                        <span class="text-muted"><i>Đã khóa</i></span>
+                                    @else
+                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#roleModal" onclick="alertRole({{ $role->id }})">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="alertDelete({{ $role->id }})">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    @endif
                                 </td>
                             @endforeach
                         </tr>

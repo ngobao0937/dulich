@@ -5,9 +5,14 @@
         <div class="card">
             <div class="card-header">
                 <div class="div-header" style="display: flex; justify-content: space-between; flex-wrap: nowrap; gap: 10px;">
-                    <a class="btn btn-success btn-sm" href="{{ route('backend.product.create') }}">
-                        Thêm mới
-                    </a>
+                    @if (Auth::user()->isSuperUser())
+                        <a class="btn btn-success btn-sm" href="{{ route('backend.product.create') }}">
+                            Thêm mới
+                        </a>
+                    @else
+                        <span></span>
+                    @endif
+                    
                     <form method="GET" action="{{ route('backend.product.index') }}" class="form-inline" id="search-form">
                         <div class="input-group input-group-sm mr-2">
                             <select name="active" id="active" class="form-control">
@@ -66,9 +71,12 @@
                                 <a href="{{ route('backend.product.edit', ['id' => $product->id]) }}" class="btn btn-success btn-sm">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <button type="button" class="btn btn-danger btn-sm" onclick="alertDelete({{ $product->id }})">
-                                    <i class="fa fa-trash"></i>
-                                </button>
+                                @if (Auth::user()->isSuperUser())
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="alertDelete({{ $product->id }})">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                @endif
+                                
                             </td>
                         </tr>
                         @empty
@@ -85,6 +93,7 @@
         </div>
     </div>
 </section>
+@if (Auth::user()->isSuperUser())
 <div id="myModal" class="modal fade" role="dialog" data-id="0">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -106,6 +115,7 @@
         </div>
     </div>
 </div>
+@endif
 @endsection
 @section('styles')
 

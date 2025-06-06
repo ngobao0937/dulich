@@ -21,7 +21,16 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
+        if(Auth::user()->role->id == 2){
+            return redirect()->route('backend.product.my.product');
+        }
+
         $query = Product::query();
+
+        if (!Auth::user()->isSuperUser()) {
+            $productIds = Auth::user()->products()->pluck('product_fk');
+            $query->whereIn('id', $productIds);
+        }
 
         if ($request->has('search') && $request->search) {
             $search = $request->search;
@@ -56,8 +65,22 @@ class ProductController extends Controller
 
 	public function edit(Request $request) {
 		$id = $request->input('id');
-		$product = Product::with(['image'])->find($id);
+
+		$product = Product::with(['image', 'user'])->find($id);
         // Promotion::where('product_fk', $product->id)->where('issave', 0)->delete();
+		return view('backend.product.model', [
+			'product' => $product,
+		]);
+    }
+    public function myProduct() {
+        if(Auth::user()->role->id != 2){
+            abort(403, 'Bạn không có quyền truy cập vào chức năng này.');
+        }
+		$id = Auth::user()->product ? Auth::user()->product->id : null;
+        if($id == null){
+            return view('backend.product.empty');
+        }
+		$product = Product::with(['image', 'user'])->find($id);
 		return view('backend.product.model', [
 			'product' => $product,
 		]);
@@ -98,6 +121,21 @@ class ProductController extends Controller
             'isdelete' => 0
         ];
 
+        if (Auth::user()->isSuperuser() && $request->has('user_fk')) {
+            $newUserId = $request->user_fk;
+
+            if ($newUserId != 10000) {
+                $editingProductId = $request->input('id', null);
+
+                Product::where('user_fk', $newUserId)
+                    ->when($editingProductId, function ($q) use ($editingProductId) {
+                        return $q->where('id', '<>', $editingProductId);
+                    })
+                    ->update(['user_fk' => 10000]);
+            }
+
+            $data['user_fk'] = $newUserId;
+        }
 
 		$obj = Product::updateOrCreate(
 			['id' => $id],
@@ -147,11 +185,18 @@ class ProductController extends Controller
             }
         }
 
+
+
         // Promotion::where('product_fk', $id)
         //         ->where('issave', 0)
         //         ->update(['issave' => 1]);
         
-		return redirect(route('backend.product.index', $request->query()));
+        if(Auth::user()->role->id == 2){
+            return redirect()->route('backend.product.my.product');
+        }else{
+            return redirect(route('backend.product.index', $request->query()));
+        }
+		
     }
 
 	public function delete(Request $request) {
@@ -345,5 +390,35 @@ class ProductController extends Controller
     }
 
 
+    public function getProducts(Request $request)
+    {
+        $query = $request->input('q');
+        $page = $request->input('page', 1);
+        $limit = 30;
+        $offset = ($page - 1) * $limit;
+
+        $products = Product::when($query, function ($q) use ($query) {
+                return $q->where('name', 'like', '%' . $query . '%');
+            })
+            ->where('isdelete', 0)
+            ->orderBy('name')
+            ->offset($offset)
+            ->limit($limit + 1)
+            ->get();
+
+        $hasMorePages = $products->count() > $limit;
+
+        $results = $products->take($limit)->map(function ($product) {
+            return [
+                'id' => $product->id,
+                'text' => $product->name
+            ];
+        });
+
+        return response()->json([
+            'results' => $results,
+            'pagination' => ['more' => $hasMorePages]
+        ]);
+    }
 
 }

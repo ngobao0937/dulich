@@ -25,6 +25,9 @@ class PromotionController extends Controller
 		]);
     }
 	public function store(Request $request) {
+		if(!Auth::user()->isSuperUser() && !Auth::user()->products()->where('product_fk', $request->product_fk)->exists()){
+			abort(403, 'Bạn không có quyền chỉnh sửa khách sạn này.');
+		}
 		
 		$validator = Validator::make($request->all(), [
             'name' => 'required',
