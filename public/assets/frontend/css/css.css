@@ -1921,7 +1921,7 @@ a{
     display: block;
     font-size: 13px;
     margin-top: 6px;
-	color: rgb(255, 148, 148) !important;
+	color: rgb(255, 186, 186) !important;
 }
 
 .btn-default {
@@ -2196,6 +2196,11 @@ a{
     height: 100%;
 }
 
+.logo-footer-c{
+    width: 100%;
+    height: 180px;
+}
+
 
 @media screen and (max-width: 1250px) {
 	.title-sodl{
@@ -2228,9 +2233,9 @@ a{
 }
 
 @media screen and (max-width: 767px) {
-	/* .logo-footer-c{
-		display: none;
-	} */
+	.logo-footer-c{
+		height: 150px;
+	}
     .title-web{
         font-size: 18px;
     }

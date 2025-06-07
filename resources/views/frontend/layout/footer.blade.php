@@ -7,8 +7,8 @@
                     <div class="col-xl-6">
                 <div class="row">
                      <div class="col-md-6">
-                        <div class="w-100 d-flex justify-content-center mb-3" style="aspect-ratio: 5/3">
-                            <img class="logo-footer-c w-100" style="object-fit: contain;" src="{{ asset('images/logo-1.png') }}" alt="Logo">
+                        <div class="w-100 d-flex justify-content-center mb-3 logo-footer-c">
+                            <img class="w-100" style="object-fit: contain;" src="{{ asset('images/logo-1.png') }}" alt="Logo">
                         </div>
                         <div class="title-logo-white mb-2">Sở Du Lịch Bà Rịa - Vũng Tàu</div>
                         <div class="des-logo-footer mb-2">
@@ -67,6 +67,13 @@
                         </a>
                         <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal" class="mb-2 d-block">
                             <div>Đăng ký</div>
+                        </a>
+                        <div class="title-logo-white mb-3 mt-3">Chính sách</div>
+                        <a href="{{ route('frontend.page.detail', ['id'=>10000, 'slug'=>$page1->slug]) }}" class="mb-2 d-block">
+                            <div>Điều khoản dịch vụ</div>
+                        </a>
+                        <a href="{{ route('frontend.page.detail', ['id'=>10001, 'slug'=>$page2->slug]) }}" class="mb-2 d-block">
+                            <div>Chính sách quyền riêng tư</div>
                         </a>
                     </div>
                 </div>

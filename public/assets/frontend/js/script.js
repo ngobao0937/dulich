@@ -155,12 +155,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 maxlength: "Lời nhắn không được vượt quá 200 ký tự"
             },
             agree: {
-                required: "Bạn phải đồng ý với Điều khoản dịch vụ"
+                required: "Vui lòng đồng ý với các chính sách của chúng tôi"
             }
         },
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             if (element.attr("type") === "checkbox") {
-                error.insertAfter(element.closest('.icheck-primary'));
+                error.appendTo(".checkbox-error");
             } else {
                 error.insertAfter(element);
             }
@@ -215,12 +215,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 maxlength: "Lời nhắn tối đa 200 ký tự"
             },
             agree: {
-                required: "Bạn phải đồng ý với Điều khoản dịch vụ"
+                required: "Vui lòng đồng ý với các chính sách của chúng tôi"
             }
         },
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             if (element.attr("type") === "checkbox") {
-                error.insertAfter(element.closest('.icheck-primary'));
+                error.appendTo(".checkbox-error-re");
             } else {
                 error.insertAfter(element);
             }

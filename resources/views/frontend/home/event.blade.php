@@ -82,7 +82,7 @@
         
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="special-offer-card" style="background-image: url({{ asset('assets/frontend/images/uudai-bg.png') }});">
+                <div class="special-offer-card" style="background-image: url({{ $bannerList[1007]->image ? asset('uploads/'.$bannerList[1007]->image->ten) : asset('assets/frontend/images/uudai-bg.png') }});">
                     <div class="special-overlay"></div>
                     <div class="special-offer-overlay">
                         <div class="special-offer-title">Ưu đãi đặc biệt</div>
@@ -147,7 +147,7 @@
         
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="special-offer-card" style="background-image: url({{ asset('assets/frontend/images/uudai-bg.png') }});">
+                <div class="special-offer-card" style="background-image: url({{ $bannerList[1008]->image ? asset('uploads/'.$bannerList[1008]->image->ten) : asset('assets/frontend/images/uudai-bg.png') }});">
                     <div class="special-overlay"></div>
                     <div class="special-offer-overlay">
                         <div class="special-offer-title">Ưu đãi đặc biệt</div>
@@ -212,7 +212,7 @@
         
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="special-offer-card" style="background-image: url({{ asset('assets/frontend/images/uudai-bg.png') }});">
+                <div class="special-offer-card" style="background-image: url({{ $bannerList[1009]->image ? asset('uploads/'.$bannerList[1009]->image->ten) : asset('assets/frontend/images/uudai-bg.png') }});">
                     <div class="special-overlay"></div>
                     <div class="special-offer-overlay">
                         <div class="special-offer-title">Ưu đãi đặc biệt</div>
@@ -304,10 +304,6 @@
                     <div class="form-group">
                         <div class="icheck-success d-inline">
                             <input type="checkbox" name="agree" id="agreeS" checked required>
-                            @php
-                                $page1 = App\Models\Page::find(10000);
-                                $page2 = App\Models\Page::find(10001);
-                            @endphp
                             <label for="agreeS">Tôi đồng ý với <a href="{{ route('frontend.page.detail', ['id'=>10000, 'slug'=>$page1->slug]) }}" style="color: #38b19e; font-weight: bold;" target="_blank">Điều khoản dịch vụ</a> và <a href="{{ route('frontend.page.detail', ['id'=>10001, 'slug'=>$page2->slug]) }}" style="color: #38b19e; font-weight: bold;" target="_blank">Chính sách quyền riêng tư</a></label>
                         </div>
                     </div>
@@ -429,7 +425,6 @@
                 const now = new Date();
 
                 if (now < startDate) {
-                    // Sự kiện sắp diễn ra - đếm ngược đến ngày bắt đầu
                     const diff = startDate - now;
                     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -441,10 +436,8 @@
                     values[2].textContent = String(minutes).padStart(2, '0');
                     values[3].textContent = String(seconds).padStart(2, '0');
                 } else if (now >= startDate && now <= endDate) {
-                    // Sự kiện đang diễn ra
                     container.innerHTML = `<div class="countdown-event-status" style="color: green; font-weight: bold; font-size: clamp(17px, 4vw, 20px)">Đang diễn ra</div>`;
                 } else {
-                    // Sự kiện đã kết thúc
                     container.innerHTML = `<div class="countdown-event-status" style="color: red; font-weight: bold; font-size: clamp(17px, 4vw, 20px)">Đã kết thúc</div>`;
                 }
             }

@@ -29,12 +29,9 @@
                     <div class="form-group">
                         <div class="icheck-success d-inline">
                             <input type="checkbox" name="agree" id="agree" checked required>
-                            @php
-                                $page1 = App\Models\Page::find(10000);
-                                $page2 = App\Models\Page::find(10001);
-                            @endphp
                             <label for="agree">Tôi đồng ý với <a href="{{ route('frontend.page.detail', ['id'=>10000, 'slug'=>$page1->slug]) }}" style="color: rgb(255, 211, 130); font-weight: bold;" target="_blank">Điều khoản dịch vụ</a> và <a href="{{ route('frontend.page.detail', ['id'=>10001, 'slug'=>$page2->slug]) }}" style="color: rgb(255, 211, 130); font-weight: bold;" target="_blank">Chính sách quyền riêng tư</a></label>
                         </div>
+                        <div class="checkbox-error-re"></div>
                     </div>
                     
                     <button type="submit" class="btn-get-offer" style="color: white; font-size: clamp(17px, 4vw, 19px); font-weight: bold;">ĐĂNG KÝ NGAY</button>
