@@ -12,6 +12,10 @@ class LoginController extends Controller
 {
     public function login() {
         if(Auth::check()){
+            if(Auth::user()->role == null){
+                Auth::logout();
+    	        return redirect(route('backend.login'));
+            }
             if(Auth::user()->role->id == 2){
                 return redirect()->route('backend.product.my.product');
             }else{
@@ -41,6 +45,10 @@ class LoginController extends Controller
         if (Hash::check($request->input('password'), $user->password)) {
             $remember = $request->has('remember') ? true : false;
             Auth::login($user, $remember);
+            if(Auth::user()->role == null){
+                Auth::logout();
+                abort(403, 'Tài khoản này chưa có vai trò. Vui lòng liên hệ với quản trị viên.');
+            }
             if(Auth::user()->role->id == 2){
                 return redirect()->route('backend.product.my.product');
             }else{

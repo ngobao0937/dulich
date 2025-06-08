@@ -44,7 +44,7 @@ Route::get('/admin', [LoginController::class, 'login'])->name('backend.login');
 Route::post('/check', [LoginController::class, 'check'])->name('backend.check');
 Route::get('/logout', [LoginController::class, 'logout'])->name('backend.logout')->middleware('auth');
 
-Route::middleware('auth')->prefix('/admin')->group(function () {
+Route::middleware(['auth','check.role'])->prefix('/admin')->group(function () {
     Route::post('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
     Route::post('/upload-image', [ImageController::class, 'uploadImage'])->name('backend.uploadImage');
     Route::post('/update-image-order', [ImageController::class, 'updateOrder'])->name('backend.update.image.order');
