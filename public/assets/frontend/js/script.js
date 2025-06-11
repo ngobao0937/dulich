@@ -227,4 +227,35 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    function isVisible(el) {
+        return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+    }
+
+    let allBanners = document.querySelectorAll(".bannerSwiper");
+
+    let bannerSection = Array.from(allBanners).find(isVisible);
+
+    if (bannerSection) {
+        let nextSection = document.querySelector("#nextSection");
+
+        let scrolled = false;
+        const headerHeight = 50;
+
+        window.addEventListener("wheel", function (e) {
+            if (window.scrollY === 0) {
+                scrolled = false;
+            }
+
+            if (!scrolled && e.deltaY > 0 && window.scrollY < 50) {
+                scrolled = true;
+                if (nextSection) {
+                    const offsetTop = nextSection.getBoundingClientRect().top + window.scrollY - headerHeight;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    }
 });

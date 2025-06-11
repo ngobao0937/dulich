@@ -143,6 +143,16 @@
               <p>Danh mục</p>
             </a>
           </li> --}}
+
+          @if (Auth::user()->isSuperUser())
+            <li class="nav-item">
+              <a href="{{ route('backend.other.index') }}" class="nav-link {{ request()->routeIs('backend.other.*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-splotch"></i>
+                <p>Khác</p>
+              </a>
+            </li>
+          @endif
+
           @if (Auth::user()->hasPermission(3))
             <li class="nav-item">
               <a href="{{ route('backend.role.index') }}" class="nav-link {{ request()->routeIs('backend.role.*') ? 'active' : '' }}">

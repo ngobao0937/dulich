@@ -1,7 +1,7 @@
 @extends('frontend.layout.app')
 @section('title', 'Khuyến mãi & ưu đãi')
 @section('content')
-<div class="swiper bannerSwiper sp_container" style="width: 100%;">
+{{-- <div class="swiper bannerSwiper sp_container" style="width: 100%;">
     <div class="swiper-wrapper">
         @foreach ($banners as $banner)
             <div class="swiper-slide position-relative">
@@ -13,23 +13,49 @@
             </div>
         @endforeach
     </div>
-</div>
+</div> --}}
 
+<section class="d-none d-md-block banner-desktop">
+    <div class="swiper bannerSwiper" style="width: 100%; height: 100vh; overflow: hidden;">
+        <div class="swiper-wrapper">
+            @foreach ($desktopBanners as $banner)
+                <div class="swiper-slide position-relative">
+                    <img class="w-100 h-100" style="object-fit: cover;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->name }}">
+                    <div class="overlay position-absolute w-100 h-100 top-0 start-0" style="display: flex; justify-content: center; align-items: center; z-index: 1; border-radius: 0">
+                        <h1 style="color: white; font-weight: bold; font-size: clamp(20px, 4vw, 40px);;">ƯU ĐÃI CHO HÔM NAY!</h1>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
 
-<section class="mt-4">
-    <div class="container">
+<section class="d-block d-md-none banner-mobile">
+    <div class="swiper bannerSwiper" style="width: 100%; height: 100vh; overflow: hidden;">
+        <div class="swiper-wrapper">
+            @foreach ($mobileBanners as $banner)
+                <div class="swiper-slide position-relative">
+                    <img class="w-100 h-100" style="object-fit: cover;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->name }}">
+                    <div class="overlay position-absolute w-100 h-100 top-0 start-0" style="display: flex; justify-content: center; align-items: center; z-index: 1; border-radius: 0">
+                        <h1 style="color: white; font-weight: bold; font-size: clamp(20px, 4vw, 40px);;">ƯU ĐÃI CHO HÔM NAY!</h1>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+<section id="nextSection">
+    <div class="container pt-5">
         <div class="row">
-            <!-- Mobile Filter Toggle Button -->
             <div class="col-12">
                 <button class="btn btn-outline-secondary mobile-filter-toggle" id="toggleFilters">
                     <i class="fas fa-filter mr-2"></i> Hiển thị bộ lọc
                 </button>
             </div>
             
-            <!-- Left Sidebar - Filters -->
             <div class="col-lg-3">
                 <div id="filterSection">
-                    <!-- Filter Section 1 -->
                     <form id="filterForm" method="GET" action="{{ route('frontend.product.promotions') }}">
                         <div class="filter-section">
                             <h5 class="filter-heading">Áp dụng được cho</h5>
@@ -50,7 +76,6 @@
                         </div>
                     </form>
                     
-                    <!-- Filter Section 2 -->
                     <div class="filter-section">
                         <h5 class="filter-heading">Ưu đãi</h5>
                         <div class="filter-group">
@@ -79,14 +104,11 @@
                 </div>
             </div>
             
-            <!-- Right Content - Item Grid -->
             <div class="col-lg-9">
-                <!-- Search Bar -->
                 <div class="row mb-4">
                     <div class="col-lg-6 col-md-12"></div>
                     <div class="col-lg-6 col-md-12">
                         <form method="GET" action="{{ route('frontend.product.promotions') }}">
-                            {{-- Giữ lại các checkbox lọc --}}
                             @foreach(request()->input('filters', []) as $filter)
                                 <input type="hidden" name="filters[]" value="{{ $filter }}">
                             @endforeach
@@ -147,7 +169,7 @@
                                             </div>
                                         </div>
                                         <div class="text-center mt-3">
-                                            <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="btn-get-offer">Nhận ưu đãi ngay</a>
+                                            <a href="{{ route('frontend.product.detail', ['id'=>$product->id, 'slug'=>$product->slug]) }}" class="btn-get-offer">Xem thêm về ưu đãi</a>
                                         </div>
                                     </div>
                                 </div>

@@ -46,7 +46,7 @@
                         <div class="w-100 mb-3" style="background: white">
                             <div class="embed-responsive embed-responsive-16by9 h-100">
                                 <iframe class="embed-responsive-item" 
-                                        src="{{ $bannerList[1010]->link ? $bannerList[1010]->link : 'https://www.youtube.com/embed/aY7F3NKR6VA?si=gTc1nuFzogIKN8eM' }}"
+                                        src="{{ $linkF->link ? $linkF->link : 'https://www.youtube.com/embed/aY7F3NKR6VA?si=gTc1nuFzogIKN8eM' }}"
                                         allowfullscreen 
                                         style="width: 100%; border: none; aspect-ratio: 16/9;">
                                 </iframe>
@@ -75,6 +75,17 @@
                         <a href="{{ route('frontend.page.detail', ['id'=>10001, 'slug'=>$page2->slug]) }}" class="mb-2 d-block">
                             <div>Chính sách quyền riêng tư</div>
                         </a>
+                        <div class="d-flex mb-3 mt-3">
+                            <a href="#" style="width: 40px; margin-right: 10px; display: block;">
+                                <i class="fab fa-facebook" style="color: #ffffff; font-size: 40px;"></i>
+                            </a>
+                            <a href="#" style="width: 40px; margin-right: 10px; display: block">
+                                <img class="w-100" src="{{ asset('assets/frontend/images/icon-zalo9.png') }}" alt="zalo">
+                            </a>
+                            <a href="#" style="width: 40px; display: block">
+                                <img class="w-100" src="{{ asset('assets/frontend/images/tiktok.png') }}" alt="tiktok">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -85,18 +96,6 @@
         <div class="post-divider"></div>
         <div class="d-flex justify-content-between mt-3">
             <div style="font-size: 14px">Copy right © 2025 All rights reserved</div>
-            <div class="d-flex">
-                <a href="#" style="width: 40px; margin-right: 10px; display: block;">
-                    <i class="fab fa-facebook" style="color: #ffffff; font-size: 40px;"></i>
-                </a>
-                <a href="#" style="width: 40px; margin-right: 10px; display: block">
-                    <img class="w-100" src="{{ asset('assets/frontend/images/icon-zalo9.png') }}" alt="zalo">
-                </a>
-                <a href="#" style="width: 40px; display: block">
-                    <img class="w-100" src="{{ asset('assets/frontend/images/tiktok.png') }}" alt="tiktok">
-                </a>
-                
-            </div>
         </div>
     </div>
 </footer>

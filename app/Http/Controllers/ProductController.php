@@ -360,6 +360,18 @@ class ProductController extends Controller
             ->orderBy('position', 'asc')
             ->where('active', 1)
             ->get();
+            
+        $desktopBanners = Banner::where('type', 'promotion')
+            ->where('active', 1)
+            ->where('isMobile', 0)
+            ->orderBy('position', 'asc')
+            ->get();
+
+        $mobileBanners = Banner::where('type', 'promotion')
+            ->where('active', 1)
+            ->where('isMobile', 1)
+            ->orderBy('position', 'asc')
+            ->get();
 
         $menuIds = $request->input('filters', []);
         $keyword = $request->input('keyword');
@@ -386,6 +398,8 @@ class ProductController extends Controller
         return view('frontend.product.promotions', [
             'banners' => $banners,
             'products' => $products,
+            'desktopBanners' => $desktopBanners,
+            'mobileBanners' => $mobileBanners,
         ]);
     }
 

@@ -57,9 +57,9 @@
                                 @if ($banner->type == 'main')
                                     Trang chủ ({{$banner->isMobile == 1 ? 'M' : 'D'}})
                                 @elseif ($banner->type == 'event')
-                                    Trang sự kiện
+                                    Trang sự kiện ({{$banner->isMobile == 1 ? 'M' : 'D'}})
                                 @elseif ($banner->type == 'promotion')
-                                    Trang ưu đãi
+                                    Trang ưu đãi ({{$banner->isMobile == 1 ? 'M' : 'D'}})
                                 @elseif ($banner->type == 'blog')
                                     Trang blog
                                 @elseif ($banner->type == 'other')
@@ -74,13 +74,20 @@
                                 <span class="badge badge-success">Hoạt động</span>
                                 @endif
                             </td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#bannerModal" onclick="alertBanner({{ $banner->id }})">
-                                <i class="fa fa-edit"></i>
-                                </button>
-                                <button type="button" class="btn btn-danger btn-sm" onclick="alertDelete({{ $banner->id }}, '{{ $banner->type }}')">
-                                <i class="fa fa-trash"></i>
-                                </button>
+                            <td>
+                                @if ($banner->type == 'other')
+                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#bannerModal" onclick="alertBanner({{ $banner->id }})">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                @else
+                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#bannerModal" onclick="alertBanner({{ $banner->id }})">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="alertDelete({{ $banner->id }}, '{{ $banner->type }}')">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                @endif
+                                
                             </td>
                         </tr>
                         @empty
@@ -122,6 +129,7 @@
         $('#active').prop('checked', false);
         $('#picture').val('');
         $('#imagePreview').attr('src', defaultImage);
+        $('#bannerModal').find('input, select, textarea').prop('disabled', false);
     });
     function alertBanner(bannerId){
         $.ajax({
@@ -145,6 +153,9 @@
                     originalImage = '/uploads/' + data.banner.image.ten;
                 }
 
+                if (data.banner.type === 'other') {
+                    $('#bannerModal').find('input, select, textarea').not('#id, #picture, input[name="_token"]').prop('disabled', true);
+                }
             },
             error: function(error){
                 console.log(error);

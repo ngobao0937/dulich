@@ -7,12 +7,14 @@
             @foreach ($product->banners as $banner)
                 <div class="swiper-slide">
                     <div class="position-relative">
-                        <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 21/9;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->name }}">
+                        <img class="w-100 h-100" style="object-fit: cover; aspect-ratio: 18/9;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->name }}">
                         <div class="overlay d-flex align-items-center" style="border-radius: 0;">
-                            <div class="text-white container">
-                                <div style="font-size: clamp(18px, 4vw, 30px); font-weight: bold;">{{ $banner->name }}</div>
-                                <div style="font-size: clamp(13px, 4vw, 20px);">{{ $banner->description }}</div>
-                            </div>
+                            @if ($banner->show_text == 1)
+                                <div class="text-white container">
+                                    <div style="font-size: clamp(18px, 4vw, 30px); font-weight: bold;">{{ $banner->name }}</div>
+                                    <div style="font-size: clamp(13px, 4vw, 20px);">{{ $banner->description }}</div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -351,6 +353,10 @@
 
 @endsection
 @section('script')
+@if ($product->chatbot)
+    <script id="chat-init" src="{{ $product->chatbot }}"></script>
+@endif
+
 <script>
     const lgInstance = lightGallery(document.getElementById('fullGallery'), {
         selector: 'a',
@@ -477,6 +483,4 @@
     });
 
 </script>
-
-
 @endsection

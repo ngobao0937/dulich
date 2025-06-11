@@ -45,7 +45,7 @@
     <div class="container pb-5 pt-5" >
         <div class="row">
             <div class="col-md-6">
-                <img src="{{ $bannerList[1000]->image ? asset('uploads/'.$bannerList[1000]->image->ten) : asset('assets/frontend/images/bariavungtau-h1.jpg') }}" alt="home1" class="w-100 h-100" style="object-fit: cover; border-radius: 10px;">
+                <img src="{{ $other3[7]->image ? asset('uploads/'.$other3[7]->image->ten) : asset('assets/frontend/images/bariavungtau-h1.jpg') }}" alt="home1" class="w-100 h-100" style="object-fit: cover; border-radius: 10px;">
             </div>
             <div class="col-md-6">
                 <div class="pt-3 pb-3">
@@ -74,7 +74,7 @@
                     </div>
 
                     <div class="w-100 d-flex justify-content-center">
-                        <button class="btn-1"><span>KHÁM PHÁ NGAY</span></button>
+                        <button class="btn-1" onclick="openFormRegister(0)"><span>ĐĂNG KÝ NHẬN ƯU ĐÃI NGAY!</span></button>
                     </div>
                 </div>
             </div>
@@ -89,10 +89,10 @@
             <div class="col-md-4 mb-4">
                 <div class="flip-box">
                     <div class="flip-inner">
-                        <div class="flip-front" style="background-image: url('{{ $bannerList[1001]->image ? asset('uploads/'.$bannerList[1001]->image->ten) : asset('assets/frontend/images/h1.png') }}');">
+                        <div class="flip-front" style="background-image: url('{{ $other3[8]->image ? asset('uploads/'.$other3[8]->image->ten) : asset('assets/frontend/images/h1.png') }}');">
                             <div class="special-overlay w-100 h-100 d-flex align-items-center justify-content-center"><span style="font-size: clamp(1.5rem, 2vw, 2rem)">Ở ĐÂU</span></div>
                         </div>
-                        <div class="flip-back" style="background-image: url('{{ $bannerList[1001]->image ? asset('uploads/'.$bannerList[1001]->image->ten) : asset('assets/frontend/images/h1.png') }}');">
+                        <div class="flip-back" style="background-image: url('{{ $other3[8]->image ? asset('uploads/'.$other3[8]->image->ten) : asset('assets/frontend/images/h1.png') }}');">
                             <div class="special-overlay"></div>
                             <div class="w-100 position-absolute p-3" style="bottom: 0; background: #38b19e; color: white">
                                 Khám phá các khách sạn với ưu đãi độc quyền, từ resort sang trọng đến homestay ấm cúng.
@@ -107,10 +107,10 @@
                     <div class="col-6">
                         <div class="flip-box">
                             <div class="flip-inner">
-                                <div class="flip-front" style="background-image: url('{{ $bannerList[1002]->image ? asset('uploads/'.$bannerList[1002]->image->ten) : asset('assets/frontend/images/h2.png') }}');">
+                                <div class="flip-front" style="background-image: url('{{ $other3[9]->image ? asset('uploads/'.$other3[9]->image->ten) : asset('assets/frontend/images/h2.png') }}');">
                                     <div class="special-overlay w-100 h-100 d-flex align-items-center justify-content-center"><span style="font-size: clamp(1.5rem, 2vw, 2rem)">ĂN GÌ?</span></div>
                                 </div>
-                                <div class="flip-back" style="background-image: url('{{ $bannerList[1002]->image ? asset('uploads/'.$bannerList[1002]->image->ten) : asset('assets/frontend/images/h2.png') }}');">
+                                <div class="flip-back" style="background-image: url('{{ $other3[9]->image ? asset('uploads/'.$other3[9]->image->ten) : asset('assets/frontend/images/h2.png') }}');">
                                     <div class="special-overlay"></div>
                                     <div class="w-100 position-absolute p-3" style="bottom: 0; background: #38b19e; color: white">
                                         Thưởng thức ẩm thực địa phương và quốc tế với các chương trình giảm giá hấp dẫn.
@@ -123,10 +123,10 @@
                     <div class="col-6">
                         <div class="flip-box">
                             <div class="flip-inner">
-                                <div class="flip-front" style="background-image: url('{{ $bannerList[1003]->image ? asset('uploads/'.$bannerList[1003]->image->ten) : asset('assets/frontend/images/h3.png') }}');">
+                                <div class="flip-front" style="background-image: url('{{ $other3[10]->image ? asset('uploads/'.$other3[10]->image->ten) : asset('assets/frontend/images/h3.png') }}');">
                                     <div class="special-overlay w-100 h-100 d-flex align-items-center justify-content-center"><span style="font-size: clamp(1.5rem, 2vw, 2rem)">CHƠI GÌ?</span></div>
                                 </div>
-                                <div class="flip-back" style="background-image: url('{{ $bannerList[1003]->image ? asset('uploads/'.$bannerList[1003]->image->ten) : asset('assets/frontend/images/h3.png') }}');">
+                                <div class="flip-back" style="background-image: url('{{ $other3[10]->image ? asset('uploads/'.$other3[10]->image->ten) : asset('assets/frontend/images/h3.png') }}');">
                                     <div class="special-overlay"></div>
                                     <div class="w-100 position-absolute p-3" style="bottom: 0; background: #38b19e; color: white">
                                         Trải nghiệm các hoạt động giải trí, từ bãi biển đến công viên với vé ưu đãi.
@@ -147,7 +147,7 @@
     <div class="row">
         <div class="col-lg-9 mb-3">
             <div class="w-100 h-100">
-                <img class="w-100 h-100" style="border-radius: 10px; object-fit: cover;" src="{{ $bannerList[1004]->image ? asset('uploads/'.$bannerList[1004]->image->ten) : asset('assets/frontend/images/h4.jpg') }}" alt="h4">
+                <img class="w-100 h-100" style="border-radius: 10px; object-fit: cover;" src="{{ $other3[11]->image ? asset('uploads/'.$other3[11]->image->ten) : asset('assets/frontend/images/h4.jpg') }}" alt="h4">
             </div>
         </div>
 
@@ -155,7 +155,7 @@
             <div class="row">
                 <div class="col-lg-12 col-6 pb-3">
                     <div class="position-relative w-100">
-                        <img class="w-100" style="border-radius: 10px; object-fit: cover; aspect-ratio: 1/1;" src="{{ $bannerList[1005]->image ? asset('uploads/'.$bannerList[1005]->image->ten) : asset('assets/frontend/images/h5.jpg') }}" alt="h5">
+                        <img class="w-100" style="border-radius: 10px; object-fit: cover; aspect-ratio: 1/1;" src="{{ $other3[12]->image ? asset('uploads/'.$other3[12]->image->ten) : asset('assets/frontend/images/h5.jpg') }}" alt="h5">
                         <div class="overlay d-flex align-items-center justify-content-center" style="padding-left: 10px; padding-right: 10px; background-color: rgba(0, 0, 0, 0.4);">
                             <div class="text-center">
                                 <div class="des-event mb-2">Các sự kiện đang diễn ra</div>
@@ -168,7 +168,7 @@
                 </div>
                 <div class="col-lg-12 col-6 pb-3">
                     <div class="position-relative w-100">
-                        <img class="w-100" style="border-radius: 10px; object-fit: cover; aspect-ratio: 1/1;" src="{{ $bannerList[1006]->image ? asset('uploads/'.$bannerList[1006]->image->ten) : asset('assets/frontend/images/h5.jpg') }}" alt="h5">
+                        <img class="w-100" style="border-radius: 10px; object-fit: cover; aspect-ratio: 1/1;" src="{{ $other3[13]->image ? asset('uploads/'.$other3[13]->image->ten) : asset('assets/frontend/images/h5.jpg') }}" alt="h5">
                         <div class="overlay d-flex align-items-center justify-content-center" style="padding-left: 10px; padding-right: 10px; background-color: rgba(0, 0, 0, 0.4);">
                             <div class="text-center">
                                 <div class="des-event mb-2">Các sự kiện đang diễn ra</div>
@@ -258,7 +258,7 @@
         
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="special-offer-card" style="background-image: url({{ $bannerList[1007]->image ? asset('uploads/'.$bannerList[1007]->image->ten) : asset('assets/frontend/images/uudai-bg.png') }});">
+                <div class="special-offer-card" style="background-image: url({{ $other3[14]->image ? asset('uploads/'.$other3[14]->image->ten) : asset('assets/frontend/images/uudai-bg.png') }});">
                     <div class="special-overlay"></div>
                     <div class="special-offer-overlay">
                         <div class="special-offer-title">Ưu đãi đặc biệt</div>
@@ -323,7 +323,7 @@
         
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="special-offer-card" style="background-image: url({{ $bannerList[1008]->image ? asset('uploads/'.$bannerList[1008]->image->ten) : asset('assets/frontend/images/uudai-bg.png') }});">
+                <div class="special-offer-card" style="background-image: url({{ $other3[15]->image ? asset('uploads/'.$other3[15]->image->ten) : asset('assets/frontend/images/uudai-bg.png') }});">
                     <div class="special-overlay"></div>
                     <div class="special-offer-overlay">
                         <div class="special-offer-title">Ưu đãi đặc biệt</div>
@@ -388,7 +388,7 @@
         
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="special-offer-card" style="background-image: url({{ $bannerList[1009]->image ? asset('uploads/'.$bannerList[1009]->image->ten) : asset('assets/frontend/images/uudai-bg.png') }});">
+                <div class="special-offer-card" style="background-image: url({{ $other3[16]->image ? asset('uploads/'.$other3[16]->image->ten) : asset('assets/frontend/images/uudai-bg.png') }});">
                     <div class="special-overlay"></div>
                     <div class="special-offer-overlay">
                         <div class="special-offer-title">Ưu đãi đặc biệt</div>
@@ -451,7 +451,27 @@
     <div class="container pb-4 pt-5" >
         <div class="text-center">
             <div class="title-mint mb-4">HỖ TRỢ DU LỊCH</div>
-            <div class="row">
+            @foreach ($other1->chunk(4) as $group4)
+                <div class="row">
+                    @foreach ($group4->chunk(2) as $pair2)
+                        <div class="col-md-6 mb-4">
+                            <div class="row">
+                                @foreach ($pair2 as $item)
+                                    <div class="col-6">
+                                        <div class="w-100 text-center">
+                                            <img style="width: 80px; height: 80px; object-fit: contain" src="{{ $item->image ? asset('uploads/'.$item->image->ten) : asset('assets/frontend/images/virtual-reality.png') }}" alt="{{ $item->name }}">
+                                            <div class="title-black mt-2 mb-1">{{ $item->name }}</div>
+                                            <div class="text-normal mb-1">{{ $item->description }}</div>
+                                            <a class="title-blue" style="font-size: 16px;" href="{{ $item->link ? $item->link : '#' }}" target="_blank">Xem bản đồ</a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endforeach
+            {{-- <div class="row">
                 <div class="col-md-6 mb-4">
                     <div class="row">
                         <div class="col-6">
@@ -493,7 +513,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
@@ -657,39 +677,6 @@
                 }
             }
         });
-
-        function isVisible(el) {
-            return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
-        }
-
-        let allBanners = document.querySelectorAll(".bannerSwiper");
-
-        let bannerSection = Array.from(allBanners).find(isVisible);
-
-        if (bannerSection) {
-            let nextSection = document.querySelector("#nextSection");
-
-            let scrolled = false;
-            const headerHeight = 50;
-
-            window.addEventListener("wheel", function (e) {
-                if (window.scrollY === 0) {
-                    scrolled = false;
-                }
-
-                if (!scrolled && e.deltaY > 0 && window.scrollY < 50) {
-                    scrolled = true;
-                    if (nextSection) {
-                        const offsetTop = nextSection.getBoundingClientRect().top + window.scrollY - headerHeight;
-                        window.scrollTo({
-                            top: offsetTop,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
-        }
-
     });
 </script>
 

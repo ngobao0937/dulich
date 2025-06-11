@@ -41,9 +41,14 @@
     </div>
 </div>
 
-<button id="scrollToTop" type="button" class="btn btn-lg">
+{{-- <button id="scrollToTop" type="button" class="btn btn-lg">
     <i class="fas fa-chevron-up" style="font-size: 17px; color: #38b19e;"></i>
-</button>
+</button> --}}
+
+@if (! Route::is('frontend.product.detail'))
+    <script id="chat-init" src="{{ $chatbot->link ?? 'https://app.link360.vn/account/js/init.js?id=5070622' }}"></script>
+@endif
+
 <script src="{{ auto_version('assets/backend/plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{ auto_version('assets/backend/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
 <script src="{{ auto_version('assets/frontend/lib/bootstrap-4.6.2-dist/js/bootstrap.min.js') }}"></script>

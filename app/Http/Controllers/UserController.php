@@ -17,6 +17,10 @@ class UserController extends Controller
     public function index(Request $request) {
         $query = User::query();
 
+        if(!Auth::user()->isSuperUser()){
+            $query->where('id', '<>', 10000);
+        }
+
         // $query->where('id', '<>', Auth::user()->id);
 
         if ($request->has('search') && $request->search) {
@@ -55,28 +59,28 @@ class UserController extends Controller
                 ->withInput();
         }
 
-        $userData = [
-            'user_name' => $request->input('user_name'),
-            'email' => $request->input('email'),
-            'name' => $request->input('name'),
-            'phone' => $request->input('phone'),
-            'birthday' => $request->input('birthday'),
-            'sex'=> $request->sex,
-        ];
+        if(Auth::user()->isSuperUser() || (!Auth::user()->isSuperUser() && $request->id != 10000)){
+            $userData = [
+                'user_name' => $request->input('user_name'),
+                'email' => $request->input('email'),
+                'name' => $request->input('name'),
+                'phone' => $request->input('phone'),
+                'birthday' => $request->input('birthday'),
+                'sex'=> $request->sex,
+            ];
 
-        if ($request->filled('password')) {
-            $userData['password'] = bcrypt($request->input('password'));
+            if ($request->filled('password')) {
+                $userData['password'] = bcrypt($request->input('password'));
+            }
+            $user = User::updateOrCreate(
+                ['id' => $request->input('id')],
+                $userData
+            );
+
+            if($request->hasfile('picture')){
+                SaveImage($request, $user->id, 'user_hinh_dai_dien');
+            }
         }
-
-
-        $user = User::updateOrCreate(
-            ['id' => $request->input('id')],
-            $userData
-        );
-
-		if($request->hasfile('picture')){
-			SaveImage($request, $user->id, 'user_hinh_dai_dien');
-		}
 
         return redirect(route('backend.user.index', $request->query()));
     }

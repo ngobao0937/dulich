@@ -1336,7 +1336,7 @@ a{
 #scrollToTop{
     aspect-ratio: 1 / 1;
     position: fixed;
-    bottom: 25px;
+    bottom: 90px;
     right: 25px;
     z-index: 50;
     height: 45px;
@@ -1349,9 +1349,6 @@ a{
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.promotion_section{
-
-}
 
 .section-title {
     color: #38b19e;
@@ -1567,6 +1564,12 @@ a{
     align-items: center;
     border-radius: 25.0724px;
     box-shadow: rgba(0, 0, 0, 0.133) 6px 6px 7px 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-1:hover {
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
 }
 
 .btn-1>span{
@@ -1622,6 +1625,10 @@ a{
 	color: #38b19e;
 	/* font-family: Montserrat-Bold; */
 	text-align: center;
+}
+
+.title-blue:hover{
+    color: #2d8577;
 }
 
 .title-mint{
@@ -2213,10 +2220,10 @@ a{
         padding-left: 2.5em;
         padding-right: 2.5em;
     }
-    #scrollToTop{
+    /* #scrollToTop{
         bottom: 75px;
         right: 10px;
-    }
+    } */
 }
 
 @media screen and (max-width: 991.20px) {

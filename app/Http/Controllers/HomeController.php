@@ -12,6 +12,7 @@ use App\Models\Menu;
 use App\Models\Contact;
 use App\Models\Sponsor;
 use App\Models\Event;
+use App\Models\Other;
 use Mews\Captcha\Facades\Captcha;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -84,6 +85,8 @@ class HomeController extends Controller
 
         $sponsors = Sponsor::where('active', 1)->orderby('position', 'asc')->get();
 
+        $other1 = Other::where('type', 1)->get();
+
         return view('frontend.home.index', [
             'banners' => $banners,
             'desktopBanners' => $desktopBanners,
@@ -93,6 +96,7 @@ class HomeController extends Controller
             'promotions_NH' => $promotions_NH,
             'promotions_KVC' => $promotions_KVC,
             'sponsors' => $sponsors,
+            'other1' => $other1
             // 'products_KS' => $products_KS,
             // 'products_NH' => $products_NH,
             // 'products_KVC' => $products_KVC
@@ -128,6 +132,18 @@ class HomeController extends Controller
 
         $banners = Banner::where('type', 'event')->orderby('position', 'asc')->where('active', 1)->get();
 
+        $desktopBanners = Banner::where('type', 'event')
+            ->where('active', 1)
+            ->where('isMobile', 0)
+            ->orderBy('position', 'asc')
+            ->get();
+
+        $mobileBanners = Banner::where('type', 'event')
+            ->where('active', 1)
+            ->where('isMobile', 1)
+            ->orderBy('position', 'asc')
+            ->get();
+
         // $events = Event::where('active', 1)->orderby('id', 'desc')->paginate(10);
 
         $sponsors = Sponsor::where('active', 1)->orderby('position', 'asc')->get();
@@ -150,6 +166,8 @@ class HomeController extends Controller
 
         return view('frontend.home.event', [
             'banners' => $banners,
+            'desktopBanners' => $desktopBanners,
+            'mobileBanners' => $mobileBanners,
             'events' => $events,
             'promotions_KS' => $promotions_KS,
             'promotions_NH' => $promotions_NH,

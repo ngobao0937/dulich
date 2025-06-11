@@ -1,7 +1,7 @@
 @extends('frontend.layout.app')
 @section('title', 'Sự kiện du lịch')
 @section('content')
-<div class="swiper bannerSwiper" style="width: 100%;">
+{{-- <div class="swiper bannerSwiper" style="width: 100%;">
     <div class="swiper-wrapper">
         @foreach ($banners as $banner)
             <div class="swiper-slide position-relative">
@@ -10,14 +10,40 @@
             </div>
         @endforeach
     </div>
-</div>
+</div> --}}
 
-<div class="w-100" style="background: rgba(28, 77, 114, 0.1)">
+<section class="d-none d-md-block banner-desktop">
+    <div class="swiper bannerSwiper" style="width: 100%; height: 100vh; overflow: hidden;">
+        <div class="swiper-wrapper">
+            @foreach ($desktopBanners as $banner)
+                <div class="swiper-slide position-relative">
+                    <img class="w-100 h-100" style="object-fit: cover;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->name }}">
+                    <div class="overlay" style="border-radius: 0"></div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+<section class="d-block d-md-none banner-mobile">
+    <div class="swiper bannerSwiper" style="width: 100%; height: 100vh; overflow: hidden;">
+        <div class="swiper-wrapper">
+            @foreach ($mobileBanners as $banner)
+                <div class="swiper-slide position-relative">
+                    <img class="w-100 h-100" style="object-fit: cover;" src="{{ $banner->image ? asset('uploads/' . $banner->image->ten) : asset('images/default.jpg') }}" alt="{{ $banner->name }}">
+                    <div class="overlay" style="border-radius: 0"></div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+<section id="nextSection" class="w-100" style="background: rgba(28, 77, 114, 0.1)">
     <div class="container pt-4">
         <div class="title-blue mb-3">LỊCH TRÌNH SỰ KIỆN</div>
         <button class="btn btn-default mb-3" data-toggle="modal" data-target="#typeModal" style="color: #38b19e; font-size: clamp(17px, 4vw, 18px); font-weight: bold; background: white; border-radius: 7px; padding: 5px 10px"><i class="fas fa-list"></i> Các sự kiện đang / sắp diễn ra</button>
         
-        @foreach ($events as $event)
+        @forelse ($events as $event)
             @php
                 $startDate = \Carbon\Carbon::parse($event->date_start);
                 $endDate = \Carbon\Carbon::parse($event->date_end);
@@ -67,14 +93,16 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <h6 class="text-center">Không có sự kiện nào ngay lúc này. </h6>
+        @endforelse
 
         <div class="justify-content-center d-flex mt-4">
             {{ $events->links('pagination::bootstrap-4') }}
         </div>
             
     </div>
-</div>
+</section>
 
 <section class="w-100" class="promotion_section">
     <div class="container pt-5">
@@ -82,7 +110,7 @@
         
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="special-offer-card" style="background-image: url({{ $bannerList[1007]->image ? asset('uploads/'.$bannerList[1007]->image->ten) : asset('assets/frontend/images/uudai-bg.png') }});">
+                <div class="special-offer-card" style="background-image: url({{ $other3[14]->image ? asset('uploads/'.$other3[14]->image->ten) : asset('assets/frontend/images/uudai-bg.png') }});">
                     <div class="special-overlay"></div>
                     <div class="special-offer-overlay">
                         <div class="special-offer-title">Ưu đãi đặc biệt</div>
@@ -147,7 +175,7 @@
         
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="special-offer-card" style="background-image: url({{ $bannerList[1008]->image ? asset('uploads/'.$bannerList[1008]->image->ten) : asset('assets/frontend/images/uudai-bg.png') }});">
+                <div class="special-offer-card" style="background-image: url({{ $other3[15]->image ? asset('uploads/'.$other3[15]->image->ten) : asset('assets/frontend/images/uudai-bg.png') }});">
                     <div class="special-overlay"></div>
                     <div class="special-offer-overlay">
                         <div class="special-offer-title">Ưu đãi đặc biệt</div>
@@ -212,7 +240,7 @@
         
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="special-offer-card" style="background-image: url({{ $bannerList[1009]->image ? asset('uploads/'.$bannerList[1009]->image->ten) : asset('assets/frontend/images/uudai-bg.png') }});">
+                <div class="special-offer-card" style="background-image: url({{ $other3[16]->image ? asset('uploads/'.$other3[16]->image->ten) : asset('assets/frontend/images/uudai-bg.png') }});">
                     <div class="special-overlay"></div>
                     <div class="special-offer-overlay">
                         <div class="special-offer-title">Ưu đãi đặc biệt</div>

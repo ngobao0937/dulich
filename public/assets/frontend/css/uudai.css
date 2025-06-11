@@ -44,8 +44,8 @@
 }
 
 .custom-control-input:checked ~ .custom-control-label::before {
-	background-color: #000000 !important; /* màu nền đen */
-	border-color: #000000 !important;     /* viền đen */
+	background-color: #38b19e !important; /* màu nền đen */
+	border-color: #38b19e !important;     /* viền đen */
 }
 
 .custom-control-label::before,

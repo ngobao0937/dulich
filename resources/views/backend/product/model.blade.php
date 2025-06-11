@@ -900,9 +900,14 @@
                     </div>
                     
                     <div class="form-group">
-                        <div class="icheck-success d-inline">
+                        <div class="icheck-success d-inline mr-4">
                             <input type="checkbox" name="active" id="activeBanner" />
                             <label for="activeBanner">Hoạt động</label>
+                        </div>
+
+                        <div class="icheck-success d-inline">
+                            <input type="checkbox" name="show_text" id="show_textBanner" />
+                            <label for="show_textBanner">Hiển thị chữ</label>
                         </div>
                     </div>
                 </div>
@@ -1553,6 +1558,7 @@ $(document).ready(function () {
         $('#positionBanner').val('');
         $('#linkBanner').val('');
         $('#activeBanner').prop('checked', false);
+        $('#show_textBanner').prop('checked', false);
         $('#pictureBanner').val('');
         $('#imagePreviewBanner').attr('src', defaultImage);
     });
@@ -1568,6 +1574,9 @@ $(document).ready(function () {
                 $('#linkBanner').val(data.banner.link ?? '');
                 if(data.banner.active == 1){
                     $('#activeBanner').prop('checked', true);
+                }
+                if(data.banner.show_text == 1){
+                    $('#show_textBanner').prop('checked', true);
                 }
 
                 if(data.banner.image){

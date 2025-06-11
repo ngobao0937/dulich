@@ -24,8 +24,8 @@ class BannerController extends Controller
         }
 
         $banners = $query
-				->whereIn('type', ['main', 'event', 'promotion', 'blog', 'other'])
-				->orderByRaw("FIELD(type, 'main', 'event', 'promotion', 'blog', 'other')")
+				->whereIn('type', ['main', 'event', 'promotion', 'blog'])
+				->orderByRaw("FIELD(type, 'main', 'event', 'promotion', 'blog')")
 				->orderBy('isMobile', 'asc')
 				->orderBy('position', 'asc')
 				->paginate(20);
@@ -43,8 +43,8 @@ class BannerController extends Controller
 	public function store(Request $request) {
 		
 		$validator = Validator::make($request->all(), [
-            'name' => 'required',
-			'position' => 'required'
+            'name' => $request->has('type') ? 'required' : '',
+			'position' => $request->has('type') ? 'required' : ''
         ]);
 
 		if($request->type == 'product'){
@@ -60,18 +60,20 @@ class BannerController extends Controller
 			}
 		}
 
-		$data = [
-			'name' => $request->name,
-			'description' => $request->description,
-			'active' => $request->active ? 1 : 0,
-			'position' => $request->position,
-			'link' => $request->link,
-			'product_fk' => $request->product_fk,
-			'isMobile' => $request->isMobile
-		];
-
 		if($request->has('type')){
-			$data['type'] = $request->type;
+			$data = [
+				'name' => $request->name,
+				'description' => $request->description,
+				'active' => $request->active ? 1 : 0,
+				'position' => $request->position,
+				'link' => $request->link,
+				'product_fk' => $request->product_fk,
+				'isMobile' => $request->isMobile,
+				'show_text' => $request->show_text ? 1 : 0,
+				'type' => $request->type
+			];
+		}else{
+			$data = [];
 		}
 
 		$obj = Banner::updateOrCreate(
@@ -103,8 +105,13 @@ class BannerController extends Controller
 	public function delete(Request $request) {
 		$id = $request->input('id');
 		$banner = Banner::find($id);
-		$banner->delete();
-		$banner->image()->delete();
+		if($banner->type != 'other'){
+			$banner->delete();
+			$banner->image()->delete();
+		}else{
+			return redirect()->back();
+		}
+		
 		if($request->type != 'main' && $request->type != 'promotion' && $request->type != 'event' && $request->type != 'blog'){
 			return response()->json(['success' => true]);
 		}else{

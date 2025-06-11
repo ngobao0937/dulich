@@ -23,6 +23,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\OtherController;
 
 Route::get('/', [HomeController::class, 'index'])->name('frontend.home.index');
 
@@ -50,6 +51,12 @@ Route::middleware(['auth','check.role'])->prefix('/admin')->group(function () {
     Route::post('/update-image-order', [ImageController::class, 'updateOrder'])->name('backend.update.image.order');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard.index');
+
+    Route::middleware('check.superuser')->group(function () {
+        Route::get('/other', [OtherController::class, 'index'])->name('backend.other.index');
+        Route::get('/other/edit', [OtherController::class, 'edit'])->name('backend.other.edit');
+        Route::post('/other/store', [OtherController::class, 'store'])->name('backend.other.store');
+    });
 
     Route::middleware('check.permission:2')->group(function () {
         Route::get('/user', [UserController::class, 'index'])->name('backend.user.index');
