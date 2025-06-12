@@ -122,7 +122,7 @@
         <div class="title-blue mb-3">CÁC ƯU ĐÃI KHÁC</div>
         
         <div class="row">
-            @foreach ($product->promotionsThuong->where('active', 1)->take(6) as $promotion)
+            @foreach ($product->promotionsThuong->where('active', 1)->take(3) as $promotion)
                 @php
                     $startDate = \Carbon\Carbon::parse($promotion->start_date);
                     $endDate = $startDate->copy()->addDays($promotion->end_in);
@@ -169,7 +169,7 @@
         <div class="title-blue mb-3">ƯU ĐÃI HẠNG PHÒNG</div>
         
         <div class="row">
-            @foreach ($product->promotionsPhong->where('active', 1)->take(6) as $promotion)
+            @foreach ($product->promotionsPhong->where('active', 1)->take(3) as $promotion)
                 @php
                     $startDate = \Carbon\Carbon::parse($promotion->start_date);
                     $endDate = $startDate->copy()->addDays($promotion->end_in);

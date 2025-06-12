@@ -1627,7 +1627,14 @@ a{
 	text-align: center;
 }
 
-.title-blue:hover{
+.title-blue-m{
+	font-size: 16px;
+	font-weight: bold;
+	color: #38b19e;
+	text-align: center;
+}
+
+.title-blue-m:hover{
     color: #2d8577;
 }
 
@@ -1922,6 +1929,11 @@ a{
 
 .page-link {
 	color: #38b19e;
+    box-shadow: none !important;
+}
+
+.page-link:hover{
+    color: #38b19e;
 }
 
 .invalid-feedback-re{
@@ -2208,7 +2220,9 @@ a{
     height: 180px;
 }
 
-
+.navbar-dark .navbar-toggler{
+    border-color: transparent !important;
+}
 @media screen and (max-width: 1250px) {
 	.title-sodl{
 		display: none;

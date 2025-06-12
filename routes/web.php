@@ -35,6 +35,11 @@ Route::get('/blog{id}-{slug}', [BlogController::class, 'detail'])->name('fronten
 
 Route::get('/khuyen-mai-uu-dai', [ProductController::class, 'promotions'])->name('frontend.product.promotions');
 
+// Route::get('/danh-sach-khuyen-mai', [ProductController::class, 'getPromotionalProducts'])->name('frontend.product.getPromotionalProducts');
+
+Route::get('/load-danh-sach-khuyen-mai', [ProductController::class, 'apiPromotions'])->name('frontend.product.promotions.api');
+
+
 Route::get('/ks{id}-{slug}', [ProductController::class, 'detail'])->name('frontend.product.detail')->middleware('check.active');
 
 Route::post('/gui-phan-hoi', [CommentController::class, 'store'])->name('frontend.comment.store');

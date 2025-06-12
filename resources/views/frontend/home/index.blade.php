@@ -462,7 +462,7 @@
                                             <img style="width: 80px; height: 80px; object-fit: contain" src="{{ $item->image ? asset('uploads/'.$item->image->ten) : asset('assets/frontend/images/virtual-reality.png') }}" alt="{{ $item->name }}">
                                             <div class="title-black mt-2 mb-1">{{ $item->name }}</div>
                                             <div class="text-normal mb-1">{{ $item->description }}</div>
-                                            <a class="title-blue" style="font-size: 16px;" href="{{ $item->link ? $item->link : '#' }}" target="_blank">Xem bản đồ</a>
+                                            <a class="title-blue-m" style="font-size: 16px;" href="{{ $item->link ? $item->link : '#' }}" target="_blank">Xem bản đồ</a>
                                         </div>
                                     </div>
                                 @endforeach
@@ -521,7 +521,7 @@
 <div style="width: 100%; background-image: url('{{ asset('assets/frontend/images/bg-home-1.png') }}'); background-repeat: no-repeat; background-position: bottom center; background-size: 100% auto;">
     <div class="container pt-5">
         <div class="title-mint mb-2">BLOG MỚI NHẤT</div>
-        <div class="swiper blog-swiper">
+        <div class="swiper blog-swiper" style="padding-right: 5px; padding-left: 5px;">
             <div class="swiper-wrapper mt-3 mb-3">
                 @foreach ($blogs as $blog)
                     <div class="swiper-slide">

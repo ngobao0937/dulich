@@ -44,14 +44,17 @@
 }
 
 .custom-control-input:checked ~ .custom-control-label::before {
-	background-color: #38b19e !important; /* màu nền đen */
-	border-color: #38b19e !important;     /* viền đen */
+	background-color: #38b19e !important;
+	border-color: #38b19e !important;
+	box-shadow: none !important;
 }
 
 .custom-control-label::before,
 .custom-control-label::after {
 	width: 18px;  
 	height: 18px;  
+	border-color: #38b19e !important;
+	box-shadow: none !important;
 }
 
 
@@ -144,6 +147,20 @@
 
 #filterSection{
 	display: block;
+}
+
+.clear-btn {
+    position: absolute;
+    right: 95px; 
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #aaa;
+	z-index: 5;
+}
+.clear-btn:hover {
+    color: #333;
 }
 
 /* Responsive Styles */

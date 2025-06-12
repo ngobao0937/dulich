@@ -354,25 +354,114 @@ class ProductController extends Controller
         ]);
     }
 
+    // public function promotions(Request $request)
+    // {
+    //     $banners = Banner::where('type', 'promotion')
+    //         ->orderBy('position', 'asc')
+    //         ->where('active', 1)
+    //         ->get();
+            
+    //     $desktopBanners = Banner::where('type', 'promotion')
+    //         ->where('active', 1)
+    //         ->where('isMobile', 0)
+    //         ->orderBy('position', 'asc')
+    //         ->get();
+
+    //     $mobileBanners = Banner::where('type', 'promotion')
+    //         ->where('active', 1)
+    //         ->where('isMobile', 1)
+    //         ->orderBy('position', 'asc')
+    //         ->get();
+
+    //     $menuIds = $request->input('filters', []);
+    //     $keyword = $request->input('keyword');
+
+    //     $products = Product::where('active', 1)
+    //         ->where('isdelete', 0)
+    //         ->when(!empty($menuIds), function ($query) use ($menuIds) {
+    //             $query->whereHas('menus', function ($q) use ($menuIds) {
+    //                 $q->whereIn('menus.id', $menuIds);
+    //             });
+    //         })
+    //         ->when(!empty($keyword), function ($query) use ($keyword) {
+    //             $query->where(function ($q) use ($keyword) {
+    //                 $q->where('products.name', 'like', "%$keyword%")
+    //                 ->orWhereHas('promotionThuongMain', function ($sub) use ($keyword) {
+    //                     $sub->where('name', 'like', "%$keyword%");
+    //                 });
+    //             });
+    //         })
+    //         ->whereHas('promotionThuongMain')
+    //         ->orderBy('id', 'desc')
+    //         ->paginate(12);
+
+    //     return view('frontend.product.promotions', [
+    //         'banners' => $banners,
+    //         'products' => $products,
+    //         'desktopBanners' => $desktopBanners,
+    //         'mobileBanners' => $mobileBanners,
+    //     ]);
+    // }
+
     public function promotions(Request $request)
     {
         $banners = Banner::where('type', 'promotion')
-            ->orderBy('position', 'asc')
             ->where('active', 1)
-            ->get();
-            
-        $desktopBanners = Banner::where('type', 'promotion')
-            ->where('active', 1)
-            ->where('isMobile', 0)
             ->orderBy('position', 'asc')
             ->get();
 
-        $mobileBanners = Banner::where('type', 'promotion')
-            ->where('active', 1)
-            ->where('isMobile', 1)
-            ->orderBy('position', 'asc')
-            ->get();
+        $desktopBanners = $banners->where('isMobile', 0);
+        $mobileBanners = $banners->where('isMobile', 1);
 
+        $products = $this->getPromotionalProducts($request);
+
+        return view('frontend.product.promotions', [
+            'banners' => $banners,
+            'products' => $products,
+            'desktopBanners' => $desktopBanners,
+            'mobileBanners' => $mobileBanners,
+        ]);
+    }
+
+
+    public function getPromotionalProducts(Request $request)
+    {
+        $menuIds = $request->input('filters', []);
+        $keyword = $request->input('keyword');
+
+        return Product::where('active', 1)
+            ->where('isdelete', 0)
+            ->with('promotionThuongMain.image')
+            ->when(!empty($menuIds), function ($query) use ($menuIds) {
+                $query->whereHas('menus', function ($q) use ($menuIds) {
+                    $q->whereIn('menus.id', $menuIds);
+                });
+            })
+            ->when(!empty($keyword), function ($query) use ($keyword) {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('products.name', 'like', "%$keyword%")
+                        ->orWhereHas('promotionThuongMain', function ($sub) use ($keyword) {
+                            $sub->where('name', 'like', "%$keyword%");
+                        });
+                });
+            })
+            ->whereHas('promotionThuongMain')
+            ->orderBy('id', 'desc')
+            ->paginate(12);
+    }
+
+    public function apiPromotions(Request $request)
+    {
+        $products = $this->getPromotionalProducts($request);
+
+        return response()->json([
+            'products' => $products
+        ]);
+    }
+
+
+    public function ajaxPromotions(Request $request)
+    {
         $menuIds = $request->input('filters', []);
         $keyword = $request->input('keyword');
 
@@ -386,22 +475,19 @@ class ProductController extends Controller
             ->when(!empty($keyword), function ($query) use ($keyword) {
                 $query->where(function ($q) use ($keyword) {
                     $q->where('products.name', 'like', "%$keyword%")
-                    ->orWhereHas('promotionThuongMain', function ($sub) use ($keyword) {
-                        $sub->where('name', 'like', "%$keyword%");
-                    });
+                        ->orWhereHas('promotionThuongMain', function ($sub) use ($keyword) {
+                            $sub->where('name', 'like', "%$keyword%");
+                        });
                 });
             })
             ->whereHas('promotionThuongMain')
             ->orderBy('id', 'desc')
-            ->paginate(12);
+            ->paginate(1);
 
-        return view('frontend.product.promotions', [
-            'banners' => $banners,
-            'products' => $products,
-            'desktopBanners' => $desktopBanners,
-            'mobileBanners' => $mobileBanners,
-        ]);
+        $html = view('frontend.product._list', compact('products'))->render();
+        return response()->json(['html' => $html]);
     }
+
 
 
     public function getProducts(Request $request)
