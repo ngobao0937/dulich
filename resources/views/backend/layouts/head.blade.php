@@ -69,8 +69,8 @@
     
 
     .card .card-header .div-header{
-        margin-right: -.625rem; 
-        margin-left: -.625rem;
+        margin-right: -.625rem !important; 
+        margin-left: -.625rem !important;
     }
     .select2{
         width: 100% !important;
@@ -84,5 +84,8 @@
 
     .card-link:hover span{
         color: #7e7e7e !important;
+    }
+    .select2-container--default .select2-selection--single {
+        border: 1px solid #ced4da
     }
 </style>

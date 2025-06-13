@@ -4,27 +4,35 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <div class="div-header" style="display: flex; justify-content: space-between; flex-wrap: nowrap; gap: 10px;">
-                    <a class="btn btn-success btn-sm" href="{{ route('backend.event.create') }}">
+                <div class="div-header d-flex justify-content-between align-items-center flex-nowrap">
+
+                    <a class="btn btn-success btn-sm mr-2 flex-shrink-0"  href="{{ route('backend.event.create') }}">
                         Thêm mới
                     </a>
-                    <form method="GET" action="{{ route('backend.event.index') }}" class="form-inline" id="search-form">
-                        <div class="input-group input-group-sm mr-2">
-                            <select name="active" id="active" class="form-control">
+
+                    <form method="GET" action="{{ route('backend.event.index') }}" class="form-inline d-flex flex-nowrap align-items-center w-100 justify-content-end" id="search-form">
+
+                        <div class="input-group input-group-sm mr-2" style="width: fit-content;">
+                            <select name="active" id="isactive" class="form-control" style="width: fit-content;">
                                 <option value="all" {{ request('active') == 'all' ? 'selected' : '' }}>Tất cả</option>
                                 <option value="1" {{ request('active') == '1' ? 'selected' : '' }}>Hoạt động</option>
                                 <option value="0" {{ request('active') == '0' ? 'selected' : '' }}>Tạm dừng</option>
                             </select>
                         </div>
+
                         <div class="input-group input-group-sm">
-                            <input type="text" class="form-control" id="search" name="search" value="{{ request('search') }}" placeholder="Tìm kiếm ...">
+                            <input type="text" class="form-control" id="search" name="search"
+                                value="{{ request('search') }}" placeholder="Tìm kiếm ...">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                                 @if(request('search'))
-                                <a type="button" class="btn btn-default" href="{{ route('backend.event.index') }}"><i class="fas fa-times"></i></a>
-                                @endif 
+                                    <a type="button" class="btn btn-default" href="{{ route('backend.event.index') }}">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                @endif
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -61,7 +69,7 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('backend.event.edit', ['id' => $event->id]) }}" class="btn btn-success btn-sm">
+                                <a href="{{ route('backend.event.edit', ['id' => $event->id] + request()->query()) }}" class="btn btn-success btn-sm">
                                     <i class="fa fa-edit"></i>
                                 </a>
                                 <button type="button" class="btn btn-danger btn-sm" onclick="alertDelete({{ $event->id }})">

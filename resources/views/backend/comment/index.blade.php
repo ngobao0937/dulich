@@ -6,7 +6,7 @@
             <div class="card-header">
                 <div class="div-header">
                     <form method="GET" action="{{ route('backend.comment.index') }}" class="form-inline" id="search-form" style="display: flex; justify-content: end; flex-wrap: nowrap; gap: 10px;">
-                        <div id="div-select2" class="input-group input-group-sm" style="width: 400px;">
+                        <div id="div-select2" class="input-group input-group-sm" style="width: 300px;">
                             <select name="product_fk" id="product_fk" class="form-control select2">
                             </select>
                         </div>
@@ -109,7 +109,7 @@
         const $select = $('#product_fk');
 
         $select.select2({
-            placeholder: "Tìm sản phẩm...",
+            placeholder: "Tìm khách sạn...",
             ajax: {
                 url: "{{ route('backend.comment.get_products') }}",
                 dataType: 'json',

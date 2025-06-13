@@ -4,28 +4,36 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <div class="div-header" style="display: flex; justify-content: space-between; flex-wrap: nowrap; gap: 10px;">
-                    <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#promotionModal">
+                <div class="div-header d-flex justify-content-between align-items-center flex-nowrap">
+
+                    <a class="btn btn-success btn-sm mr-2 flex-shrink-0" data-toggle="modal" data-target="#promotionModal">
                         Thêm mới
                     </a>
-                    <form method="GET" action="{{ route('backend.promotion_public.index') }}" class="form-inline" id="search-form">
-                        <div class="input-group input-group-sm mr-2">
-                            <select name="menu" class="form-control">
+
+                    <form method="GET" action="{{ route('backend.promotion_public.index') }}" class="form-inline d-flex flex-nowrap align-items-center w-100 justify-content-end" id="search-form">
+
+                        <div class="input-group input-group-sm mr-2" style="width: fit-content;">
+                            <select name="menu" class="form-control" style="width: fit-content;">
                                 <option value="all" {{ request('menu') == 'all' ? 'selected' : '' }}>Tất cả</option>
                                 @foreach($menus as $menu)
                                     <option value="{{ $menu->id }}" {{ request('menu') == $menu->id ? 'selected' : '' }}>{{ $menu->name }}</option>
                                 @endforeach
                             </select>
                         </div>
+
                         <div class="input-group input-group-sm">
-                            <input type="text" class="form-control" id="search" name="search" value="{{ request('search') }}" placeholder="Tìm kiếm ...">
+                            <input type="text" class="form-control" id="search" name="search"
+                                value="{{ request('search') }}" placeholder="Tìm kiếm ...">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                                 @if(request('search'))
-                                <a type="button" class="btn btn-default" href="{{ route('backend.promotion_public.index') }}"><i class="fas fa-times"></i></a>
-                                @endif 
+                                    <a type="button" class="btn btn-default" href="{{ route('backend.promotion_public.index') }}">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                @endif
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>

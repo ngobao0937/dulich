@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Image;
 use App\Models\Banner;
+use App\Models\Other;
 use App\Models\Extension;
 use App\Models\Promotion;
 use Carbon\Carbon;
@@ -76,13 +77,16 @@ class ProductController extends Controller
         if(Auth::user()->role->id != 2){
             abort(403, 'Bạn không có quyền truy cập vào chức năng này.');
         }
+        $chatbotKS = Other::find(17);
 		$id = Auth::user()->product ? Auth::user()->product->id : null;
         if($id == null){
-            return view('backend.product.empty');
+            return view('backend.product.empty', ['chatbotKS' => $chatbotKS]);
         }
 		$product = Product::with(['image', 'user'])->find($id);
+        
 		return view('backend.product.model', [
 			'product' => $product,
+            'chatbotKS' => $chatbotKS
 		]);
     }
 	public function store(Request $request) {

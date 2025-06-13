@@ -23,6 +23,10 @@ class SponsorController extends Controller
             });
         }
 
+		if($request->active != 'all' && ($request->active == '0' || $request->active == '1') && $request->has('active')){
+            $query->where('active', $request->active);
+        }
+
         $sponsors = $query->orderBy('position', 'asc')->paginate(20);
 
         return view('backend.sponsor.index', compact('sponsors'));

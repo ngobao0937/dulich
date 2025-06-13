@@ -6,3 +6,8 @@
     </div>
 </section>
 @endsection
+@section('scripts')
+@if (Auth::user()->role->id == 2 && $chatbotKS->link)
+    <script id="chat-init" src="{{ $chatbotKS->link }}"></script>
+@endif
+@endsection

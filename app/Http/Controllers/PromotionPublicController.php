@@ -125,13 +125,13 @@ class PromotionPublicController extends Controller
             ]
         );
 
-        return redirect()->back();
+        return redirect()->route('backend.promotion_public.index', $request->query());
     }
 
     public function delete(Request $request)
     {
         $promotion = PromotionPublic::find($request->id);
         $promotion->delete();
-        return redirect()->back();
+        return redirect()->route('backend.promotion_public.index', $request->query());
     }
 }

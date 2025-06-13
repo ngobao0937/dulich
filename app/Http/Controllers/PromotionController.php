@@ -33,7 +33,21 @@ class PromotionController extends Controller
             'name' => 'required',
         ]);
 
-		 if ($validator->fails()) {
+
+		$count = Promotion::where('product_fk', $request->product_fk)
+					->where('type', $request->type)
+					->count();
+
+		if ($count >= 5 && !$request->id) {
+			return response()->json([
+				'success' => false,
+				'errors' => [
+					'limit' => ["Chỉ được tạo tối đa 5 ưu đãi."]
+				]
+			], 422);
+		}
+
+		if ($validator->fails()) {
 			return response()->json([
 				'success' => false,
 				'errors' => $validator->errors()

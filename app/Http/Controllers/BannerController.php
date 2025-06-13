@@ -23,6 +23,10 @@ class BannerController extends Controller
             });
         }
 
+		if($request->active != 'all' && ($request->active == '0' || $request->active == '1') && $request->has('active')){
+            $query->where('active', $request->active);
+        }
+
         $banners = $query
 				->whereIn('type', ['main', 'event', 'promotion', 'blog'])
 				->orderByRaw("FIELD(type, 'main', 'event', 'promotion', 'blog')")
@@ -47,18 +51,42 @@ class BannerController extends Controller
 			'position' => $request->has('type') ? 'required' : ''
         ]);
 
-		if($request->type == 'product'){
+		if (in_array($request->type, ['product', 'product_images'])) {
+			$maxLimits = [
+				'product' => 5,
+				'product_images' => 10,
+			];
+
+			$labels = [
+				'product' => 'banner',
+				'product_images' => 'ảnh',
+			];
+
+			$count = Banner::where('product_fk', $request->product_fk)
+						->where('type', $request->type)
+						->count();
+
+			if ($count >= $maxLimits[$request->type] && !$request->id) {
+				return response()->json([
+					'success' => false,
+					'errors' => [
+						'limit' => ["Chỉ được tạo tối đa {$maxLimits[$request->type]} {$labels[$request->type]}."]
+					]
+				], 422);
+			}
+
 			if ($validator->fails()) {
 				return response()->json([
 					'success' => false,
 					'errors' => $validator->errors()
 				], 422);
 			}
-		}else{
+		} else {
 			if ($validator->fails()) {
 				return redirect()->back()->withErrors($validator)->withInput();
 			}
 		}
+
 
 		if($request->has('type')){
 			$data = [

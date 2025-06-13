@@ -33,6 +33,10 @@ class UserController extends Controller
             });
         }
 
+        if($request->role != 'all' && $request->has('role')){
+            $query->where('role_fk', $request->role);
+        }
+
         $users = $query->orderby('id', 'asc')->paginate(20);
 
         $roles = Role::where('isdelete', 0)->where('id', '<>', 1)->get();

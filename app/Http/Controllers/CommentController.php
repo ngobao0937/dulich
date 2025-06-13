@@ -18,7 +18,8 @@ class CommentController extends Controller
         if ($request->has('search') && $request->search) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
-                $q->where('content', 'like', '%' . $search . '%');
+                $q->where('content', 'like', '%' . $search . '%')
+					->orWhere('name', 'like', '%' . $search . '%');
             });
         }
 

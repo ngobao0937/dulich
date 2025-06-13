@@ -127,6 +127,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <span class="text-danger">*</span> <span class="text-muted"><i>Tối đa 5 banner.</i></span>
                         </div>
                     </div>
                 </div>
@@ -368,6 +369,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <span class="text-danger">*</span> <span class="text-muted"><i>Tối đa 10 ảnh.</i></span>
                         </div>
                     </div>
                 </div>
@@ -438,6 +440,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <span class="text-danger">*</span> <span class="text-muted"><i>Tạo tối đa 5 ưu đãi. Chỉ hiển thị 3 ưu đãi đầu tiên ở trang chi tiết khách sạn.</i></span>
                         </div>
                     </div>
                 </div>
@@ -507,7 +510,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            
+                            <span class="text-danger">*</span> <span class="text-muted"><i>Tạo tối đa 5 ưu đãi. Chỉ hiển thị 3 ưu đãi đầu tiên ở trang chi tiết khách sạn.</i></span>
                         </div>
                     </div>
                 </div>
@@ -1071,6 +1074,13 @@
         background-color: rgb(240, 240, 240); 
     }
 </style>
+@if (Auth::user()->role->id == 2 && $chatbotKS->link)
+<style>
+    .fixed-save {
+        right: 100px;
+    }
+</style>
+@endif
 @endsection
 @section('scripts')
 
@@ -1109,14 +1119,79 @@ $(document).ready(function () {
                 }
             },
             error: function (err) {
-                toastr.error('Lỗi khi lưu dữ liệu');
-                console.log(err.responseJSON);
+                if (err.status === 422 && err.responseJSON && err.responseJSON.errors) {
+                    var errors = err.responseJSON.errors;
+
+                    Object.keys(errors).forEach(function (key) {
+                        errors[key].forEach(function (message) {
+                            toastr.error(message);
+                        });
+                    });
+                } else {
+                    toastr.error('Lỗi khi lưu dữ liệu');
+                    // console.log(err.responseJSON);
+                }
             }
         });
     });
 
     function updateSttUuDaiThuong() {
         $('#table_tbodyUuDaiThuong tr').each(function (index) {
+            $(this).find('td:first').text(index + 1);
+        });
+    }
+
+    $('#formUuDaiPhong').submit(function (e) {
+        e.preventDefault();
+
+        var formData = new FormData(this);
+        var id = $('#idUuDaiPhong').val(); // Lấy id để kiểm tra là thêm hay sửa
+
+        $.ajax({
+            url: "{{ route('backend.promotion.store') }}",
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                if (res.success) {
+                    $('#uuDaiPhongModal').modal('toggle');
+
+                    if (id) {
+                        $('#table_tbodyUuDaiPhong tr[data-id="' + id + '"]').replaceWith(res.html);
+                        toastr.success('Cập nhật ưu đãi thành công!');
+                    } else {
+                        $('#table_tbodyUuDaiPhong tr').each(function () {
+                            if ($(this).find('td[colspan]').length && $(this).text().includes('Không có dữ liệu')) {
+                                $(this).remove();
+                            }
+                        });
+                        $('#table_tbodyUuDaiPhong').append(res.html);
+                        toastr.success('Thêm mới ưu đãi thành công!');
+                    }
+
+                    updateSttUuDaiPhong();
+                }
+            },
+            error: function (err) {
+                if (err.status === 422 && err.responseJSON && err.responseJSON.errors) {
+                    var errors = err.responseJSON.errors;
+
+                    Object.keys(errors).forEach(function (key) {
+                        errors[key].forEach(function (message) {
+                            toastr.error(message);
+                        });
+                    });
+                } else {
+                    toastr.error('Lỗi khi lưu dữ liệu');
+                    // console.log(err.responseJSON);
+                }
+            }
+        });
+    });
+
+    function updateSttUuDaiPhong() {
+        $('#table_tbodyUuDaiPhong tr').each(function (index) {
             $(this).find('td:first').text(index + 1);
         });
     }
@@ -1154,8 +1229,18 @@ $(document).ready(function () {
                 }
             },
             error: function (err) {
-                toastr.error('Lỗi khi lưu dữ liệu');
-                console.log(err.responseJSON);
+                if (err.status === 422 && err.responseJSON && err.responseJSON.errors) {
+                    var errors = err.responseJSON.errors;
+
+                    Object.keys(errors).forEach(function (key) {
+                        errors[key].forEach(function (message) {
+                            toastr.error(message);
+                        });
+                    });
+                } else {
+                    toastr.error('Lỗi khi lưu dữ liệu');
+                    // console.log(err.responseJSON);
+                }
             }
         });
     });
@@ -1199,63 +1284,24 @@ $(document).ready(function () {
                 }
             },
             error: function (err) {
-                toastr.error('Lỗi khi lưu dữ liệu');
-                console.log(err.responseJSON);
+                if (err.status === 422 && err.responseJSON && err.responseJSON.errors) {
+                    var errors = err.responseJSON.errors;
+
+                    Object.keys(errors).forEach(function (key) {
+                        errors[key].forEach(function (message) {
+                            toastr.error(message);
+                        });
+                    });
+                } else {
+                    toastr.error('Lỗi khi lưu dữ liệu');
+                    // console.log(err.responseJSON);
+                }
             }
         });
     });
 
     function updateSttImages() {
         $('#table_tbodyImages tr').each(function (index) {
-            $(this).find('td:first').text(index + 1);
-        });
-    }
-});
-</script>
-
-<script>
-$(document).ready(function () {
-    $('#formUuDaiPhong').submit(function (e) {
-        e.preventDefault();
-
-        var formData = new FormData(this);
-        var id = $('#idUuDaiPhong').val(); // Lấy id để kiểm tra là thêm hay sửa
-
-        $.ajax({
-            url: "{{ route('backend.promotion.store') }}",
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (res) {
-                if (res.success) {
-                    $('#uuDaiPhongModal').modal('toggle');
-
-                    if (id) {
-                        $('#table_tbodyUuDaiPhong tr[data-id="' + id + '"]').replaceWith(res.html);
-                        toastr.success('Cập nhật ưu đãi thành công!');
-                    } else {
-                        $('#table_tbodyUuDaiPhong tr').each(function () {
-                            if ($(this).find('td[colspan]').length && $(this).text().includes('Không có dữ liệu')) {
-                                $(this).remove();
-                            }
-                        });
-                        $('#table_tbodyUuDaiPhong').append(res.html);
-                        toastr.success('Thêm mới ưu đãi thành công!');
-                    }
-
-                    updateSttUuDaiPhong();
-                }
-            },
-            error: function (err) {
-                toastr.error('Lỗi khi lưu dữ liệu');
-                console.log(err.responseJSON);
-            }
-        });
-    });
-
-    function updateSttUuDaiPhong() {
-        $('#table_tbodyUuDaiPhong tr').each(function (index) {
             $(this).find('td:first').text(index + 1);
         });
     }
@@ -1793,4 +1839,7 @@ $(document).ready(function () {
     // });
 </script>
 
+@if (Auth::user()->role->id == 2 && $chatbotKS->link)
+    <script id="chat-init" src="{{ $chatbotKS->link }}"></script>
+@endif
 @endsection

@@ -24,6 +24,10 @@ class BlogController extends Controller
             });
         }
 
+		if($request->active != 'all' && ($request->active == '0' || $request->active == '1') && $request->has('active')){
+            $query->where('active', $request->active);
+        }
+
         $blogs = $query->orderby('id', 'desc')->paginate(20);
 
         return view('backend.blog.index', compact('blogs'));
