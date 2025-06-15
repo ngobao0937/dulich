@@ -44,8 +44,11 @@
                     <thead class="thead-light">
                         <tr class="table-bg">
                             <th style="width: 60px;">#</th>
+                            @if (Auth::user()->isSuperUser())<th style="width: 50px"></th>@endif
                             <th style="width: 90px;">Hình ảnh</th>
                             <th>Tên khách sạn</th>
+                            <th style="width: 120px;">Từ ngày</th>
+                            <th style="width: 120px;">Đến ngày</th>
                             <th style="width: 250px;">Danh mục</th>
                             <th style="width: 100px;">Trạng thái</th>
                             <th style="width: 100px;">Hành động</th>
@@ -56,11 +59,20 @@
                         @forelse($products as $product)
                         <tr>
                             <td><?php echo $i++; ?></td>
+                            @if (Auth::user()->isSuperUser())
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="alertDelete({{ $product->id }})">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            @endif
                             <td>
                                 <div style="background: #ededed  url('{{$product->image ? asset('uploads/' . $product->image->ten) : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div>
                                 {{-- <div style="background: #ededed  url('{{$product->image ? 'https://s3-hcm-r1.longvan.net/kaholding/'.$product->image->ten : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div> --}}
                             </td>
                             <td class="text-wrap">{{ $product->name }}</td>
+                            <td>{{ $product->start_date ? \Carbon\Carbon::parse($product->start_date)->format('d-m-Y') : '' }}</td>
+                            <td>{{ $product->end_date ? \Carbon\Carbon::parse($product->end_date)->format('d-m-Y') : '' }}</td>
                             <td>
                                 @foreach ($product->menus as $key => $menu)
                                     {{ $menu->name }}{{ $key < $product->menus->count() - 1 ? ', ' : '' }}
@@ -77,11 +89,7 @@
                                 <a href="{{ route('backend.product.edit', ['id' => $product->id] + request()->query()) }}" class="btn btn-success btn-sm">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                @if (Auth::user()->isSuperUser())
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="alertDelete({{ $product->id }})">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                @endif
+                                
                                 
                             </td>
                         </tr>

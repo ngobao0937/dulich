@@ -7,6 +7,7 @@
     $address = $event->address ?? null;
     $description = $event->description ?? null;
     $content = $event->content ?? null;
+    $position = $event->position ?? null;
     $active = $event->active ?? '';
     $date_start = $event->date_start ?? null;
     $date_end = $event->date_end ?? null;
@@ -35,10 +36,16 @@
                     <input type="hidden" name="id" value="{{ $id }}">
 
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">Tên sự kiện <span class="text-danger">*</span></label>
                                 <input type="text" name="name" id="name" class="form-control" value="{{ $name }}" maxlength="250" required>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="name">Thứ tự <span class="text-danger">*</span></label>
+                                <input type="number" name="position" id="position" min="1" step="1" class="form-control" value="{{ $position }}" required>
                             </div>
                         </div>
                         <div class="col-md-4">

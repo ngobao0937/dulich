@@ -22,6 +22,8 @@
     $menu_fk = $product->menu_fk ?? null;
     $active = $product->active ?? '';
     $slug = $product->slug ?? null;
+    $start_date = $product->start_date ?? null;
+    $end_date = $product->end_date ?? null;
     $meta_keywords = $product->meta_keywords ?? null;
     $meta_description = $product->meta_description ?? null;
     $image = isset($product->image) ? $product->image->ten : null;
@@ -608,11 +610,37 @@
                             <textarea type="text" name="meta_description" class="form-control" rows="2" style="resize: vertical;" maxlength="150">{{ $meta_description }}</textarea>
                         </div>
 
-                        <div class="form-group">
-                            <div class="icheck-success d-inline">
-                                <input type="checkbox" name="active" id="active" {{ $active == 1 ? 'checked' : '' }}/>
-                                <label for="active">Hoạt động</label>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="checkbox" name="active" id="active" {{ $active == 1 ? 'checked' : '' }}/>
+                                        <label for="active">Hoạt động</label>
+                                    </div>
+                                </div>
                             </div>
+                            @if (Auth::user()->hasPermission(16))
+                                <div class="col-md-7">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label text-nowrap">Từ ngày</label>
+                                                <div class="col-sm-9">
+                                                    <input type="date" name="start_date" class="form-control" value="{{ $start_date }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label text-nowrap">Đến ngày</label>
+                                                <div class="col-sm-9">
+                                                    <input type="date" name="end_date" class="form-control" value="{{ $end_date }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

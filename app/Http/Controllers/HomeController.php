@@ -128,7 +128,7 @@ class HomeController extends Controller
             }
         });
 
-        $events = $query->where('active', 1)->orderby('id', 'desc')->paginate(10);
+        $events = $query->where('active', 1)->orderby('position', 'asc')->paginate(10);
 
         $banners = Banner::where('type', 'event')->orderby('position', 'asc')->where('active', 1)->get();
 

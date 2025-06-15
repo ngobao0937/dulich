@@ -36,7 +36,7 @@ class EventController extends Controller
             $query->where('active', $request->active);
         }
 
-        $events = $query->where('isdelete', 0)->orderby('id', 'desc')->paginate(20);
+        $events = $query->where('isdelete', 0)->orderby('position', 'asc')->paginate(20);
 
         return view('backend.event.index', compact('events'));
     }
@@ -86,6 +86,7 @@ class EventController extends Controller
             'time_start' => $request->time_start,
             'time_end' => $request->time_end,
 			'active' => $request->active ? 1 : 0,
+            'position' => $request->position
 		];
 
 		$obj = Event::updateOrCreate(

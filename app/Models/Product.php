@@ -33,6 +33,8 @@ class Product extends Model
 		'user_fk',
 		'meta_keywords',
 		'meta_description',
+		'start_date',
+		'end_date'
 	];
 
 	public $timestamps = false;

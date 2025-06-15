@@ -44,6 +44,7 @@
                             <th style="width: 90px;">Hình ảnh</th>
                             <th>Tên sự kiện</th>
                             <th style="width: 250px;">Địa chỉ</th>
+                            <th class="text-center" style="width: 100px;">Thứ tự</th>
                             <th style="width: 100px;">Trạng thái</th>
                             <th style="width: 100px;">Hành động</th>
                         </tr>
@@ -61,6 +62,7 @@
                             <td>
                                 {{ $event->address }}
                             </td>
+                            <td class="text-center">{{ $event->position }}</td>
                             <td class="text-center">
                                 @if ($event->active != 1)
                                 <span class="badge badge-warning">Tạm dừng</span>
@@ -68,6 +70,7 @@
                                 <span class="badge badge-success">Hoạt động</span>
                                 @endif
                             </td>
+                            
                             <td class="text-center">
                                 <a href="{{ route('backend.event.edit', ['id' => $event->id] + request()->query()) }}" class="btn btn-success btn-sm">
                                     <i class="fa fa-edit"></i>

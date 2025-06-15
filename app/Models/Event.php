@@ -11,7 +11,7 @@ class Event extends Model
 
 	public $timestamps = false;
 
-	protected $fillable = ['id', 'name', 'description', 'content', 'date_start', 'date_end', 'time_start', 'time_end', 'address', 'link', 'slug', 'active', 'isdelete'];
+	protected $fillable = ['id', 'name', 'description', 'content', 'date_start', 'date_end', 'time_start', 'time_end', 'address', 'link', 'slug', 'active', 'isdelete', 'position'];
 
 	public function image() {
 		return $this->hasOne('App\Models\Image', 'id_fk','id')->where('type','event_hinh_dai_dien');

@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label class="form-label">Loại</label> <i class="fas fa-question-circle ml-1" data-toggle="tooltip" title="Áp dụng cho trang chủ"></i>
+                                        <label class="form-label">Loại</label>
 
                                         <select name="isMobile" id="isMobile" class="form-control" required>
                                             <option value="0">Desktop</option>

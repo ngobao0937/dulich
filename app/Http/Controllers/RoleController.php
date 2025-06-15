@@ -15,7 +15,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::where('isdelete', 0)->get();
-        $permissions = Permission::all();
+        $permissions = Permission::orderby('position', 'asc')->get();
         return view('backend.role.index', compact('roles', 'permissions'));
     }
 

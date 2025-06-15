@@ -16,6 +16,7 @@ use App\Models\Banner;
 use App\Models\Other;
 use App\Models\Extension;
 use App\Models\Promotion;
+use App\Models\ProductLog;
 use Carbon\Carbon;
 
 class ProductController extends Controller
@@ -141,10 +142,40 @@ class ProductController extends Controller
             $data['user_fk'] = $newUserId;
         }
 
+        if(Auth::user()->hasPermission(16)){
+            $data['start_date'] = $request->start_date;
+            $data['end_date'] = $request->end_date;
+        }
+
+        $originalProduct = null;
+        if ($id) {
+            $originalProduct = Product::find($id);
+        }
+
 		$obj = Product::updateOrCreate(
 			['id' => $id],
 			$data
 		);
+
+        if ($originalProduct && Auth::user()->hasPermission(16)) {
+            $oldStartDate = $originalProduct->start_date;
+            $oldEndDate = $originalProduct->end_date;
+
+            $newStartDate = $data['start_date'] ?? null;
+            $newEndDate = $data['end_date'] ?? null;
+
+            if ($oldStartDate != $newStartDate || $oldEndDate != $newEndDate) {
+                ProductLog::create([
+                    'product_fk' => $obj->id,
+                    'user_fk' => Auth::id(),
+                    'old_start_date' => $oldStartDate,
+                    'new_start_date' => $newStartDate,
+                    'old_end_date' => $oldEndDate,
+                    'new_end_date' => $newEndDate,
+                ]);
+            }
+        }
+
 
         ProductMenu::where('product_fk', $obj->id)->delete();
 
