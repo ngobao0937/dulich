@@ -21,7 +21,14 @@ class CheckActive
 
         $product = \App\Models\Product::find($productId);
 
-        if ($product && $product->active != 1) {
+        $today = now()->toDateString();
+
+        if (!$product || 
+            $product->active != 1 || 
+            $product->isdelete == 1 || 
+            ($product->start_date && $product->start_date > $today) || 
+            ($product->end_date && $product->end_date < $today)
+        ) {
             abort(403, 'Khách sạn này không tồn tại.');
         }
 

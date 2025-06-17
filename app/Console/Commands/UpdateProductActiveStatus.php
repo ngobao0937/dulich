@@ -26,7 +26,7 @@ class UpdateProductActiveStatus extends Command
      */
     public function handle()
     {
-        \Log::info("Cron chạy lúc: " . now());
+        // \Log::info("Cron chạy lúc: " . now());
 
         $today = Carbon::today();
 
@@ -40,6 +40,6 @@ class UpdateProductActiveStatus extends Command
 
         $this->info("Đã cập nhật $count sản phẩm thành inactive.");
 
-        \Log::info("Đã cập nhật $count sản phẩm.");
+        // \Log::info("Đã cập nhật $count sản phẩm.");
     }
 }

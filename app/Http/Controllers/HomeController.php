@@ -55,7 +55,9 @@ class HomeController extends Controller
                 ->where('position', '>', 0)
                 ->whereHas('promotion.product', function ($query) {
                     $query->where('active', 1)
-                        ->where('isdelete', 0);
+                        ->where('isdelete', 0)
+                        ->whereDate('start_date', '<=', Carbon::today())
+                        ->whereDate('end_date', '>=', Carbon::today());
                 })
                 ->whereIn('menu_fk', [10000, 10001, 10002])
                 ->orderBy('menu_fk')
@@ -152,7 +154,9 @@ class HomeController extends Controller
                 ->where('position', '>', 0)
                 ->whereHas('promotion.product', function ($query) {
                     $query->where('active', 1)
-                        ->where('isdelete', 0);
+                        ->where('isdelete', 0)
+                        ->whereDate('start_date', '<=', Carbon::today())
+                        ->whereDate('end_date', '>=', Carbon::today());
                 })
                 ->whereIn('menu_fk', [10000, 10001, 10002])
                 ->orderBy('menu_fk')

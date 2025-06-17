@@ -69,10 +69,10 @@
                         
                     </div>
                     
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label>Link iframe</label>
                         <input name="link" id="link" type="link" class="form-control" placeholder="Link iframe ..."/>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group" style="margin-bottom: -5px;">
                         <label style="margin-bottom: 0;">Hình ảnh</label>

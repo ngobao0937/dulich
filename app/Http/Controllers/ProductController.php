@@ -100,6 +100,24 @@ class ProductController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        if (Auth::user()->hasPermission(16)) {
+            $startDate = $request->input('start_date');
+            $endDate = $request->input('end_date');
+
+            if (($startDate && !$endDate) || (!$startDate && $endDate)) {
+                return redirect()->back()
+                    ->withErrors(['start_date' => 'Cần nhập đầy đủ cả ngày bắt đầu và ngày kết thúc gia hạn.'])
+                    ->withInput();
+            }
+
+            if ($startDate && $endDate && $startDate > $endDate) {
+                return redirect()->back()
+                    ->withErrors(['start_date' => 'Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc gia hạn.'])
+                    ->withInput();
+            }
+        }
+
+
 		$id = $request->input('id', null);  
 
 		$data = [
@@ -168,6 +186,15 @@ class ProductController extends Controller
                 ProductLog::create([
                     'product_fk' => $obj->id,
                     'user_fk' => Auth::id(),
+                    'old_start_date' => $oldStartDate,
+                    'new_start_date' => $newStartDate,
+                    'old_end_date' => $oldEndDate,
+                    'new_end_date' => $newEndDate,
+                ]);
+
+                \Log::info('Product date changed', [
+                    'product_id' => $obj->id,
+                    'user_id' => Auth::id(),
                     'old_start_date' => $oldStartDate,
                     'new_start_date' => $newStartDate,
                     'old_end_date' => $oldEndDate,

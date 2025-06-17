@@ -142,7 +142,7 @@
         $('#isMobile').val(0);
         $('#position').val('');
         $('#type').val('main');
-        $('#link').val('');
+        // $('#link').val('');
         $('#active').prop('checked', false);
         $('#picture').val('');
         $('#imagePreview').attr('src', defaultImage);
@@ -158,7 +158,7 @@
                 $('#isMobile').val(data.banner.isMobile ?? 0);
                 $('#position').val(data.banner.position ?? '');
                 $('#type').val(data.banner.type ?? 'main');
-                $('#link').val(data.banner.link ?? '');
+                // $('#link').val(data.banner.link ?? '');
                 if(data.banner.active == 1){
                     $('#active').prop('checked', true);
                 }
