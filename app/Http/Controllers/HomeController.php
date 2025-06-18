@@ -106,32 +106,6 @@ class HomeController extends Controller
     }
 
     public function event(Request $request){
-        $query = Event::query();
-        $types = $request->input('loai', ['now', 'coming']);
-
-        $now = Carbon::now();
-
-        $query->where(function ($q) use ($types, $now) {
-            foreach ($types as $type) {
-                if ($type === 'coming') {
-                    $q->orWhere('date_start', '>', $now);
-                }
-
-                if ($type === 'now') {
-                    $q->orWhere(function ($q2) use ($now) {
-                        $q2->where('date_start', '<=', $now)
-                            ->where('date_end', '>=', $now);
-                    });
-                }
-
-                if ($type === 'end') {
-                    $q->orWhere('date_end', '<', $now);
-                }
-            }
-        });
-
-        $events = $query->where('active', 1)->orderby('position', 'asc')->paginate(10);
-
         $banners = Banner::where('type', 'event')->orderby('position', 'asc')->where('active', 1)->get();
 
         $desktopBanners = Banner::where('type', 'event')
@@ -172,13 +146,60 @@ class HomeController extends Controller
             'banners' => $banners,
             'desktopBanners' => $desktopBanners,
             'mobileBanners' => $mobileBanners,
-            'events' => $events,
+            // 'events' => $events,
             'promotions_KS' => $promotions_KS,
             'promotions_NH' => $promotions_NH,
             'promotions_KVC' => $promotions_KVC,
             'sponsors' => $sponsors
         ]);
     }
+
+    public function apiEvents(Request $request)
+    {
+        $types = $request->input('loai');
+
+        // Nếu không có loại nào được chọn, trả về danh sách rỗng ngay
+        if (empty($types)) {
+            return response()->json([
+                'events' => [
+                    'data' => [],
+                    'current_page' => 1,
+                    'last_page' => 1,
+                    'next_page_url' => null,
+                    'prev_page_url' => null
+                ]
+            ]);
+        }
+
+        $query = Event::query();
+        $now = Carbon::now();
+
+        $query->where(function ($q) use ($types, $now) {
+            foreach ($types as $type) {
+                if ($type === 'coming') {
+                    $q->orWhere('date_start', '>', $now);
+                }
+
+                if ($type === 'now') {
+                    $q->orWhere(function ($q2) use ($now) {
+                        $q2->where('date_start', '<=', $now)
+                            ->where('date_end', '>=', $now);
+                    });
+                }
+
+                if ($type === 'end') {
+                    $q->orWhere('date_end', '<', $now);
+                }
+            }
+        });
+
+        $events = $query->where('active', 1)->orderby('position', 'asc')->paginate(6);
+
+        return response()->json([
+            'events' => $events
+        ]);
+    }
+
 
     public function page(Request $request){
         $page = Page::where('slug', $request->slug)->first();

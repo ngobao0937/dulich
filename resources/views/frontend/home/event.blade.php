@@ -12,7 +12,7 @@
     </div>
 </div> --}}
 
-<section class="d-none d-md-block banner-desktop">
+<section class="d-none d-md-block banner-desktop" id="bannerDesktop">
     <div class="swiper bannerSwiper" style="width: 100%; height: 100vh; overflow: hidden;">
         <div class="swiper-wrapper">
             @foreach ($desktopBanners as $banner)
@@ -25,7 +25,7 @@
     </div>
 </section>
 
-<section class="d-block d-md-none banner-mobile">
+<section class="d-block d-md-none banner-mobile" id="bannerMobile">
     <div class="swiper bannerSwiper" style="width: 100%; height: 100vh; overflow: hidden;">
         <div class="swiper-wrapper">
             @foreach ($mobileBanners as $banner)
@@ -39,38 +39,34 @@
 </section>
 
 <section id="nextSection" class="w-100" style="background: rgba(28, 77, 114, 0.1)">
-    <div class="container pt-4">
-        <div class="title-blue mb-3">LỊCH TRÌNH SỰ KIỆN</div>
-        <button class="btn btn-default mb-3" data-toggle="modal" data-target="#typeModal" style="color: #38b19e; font-size: clamp(17px, 4vw, 18px); font-weight: bold; background: white; border-radius: 7px; padding: 5px 10px"><i class="fas fa-list"></i> Các sự kiện đang / sắp diễn ra</button>
-        
-        @forelse ($events as $event)
-            @php
-                $startDate = \Carbon\Carbon::parse($event->date_start);
-                $endDate = \Carbon\Carbon::parse($event->date_end);
-                $now = \Carbon\Carbon::now();
-                $isComing = $now->lt($startDate);
-                $targetDate = $isComing ? $startDate : $endDate;
-            @endphp
-            <div class="w-100 mb-3" style="background: white; padding: 15px 15px 0 15px; border-radius: 7px;">
+    <div id="app">
+        <div class="container pt-4 pb-2">
+            <div class="title-blue mb-3">LỊCH TRÌNH SỰ KIỆN</div>
+
+            <button class="btn btn-default mb-3" @click="showModal = true" style="color: #38b19e; font-size: clamp(17px, 4vw, 18px); font-weight: bold; background: white; border-radius: 7px; padding: 5px 10px">
+                <i class="fas fa-list"></i> Các sự kiện đang / sắp diễn ra
+            </button>
+
+            <div v-for="event in events" v-cloak :key="event.id" class="w-100 mb-3" style="background: white; padding: 15px 15px 0 15px; border-radius: 7px;">
                 <div class="row">
-                    <div class="col-md-3" style="margin-bottom: 15px">
-                        <img class="w-100" style="aspect-ratio: 4/3; border-radius: 5px;" src="{{ $event->image ? asset('uploads/'.$event->image->ten) : asset('assets/frontend/images/event-photo.jpg') }}" alt="event">
+                    <div class="col-md-3 mb-3">
+                        <img class="w-100" style="aspect-ratio: 4/3; border-radius: 5px;" :src="event.image_url" alt="event">
                     </div>
-                    <div class="col-md-9" style="margin-bottom: 15px">
+                    <div class="col-md-9 mb-3">
                         <div class="mb-2" style="background: rgba(28, 77, 114, 0.1); color: #333; width: fit-content; padding: 5px; border-radius: 5px">
-                            <i class="far fa-clock"></i> {{ $event->time_start }} - {{ $event->time_end }}
+                            <i class="far fa-clock"></i> @{{ event.time_start }} - @{{ event.time_end }}
                             <span class="ml-3 mr-3" style="height: 100%; border-right: 2px solid #333"></span>
-                            <i class="far fa-calendar-alt"></i> {{ $event->date_range }}
+                            <i class="far fa-calendar-alt"></i> @{{ event.date_range }}
                             <span class="ml-3 mr-3" style="height: 100%; border-right: 2px solid #333"></span>
-                            <i class="fas fa-map-marker-alt"></i> {{ $event->address }}
+                            <i class="fas fa-map-marker-alt"></i> @{{ event.address }}
                         </div>
-                        <div class="title-blue text-left mb-1" style="font-size: clamp(22px, 4vw, 26px);">{{ $event->name }}</div>
-                        <div class="mb-2 line-clamp-3" style="color: #333; min-height: 4em;">
-                            {{ $event->description }}
+                        <div class="title-blue text-left mb-1" style="font-size: clamp(22px, 4vw, 26px);">@{{ event.name }}</div>
+                        <div class="mb-2" style="color: #333; min-height: 4em;">
+                            @{{ event.description }}
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="{{ $event->link ?? '#' }}" target="_blank" class="btn btn-dark-blue" style="width: fit-content; height: fit-content;">Chi tiết sự kiện</a>
-                            <div class="countdown-event-container" data-start="{{ $startDate->toIso8601String() }}" data-end="{{ $endDate->toIso8601String() }}">
+                            <a :href="event.link || '#'" target="_blank" class="btn btn-dark-blue" style="width: fit-content; height: fit-content;">Chi tiết sự kiện</a>
+                            <div class="countdown-event-container" :data-start="event.date_start" :data-end="event.date_end">
                                 <div class="countdown-event-box">
                                     <div class="countdown-event-value">00</div>
                                     <div class="countdown-event-label">Ngày</div>
@@ -89,18 +85,49 @@
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
-        @empty
-            <h6 class="text-center">Không có sự kiện nào ngay lúc này. </h6>
-        @endforelse
 
-        <div class="justify-content-center d-flex mt-4">
-            {{ $events->links('pagination::bootstrap-4') }}
+            <div v-if="events.length === 0" class="text-center mb-3">Không có sự kiện nào ngay lúc này.</div>
+
+            <div class="justify-content-center d-flex mt-4" v-cloak v-if="events.length !== 0 && pagination.last_page > 1">
+                <ul class="pagination">
+                    <li class="page-item" :class="{ disabled: pagination.current_page === 1 }">
+                        <a class="page-link" href="#" @click.prevent="goToPage(pagination.current_page - 1)">&lsaquo;</a>
+                    </li>
+                    <li class="page-item" v-for="page in pagination.last_page" :key="page" :class="{ active: pagination.current_page === page }">
+                        <a class="page-link" href="#" @click.prevent="goToPage(page)">@{{ page }}</a>
+                    </li>
+                    <li class="page-item" :class="{ disabled: pagination.current_page === pagination.last_page }">
+                        <a class="page-link" href="#" @click.prevent="goToPage(pagination.current_page + 1)">&rsaquo;</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div v-if="showModal" v-cloak class="modal fade show d-block" style="z-index: 1050; background: rgba(0,0,0,0.5);">
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="modal-title" style="font-weight: bold; font-size: 20px;">Các loại sự kiện</div>
+                            <button type="button" class="close" @click="showModal = false">&times;</button>
+                        </div>
+                        <div class="modal-body position-relative">
+                            <div class="form-group" v-for="type in ['now', 'coming', 'end']" :key="type">
+                                <div class="icheck-success d-inline">
+                                    <input type="checkbox" :id="type" :value="type" v-model="filters" @change="applyFilters">
+                                    <label :for="type" style="font-weight: bold">Sự kiện @{{ type === 'now' ? 'đang diễn ra' : type === 'coming' ? 'sắp diễn ra' : 'đã kết thúc' }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" @click="showModal = false">Đóng</button>
+                            <button type="button" class="btn btn-success" @click="applyFilters">Áp dụng</button>
+                        </div> --}}
+                    </div>
+                </div>
+            </div>
         </div>
-            
     </div>
 </section>
 
@@ -360,50 +387,14 @@
     </div>
 </div>
 
-<div id="typeModal" class="modal fade" role="dialog" style="z-index: 1050; display: none;">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-        <div class="modal-content">
-            <form action="{{ route('frontend.home.event') }}" method="get" style="display: block;">
-                <div class="modal-header">
-                    <div class="modal-title" style="font-weight: bold; font-size: 20px;">Các loại sự kiện</div>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body position-relative">
-                    <div class="form-group">
-                        <div class="icheck-success d-inline">
-                            <input type="checkbox" id="now" name="loai[]" value="now"
-                                    {{ in_array('now', request('loai', ['now', 'coming'])) ? 'checked' : '' }}>
-                            <label style="font-weight: bold" for="now">Sự kiện đang diễn ra</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="icheck-success d-inline">
-                            <input type="checkbox" id="coming" name="loai[]" value="coming"
-                                    {{ in_array('coming', request('loai', ['now', 'coming'])) ? 'checked' : '' }}>
-                            <label style="font-weight: bold" for="coming">Sự kiện sắp diễn ra</label>
-                        </div>
-                    </div>
-                    <div class="form-group" style="margin-bottom: 0">
-                        <div class="icheck-success d-inline">
-                            <input type="checkbox" id="end" name="loai[]" value="end"
-                                    {{ in_array('end', request('loai', ['now', 'coming'])) ? 'checked' : '' }}>
-                            <label style="font-weight: bold" for="end">Sự kiện đã kết thúc</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-success">Áp dụng</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 @endsection
 @section('styles')
 <link rel="stylesheet" href="{{ asset('assets/frontend/css/event.css') }}">
-
+<style>
+    [v-cloak] {
+        display: none !important;
+    }
+</style>
 @endsection
 @section('script')
 <script>
@@ -442,12 +433,16 @@
                 }
             }
         });
+    });
+</script>
+<script src="{{ asset('assets/frontend/js/vue.js') }}"></script>
 
+<script>
+    function initCountdownTimers() {
         document.querySelectorAll('.countdown-event-container').forEach(function (container) {
             const startDate = new Date(container.dataset.start);
             const endDate = new Date(container.dataset.end);
             const values = container.querySelectorAll('.countdown-event-value');
-            const labels = container.querySelectorAll('.countdown-event-label');
 
             function updateCountdown() {
                 const now = new Date();
@@ -464,16 +459,58 @@
                     values[2].textContent = String(minutes).padStart(2, '0');
                     values[3].textContent = String(seconds).padStart(2, '0');
                 } else if (now >= startDate && now <= endDate) {
-                    container.innerHTML = `<div class="countdown-event-status" style="color: green; font-weight: bold; font-size: clamp(17px, 4vw, 20px)">Đang diễn ra</div>`;
+                    container.innerHTML = `<div class='countdown-event-status' style='color: green; font-weight: bold; font-size: clamp(17px, 4vw, 20px)'>Đang diễn ra</div>`;
                 } else {
-                    container.innerHTML = `<div class="countdown-event-status" style="color: red; font-weight: bold; font-size: clamp(17px, 4vw, 20px)">Đã kết thúc</div>`;
+                    container.innerHTML = `<div class='countdown-event-status' style='color: red; font-weight: bold; font-size: clamp(17px, 4vw, 20px)'>Đã kết thúc</div>`;
                 }
             }
 
             updateCountdown();
             setInterval(updateCountdown, 1000);
         });
+    }
 
+    new Vue({
+        el: '#app',
+        data: {
+            events: [],
+            pagination: {
+                current_page: 1,
+                last_page: 1
+            },
+            filters: ['now', 'coming'],
+            showModal: false
+        },
+        methods: {
+            async loadEvents(page = 1) {
+                const params = new URLSearchParams();
+                params.append('page', page);
+                this.filters.forEach(type => params.append('loai[]', type));
+
+                const res = await fetch(`/load-danh-sach-su-kien?${params.toString()}`);
+                const data = await res.json();
+
+                this.events = data.events.data.map(e => ({
+                    ...e,
+                    image_url: e.image?.ten ? `/uploads/${e.image.ten}` : '/assets/frontend/images/event-photo.jpg'
+                }));
+                this.pagination.current_page = data.events.current_page;
+                this.pagination.last_page = data.events.last_page;
+
+                this.$nextTick(() => initCountdownTimers());
+            },
+            goToPage(page) {
+                if (page !== this.pagination.current_page && page >= 1 && page <= this.pagination.last_page) {
+                    this.loadEvents(page);
+                }
+            },
+            applyFilters() {
+                this.loadEvents();
+            }
+        },
+        mounted() {
+            this.loadEvents();
+        }
     });
 </script>
 @endsection

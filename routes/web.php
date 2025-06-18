@@ -39,6 +39,7 @@ Route::get('/khuyen-mai-uu-dai', [ProductController::class, 'promotions'])->name
 
 Route::get('/load-danh-sach-khuyen-mai', [ProductController::class, 'apiPromotions'])->name('frontend.product.promotions.api');
 
+Route::get('/load-danh-sach-su-kien', [HomeController::class, 'apiEvents'])->name('frontend.home.events.api');
 
 Route::get('/ks{id}-{slug}', [ProductController::class, 'detail'])->name('frontend.product.detail')->middleware('check.active');
 

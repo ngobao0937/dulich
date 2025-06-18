@@ -13,6 +13,8 @@ class Event extends Model
 
 	protected $fillable = ['id', 'name', 'description', 'content', 'date_start', 'date_end', 'time_start', 'time_end', 'address', 'link', 'slug', 'active', 'isdelete', 'position'];
 
+	protected $appends = ['date_range'];
+	
 	public function image() {
 		return $this->hasOne('App\Models\Image', 'id_fk','id')->where('type','event_hinh_dai_dien');
 	}

@@ -1,7 +1,7 @@
 @extends('frontend.layout.app')
 @section('title', 'Khuyến mãi & ưu đãi')
 @section('content')
-<section class="d-none d-md-block banner-desktop">
+<section class="d-none d-md-block banner-desktop" id="bannerDesktop">
     <div class="swiper bannerSwiper" style="width: 100%; height: 100vh; overflow: hidden;">
         <div class="swiper-wrapper">
             @foreach ($desktopBanners as $banner)
@@ -16,7 +16,7 @@
     </div>
 </section>
 
-<section class="d-block d-md-none banner-mobile">
+<section class="d-block d-md-none banner-mobile" id="bannerMobile">
     <div class="swiper bannerSwiper" style="width: 100%; height: 100vh; overflow: hidden;">
         <div class="swiper-wrapper">
             @foreach ($mobileBanners as $banner)
@@ -189,7 +189,7 @@
 
 @endsection
 @section('script')
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="{{ asset('assets/frontend/js/vue.js') }}"></script>
 <script>
     function initCountdownTimers() {
         document.querySelectorAll('.timer').forEach(function (container) {

@@ -106,126 +106,132 @@ document.addEventListener('DOMContentLoaded', function () {
 
     closeBtn.addEventListener('click', closeSidebar);
     overlay.addEventListener('click', closeSidebar);
+    if ($('#customerForm').length) {
+        $('#customerForm').validate({
+            errorElement: 'div',
+            errorClass: 'invalid-feedback',
+            highlight: function (element) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element) {
+                $(element).removeClass('is-invalid');
+            },
+            rules: {
+                name: {
+                    required: true,
+                    maxlength: 50
+                },
+                email: {
+                    required: true,
+                    email: true,
+                    maxlength: 50
+                },
+                phone: {
+                    required: true,
+                    maxlength: 20
+                },
+                content: {
+                    maxlength: 200
+                },
+                agree: {
+                    required: true
+                }
+            },
+            messages: {
+                name: {
+                    required: "Vui lòng nhập họ tên",
+                    maxlength: "Họ tên không được vượt quá 50 ký tự"
+                },
+                email: {
+                    required: "Vui lòng nhập email",
+                    email: "Email không đúng định dạng",
+                    maxlength: "Email không được vượt quá 50 ký tự"
+                },
+                phone: {
+                    required: "Vui lòng nhập số điện thoại",
+                    maxlength: "Số điện thoại không được vượt quá 20 ký tự"
+                },
+                content: {
+                    maxlength: "Lời nhắn không được vượt quá 200 ký tự"
+                },
+                agree: {
+                    required: "Vui lòng đồng ý với các chính sách của chúng tôi"
+                }
+            },
+            errorPlacement: function(error, element) {
+                if (element.attr("type") === "checkbox") {
+                    error.appendTo(".checkbox-error");
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+    }
+    
 
-    $('#customerForm').validate({
-        errorElement: 'div',
-        errorClass: 'invalid-feedback',
-        highlight: function (element) {
-            $(element).addClass('is-invalid');
-        },
-        unhighlight: function (element) {
-            $(element).removeClass('is-invalid');
-        },
-        rules: {
-            name: {
-                required: true,
-                maxlength: 50
+    if ($('#registerForm').length) {
+        $('#registerForm').validate({
+            errorElement: 'div',
+            errorClass: 'invalid-feedback-re',
+            highlight: function (element) {
+                $(element).addClass('is-invalid');
             },
-            email: {
-                required: true,
-                email: true,
-                maxlength: 50
+            unhighlight: function (element) {
+                $(element).removeClass('is-invalid');
             },
-            phone: {
-                required: true,
-                maxlength: 20
+            rules: {
+                name: {
+                    required: true,
+                    maxlength: 50
+                },
+                email: {
+                    required: true,
+                    email: true,
+                    maxlength: 50
+                },
+                phone: {
+                    required: true,
+                    maxlength: 20
+                },
+                content: {
+                    maxlength: 200
+                },
+                agree: {
+                    required: true
+                }
             },
-            content: {
-                maxlength: 200
+            messages: {
+                name: {
+                    required: "Vui lòng nhập họ tên",
+                    maxlength: "Họ tên tối đa 50 ký tự"
+                },
+                email: {
+                    required: "Vui lòng nhập email",
+                    email: "Email không hợp lệ",
+                    maxlength: "Email tối đa 50 ký tự"
+                },
+                phone: {
+                    required: "Vui lòng nhập số điện thoại",
+                    maxlength: "Số điện thoại tối đa 20 ký tự"
+                },
+                content: {
+                    maxlength: "Lời nhắn tối đa 200 ký tự"
+                },
+                agree: {
+                    required: "Vui lòng đồng ý với các chính sách của chúng tôi"
+                }
             },
-            agree: {
-                required: true
+            errorPlacement: function(error, element) {
+                if (element.attr("type") === "checkbox") {
+                    error.appendTo(".checkbox-error-re");
+                } else {
+                    error.insertAfter(element);
+                }
             }
-        },
-        messages: {
-            name: {
-                required: "Vui lòng nhập họ tên",
-                maxlength: "Họ tên không được vượt quá 50 ký tự"
-            },
-            email: {
-                required: "Vui lòng nhập email",
-                email: "Email không đúng định dạng",
-                maxlength: "Email không được vượt quá 50 ký tự"
-            },
-            phone: {
-                required: "Vui lòng nhập số điện thoại",
-                maxlength: "Số điện thoại không được vượt quá 20 ký tự"
-            },
-            content: {
-                maxlength: "Lời nhắn không được vượt quá 200 ký tự"
-            },
-            agree: {
-                required: "Vui lòng đồng ý với các chính sách của chúng tôi"
-            }
-        },
-        errorPlacement: function(error, element) {
-            if (element.attr("type") === "checkbox") {
-                error.appendTo(".checkbox-error");
-            } else {
-                error.insertAfter(element);
-            }
-        }
-    });
+        });
+    }
+    
 
-    $('#registerForm').validate({
-        errorElement: 'div',
-        errorClass: 'invalid-feedback-re',
-        highlight: function (element) {
-            $(element).addClass('is-invalid');
-        },
-        unhighlight: function (element) {
-            $(element).removeClass('is-invalid');
-        },
-        rules: {
-            name: {
-                required: true,
-                maxlength: 50
-            },
-            email: {
-                required: true,
-                email: true,
-                maxlength: 50
-            },
-            phone: {
-                required: true,
-                maxlength: 20
-            },
-            content: {
-                maxlength: 200
-            },
-            agree: {
-                required: true
-            }
-        },
-        messages: {
-            name: {
-                required: "Vui lòng nhập họ tên",
-                maxlength: "Họ tên tối đa 50 ký tự"
-            },
-            email: {
-                required: "Vui lòng nhập email",
-                email: "Email không hợp lệ",
-                maxlength: "Email tối đa 50 ký tự"
-            },
-            phone: {
-                required: "Vui lòng nhập số điện thoại",
-                maxlength: "Số điện thoại tối đa 20 ký tự"
-            },
-            content: {
-                maxlength: "Lời nhắn tối đa 200 ký tự"
-            },
-            agree: {
-                required: "Vui lòng đồng ý với các chính sách của chúng tôi"
-            }
-        },
-        errorPlacement: function(error, element) {
-            if (element.attr("type") === "checkbox") {
-                error.appendTo(".checkbox-error-re");
-            } else {
-                error.insertAfter(element);
-            }
-        }
-    });
 
     function isVisible(el) {
         return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
@@ -259,3 +265,48 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     const headerHeight = 50;
+//     const nextSection = document.querySelector("#nextSection");
+
+//     // Scroll mượt đến nextSection
+//     function smoothScrollFrom(el) {
+//         if (!nextSection || !el) return;
+
+//         const offsetTop = nextSection.getBoundingClientRect().top + window.scrollY - headerHeight;
+
+//         window.scrollTo({
+//             top: offsetTop,
+//             behavior: "smooth"
+//         });
+//     }
+
+//     // Kiểm tra phần tử có đang hiển thị không
+//     function isVisible(el) {
+//         return el && el.offsetParent !== null;
+//     }
+
+//     const bannerDesktop = document.querySelector("#bannerDesktop");
+//     const bannerMobile = document.querySelector("#bannerMobile");
+
+//     // Xác định phần tử banner đang hiển thị
+//     const visibleBanner = isVisible(bannerDesktop) ? bannerDesktop :
+//                           isVisible(bannerMobile) ? bannerMobile : null;
+
+//     if (!visibleBanner) return;
+
+//     let scrolled = false;
+
+//     window.addEventListener("wheel", function (e) {
+//         if (window.scrollY <= 10) {
+//             if (!scrolled && e.deltaY > 0) {
+//                 scrolled = true;
+//                 smoothScrollFrom(visibleBanner);
+//             }
+//         } else {
+//             scrolled = false; // reset nếu cuộn lại đầu
+//         }
+//     }, { passive: true });
+// });
+
