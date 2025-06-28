@@ -24,6 +24,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\OtherController;
+use App\Http\Controllers\ReceiptController;
 
 Route::get('/', [HomeController::class, 'index'])->name('frontend.home.index');
 
@@ -103,6 +104,13 @@ Route::middleware(['auth','check.role'])->prefix('/admin')->group(function () {
         Route::get('/blog/edit', [BlogController::class, 'edit'])->name('backend.blog.edit');
         Route::delete('/blog/delete', [BlogController::class, 'delete'])->name('backend.blog.delete');
         Route::post('/blog/store', [BlogController::class, 'store'])->name('backend.blog.store');
+    });
+
+    Route::middleware('check.permission:17')->group(function () {
+        Route::get('/receipt', [ReceiptController::class, 'index'])->name('backend.receipt.index');
+        Route::get('/receipt/edit', [ReceiptController::class, 'edit'])->name('backend.receipt.edit');
+        Route::delete('/receipt/delete', [ReceiptController::class, 'delete'])->name('backend.receipt.delete');
+        Route::post('/receipt/store', [ReceiptController::class, 'store'])->name('backend.receipt.store');
     });
 
     Route::middleware('check.permission:7')->group(function () {

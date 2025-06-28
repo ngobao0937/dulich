@@ -89,8 +89,11 @@
                                 <a href="{{ route('backend.product.edit', ['id' => $product->id] + request()->query()) }}" class="btn btn-success btn-sm">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                
-                                
+                                @if (Auth::user()->hasPermission(17))
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#receiptModal" onclick="alertReceipt({{ $product->id }})">
+                                    <i class="fa fa-receipt"></i>
+                                </button>
+                                @endif
                             </td>
                         </tr>
                         @empty
@@ -130,16 +133,88 @@
     </div>
 </div>
 @endif
+@if (Auth::user()->hasPermission(17))
+<div id="receiptModal" class="modal fade" role="dialog" aria-labelledby="receiptModalLabel">
+    <div class="modal-dialog">
+        
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Tạo phiếu thu</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form action="{{ route('backend.receipt.store', request()->query()) }}" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    @csrf
+                    <input type="text" id="idReceipt" name="id" value="" hidden />
+                    <input type="text" id="product_fk" name="product_fk" value="" hidden />
+
+                    <div class="form-group">
+                        <label>Số tiền</label>
+                        <input type="text" class="form-control" name="so_tien" id="so_tien" placeholder="Nhập số tiền" 
+                                data-inputmask="'alias': 'numeric',
+                                            'groupSeparator': '.',
+                                            'digits': 0,
+                                            'autoGroup': true,
+                                            'prefix': '',
+                                            'suffix': ' ₫',
+                                            'rightAlign': false" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ngày thu</label>
+                                <input type="date" class="form-control" name="ngay_thu" id="ngay_thu" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ngày hết hạn</label>
+                                <input type="date" class="form-control" name="ngay_het_han" id="ngay_het_han" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <label>Ghi chú</label>
+                        <textarea class="form-control" name="ghi_chu" id="ghi_chu" rows="3" placeholder="Nhập ghi chú"></textarea>
+                    </div>
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-success">Lưu thông tin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endif
 @endsection
 @section('styles')
 
 @endsection
 @section('scripts')
+<script src="{{ asset('assets/backend/plugins/inputmask/jquery.inputmask.min.js') }}"></script>
 <script>
     function alertDelete(id) {
         $('#myModal').data('id', id);
         $('#myModal').modal('toggle');
         $('#deleteId').val(id);
     }
+    $('#receiptModal').on('hidden.bs.modal', function() {
+        $('#idReceipt').val('');
+        $('#so_tien').val('');
+        $('#ngay_thu').val('');
+        $('#ngay_het_han').val('');
+        $('#ghi_chu').val('');
+        $('#product_fk').val('');
+    });
+    function alertReceipt(productId){
+        $('#product_fk').val(productId);
+    }
+    $(document).ready(function () {
+        $('#so_tien').inputmask();
+    });
 </script>
 @endsection
