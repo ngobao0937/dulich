@@ -99,6 +99,7 @@
 </style>
 @endsection
 @section('scripts')
+<script src="{{ asset('assets/backend/plugins/inputmask/jquery.inputmask.min.js') }}"></script>
 <script>
     function alertDelete(id) {
         $('#myModal').data('id', id);
@@ -112,59 +113,33 @@
         $('#ngay_thu').val('');
         $('#ngay_het_han').val('');
         $('#ghi_chu').val('');
-
-        $('#product_fk').empty().prop('disabled', false).attr('required', 'required').prop('multiple', true).closest('.form-group').show();
-        $('#product_fk_name_div').hide();
-        $('#product_fk_name').val('');
-        $('#product_fk_hidden').val('');
         $('#product_fk').val(null).trigger('change');
-
-        $('#product_fk_name_div').hide();
-        $('#product_fk_name').val('');
-        $('#product_fk_hidden').val('').prop('disabled', true);
-
-        $('#period_fk').val('').trigger('change').attr('required', 'required');
-        $('#period_fk_name_div').hide();
     });
     function alertReceipt(receiptId){
         $.ajax({
             type: 'GET',
-            url: 'receipt/edit?id=' + receiptId,
+            url: 'receipt/edit' + '?id=' + receiptId,
             success: function(data){
                 $('#id').val(data.receipt.id);
-                // $('#period_fk').val(data.receipt.period_fk);
-                $('#period_fk_name').val(data.receipt.name_period + ' - Giá: ' + numberWithCommas(data.receipt.so_tien) + ' ₫ - Hạn: ' + data.receipt.het_han_sau + ' ngày');
-                $('#period_fk_name_div').show();
-                $('#period_fk').val('').trigger('change').removeAttr('required');
                 $('#so_tien').val(data.receipt.so_tien ?? '');
                 $('#ngay_thu').val(data.receipt.ngay_thu ?? '');
                 $('#ngay_het_han').val(data.receipt.ngay_het_han ?? '');
                 $('#ghi_chu').val(data.receipt.ghi_chu ?? '');
-
-                $('#product_fk')
-                    .removeAttr('required')
-                    .prop('disabled', true)
-                    .closest('.form-group')
-                    .hide();
-
-                $('#product_fk_name_div').show();
-                $('#product_fk_name').val(data.receipt.product.name ?? '');
-                $('#product_fk_hidden').val(data.receipt.product_fk).prop('disabled', false);
+                if (data.receipt.product_fk) {
+                    const newOption = new Option(data.receipt.product.name, data.receipt.product_fk, true, true);
+                    $('#product_fk').append(newOption).trigger('change');
+                }
             },
             error: function(error){
                 console.log(error);
             }
-        });
+        })
     }
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
-
     $(document).ready(function () {
+        $('#so_tien').inputmask();
         $('#product_fk').select2({
             placeholder: "-- Chọn khách sạn --",
             allowClear: false,
-            closeOnSelect: false,
             ajax: {
                 url: '{{ route("backend.product.get.products") }}',
                 dataType: 'json',

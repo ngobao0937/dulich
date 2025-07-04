@@ -47,8 +47,8 @@
                             @if (Auth::user()->isSuperUser())<th style="width: 50px"></th>@endif
                             <th style="width: 90px;">Hình ảnh</th>
                             <th>Tên khách sạn</th>
-                            <th style="width: 120px;">Từ ngày</th>
-                            <th style="width: 120px;">Đến ngày</th>
+                            <th style="width: 120px;">Ngày hết hạn</th>
+                            <th style="width: 100px;">Tình trạng</th>
                             <th style="width: 250px;">Danh mục</th>
                             <th style="width: 100px;">Trạng thái</th>
                             <th style="width: 100px;">Hành động</th>
@@ -71,8 +71,25 @@
                                 {{-- <div style="background: #ededed  url('{{$product->image ? 'https://s3-hcm-r1.longvan.net/kaholding/'.$product->image->ten : asset('images/default.jpg') }}') no-repeat center center ; background-size: contain; width: 100%;height: 30px;"></div> --}}
                             </td>
                             <td class="text-wrap">{{ $product->name }}</td>
-                            <td>{{ $product->start_date ? \Carbon\Carbon::parse($product->start_date)->format('d-m-Y') : '' }}</td>
-                            <td>{{ $product->end_date ? \Carbon\Carbon::parse($product->end_date)->format('d-m-Y') : '' }}</td>
+                            <td>{{ $product->end_date ? \Carbon\Carbon::parse($product->end_date)->format('d/m/Y') : '' }}</td>
+                            <td>
+                                @php
+                                    $today = \Carbon\Carbon::today();
+                                    $endDate = \Carbon\Carbon::parse($product->end_date);
+
+                                    if ($endDate->lte($today) || !$product->end_date) {
+                                        $statusText = 'Hết hạn';
+                                        $badgeClass = 'badge badge-danger';
+                                    } elseif ($endDate->lte($today->copy()->addDays(7))) {
+                                        $statusText = 'Sắp hết hạn';
+                                        $badgeClass = 'badge badge-warning';
+                                    } else {
+                                        $statusText = 'Còn hạn';
+                                        $badgeClass = 'badge badge-success';
+                                    }
+                                @endphp
+                                <span class="{{ $badgeClass }}">{{ $statusText }}</span>
+                            </td>
                             <td>
                                 @foreach ($product->menus as $key => $menu)
                                     {{ $menu->name }}{{ $key < $product->menus->count() - 1 ? ', ' : '' }}
@@ -90,7 +107,7 @@
                                     <i class="fa fa-edit"></i>
                                 </a>
                                 @if (Auth::user()->hasPermission(17))
-                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#receiptModal" onclick="alertReceipt({{ $product->id }})">
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#receiptModal" onclick="alertReceipt({{ $product->id }}, '{{ $product->name }}')">
                                     <i class="fa fa-receipt"></i>
                                 </button>
                                 @endif
@@ -146,18 +163,20 @@
                 <div class="modal-body">
                     @csrf
                     <input type="text" id="idReceipt" name="id" value="" hidden />
-                    <input type="text" id="product_fk" name="product_fk" value="" hidden />
+                    <input type="text" id="product_fk" name="product_fk[]" value="" hidden />
 
                     <div class="form-group">
-                        <label>Số tiền</label>
-                        <input type="text" class="form-control" name="so_tien" id="so_tien" placeholder="Nhập số tiền" 
-                                data-inputmask="'alias': 'numeric',
-                                            'groupSeparator': '.',
-                                            'digits': 0,
-                                            'autoGroup': true,
-                                            'prefix': '',
-                                            'suffix': ' ₫',
-                                            'rightAlign': false" required>
+                        <label>Khách sạn</label>
+                        <input type="text" class="form-control" id="product_fk_name" value="" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Chọn gói</label>
+                        <select name="period_fk" id="period_fk" class="form-control" required>
+                            @foreach ($periods as $period)
+                                <option value="{{ $period->id }}">{{ $period->name }} - Giá: {{ number_format($period->price, 0, ',', '.') }} ₫ - Hạn: {{ $period->het_han_sau }} ngày</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -167,10 +186,6 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Ngày hết hạn</label>
-                                <input type="date" class="form-control" name="ngay_het_han" id="ngay_het_han" required>
-                            </div>
                         </div>
                     </div>
                     
@@ -195,7 +210,6 @@
 
 @endsection
 @section('scripts')
-<script src="{{ asset('assets/backend/plugins/inputmask/jquery.inputmask.min.js') }}"></script>
 <script>
     function alertDelete(id) {
         $('#myModal').data('id', id);
@@ -209,12 +223,12 @@
         $('#ngay_het_han').val('');
         $('#ghi_chu').val('');
         $('#product_fk').val('');
+        $('#product_fk_name').val('');
     });
-    function alertReceipt(productId){
+    function alertReceipt(productId, productName){
         $('#product_fk').val(productId);
+        $('#product_fk_name').val(productName);
     }
-    $(document).ready(function () {
-        $('#so_tien').inputmask();
-    });
+
 </script>
 @endsection

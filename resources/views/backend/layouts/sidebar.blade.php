@@ -207,8 +207,8 @@
           @endif
 
           @if (Auth::user()->hasPermission(3) || Auth::user()->hasPermission(2))      
-          <li class="nav-item {{ (request()->routeIs('backend.role.*') || request()->routeIs('backend.user.*')) ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ (request()->routeIs('backend.role.*') || request()->routeIs('backend.user.*')) ? 'active' : '' }}">
+          <li class="nav-item {{ (request()->routeIs('backend.role.*') || request()->routeIs('backend.user.*') || request()->routeIs('backend.period.*')) ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ (request()->routeIs('backend.role.*') || request()->routeIs('backend.user.*') || request()->routeIs('backend.period.*')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-cogs"></i>
               <p>
                 Quản lý hệ thống
@@ -216,6 +216,15 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @if (Auth::user()->isSuperUser())
+                <li class="nav-item">
+                  <a href="{{ route('backend.period.index') }}" class="nav-link {{ request()->routeIs('backend.period.*') ? 'active' : '' }}">
+                    <i class="far {{ request()->routeIs('backend.period.*') ? 'fa-dot-circle' : 'fa-circle' }} nav-icon"></i>
+                    <p>Gói phiếu thu</p>
+                  </a>
+                </li>
+              @endif
+
               @if (Auth::user()->hasPermission(3))
                 <li class="nav-item">
                   <a href="{{ route('backend.role.index') }}" class="nav-link {{ request()->routeIs('backend.role.*') ? 'active' : '' }}">

@@ -22,8 +22,8 @@
     $menu_fk = $product->menu_fk ?? null;
     $active = $product->active ?? '';
     $slug = $product->slug ?? null;
-    $start_date = $product->start_date ?? null;
-    $end_date = $product->end_date ?? null;
+    // $start_date = $product->start_date ?? null;
+    // $end_date = $product->end_date ?? null;
     $meta_keywords = $product->meta_keywords ?? null;
     $meta_description = $product->meta_description ?? null;
     $image = isset($product->image) ? $product->image->ten : null;
@@ -619,7 +619,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @if (Auth::user()->hasPermission(16))
+                            {{-- @if (Auth::user()->hasPermission(16))
                                 <div class="col-md-7">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -640,7 +640,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endif
+                            @endif --}}
                         </div>
                     </div>
                 </div>

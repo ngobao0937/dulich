@@ -27,34 +27,21 @@
                     @csrf
                     <input type="text" id="id" name="id" value="" hidden />
                     <div class="form-group">
-                        <label>Chọn khách sạn</label> <small><span class="text-muted">(có thể chọn nhiều)</span></small>
-                        <div class="select2-primary">
-                            <select name="product_fk[]" id="product_fk" class="select2-multiple" multiple="multiple" data-placeholder="-- Chọn khách sạn --" required>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group" id="product_fk_name_div" style="display: none;">
-                        <label>Khách sạn</label>
-                        <input type="text" class="form-control" id="product_fk_name" value="" readonly>
-                        <input type="hidden" name="product_fk[]" id="product_fk_hidden" disabled>
-                    </div>
-
-                    <div class="form-group" id="period_fk_name_div" style="display: none;">
-                        <label>Gói hiện tại</label>
-                        <input type="text" class="form-control" id="period_fk_name" value="" readonly>
+                        <label>Chọn khách sạn</label>
+                        <select name="product_fk" id="product_fk" class="form-control select2" data-placeholder="-- Chọn khách sạn --" required></select>
                     </div>
 
                     <div class="form-group">
-                        <label>Chọn gói</label>
-                        <select name="period_fk" id="period_fk" class="form-control" required>
-                            <option value="">-- Chọn gói phiếu thu --</option>
-                            @foreach ($periods as $period)
-                                <option value="{{ $period->id }}">{{ $period->name }} - Giá: {{ number_format($period->price, 0, ',', '.') }} ₫ - Hạn: {{ $period->het_han_sau }} ngày</option>
-                            @endforeach
-                        </select>
+                        <label>Số tiền</label>
+                        <input type="text" class="form-control" name="so_tien" id="so_tien" placeholder="Nhập số tiền" 
+                                data-inputmask="'alias': 'numeric',
+                                            'groupSeparator': '.',
+                                            'digits': 0,
+                                            'autoGroup': true,
+                                            'prefix': '',
+                                            'suffix': ' ₫',
+                                            'rightAlign': false" required>
                     </div>
-
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -63,6 +50,10 @@
                             </div>
                         </div>
                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ngày hết hạn</label>
+                                <input type="date" class="form-control" name="ngay_het_han" id="ngay_het_han" required>
+                            </div>
                         </div>
                     </div>
                     

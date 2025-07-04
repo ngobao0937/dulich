@@ -17,6 +17,7 @@ use App\Models\Other;
 use App\Models\Extension;
 use App\Models\Promotion;
 use App\Models\ProductLog;
+use App\Models\Period;
 use Carbon\Carbon;
 
 class ProductController extends Controller
@@ -54,7 +55,9 @@ class ProductController extends Controller
 
         $products = $query->where('isdelete', 0)->orderby('id', 'desc')->paginate(20);
 
-        return view('backend.product.index', compact('products'));
+        $periods = Period::where('isdelete', 0)->get();
+
+        return view('backend.product.index', compact('products', 'periods'));
     }
 	public function create(Request $request) {
         if($request->product_fk){
@@ -100,22 +103,22 @@ class ProductController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        if (Auth::user()->hasPermission(16)) {
-            $startDate = $request->input('start_date');
-            $endDate = $request->input('end_date');
+        // if (Auth::user()->hasPermission(16)) {
+        //     $startDate = $request->input('start_date');
+        //     $endDate = $request->input('end_date');
 
-            if (($startDate && !$endDate) || (!$startDate && $endDate)) {
-                return redirect()->back()
-                    ->withErrors(['start_date' => 'Cần nhập đầy đủ cả ngày bắt đầu và ngày kết thúc gia hạn.'])
-                    ->withInput();
-            }
+        //     if (($startDate && !$endDate) || (!$startDate && $endDate)) {
+        //         return redirect()->back()
+        //             ->withErrors(['start_date' => 'Cần nhập đầy đủ cả ngày bắt đầu và ngày kết thúc gia hạn.'])
+        //             ->withInput();
+        //     }
 
-            if ($startDate && $endDate && $startDate > $endDate) {
-                return redirect()->back()
-                    ->withErrors(['start_date' => 'Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc gia hạn.'])
-                    ->withInput();
-            }
-        }
+        //     if ($startDate && $endDate && $startDate > $endDate) {
+        //         return redirect()->back()
+        //             ->withErrors(['start_date' => 'Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc gia hạn.'])
+        //             ->withInput();
+        //     }
+        // }
 
 
 		$id = $request->input('id', null);  
@@ -160,10 +163,10 @@ class ProductController extends Controller
             $data['user_fk'] = $newUserId;
         }
 
-        if(Auth::user()->hasPermission(16)){
-            $data['start_date'] = $request->start_date;
-            $data['end_date'] = $request->end_date;
-        }
+        // if(Auth::user()->hasPermission(16)){
+        //     $data['start_date'] = $request->start_date;
+        //     $data['end_date'] = $request->end_date;
+        // }
 
         $originalProduct = null;
         if ($id) {
@@ -175,33 +178,33 @@ class ProductController extends Controller
 			$data
 		);
 
-        if ($originalProduct && Auth::user()->hasPermission(16)) {
-            $oldStartDate = $originalProduct->start_date;
-            $oldEndDate = $originalProduct->end_date;
+        // if ($originalProduct && Auth::user()->hasPermission(16)) {
+        //     $oldStartDate = $originalProduct->start_date;
+        //     $oldEndDate = $originalProduct->end_date;
 
-            $newStartDate = $data['start_date'] ?? null;
-            $newEndDate = $data['end_date'] ?? null;
+        //     $newStartDate = $data['start_date'] ?? null;
+        //     $newEndDate = $data['end_date'] ?? null;
 
-            if ($oldStartDate != $newStartDate || $oldEndDate != $newEndDate) {
-                ProductLog::create([
-                    'product_fk' => $obj->id,
-                    'user_fk' => Auth::id(),
-                    'old_start_date' => $oldStartDate,
-                    'new_start_date' => $newStartDate,
-                    'old_end_date' => $oldEndDate,
-                    'new_end_date' => $newEndDate,
-                ]);
+        //     if ($oldStartDate != $newStartDate || $oldEndDate != $newEndDate) {
+        //         ProductLog::create([
+        //             'product_fk' => $obj->id,
+        //             'user_fk' => Auth::id(),
+        //             'old_start_date' => $oldStartDate,
+        //             'new_start_date' => $newStartDate,
+        //             'old_end_date' => $oldEndDate,
+        //             'new_end_date' => $newEndDate,
+        //         ]);
 
-                \Log::info('Product date changed', [
-                    'product_id' => $obj->id,
-                    'user_id' => Auth::id(),
-                    'old_start_date' => $oldStartDate,
-                    'new_start_date' => $newStartDate,
-                    'old_end_date' => $oldEndDate,
-                    'new_end_date' => $newEndDate,
-                ]);
-            }
-        }
+        //         \Log::info('Product date changed', [
+        //             'product_id' => $obj->id,
+        //             'user_id' => Auth::id(),
+        //             'old_start_date' => $oldStartDate,
+        //             'new_start_date' => $newStartDate,
+        //             'old_end_date' => $oldEndDate,
+        //             'new_end_date' => $newEndDate,
+        //         ]);
+        //     }
+        // }
 
 
         ProductMenu::where('product_fk', $obj->id)->delete();
