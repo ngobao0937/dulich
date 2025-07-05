@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\Period;
 use App\Models\Product;
+use App\Models\ReceiptLog;
 use Carbon\Carbon;
 
 class ReceiptController extends Controller
@@ -113,16 +114,46 @@ class ReceiptController extends Controller
                 ['id' => $request->id],
                 $data
             );
+
+            ReceiptLog::create([
+                'receipt_fk' => $request->id,
+                'user_fk'    => Auth::id(),
+                'hanh_dong'  => "Chỉnh sửa phiếu thu cho khách sạn ID {$data['product_fk']}, gói: {$data['name_period']}, số tiền: {$data['so_tien']}₫, ngày thu: {$data['ngay_thu']->format('d/m/Y')}, hạn đến: {$data['ngay_het_han']->format('d/m/Y')}, ghi chú: " . ($data['ghi_chu'] ?? ''),
+            ]);
         } else {
             // THÊM MỚI
             $period = Period::find($request->period_fk);
-            $ngay_het_han = $ngay_thu->copy()->addDays($period->het_han_sau);
+            $ngay_het_han = Carbon::parse($request->ngay_thu)->copy()->addDays($period->het_han_sau);
 
+            $invalidProducts = [];
+
+            // Kiểm tra trước tất cả các product
             foreach ($request->product_fk as $productId) {
-                Receipt::create([
+                $lastReceipt = Receipt::where('product_fk', $productId)
+                                    ->where('isdelete', 0)
+                                    ->orderByDesc('id')
+                                    ->first();
+
+                if ($lastReceipt && Carbon::parse($lastReceipt->ngay_het_han)->gte(now())) {
+                    $product = Product::find($productId);
+                    $productName = $product->name ?? "ID $productId";
+                    $invalidProducts[] = "Khách sạn \"$productName\" vẫn còn hạn đến " . Carbon::parse($lastReceipt->ngay_het_han)->format('d/m/Y');
+                }
+            }
+
+            // Nếu có bất kỳ sản phẩm nào không hợp lệ thì báo lỗi
+            if (!empty($invalidProducts)) {
+                return redirect()->back()
+                    ->withErrors(['product_fk' => implode('. ', $invalidProducts)])
+                    ->withInput();
+            }
+
+            // Nếu tất cả đều hợp lệ => Tiến hành tạo phiếu thu
+            foreach ($request->product_fk as $productId) {
+                $receipt = Receipt::create([
                     'product_fk'   => $productId,
                     'user_fk'      => Auth::id(),
-                    'ngay_thu'     => $ngay_thu,
+                    'ngay_thu'     => Carbon::parse($request->ngay_thu),
                     'ngay_het_han' => $ngay_het_han,
                     'ghi_chu'      => $request->ghi_chu,
                     'name_period'  => $period->name,
@@ -132,9 +163,16 @@ class ReceiptController extends Controller
                 ]);
 
                 Product::where('id', $productId)->update([
-                    'start_date' => $ngay_thu,
+                    'start_date' => Carbon::parse($request->ngay_thu),
                     'end_date'   => $ngay_het_han,
                 ]);
+
+                ReceiptLog::create([
+                    'receipt_fk' => $receipt->id,
+                    'user_fk'    => Auth::id(),
+                    'hanh_dong'  => "Tạo phiếu thu cho khách sạn ID {$productId}, gói: {$period->name}, số tiền: {$period->price}₫, ngày thu: {$ngay_thu->format('d/m/Y')}, hạn đến: {$ngay_het_han->format('d/m/Y')}, ghi chú: {$request->ghi_chu}",
+                ]);
+
             }
         }
 
@@ -169,6 +207,12 @@ class ReceiptController extends Controller
                 'end_date' => null,
             ]);
         }
+
+        ReceiptLog::create([
+            'receipt_fk' => $receipt->id,
+            'user_fk'    => Auth::id(),
+            'hanh_dong'  => 'delete',
+        ]);
 
         return redirect(route('backend.receipt.index', $request->query()));
     }
