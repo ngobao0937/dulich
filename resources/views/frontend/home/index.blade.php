@@ -89,15 +89,15 @@
             <div class="col-md-4 mb-4">
                 <div class="flip-box">
                     <div class="flip-inner">
-                        <div class="flip-front" style="background-image: url('{{ $other3[8]->image ? asset('uploads/'.$other3[8]->image->ten) : asset('assets/frontend/images/h1.png') }}');">
-                            <div class="special-overlay w-100 h-100 d-flex align-items-center justify-content-center"><span style="font-size: clamp(1.5rem, 2vw, 2rem)">Ở ĐÂU</span></div>
-                        </div>
-                        <div class="flip-back" style="background-image: url('{{ $other3[8]->image ? asset('uploads/'.$other3[8]->image->ten) : asset('assets/frontend/images/h1.png') }}');">
+                        <a href="{{ route('frontend.product.promotions', ['filter_id' => 10000]) }}" class="flip-front" style="background-image: url('{{ $other3[8]->image ? asset('uploads/'.$other3[8]->image->ten) : asset('assets/frontend/images/h1.png') }}');">
+                            <div class="special-overlay w-100 h-100 d-flex align-items-center justify-content-center"><span style="font-size: clamp(1.5rem, 2vw, 2rem); color: white"">Ở ĐÂU</span></div>
+                        </a>
+                        <a href="{{ route('frontend.product.promotions', ['filter_id' => 10000]) }}" class="flip-back" style="background-image: url('{{ $other3[8]->image ? asset('uploads/'.$other3[8]->image->ten) : asset('assets/frontend/images/h1.png') }}');">
                             <div class="special-overlay"></div>
                             <div class="w-100 position-absolute p-3" style="bottom: 0; background: #38b19e; color: white">
                                 Khám phá các khách sạn với ưu đãi độc quyền, từ resort sang trọng đến homestay ấm cúng.
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -107,15 +107,15 @@
                     <div class="col-6">
                         <div class="flip-box">
                             <div class="flip-inner">
-                                <div class="flip-front" style="background-image: url('{{ $other3[9]->image ? asset('uploads/'.$other3[9]->image->ten) : asset('assets/frontend/images/h2.png') }}');">
-                                    <div class="special-overlay w-100 h-100 d-flex align-items-center justify-content-center"><span style="font-size: clamp(1.5rem, 2vw, 2rem)">ĂN GÌ?</span></div>
-                                </div>
-                                <div class="flip-back" style="background-image: url('{{ $other3[9]->image ? asset('uploads/'.$other3[9]->image->ten) : asset('assets/frontend/images/h2.png') }}');">
+                                <a href="{{ route('frontend.product.promotions', ['filter_id' => 10001]) }}" class="flip-front" style="background-image: url('{{ $other3[9]->image ? asset('uploads/'.$other3[9]->image->ten) : asset('assets/frontend/images/h2.png') }}');">
+                                    <div class="special-overlay w-100 h-100 d-flex align-items-center justify-content-center"><span style="font-size: clamp(1.5rem, 2vw, 2rem); color: white">ĂN GÌ?</span></div>
+                                </a>
+                                <a href="{{ route('frontend.product.promotions', ['filter_id' => 10001]) }}" class="flip-back" style="background-image: url('{{ $other3[9]->image ? asset('uploads/'.$other3[9]->image->ten) : asset('assets/frontend/images/h2.png') }}');">
                                     <div class="special-overlay"></div>
                                     <div class="w-100 position-absolute p-3" style="bottom: 0; background: #38b19e; color: white">
                                         Thưởng thức ẩm thực địa phương và quốc tế với các chương trình giảm giá hấp dẫn.
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -123,15 +123,15 @@
                     <div class="col-6">
                         <div class="flip-box">
                             <div class="flip-inner">
-                                <div class="flip-front" style="background-image: url('{{ $other3[10]->image ? asset('uploads/'.$other3[10]->image->ten) : asset('assets/frontend/images/h3.png') }}');">
-                                    <div class="special-overlay w-100 h-100 d-flex align-items-center justify-content-center"><span style="font-size: clamp(1.5rem, 2vw, 2rem)">CHƠI GÌ?</span></div>
-                                </div>
-                                <div class="flip-back" style="background-image: url('{{ $other3[10]->image ? asset('uploads/'.$other3[10]->image->ten) : asset('assets/frontend/images/h3.png') }}');">
+                                <a href="{{ route('frontend.home.event') }}" class="flip-front" style="background-image: url('{{ $other3[10]->image ? asset('uploads/'.$other3[10]->image->ten) : asset('assets/frontend/images/h3.png') }}');">
+                                    <div class="special-overlay w-100 h-100 d-flex align-items-center justify-content-center"><span style="font-size: clamp(1.5rem, 2vw, 2rem); color: white"">CHƠI GÌ?</span></div>
+                                </a>
+                                <a href="{{ route('frontend.home.event') }}" class="flip-back" style="background-image: url('{{ $other3[10]->image ? asset('uploads/'.$other3[10]->image->ten) : asset('assets/frontend/images/h3.png') }}');">
                                     <div class="special-overlay"></div>
                                     <div class="w-100 position-absolute p-3" style="bottom: 0; background: #38b19e; color: white">
                                         Trải nghiệm các hoạt động giải trí, từ bãi biển đến công viên với vé ưu đãi.
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>

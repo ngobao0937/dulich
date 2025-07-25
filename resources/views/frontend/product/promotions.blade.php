@@ -307,8 +307,24 @@
 
         },
         mounted() {
-            this.loadProducts();
+            const urlParams = new URLSearchParams(window.location.search);
+            const filterId = urlParams.get('filter_id');
+
+            if (filterId) {
+                const id = parseInt(filterId);
+                if (!this.filters.includes(id)) {
+                    this.filters.push(id);
+                }
+
+                // ✅ Optional: gỡ filter_id khỏi URL cho sạch
+                const newUrl = window.location.pathname;
+                window.history.replaceState({}, '', newUrl);
+            }
+
+            // ✅ Luôn load sản phẩm khi mounted
+            this.loadProducts(1);
         }
+
     });
 </script>
 @endsection
